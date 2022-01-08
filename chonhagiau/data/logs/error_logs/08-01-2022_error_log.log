@@ -1,0 +1,2047 @@
+[Fri, 07 Jan 2022 19:00:14 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:00:14 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:00:14 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:00:14 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:00:14 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:00:14 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:00:14 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:00:14 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:00:14 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:00:14 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:01:10 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:01:10 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:01:10 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:01:10 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:01:10 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:01:10 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:01:10 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:01:10 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:01:10 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:01:10 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:01:31 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Fri, 07 Jan 2022 19:01:43 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3798] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:02:22 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 181] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:02:22 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3089] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 19:02:22 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 183] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:02:22 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 185] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:02:22 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 195] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:02:22 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 196] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:02:22 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 197] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:02:23 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:02:23 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:02:23 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:02:23 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:02:23 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:02:23 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:02:23 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:02:23 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:02:23 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:02:23 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:04:29 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:04:29 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:04:29 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:04:29 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:04:29 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:04:29 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:04:29 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:04:29 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:04:29 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:04:29 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:05:12 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:05:12 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:05:12 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:05:12 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:05:12 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:05:12 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:05:12 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:05:12 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:05:12 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:05:12 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:08:33 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:08:33 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:08:33 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:08:33 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:08:33 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:08:33 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:08:33 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:08:33 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:08:33 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:08:33 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:10:20 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 181] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:10:20 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3089] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 19:10:20 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3155] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 19:10:20 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3158] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 19:10:20 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 183] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:10:20 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 185] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:10:20 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 195] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:10:20 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 196] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:10:20 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 197] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:10:50 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Fri, 07 Jan 2022 19:14:25 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Sat, 08 Jan 2022 01:18:23 +0100] [chonhagiau.com] [54.36.149.44] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 01:18:23 +0100] [chonhagiau.com] [54.36.149.44] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 01:18:23 +0100] [chonhagiau.com] [54.36.149.44] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 01:18:23 +0100] [chonhagiau.com] [54.36.149.44] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 01:18:23 +0100] [chonhagiau.com] [54.36.149.44] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 01:18:23 +0100] [chonhagiau.com] [54.36.149.44] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 01:18:23 +0100] [chonhagiau.com] [54.36.149.44] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 01:18:23 +0100] [chonhagiau.com] [54.36.149.44] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 01:18:23 +0100] [chonhagiau.com] [54.36.149.44] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 01:18:23 +0100] [chonhagiau.com] [54.36.149.44] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:18:38 -0500] [chonhagiau.com] [216.244.66.202] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Sat, 08 Jan 2022 08:19:29 +0800] [chonhagiau.com] [114.119.134.204] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Sat, 08 Jan 2022 01:21:54 +0100] [chonhagiau.com] [54.36.149.44] [Notice(8): Undefined index: status] [FILE: /modules/retails/functions.php] [LINE: 46] [TRACE:]
+#1  LINE: 338   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:25:56 -0500] [chonhagiau.com] [216.244.66.202] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:25:56 -0500] [chonhagiau.com] [216.244.66.202] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:25:56 -0500] [chonhagiau.com] [216.244.66.202] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:25:56 -0500] [chonhagiau.com] [216.244.66.202] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:25:56 -0500] [chonhagiau.com] [216.244.66.202] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:25:56 -0500] [chonhagiau.com] [216.244.66.202] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:25:56 -0500] [chonhagiau.com] [216.244.66.202] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:25:56 -0500] [chonhagiau.com] [216.244.66.202] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:28:30 -0500] [chonhagiau.com] [216.244.66.202] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3798] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:28:41 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Sat, 08 Jan 2022 08:29:52 +0800] [chonhagiau.com] [114.119.135.224] [Notice(8): Undefined index: status] [FILE: /modules/retails/functions.php] [LINE: 46] [TRACE:]
+#1  LINE: 338   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:32:22 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 181] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:32:22 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3089] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 19:32:22 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3155] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 19:32:22 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3158] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 19:32:22 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 183] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:32:22 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 185] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:32:22 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 195] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:32:22 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 196] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:32:22 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 197] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:33:16 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Fri, 07 Jan 2022 19:33:24 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3798] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:38:17 -0500] [chonhagiau.vn] [40.77.167.15] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:38:17 -0500] [chonhagiau.vn] [40.77.167.15] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:38:17 -0500] [chonhagiau.vn] [40.77.167.15] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:38:17 -0500] [chonhagiau.vn] [40.77.167.15] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:38:17 -0500] [chonhagiau.vn] [40.77.167.15] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:38:17 -0500] [chonhagiau.vn] [40.77.167.15] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:38:17 -0500] [chonhagiau.vn] [40.77.167.15] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:38:17 -0500] [chonhagiau.vn] [40.77.167.15] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:38:17 -0500] [chonhagiau.vn] [40.77.167.15] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:38:17 -0500] [chonhagiau.vn] [40.77.167.15] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:39:48 +0800] [chonhagiau.com] [114.119.134.187] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:39:48 +0800] [chonhagiau.com] [114.119.134.187] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:39:48 +0800] [chonhagiau.com] [114.119.134.187] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:39:48 +0800] [chonhagiau.com] [114.119.134.187] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:39:48 +0800] [chonhagiau.com] [114.119.134.187] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:39:48 +0800] [chonhagiau.com] [114.119.134.187] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:39:48 +0800] [chonhagiau.com] [114.119.134.187] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:39:48 +0800] [chonhagiau.com] [114.119.134.187] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:44:05 -0500] [chonhagiau.com] [207.46.13.196] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Fri, 07 Jan 2022 19:44:15 -0500] [chonhagiau.vn] [157.55.39.218] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:44:15 -0500] [chonhagiau.vn] [157.55.39.218] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:44:15 -0500] [chonhagiau.vn] [157.55.39.218] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:44:15 -0500] [chonhagiau.vn] [157.55.39.218] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:44:15 -0500] [chonhagiau.vn] [157.55.39.218] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 19:44:15 -0500] [chonhagiau.vn] [157.55.39.218] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:44:15 -0500] [chonhagiau.vn] [157.55.39.218] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 19:44:15 -0500] [chonhagiau.vn] [157.55.39.218] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 07:46:30 +0700] [chonhagiau.com] [113.185.74.3] [Notice(8): Undefined index: personal] [FILE: /modules/users/funcs/personal.php] [LINE: 38] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 07:46:42 +0700] [chonhagiau.com] [113.185.74.3] [Notice(8): Undefined index: danhmuc_sp] [FILE: /modules/retails/funcs/categories.php] [LINE: 98] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 19:51:08 -0500] [chonhagiau.com] [40.77.139.8] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Fri, 07 Jan 2022 19:59:25 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3798] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:59:32 +0800] [chonhagiau.com] [114.119.151.237] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:59:32 +0800] [chonhagiau.com] [114.119.151.237] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:59:32 +0800] [chonhagiau.com] [114.119.151.237] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:59:32 +0800] [chonhagiau.com] [114.119.151.237] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:59:32 +0800] [chonhagiau.com] [114.119.151.237] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:59:32 +0800] [chonhagiau.com] [114.119.151.237] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:59:32 +0800] [chonhagiau.com] [114.119.151.237] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:59:32 +0800] [chonhagiau.com] [114.119.151.237] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:59:32 +0800] [chonhagiau.com] [114.119.151.237] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:59:32 +0800] [chonhagiau.com] [114.119.151.237] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:04:39 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 181] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:04:39 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3089] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 20:04:39 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3155] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 20:04:39 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3158] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 20:04:39 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 183] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:04:39 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 185] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:04:39 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 195] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:04:39 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 196] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:04:39 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 197] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:06:31 +0700] [chonhagiau.com] [42.113.186.151] [Warning(2): ob_start(): output handler 'ob_gzhandler' conflicts with 'zlib output compression'] [FILE: /includes/core/theme_functions.php] [LINE: 202] [TRACE:]
+#1  LINE: 178   FILE: /admin/index.php
+#2  LINE: 90    FILE: /admin/siteinfo/notification.php
+#3  LINE: 202   FILE: /includes/core/theme_functions.php
+
+[Sat, 08 Jan 2022 08:06:31 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): ob_start(): failed to create buffer] [FILE: /includes/core/theme_functions.php] [LINE: 202] [TRACE:]
+#1  LINE: 178   FILE: /admin/index.php
+#2  LINE: 90    FILE: /admin/siteinfo/notification.php
+#3  LINE: 202   FILE: /includes/core/theme_functions.php
+
+[Fri, 07 Jan 2022 20:08:21 -0500] [chonhagiau.com] [216.244.66.202] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:08:21 -0500] [chonhagiau.com] [216.244.66.202] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:12:16 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:12:16 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:12:16 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:12:16 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3798] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:12:16 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:12:16 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:12:16 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:12:16 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:16:46 -0500] [chonhagiau.com] [157.55.39.177] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3798] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:18:16 +0700] [chonhagiau.com] [113.160.132.46] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:18:16 +0700] [chonhagiau.com] [113.160.132.46] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:18:16 +0700] [chonhagiau.com] [113.160.132.46] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:18:16 +0700] [chonhagiau.com] [113.160.132.46] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:18:16 +0700] [chonhagiau.com] [113.160.132.46] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:18:16 +0700] [chonhagiau.com] [113.160.132.46] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:18:16 +0700] [chonhagiau.com] [113.160.132.46] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:18:16 +0700] [chonhagiau.com] [113.160.132.46] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:18:16 +0700] [chonhagiau.com] [113.160.132.46] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:18:16 +0700] [chonhagiau.com] [113.160.132.46] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:19:47 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 181] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:19:47 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3089] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Sat, 08 Jan 2022 08:19:47 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3155] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Sat, 08 Jan 2022 08:19:47 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3158] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Sat, 08 Jan 2022 08:19:47 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 183] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:19:47 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 185] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:19:47 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 195] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:19:47 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 196] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:19:47 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 197] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:20:10 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:20:10 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:10 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:10 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:10 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:10 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:10 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:10 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:20:10 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:20:10 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:20:12 -0500] [chonhagiau.com] [66.249.66.198] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Fri, 07 Jan 2022 20:20:15 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:15 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:15 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:16 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:20:16 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:16 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:16 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:16 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:16 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:20:16 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:20:16 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:20:19 -0500] [chonhagiau.com] [66.249.66.222] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:20:19 -0500] [chonhagiau.com] [66.249.66.222] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:19 -0500] [chonhagiau.com] [66.249.66.222] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:19 -0500] [chonhagiau.com] [66.249.66.222] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3798] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:19 -0500] [chonhagiau.com] [66.249.66.222] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:19 -0500] [chonhagiau.com] [66.249.66.222] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:20:19 -0500] [chonhagiau.com] [66.249.66.222] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:20:19 -0500] [chonhagiau.com] [66.249.66.222] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:20:22 -0500] [chonhagiau.com] [66.249.66.144] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Fri, 07 Jan 2022 20:20:23 -0500] [chonhagiau.com] [66.249.66.222] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Fri, 07 Jan 2022 20:20:30 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 181] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:20:30 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3089] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 20:20:30 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3155] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 20:20:30 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3158] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 20:20:30 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 183] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:20:30 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 185] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:20:30 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 195] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:20:30 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 196] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:20:30 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 197] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:20:34 -0500] [chonhagiau.com] [66.249.66.24] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:20:34 -0500] [chonhagiau.com] [66.249.66.24] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:34 -0500] [chonhagiau.com] [66.249.66.24] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:34 -0500] [chonhagiau.com] [66.249.66.24] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3798] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:34 -0500] [chonhagiau.com] [66.249.66.24] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:20:34 -0500] [chonhagiau.com] [66.249.66.24] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:20:34 -0500] [chonhagiau.com] [66.249.66.24] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:20:34 -0500] [chonhagiau.com] [66.249.66.24] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:20:35 -0500] [chonhagiau.com] [66.249.66.24] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Sat, 08 Jan 2022 08:21:24 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:21:24 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:21:24 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:21:24 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:21:24 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:21:24 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:21:24 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:21:24 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:21:24 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:21:24 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 03:22:15 +0200] [chonhagiau.com] [185.191.171.39] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Fri, 07 Jan 2022 20:22:38 -0500] [chonhagiau.com] [66.249.66.95] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Fri, 07 Jan 2022 20:23:25 -0500] [chonhagiau.vn] [40.77.167.31] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:23:25 -0500] [chonhagiau.vn] [40.77.167.31] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:23:25 -0500] [chonhagiau.vn] [40.77.167.31] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:23:25 -0500] [chonhagiau.vn] [40.77.167.31] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:23:25 -0500] [chonhagiau.vn] [40.77.167.31] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:23:25 -0500] [chonhagiau.vn] [40.77.167.31] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:23:25 -0500] [chonhagiau.vn] [40.77.167.31] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 20:23:25 -0500] [chonhagiau.vn] [40.77.167.31] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:23:25 -0500] [chonhagiau.vn] [40.77.167.31] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 20:23:25 -0500] [chonhagiau.vn] [40.77.167.31] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:23:38 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:23:38 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:23:38 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:23:38 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:23:38 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:25:17 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: where] [FILE: /modules/retails/funcs/search.php] [LINE: 22] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:25:17 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: num_items] [FILE: /modules/retails/theme.php] [LINE: 1521] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 42    FILE: /modules/retails/funcs/search.php
+
+[Sat, 08 Jan 2022 08:25:21 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: where] [FILE: /modules/retails/funcs/search.php] [LINE: 16] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:25:25 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:25:25 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:34:40 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:34:40 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 08:34:40 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:34:44 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 181] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:34:44 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3089] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Sat, 08 Jan 2022 08:34:44 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3155] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Sat, 08 Jan 2022 08:34:44 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3158] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Sat, 08 Jan 2022 08:34:44 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 183] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:34:44 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 185] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:34:44 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 195] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:34:44 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 196] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:34:44 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 197] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 08:38:28 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: where] [FILE: /modules/retails/admin/seller_management.php] [LINE: 99] [TRACE:]
+#1  LINE: 178   FILE: /admin/index.php
+
+[Fri, 07 Jan 2022 20:44:53 -0500] [chonhagiau.com] [40.77.167.13] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3798] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 03:48:02 +0200] [chonhagiau.com] [185.191.171.10] [Notice(8): Undefined offset: 265] [FILE: /modules/retails/global.functions.php] [LINE: 4017] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 30    FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4000  FILE: /modules/retails/global.functions.php
+
+[Sat, 08 Jan 2022 03:48:02 +0200] [chonhagiau.com] [185.191.171.10] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 03:48:02 +0200] [chonhagiau.com] [185.191.171.10] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 03:48:02 +0200] [chonhagiau.com] [185.191.171.10] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 03:48:02 +0200] [chonhagiau.com] [185.191.171.10] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 03:48:02 +0200] [chonhagiau.com] [185.191.171.10] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 03:48:02 +0200] [chonhagiau.com] [185.191.171.10] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 03:48:02 +0200] [chonhagiau.com] [185.191.171.10] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 03:48:02 +0200] [chonhagiau.com] [185.191.171.10] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 03:48:02 +0200] [chonhagiau.com] [185.191.171.10] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 03:48:02 +0200] [chonhagiau.com] [185.191.171.10] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 08:48:53 +0700] [chonhagiau.com] [113.176.64.54] [Warning(2): ob_start(): output handler 'ob_gzhandler' conflicts with 'zlib output compression'] [FILE: /includes/core/theme_functions.php] [LINE: 202] [TRACE:]
+#1  LINE: 178   FILE: /admin/index.php
+#2  LINE: 90    FILE: /admin/siteinfo/notification.php
+#3  LINE: 202   FILE: /includes/core/theme_functions.php
+
+[Sat, 08 Jan 2022 08:48:53 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): ob_start(): failed to create buffer] [FILE: /includes/core/theme_functions.php] [LINE: 202] [TRACE:]
+#1  LINE: 178   FILE: /admin/index.php
+#2  LINE: 90    FILE: /admin/siteinfo/notification.php
+#3  LINE: 202   FILE: /includes/core/theme_functions.php
+
+[Fri, 07 Jan 2022 20:49:59 -0500] [chonhagiau.com] [157.55.39.196] [Notice(8): Undefined index: status] [FILE: /modules/retails/functions.php] [LINE: 46] [TRACE:]
+#1  LINE: 338   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:57:02 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 181] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:57:02 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3089] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 20:57:02 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3155] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 20:57:02 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3158] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 20:57:02 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 183] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:57:02 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 185] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:57:02 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 195] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:57:02 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 196] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 20:57:02 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 197] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 21:24:00 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 181] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 21:24:00 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3089] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 21:24:00 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 183] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 21:24:00 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 185] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 21:24:00 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 195] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 21:24:00 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 196] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 21:24:00 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 197] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 10:28:43 +0800] [chonhagiau.com] [114.119.134.203] [Notice(8): Undefined index: retails_cart] [FILE: /modules/retails/funcs/cart.php] [LINE: 16] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 21:37:38 -0500] [chonhagiau.vn] [207.46.13.93] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 21:37:38 -0500] [chonhagiau.vn] [207.46.13.93] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 21:37:38 -0500] [chonhagiau.vn] [207.46.13.93] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 21:37:38 -0500] [chonhagiau.vn] [207.46.13.93] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 21:37:38 -0500] [chonhagiau.vn] [207.46.13.93] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 21:37:38 -0500] [chonhagiau.vn] [207.46.13.93] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 21:37:38 -0500] [chonhagiau.vn] [207.46.13.93] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 21:37:38 -0500] [chonhagiau.vn] [207.46.13.93] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 21:37:38 -0500] [chonhagiau.vn] [207.46.13.93] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 21:37:38 -0500] [chonhagiau.vn] [207.46.13.93] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 03:45:49 +0100] [chonhagiau.com] [54.36.149.44] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Sat, 08 Jan 2022 04:47:46 +0200] [chonhagiau.com] [185.191.171.12] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 04:47:46 +0200] [chonhagiau.com] [185.191.171.12] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 04:47:46 +0200] [chonhagiau.com] [185.191.171.12] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 04:47:46 +0200] [chonhagiau.com] [185.191.171.12] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3798] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 04:47:46 +0200] [chonhagiau.com] [185.191.171.12] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 04:47:46 +0200] [chonhagiau.com] [185.191.171.12] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 04:47:46 +0200] [chonhagiau.com] [185.191.171.12] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 04:47:46 +0200] [chonhagiau.com] [185.191.171.12] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 21:48:56 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 21:48:56 -0500] [chonhagiau.vn] [207.46.13.102] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 09:55:03 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3421] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 180   FILE: /modules/retails/funcs/search.php
+
+[Sat, 08 Jan 2022 04:55:12 +0200] [chonhagiau.com] [185.191.171.1] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 04:55:12 +0200] [chonhagiau.com] [185.191.171.1] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 04:55:12 +0200] [chonhagiau.com] [185.191.171.1] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 04:55:12 +0200] [chonhagiau.com] [185.191.171.1] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 04:55:12 +0200] [chonhagiau.com] [185.191.171.1] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 04:55:12 +0200] [chonhagiau.com] [185.191.171.1] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 04:55:12 +0200] [chonhagiau.com] [185.191.171.1] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 04:55:12 +0200] [chonhagiau.com] [185.191.171.1] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 04:55:12 +0200] [chonhagiau.com] [185.191.171.1] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 04:55:12 +0200] [chonhagiau.com] [185.191.171.1] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 21:57:40 -0500] [chonhagiau.com] [66.249.66.28] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 21:57:40 -0500] [chonhagiau.com] [66.249.66.28] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 21:57:40 -0500] [chonhagiau.com] [66.249.66.28] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 21:57:40 -0500] [chonhagiau.com] [66.249.66.28] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 21:57:40 -0500] [chonhagiau.com] [66.249.66.28] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 21:57:40 -0500] [chonhagiau.com] [66.249.66.28] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 21:57:40 -0500] [chonhagiau.com] [66.249.66.28] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 21:57:40 -0500] [chonhagiau.com] [66.249.66.28] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 21:57:40 -0500] [chonhagiau.com] [66.249.66.28] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 21:57:40 -0500] [chonhagiau.com] [66.249.66.28] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 10:59:03 +0800] [chonhagiau.com] [114.119.134.206] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 10:59:03 +0800] [chonhagiau.com] [114.119.134.206] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 10:59:03 +0800] [chonhagiau.com] [114.119.134.206] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 10:59:03 +0800] [chonhagiau.com] [114.119.134.206] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 10:59:03 +0800] [chonhagiau.com] [114.119.134.206] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 10:59:03 +0800] [chonhagiau.com] [114.119.134.206] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 10:59:03 +0800] [chonhagiau.com] [114.119.134.206] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 10:59:03 +0800] [chonhagiau.com] [114.119.134.206] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 10:59:03 +0800] [chonhagiau.com] [114.119.134.206] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 10:59:03 +0800] [chonhagiau.com] [114.119.134.206] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 05:02:53 +0200] [chonhagiau.com] [185.191.171.38] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 05:02:53 +0200] [chonhagiau.com] [185.191.171.38] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:02:53 +0200] [chonhagiau.com] [185.191.171.38] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:02:53 +0200] [chonhagiau.com] [185.191.171.38] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:02:53 +0200] [chonhagiau.com] [185.191.171.38] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:02:53 +0200] [chonhagiau.com] [185.191.171.38] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:02:53 +0200] [chonhagiau.com] [185.191.171.38] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:02:53 +0200] [chonhagiau.com] [185.191.171.38] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 05:02:53 +0200] [chonhagiau.com] [185.191.171.38] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 05:02:53 +0200] [chonhagiau.com] [185.191.171.38] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 11:09:08 +0800] [chonhagiau.com] [114.119.134.196] [Notice(8): Undefined index: status] [FILE: /modules/retails/functions.php] [LINE: 46] [TRACE:]
+#1  LINE: 338   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:10:43 -0500] [chonhagiau.com] [66.249.66.148] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:10:43 -0500] [chonhagiau.com] [66.249.66.148] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:10:43 -0500] [chonhagiau.com] [66.249.66.148] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:10:43 -0500] [chonhagiau.com] [66.249.66.148] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:10:43 -0500] [chonhagiau.com] [66.249.66.148] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:10:43 -0500] [chonhagiau.com] [66.249.66.148] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:10:43 -0500] [chonhagiau.com] [66.249.66.148] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:10:43 -0500] [chonhagiau.com] [66.249.66.148] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 22:10:43 -0500] [chonhagiau.com] [66.249.66.148] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 22:10:43 -0500] [chonhagiau.com] [66.249.66.148] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 10:13:01 +0700] [chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Fri, 07 Jan 2022 22:25:09 -0500] [chonhagiau.vn] [66.249.66.141] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:25:09 -0500] [chonhagiau.vn] [66.249.66.141] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:25:09 -0500] [chonhagiau.vn] [66.249.66.141] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:25:09 -0500] [chonhagiau.vn] [66.249.66.141] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:25:09 -0500] [chonhagiau.vn] [66.249.66.141] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:25:09 -0500] [chonhagiau.vn] [66.249.66.141] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:25:09 -0500] [chonhagiau.vn] [66.249.66.141] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:25:09 -0500] [chonhagiau.vn] [66.249.66.141] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 22:25:09 -0500] [chonhagiau.vn] [66.249.66.141] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 22:25:09 -0500] [chonhagiau.vn] [66.249.66.141] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 05:28:06 +0200] [chonhagiau.com] [185.191.171.35] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 05:28:06 +0200] [chonhagiau.com] [185.191.171.35] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:28:06 +0200] [chonhagiau.com] [185.191.171.35] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:28:06 +0200] [chonhagiau.com] [185.191.171.35] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:28:06 +0200] [chonhagiau.com] [185.191.171.35] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:28:06 +0200] [chonhagiau.com] [185.191.171.35] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:28:06 +0200] [chonhagiau.com] [185.191.171.35] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:28:06 +0200] [chonhagiau.com] [185.191.171.35] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 05:28:06 +0200] [chonhagiau.com] [185.191.171.35] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 05:28:06 +0200] [chonhagiau.com] [185.191.171.35] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 11:28:59 +0800] [chonhagiau.com] [114.119.134.204] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 11:28:59 +0800] [chonhagiau.com] [114.119.134.204] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 11:28:59 +0800] [chonhagiau.com] [114.119.134.204] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 11:28:59 +0800] [chonhagiau.com] [114.119.134.204] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 11:28:59 +0800] [chonhagiau.com] [114.119.134.204] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 11:28:59 +0800] [chonhagiau.com] [114.119.134.204] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 11:28:59 +0800] [chonhagiau.com] [114.119.134.204] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 11:28:59 +0800] [chonhagiau.com] [114.119.134.204] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 11:28:59 +0800] [chonhagiau.com] [114.119.134.204] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 11:28:59 +0800] [chonhagiau.com] [114.119.134.204] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 22:40:46 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3155] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 22:40:46 -0500] [chonhagiau.com] [40.77.167.66] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3158] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 22:44:23 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 181] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:44:23 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3089] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 22:44:23 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3155] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 22:44:23 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3158] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 22:44:23 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 183] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:44:23 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 185] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:44:23 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 195] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:44:23 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 196] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:44:23 -0500] [chonhagiau.com] [157.55.39.187] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 197] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:50:20 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 181] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:50:20 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3089] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 22:50:20 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3155] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 22:50:20 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3158] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 22:50:20 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 183] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:50:20 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 185] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:50:20 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 195] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:50:20 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 196] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:50:20 -0500] [chonhagiau.com] [66.249.66.197] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 197] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:50:29 -0500] [chonhagiau.com] [66.249.66.146] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:50:29 -0500] [chonhagiau.com] [66.249.66.146] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:50:29 -0500] [chonhagiau.com] [66.249.66.146] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:50:29 -0500] [chonhagiau.com] [66.249.66.146] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:50:29 -0500] [chonhagiau.com] [66.249.66.146] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:50:29 -0500] [chonhagiau.com] [66.249.66.146] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:50:29 -0500] [chonhagiau.com] [66.249.66.146] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:50:29 -0500] [chonhagiau.com] [66.249.66.146] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 22:50:29 -0500] [chonhagiau.com] [66.249.66.146] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 22:50:29 -0500] [chonhagiau.com] [66.249.66.146] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 22:53:27 -0500] [chonhagiau.com] [158.69.243.140] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 22:53:27 -0500] [chonhagiau.com] [158.69.243.140] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:53:27 -0500] [chonhagiau.com] [158.69.243.140] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:53:27 -0500] [chonhagiau.com] [158.69.243.140] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:53:27 -0500] [chonhagiau.com] [158.69.243.140] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:53:27 -0500] [chonhagiau.com] [158.69.243.140] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:53:27 -0500] [chonhagiau.com] [158.69.243.140] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Fri, 07 Jan 2022 22:53:27 -0500] [chonhagiau.com] [158.69.243.140] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 22:53:27 -0500] [chonhagiau.com] [158.69.243.140] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 22:53:27 -0500] [chonhagiau.com] [158.69.243.140] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 06:05:27 +0200] [chonhagiau.com] [185.191.171.14] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 06:05:27 +0200] [chonhagiau.com] [185.191.171.14] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 06:05:27 +0200] [chonhagiau.com] [185.191.171.14] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 06:05:27 +0200] [chonhagiau.com] [185.191.171.14] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 06:05:27 +0200] [chonhagiau.com] [185.191.171.14] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 06:05:27 +0200] [chonhagiau.com] [185.191.171.14] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 06:05:27 +0200] [chonhagiau.com] [185.191.171.14] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 06:05:27 +0200] [chonhagiau.com] [185.191.171.14] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 06:05:27 +0200] [chonhagiau.com] [185.191.171.14] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 06:05:27 +0200] [chonhagiau.com] [185.191.171.14] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 06:12:27 +0200] [chonhagiau.com] [185.191.171.34] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 06:12:27 +0200] [chonhagiau.com] [185.191.171.34] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 06:12:27 +0200] [chonhagiau.com] [185.191.171.34] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 06:12:27 +0200] [chonhagiau.com] [185.191.171.34] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 06:12:27 +0200] [chonhagiau.com] [185.191.171.34] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 06:12:27 +0200] [chonhagiau.com] [185.191.171.34] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 06:12:27 +0200] [chonhagiau.com] [185.191.171.34] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 06:12:27 +0200] [chonhagiau.com] [185.191.171.34] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Fri, 07 Jan 2022 23:13:11 -0500] [chonhagiau.com] [40.77.190.10] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 181] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 23:13:11 -0500] [chonhagiau.com] [40.77.190.10] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3089] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 23:13:11 -0500] [chonhagiau.com] [40.77.190.10] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3155] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 23:13:11 -0500] [chonhagiau.com] [40.77.190.10] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3158] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 181   FILE: /modules/retails/funcs/viewcatshops.php
+
+[Fri, 07 Jan 2022 23:13:11 -0500] [chonhagiau.com] [40.77.190.10] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 183] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 23:13:11 -0500] [chonhagiau.com] [40.77.190.10] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 185] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 23:13:11 -0500] [chonhagiau.com] [40.77.190.10] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 195] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 23:13:11 -0500] [chonhagiau.com] [40.77.190.10] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 196] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Fri, 07 Jan 2022 23:13:11 -0500] [chonhagiau.com] [40.77.190.10] [Notice(8): Undefined variable: cat_info] [FILE: /modules/retails/funcs/viewcatshops.php] [LINE: 197] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 12:18:22 +0800] [chonhagiau.com] [114.119.135.224] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Sat, 08 Jan 2022 05:22:10 +0100] [chonhagiau.com] [5.9.70.117] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 05:22:10 +0100] [chonhagiau.com] [5.9.70.117] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 3994] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:22:10 +0100] [chonhagiau.com] [5.9.70.117] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4010] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:22:10 +0100] [chonhagiau.com] [5.9.70.117] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3795] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:22:10 +0100] [chonhagiau.com] [5.9.70.117] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3812] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:22:10 +0100] [chonhagiau.com] [5.9.70.117] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3819] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:22:10 +0100] [chonhagiau.com] [5.9.70.117] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3838] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Sat, 08 Jan 2022 05:22:10 +0100] [chonhagiau.com] [5.9.70.117] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 05:22:10 +0100] [chonhagiau.com] [5.9.70.117] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 05:22:10 +0100] [chonhagiau.com] [5.9.70.117] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 3956  FILE: /modules/retails/theme.php
+
+[Sat, 08 Jan 2022 11:22:33 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined variable: where] [FILE: /modules/retails/funcs/search.php] [LINE: 22] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 11:22:33 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined variable: num_items] [FILE: /modules/retails/theme.php] [LINE: 1521] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 42    FILE: /modules/retails/funcs/search.php
+
+[Sat, 08 Jan 2022 11:22:34 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined variable: where] [FILE: /modules/retails/funcs/search.php] [LINE: 16] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Sat, 08 Jan 2022 11:22:35 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3421] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 180   FILE: /modules/retails/funcs/search.php
+
+[Sat, 08 Jan 2022 11:22:45 +0700] [chonhagiau.com] [113.176.64.54] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Sat, 08 Jan 2022 12:36:25 +0800] [chonhagiau.com] [114.119.134.203] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3306] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Sat, 08 Jan 2022 05:45:14 +0100] [chonhagiau.com] [54.36.149.44] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3798] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
