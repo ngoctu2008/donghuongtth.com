@@ -3066,7 +3066,11 @@
 	}
 	
 	
+<<<<<<< HEAD
 	function shops_info( $array_data, $per_page, $page, $num_items, $cat_info, $base_url,$list_category_parrent,$getbrand_all,$page_check,$info_shop) {
+=======
+	function shops_info( $array_data, $per_page, $page, $num_items, $cat_info, $base_url,$list_category_parrent,$getbrand_all,$page_check,$info_shop,$list_voucher) {
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 		global $module_info, $lang_module, $lang_global, $op, $module_name, $module_upload, $db,$user_info;
 		
 		if($page_check==0){
@@ -3196,6 +3200,60 @@
 			$xtpl->parse( 'main.product' );
 		}
 		
+<<<<<<< HEAD
+=======
+		//voucher
+		
+		if(!empty($list_voucher))
+		{
+			foreach( $list_voucher as $voucher ) {
+				// print_r($voucher['list_product']);
+				if($voucher['list_product'] == 0){
+					$xtpl->assign( 'VOUCHER_APPLY', 'Voucher áp dụng cho tất cả sản phẩm của Shop');
+				}
+				else{
+					$xtpl->assign( 'VOUCHER_APPLY', 'Voucher áp dụng cho một số sản phẩm');
+				}
+				if($voucher['type_discount']){
+					$voucher['discount_price'] = $voucher['discount_price'] . '%';
+					
+				}
+				else
+				{
+					$voucher['discount_price'] = number_format( $voucher['discount_price'] ).'đ'; 
+				}
+				
+				$voucher['time_to'] = date("d-m-Y", $voucher['time_to']);
+				$xtpl->assign( 'VOUCHER', $voucher);
+				
+				
+				if($voucher['maximum_discount'])
+				{	
+					$xtpl->parse( 'main.voucher.voucher_loop.maximum_discount' );
+					$voucher['maximum_discount'] = number_format( $voucher['maximum_discount'] ).'đ';
+					$xtpl->assign( 'maximum_discount', $voucher['maximum_discount']);
+				}
+				
+				//check voucher khach da luu
+				$check_voucher_customer = $db->query('SELECT id FROM ' . TABLE . '_voucher_wallet WHERE voucherid = ' . $voucher['id'])->fetchColumn();
+				if($check_voucher_customer){
+					$xtpl->parse( 'main.voucher.voucher_loop.saved');
+					}else{
+					if(!$voucher['usage_limit_quantity']){
+						$xtpl->parse( 'main.voucher.voucher_loop.not_voucher');
+						}else{
+						$xtpl->parse( 'main.voucher.voucher_loop.not_saved');
+					}
+					
+				}
+				
+				
+				$xtpl->parse( 'main.voucher.voucher_loop' );
+			}
+			$xtpl->parse( 'main.voucher' );
+		}
+		
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 		$xtpl->parse( 'main' );
 		return $xtpl->text( 'main' );
 	}

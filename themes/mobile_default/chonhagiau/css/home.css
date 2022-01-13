@@ -418,4 +418,96 @@ ul.nav.nav-pills li a{
 }
 .content_main_layout{
 	padding-bottom:50px;
+<<<<<<< HEAD
+=======
+}
+.product_landingpage .item.product_suggest{
+	max-width:100%;
+	max-height:302px;
+}
+.product_landingpage .item.product_suggest .card{
+	min-height:302px;
+}
+.product_landingpage .item.product_suggest .suggest_img{
+	height: 180px;
+    width: 180px;
+}
+.coupons_voucher{
+	min-height:130px;
+}
+.coupons_voucher .coupons_right{
+	width: 7.375rem;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient( 
+	90deg,transparent 0,transparent 0.1875rem,#fff 0);
+}
+.coupons_voucher .coupons_right:after{
+	content:'';
+	display:block;
+	width:20px;
+	height:20px;
+	border-radius:50%;
+	background:#efefef;
+	position:absolute;
+	top:-10px;
+	left:-15px;
+}
+.coupons_voucher .coupons_right:before{
+	content:'';
+	display:block;
+	width:20px;
+	height:20px;
+	background:#efefef;
+	border-radius:50%;
+	position:absolute;
+	bottom:-10px;
+	left:-15px;
+}
+.coupons_voucher .coupons_right .coupons_right-border{
+	position: absolute;
+    top: -0.487rem;
+    right: -12px;
+    width: 1.25rem;
+    height: calc(100% - -0.5rem);
+    background: radial-gradient(circle at 0,at .25rem,transparent 0,transparent .1875rem,#fff 0);
+    background: radial-gradient(circle at 0 0.25rem,transparent 0,transparent 0.188rem,#fff 0);
+	background-repeat: repeat;
+	background-size: auto;
+    background-size: 3.25rem 0.63rem;
+    background-repeat: repeat-y;
+    transform: rotatey(145deg);
+}
+#voucher_shop .owl-stage-outer .owl-stage{
+	padding-left:0px !important;
+}
+#voucher_shop .owl-nav .owl-prev{
+	position:absolute;
+	left:-14px;
+	top:45%;
+	transform:translateY(-50%);
+	background-color: rgba(220, 220, 220, 0.5);
+	color: #e1a208;
+	width: 20px;
+	height: 40px;
+}
+#voucher_shop .owl-nav .owl-prev{
+	font-size:35px;
+}
+#voucher_shop .owl-nav .owl-next{
+	position:absolute;
+	right:-16px;
+	top:45%;
+	transform:translateY(-50%);
+	background-color: rgba(220, 220, 220, 0.5);
+	color: #e1a208;
+	width: 20px;
+	height: 40px;
+}
+#voucher_shop .owl-nav .owl-next{
+	font-size:35px;
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 }

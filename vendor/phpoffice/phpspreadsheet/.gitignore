@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /tests/codeCoverage
 /analysis
 /vendor/
@@ -8,3 +9,15 @@
 *.project
 /.settings
 /.idea
+=======
+/tests/codeCoverage
+/analysis
+/vendor/
+/phpunit.xml
+
+## IDE support
+*.buildpath
+*.project
+/.settings
+/.idea
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c

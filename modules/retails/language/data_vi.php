@@ -86,7 +86,11 @@ try {
 }
 
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_categories (id, name, alias, parrent_id, percent_discount, keyword, image, other_image, description, viewdescriptionhtml, groups_view, inhome, viewcat, numlinks, idsite, user_add, time_add, user_edit, time_edit, weight, status, brand, origin) VALUES('2', 'Thời Trang Nam', 'thoi-trang-nam', '0', '5', 'thời trang nam', 'cat/1612407759.png', '1;https://tmscity.com/admin/;/uploads/retails/cat/banner-ngang-1200x200px-dothucongmynghe.jpg|2;https://tmscity.com/admin/;/uploads/retails/cat/category-banner-winter-10-off-1200x200px.jpg', 'mô tả<br />
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_categories (id, name, alias, parrent_id, percent_discount, keyword, image, other_image, description, viewdescriptionhtml, groups_view, inhome, viewcat, numlinks, idsite, user_add, time_add, user_edit, time_edit, weight, status, brand, origin) VALUES('2', 'Thời Trang Nam', 'thoi-trang-nam', '0', '5', 'thời trang nam', 'cat/1612407759.png', '1;https://tmscity.com/admin/;/uploads/retails/cat/banner-ngang-1200x200px-dothucongmynghe.jpg|2;https://tmscity.com/admin/;/uploads/retails/cat/category-banner-winter-10-off-1200x200px.jpg', 'mô tả<br />
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 &nbsp;', '0', '6', '1', '0', '10', '0', '1', '1608714043', '2', '1613621137', '1', '1', '', '1|2')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
@@ -1161,6 +1165,7 @@ try {
 }
 
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_product (id, store_id, barcode, name_product, alias, categories_id, unit_id, unit_weight, weight_product, length_product, width_product, height_product, unit_length, unit_height, unit_width, image, other_image, description, bodytext, keyword, tag_title, tag_description, inhome, allowed_rating, showprice, number_view, price_min, price_max, time_add, user_add, time_edit, user_edit, weight, status, number_order, brand, origin, price, price_special, star, number_rate, time_push, mode_push, price_sort, number_like) VALUES('1', '1', 'SP885267685', 'Nhang Mộc Tài Lộc 30cm Loại 39 Cây', 'Nhang-Moc-Tai-Loc-30cm-Loai-39-Cay', '59', '5', '2', '200', '30', '5', '1', '1', '1', '1', '2021_02/huong-nhang-tram-sach-the-nho.jpg', '', 'Không cay mắt không xộc mũi. Không hóa chất, không hương liệu độc hại<br />
 Nguồn nguyên liệu đến 99,9% từ thiên nhiên.Mùi trầm hương tự nhiên xanh sạch<br />
 Thích hợp cho phòng kín máy lạnh không gian khoảng 25m2. Dành cho khách hàng đốt nhiều nhất là công ty, cửa hàng<br />
@@ -1207,11 +1212,60 @@ Nhang Mộc phát triển quy trình sản xuất dựa trên những công ngh�
 Với mùi thơm nhẹ nhàng và êm dịu do nhang mộc tài lộc mang lại, nhân viên trong công ty tập trung làm việc, khách trong cửa hàng thoải mái đi lại, mua sắm. Nhờ đó cũng có thể góp phần nâng cao hiệu suất làm việc, doanh thu cho công ty hay cửa hàng.<br />
 Xu hướng sử dụng nhang sạch đang ngày càng phát triển. Vì vậy, đối với những người làm ăn, kinh doanh như các công ty hay chủ cửa hàng, những người có nhu cầu sử dụng nhang nhiều nên sử dụng nhang mộc tài lộc, vừa mang ý nghĩa cầu tài lộc vừa an toàn cho sức khỏe lại vừa phù hợp với văn hóa thờ cúng của người Việt Nam.<br />
 &nbsp;</p>
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_product (id, store_id, barcode, name_product, alias, categories_id, unit_id, unit_weight, weight_product, length_product, width_product, height_product, unit_length, unit_height, unit_width, image, other_image, description, bodytext, keyword, tag_title, tag_description, inhome, allowed_rating, showprice, number_view, price_min, price_max, time_add, user_add, time_edit, user_edit, weight, status, number_order, brand, origin, price, price_special, star, number_rate, time_push, mode_push, price_sort, number_like) VALUES('1', '1', 'SP885267685', 'Nhang Mộc Tài Lộc 30cm Loại 39 Cây', 'Nhang-Moc-Tai-Loc-30cm-Loai-39-Cay', '59', '5', '2', '200', '30', '5', '1', '1', '1', '1', '2021_02/huong-nhang-tram-sach-the-nho.jpg', '', 'Không cay mắt không xộc mũi. Không hóa chất, không hương liệu độc hại<br />
+Nguồn nguyên liệu đến 99,9% từ thiên nhiên.Mùi trầm hương tự nhiên xanh sạch<br />
+Thích hợp cho phòng kín máy lạnh không gian khoảng 25m2. Dành cho khách hàng đốt nhiều nhất là công ty, cửa hàng<br />
+Thành phần: bột trầm hương, keo thực vât&nbsp;(keo cây bời lời),&nbsp;tăm tre nhập khẩu.', '<h2>Nhang Trầm sạch là gì?</h2>
+Từ lâu chúng ta đã quen sử dụng nhang để thắp hương trên bàn thờ tổ tiên, bàn thờ ông địa trong các ngôi nhà hay tại các văn phòng, cửa hàng, cơ quan làm việc. Và loại nhang thường hay sử dụng đó lại chính là loại nhang có tẩm hóa chất độc hại, vì vậy mùi hương sau khi đốt thường lưu lại rất lâu nhưng ngược lại, nó gây ảnh hưởng không nhỏ tới sức khỏe cũng như sinh hoạt của con người.<br />
+Với mong muốn sử dụng một loại nhang an toàn, thời gian gần đây mọi người rất quan tâm đến sản phẩm nhang sạch. Vậy nhang trầm sạch là gì?<br />
+Nhang Trầm sạch là một loại nhang được sản xuất dựa trên dây chuyền, công nghệ tiên tiến, với thành phần hoàn toàn từ các nguyên liệu có sẵn trong tự nhiên như bột trầm hương, keo thực vật và tăm tre nhập khẩu. Đặc biệt không dùng đến hóa chất hay hương liệu độc hại, nhờ đó mà nhang sạch có mùi trầm thơm tự nhiên, chứ không phải là mùi thơm hắc như nhang có tẩm hóa chất.<br />
+&nbsp;<br />
+<img alt=\"nhang trầm sạch\" height=\"450\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc_1.jpg\" title=\"nhang trầm sạch\" width=\"800\" /><br />
+&nbsp;
+<h2>Lợi ích khi sử dụng nhang sạch</h2>
+Vì nhang trầm&nbsp;sạch được sản xuất hoàn toàn từ trầm hương tự nhiên, không hóa chất, không hương liệu độc hại và phải trải qua quá trình sản xuất, kiểm định gắt gao để cho ra đời những sản phẩm nhang chất lượng. Cho nên sử dụng nhang sạch chúng ta hoàn toàn có thể yên tâm về mặt sức khỏe, &nbsp;khi không gây ra ảnh hưởng nghiêm trọng nào về mắt, da và đường hô hấp. Đặc biệt an toàn với những người bị viêm xoang, dị ứng hay đối tựơng bà bầu, trẻ nhỏ và người già.<br />
+Bên cạnh đó, mùi hương từ nhang sạch tỏa ra là mùi trầm thơm tự nhiên, nhẹ dịu nên luôn mang đến cảm giác thư giãn, thỏai mái và dễ chịu. Nhất là khi sử dụng nhang ở những nơi đông người như văn phòng làm việc, cửa hàng hay các buổi hành lễ cũng như trong không gian phòng kín, phòng lạnh. &nbsp;
+<blockquote><img alt=\"tai loc lon 3\" height=\"371\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc.jpg\" title=\"tai loc lon 3\" width=\"1000\" /><br />
+&nbsp;<br />
+Nhang Mộc là nhà sản xuất và cung cấp Nhang Trầm Thượng Hạng cho người tiêu dùng trong và ngoài nước. Nhang Mộc tự hào mang đến cho bạn một giải pháp thực sự về một dòng “Nhang Sạch” không những chất lượng cao với hương thơm nhẹ nhàng, êm dịu, mà còn đem lại rất nhiều lợi ích cho sức khỏe người tiêu dùng.<br />
+<br />
+<strong>Nguồn nguyên liệu tự nhiên</strong><br />
+Sản phẩm của Nhang Mộc được làm từ 100% trầm hương tự nhiên. Nguyên liệu được tuyển chọn những cây trầm có điều kiện và sức khỏe tốt nhất. Đảm bảo cho ra những sản phẩm với chất lượng cao nhất.<br />
+<br />
+<strong>Chất lượng luôn được đặt lên hàng đầu</strong><br />
+Những sản phẩm được Nhang Mộc tạo ra, trước khi xuất xưởng để đến tay người tiêu dùng đều được trải qua quá trình thẩm định và kiểm định chuyên nghiệp từ độ mùi, trọng lượng, chất lượng bột nhang, tăm nhang cho đến bao bì.<br />
+<br />
+<strong>Quy trình sản xuất tiên tiến</strong><br />
+Nhang Mộc phát triển quy trình sản xuất dựa trên những công nghệ khoa học – kỹ thuật tiên tiến. Nhang Mộc tự tin sản phẩm của mình có thể làm hài lòng tất cả tầng lớp người tiêu dùng.</blockquote>
+
+<h2>Nhang Trầm Sạch: Nhang mộc tài lộc&nbsp;cầu tài lộc, tiền bạc cho công ty cửa hàng</h2>
+
+<p>Theo phong tục của người Việt Nam, “có thờ có thiêng, có kiêng có lành” nên hầu hết ở các công ty, cửa hàng đều có bàn thờ Ông Địa – Thần Tài. Việc thắp nhang vào mỗi buổi sáng để cầu việc làm ăn thuận lợi là điều cần thiết. Tuy nhiên, để đảm bảo sức khỏe cũng như cầu tài lộc thì nên cân nhắc sử dụng nhang mộc tài lộc.</p>
+<img alt=\"Nhang mộc tài lộc: cầu tài lộc, tiền bạc cho công ty cửa hàng\" height=\"400\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc_4.jpg\" title=\"Nhang mộc tài lộc: cầu tài lộc, tiền bạc cho công ty cửa hàng\" width=\"800\" />
+<p>&nbsp;</p>
+
+<h2>Lý do nên sử dụng nhang mộc tài lộc</h2>
+
+<p>Trong văn hóa thờ cúng, việc sử dụng nhang là một điều cần thiết. Tuy nhiên, các loại nhang được bày bán trên thị trường hiện nay, hầu hết đều là nhang được tẩm hóa chất độc hại. Vì vậy khi đốt rất khó ngửi và gây ảnh hưởng không tốt tới sức khỏe của con người.<br />
+Đặc biệt ở khu vực cửa hàng hay các công ty là nơi sử dụng nhang mỗi ngày. Đây là nơi tập trung nhiều người qua lại, mua bán và làm việc. Việc đốt nhang có tẩm hóa chất độc hại dù với mục đích cầu tài lộc, nhưng có thể gây nên những ảnh hưởng nghiêm trọng tới sức khỏe cũng như ảnh hưởng đến hiệu quả làm việc. Vì vậy, các chủ cửa hàng, chủ công ty nên lưu ý trong việc chọn nhang. Tốt nhất nên sử dụng nhang được làm từ thảo mộc như nhang mộc tài lộc.</p>
+<img alt=\"Nhang mộc tài lộc: mang ý nghĩa cầu tài lộc, tiền bạc\" height=\"440\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc_3.jpg\" title=\"Nhang mộc tài lộc: mang ý nghĩa cầu tài lộc, tiền bạc\" width=\"660\" />
+<p>&nbsp;</p>
+
+<h2>Nhang mộc tài lộc: mang ý nghĩa cầu tài lộc, tiền bạc</h2>
+
+<p>Nhang mộc là sản phẩm nhang sạch không chỉ được người tiêu dùng trong nước, mà cả người tiêu dùng nước ngoài rất ưa chuộng. Bởi đây là sản phẩm nhang được làm hoàn toàn từ nguyên liệu tự nhiên như: bột trầm hương, keo thực vật (keo cây bời lời) và tăm tre nhập khẩu. Vì vậy, mang đến mùi hương rất dễ chịu dù có thắp nhang ở trong phòng lạnh, đóng kín với diện tích hẹp.<br />
+Đối với các cửa hàng hay công ty có nhu cầu thắp nhang vào mỗi buổi sáng để cầu tài lộc, thì sản phẩm nhang mộc tài lộc là lựa chọn không thể nào hoàn hảo hơn. Không chỉ mang ý nghĩa cầu tài lộc, tiền bạc cho công việc làm ăn, buôn bán trong ngày gặp may mắn và thuận lợi. Nhang mộc tài lộc lại không chứa hóa chất hay hương liệu độc hại, khi thắp không hề cay mắt hay xộc mũi, do đó không gây cảm giác khó chịu hay ảnh hưởng tới sức khỏe, tinh thần của mọi người ở xung quanh.<br />
+Với mùi thơm nhẹ nhàng và êm dịu do nhang mộc tài lộc mang lại, nhân viên trong công ty tập trung làm việc, khách trong cửa hàng thoải mái đi lại, mua sắm. Nhờ đó cũng có thể góp phần nâng cao hiệu suất làm việc, doanh thu cho công ty hay cửa hàng.<br />
+Xu hướng sử dụng nhang sạch đang ngày càng phát triển. Vì vậy, đối với những người làm ăn, kinh doanh như các công ty hay chủ cửa hàng, những người có nhu cầu sử dụng nhang nhiều nên sử dụng nhang mộc tài lộc, vừa mang ý nghĩa cầu tài lộc vừa an toàn cho sức khỏe lại vừa phù hợp với văn hóa thờ cúng của người Việt Nam.<br />
+&nbsp;</p>
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 <img alt=\"Nhang mộc tài lộc\" height=\"480\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc_2.jpg\" title=\"Nhang mộc tài lộc\" width=\"720\" />', '', '', '', '1', '1', '1', '87', '0', '0', '1613550029', '1', '1613637559', '3', '1', '1', '0', '1', '1', '17000', '15000', '4', '1', '1613643143', '1', '15000', '0')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_product (id, store_id, barcode, name_product, alias, categories_id, unit_id, unit_weight, weight_product, length_product, width_product, height_product, unit_length, unit_height, unit_width, image, other_image, description, bodytext, keyword, tag_title, tag_description, inhome, allowed_rating, showprice, number_view, price_min, price_max, time_add, user_add, time_edit, user_edit, weight, status, number_order, brand, origin, price, price_special, star, number_rate, time_push, mode_push, price_sort, number_like) VALUES('2', '1', 'SP658196056', 'Nhang Mộc Tài Lộc 40cm Loại 39 Cây', 'Nhang-Moc-Tai-Loc-40cm-Loai-39-Cay', '59', '4', '2', '300', '40', '5', '1', '1', '1', '1', '2021_02/huong-nhang-tram-sach-the-nho.jpg', '', '&nbsp;<br />
 Không cay mắt không xộc mũi. Không hóa chất, không hương liệu độc hại<br />
 Nguồn nguyên liệu đến 99,9% từ thiên nhiên.Mùi trầm hương tự nhiên xanh sạch<br />
@@ -1260,11 +1314,62 @@ Nhang Mộc phát triển quy trình sản xuất dựa trên những công ngh�
 Với mùi thơm nhẹ nhàng và êm dịu do nhang mộc tài lộc mang lại, nhân viên trong công ty tập trung làm việc, khách trong cửa hàng thoải mái đi lại, mua sắm. Nhờ đó cũng có thể góp phần nâng cao hiệu suất làm việc, doanh thu cho công ty hay cửa hàng.<br />
 Xu hướng sử dụng nhang sạch đang ngày càng phát triển. Vì vậy, đối với những người làm ăn, kinh doanh như các công ty hay chủ cửa hàng, những người có nhu cầu sử dụng nhang nhiều nên sử dụng nhang mộc tài lộc, vừa mang ý nghĩa cầu tài lộc vừa an toàn cho sức khỏe lại vừa phù hợp với văn hóa thờ cúng của người Việt Nam.<br />
 &nbsp;</p>
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_product (id, store_id, barcode, name_product, alias, categories_id, unit_id, unit_weight, weight_product, length_product, width_product, height_product, unit_length, unit_height, unit_width, image, other_image, description, bodytext, keyword, tag_title, tag_description, inhome, allowed_rating, showprice, number_view, price_min, price_max, time_add, user_add, time_edit, user_edit, weight, status, number_order, brand, origin, price, price_special, star, number_rate, time_push, mode_push, price_sort, number_like) VALUES('2', '1', 'SP658196056', 'Nhang Mộc Tài Lộc 40cm Loại 39 Cây', 'Nhang-Moc-Tai-Loc-40cm-Loai-39-Cay', '59', '4', '2', '300', '40', '5', '1', '1', '1', '1', '2021_02/huong-nhang-tram-sach-the-nho.jpg', '', '&nbsp;<br />
+Không cay mắt không xộc mũi. Không hóa chất, không hương liệu độc hại<br />
+Nguồn nguyên liệu đến 99,9% từ thiên nhiên.Mùi trầm hương tự nhiên xanh sạch<br />
+Thích hợp cho phòng kín máy lạnh không gian khoảng 25m2. Dành cho khách hàng đốt nhiều nhất là công ty, cửa hàng<br />
+Thành phần: bột trầm hương, keo thực vât&nbsp;(keo cây bời lời),&nbsp;tăm tre nhập khẩu.<br />
+&nbsp;', '<h2>&nbsp;Nhang Trầm sạch là gì?</h2>
+Từ lâu chúng ta đã quen sử dụng nhang để thắp hương trên bàn thờ tổ tiên, bàn thờ ông địa trong các ngôi nhà hay tại các văn phòng, cửa hàng, cơ quan làm việc. Và loại nhang thường hay sử dụng đó lại chính là loại nhang có tẩm hóa chất độc hại, vì vậy mùi hương sau khi đốt thường lưu lại rất lâu nhưng ngược lại, nó gây ảnh hưởng không nhỏ tới sức khỏe cũng như sinh hoạt của con người.<br />
+Với mong muốn sử dụng một loại nhang an toàn, thời gian gần đây mọi người rất quan tâm đến sản phẩm nhang sạch. Vậy nhang trầm sạch là gì?<br />
+Nhang Trầm sạch là một loại nhang được sản xuất dựa trên dây chuyền, công nghệ tiên tiến, với thành phần hoàn toàn từ các nguyên liệu có sẵn trong tự nhiên như bột trầm hương, keo thực vật và tăm tre nhập khẩu. Đặc biệt không dùng đến hóa chất hay hương liệu độc hại, nhờ đó mà nhang sạch có mùi trầm thơm tự nhiên, chứ không phải là mùi thơm hắc như nhang có tẩm hóa chất.<br />
+&nbsp;<br />
+<img alt=\"nhang trầm sạch\" height=\"450\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc_1.jpg\" title=\"nhang trầm sạch\" width=\"800\" /><br />
+&nbsp;
+<h2>Lợi ích khi sử dụng nhang sạch</h2>
+Vì nhang trầm&nbsp;sạch được sản xuất hoàn toàn từ trầm hương tự nhiên, không hóa chất, không hương liệu độc hại và phải trải qua quá trình sản xuất, kiểm định gắt gao để cho ra đời những sản phẩm nhang chất lượng. Cho nên sử dụng nhang sạch chúng ta hoàn toàn có thể yên tâm về mặt sức khỏe, &nbsp;khi không gây ra ảnh hưởng nghiêm trọng nào về mắt, da và đường hô hấp. Đặc biệt an toàn với những người bị viêm xoang, dị ứng hay đối tựơng bà bầu, trẻ nhỏ và người già.<br />
+Bên cạnh đó, mùi hương từ nhang sạch tỏa ra là mùi trầm thơm tự nhiên, nhẹ dịu nên luôn mang đến cảm giác thư giãn, thỏai mái và dễ chịu. Nhất là khi sử dụng nhang ở những nơi đông người như văn phòng làm việc, cửa hàng hay các buổi hành lễ cũng như trong không gian phòng kín, phòng lạnh. &nbsp;
+<blockquote><img alt=\"tai loc lon 3\" height=\"371\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc.jpg\" title=\"tai loc lon 3\" width=\"1000\" /><br />
+&nbsp;<br />
+Nhang Mộc là nhà sản xuất và cung cấp Nhang Trầm Thượng Hạng cho người tiêu dùng trong và ngoài nước. Nhang Mộc tự hào mang đến cho bạn một giải pháp thực sự về một dòng “Nhang Sạch” không những chất lượng cao với hương thơm nhẹ nhàng, êm dịu, mà còn đem lại rất nhiều lợi ích cho sức khỏe người tiêu dùng.<br />
+<br />
+<strong>Nguồn nguyên liệu tự nhiên</strong><br />
+Sản phẩm của Nhang Mộc được làm từ 100% trầm hương tự nhiên. Nguyên liệu được tuyển chọn những cây trầm có điều kiện và sức khỏe tốt nhất. Đảm bảo cho ra những sản phẩm với chất lượng cao nhất.<br />
+<br />
+<strong>Chất lượng luôn được đặt lên hàng đầu</strong><br />
+Những sản phẩm được Nhang Mộc tạo ra, trước khi xuất xưởng để đến tay người tiêu dùng đều được trải qua quá trình thẩm định và kiểm định chuyên nghiệp từ độ mùi, trọng lượng, chất lượng bột nhang, tăm nhang cho đến bao bì.<br />
+<br />
+<strong>Quy trình sản xuất tiên tiến</strong><br />
+Nhang Mộc phát triển quy trình sản xuất dựa trên những công nghệ khoa học – kỹ thuật tiên tiến. Nhang Mộc tự tin sản phẩm của mình có thể làm hài lòng tất cả tầng lớp người tiêu dùng.</blockquote>
+
+<h2>Nhang Trầm Sạch: Nhang mộc tài lộc&nbsp;cầu tài lộc, tiền bạc cho công ty cửa hàng</h2>
+
+<p>Theo phong tục của người Việt Nam, “có thờ có thiêng, có kiêng có lành” nên hầu hết ở các công ty, cửa hàng đều có bàn thờ Ông Địa – Thần Tài. Việc thắp nhang vào mỗi buổi sáng để cầu việc làm ăn thuận lợi là điều cần thiết. Tuy nhiên, để đảm bảo sức khỏe cũng như cầu tài lộc thì nên cân nhắc sử dụng nhang mộc tài lộc.</p>
+<img alt=\"Nhang mộc tài lộc: cầu tài lộc, tiền bạc cho công ty cửa hàng\" height=\"400\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc_4.jpg\" title=\"Nhang mộc tài lộc: cầu tài lộc, tiền bạc cho công ty cửa hàng\" width=\"800\" />
+<p>&nbsp;</p>
+
+<h2>Lý do nên sử dụng nhang mộc tài lộc</h2>
+
+<p>Trong văn hóa thờ cúng, việc sử dụng nhang là một điều cần thiết. Tuy nhiên, các loại nhang được bày bán trên thị trường hiện nay, hầu hết đều là nhang được tẩm hóa chất độc hại. Vì vậy khi đốt rất khó ngửi và gây ảnh hưởng không tốt tới sức khỏe của con người.<br />
+Đặc biệt ở khu vực cửa hàng hay các công ty là nơi sử dụng nhang mỗi ngày. Đây là nơi tập trung nhiều người qua lại, mua bán và làm việc. Việc đốt nhang có tẩm hóa chất độc hại dù với mục đích cầu tài lộc, nhưng có thể gây nên những ảnh hưởng nghiêm trọng tới sức khỏe cũng như ảnh hưởng đến hiệu quả làm việc. Vì vậy, các chủ cửa hàng, chủ công ty nên lưu ý trong việc chọn nhang. Tốt nhất nên sử dụng nhang được làm từ thảo mộc như nhang mộc tài lộc.</p>
+<img alt=\"Nhang mộc tài lộc: mang ý nghĩa cầu tài lộc, tiền bạc\" height=\"440\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc_3.jpg\" title=\"Nhang mộc tài lộc: mang ý nghĩa cầu tài lộc, tiền bạc\" width=\"660\" />
+<p>&nbsp;</p>
+
+<h2>Nhang mộc tài lộc: mang ý nghĩa cầu tài lộc, tiền bạc</h2>
+
+<p>Nhang mộc là sản phẩm nhang sạch không chỉ được người tiêu dùng trong nước, mà cả người tiêu dùng nước ngoài rất ưa chuộng. Bởi đây là sản phẩm nhang được làm hoàn toàn từ nguyên liệu tự nhiên như: bột trầm hương, keo thực vật (keo cây bời lời) và tăm tre nhập khẩu. Vì vậy, mang đến mùi hương rất dễ chịu dù có thắp nhang ở trong phòng lạnh, đóng kín với diện tích hẹp.<br />
+Đối với các cửa hàng hay công ty có nhu cầu thắp nhang vào mỗi buổi sáng để cầu tài lộc, thì sản phẩm nhang mộc tài lộc là lựa chọn không thể nào hoàn hảo hơn. Không chỉ mang ý nghĩa cầu tài lộc, tiền bạc cho công việc làm ăn, buôn bán trong ngày gặp may mắn và thuận lợi. Nhang mộc tài lộc lại không chứa hóa chất hay hương liệu độc hại, khi thắp không hề cay mắt hay xộc mũi, do đó không gây cảm giác khó chịu hay ảnh hưởng tới sức khỏe, tinh thần của mọi người ở xung quanh.<br />
+Với mùi thơm nhẹ nhàng và êm dịu do nhang mộc tài lộc mang lại, nhân viên trong công ty tập trung làm việc, khách trong cửa hàng thoải mái đi lại, mua sắm. Nhờ đó cũng có thể góp phần nâng cao hiệu suất làm việc, doanh thu cho công ty hay cửa hàng.<br />
+Xu hướng sử dụng nhang sạch đang ngày càng phát triển. Vì vậy, đối với những người làm ăn, kinh doanh như các công ty hay chủ cửa hàng, những người có nhu cầu sử dụng nhang nhiều nên sử dụng nhang mộc tài lộc, vừa mang ý nghĩa cầu tài lộc vừa an toàn cho sức khỏe lại vừa phù hợp với văn hóa thờ cúng của người Việt Nam.<br />
+&nbsp;</p>
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 <img alt=\"Nhang mộc tài lộc\" height=\"480\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc_2.jpg\" title=\"Nhang mộc tài lộc\" width=\"720\" />', '', '', '', '1', '1', '1', '15', '5000', '13000', '1613550317', '1', '1613638957', '3', '2', '1', '0', '1', '1', '19000', '17000', '0', '0', '1613643167', '1', '17000', '2')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_product (id, store_id, barcode, name_product, alias, categories_id, unit_id, unit_weight, weight_product, length_product, width_product, height_product, unit_length, unit_height, unit_width, image, other_image, description, bodytext, keyword, tag_title, tag_description, inhome, allowed_rating, showprice, number_view, price_min, price_max, time_add, user_add, time_edit, user_edit, weight, status, number_order, brand, origin, price, price_special, star, number_rate, time_push, mode_push, price_sort, number_like) VALUES('3', '1', 'SP985803895', 'Nhang Mộc Tài Lộc 30cm Loại 79 Cây', 'Nhang-Moc-Tai-Loc-30cm-Loai-79-Cay', '59', '4', '2', '400', '30', '6', '1', '1', '1', '1', '2021_02/nhang_moc_tai_loc_600x600_1.jpg', '', '&nbsp;<br />
 Không cay mắt không xộc mũi. Không hóa chất, không hương liệu độc hại<br />
 Nguồn nguyên liệu đến 99,9% từ thiên nhiên.Mùi trầm hương tự nhiên xanh sạch<br />
@@ -1314,6 +1419,57 @@ Nhang Mộc phát triển quy trình sản xuất dựa trên những công ngh�
 Với mùi thơm nhẹ nhàng và êm dịu do nhang mộc tài lộc mang lại, nhân viên trong công ty tập trung làm việc, khách trong cửa hàng thoải mái đi lại, mua sắm. Nhờ đó cũng có thể góp phần nâng cao hiệu suất làm việc, doanh thu cho công ty hay cửa hàng.<br />
 Xu hướng sử dụng nhang sạch đang ngày càng phát triển. Vì vậy, đối với những người làm ăn, kinh doanh như các công ty hay chủ cửa hàng, những người có nhu cầu sử dụng nhang nhiều nên sử dụng nhang mộc tài lộc, vừa mang ý nghĩa cầu tài lộc vừa an toàn cho sức khỏe lại vừa phù hợp với văn hóa thờ cúng của người Việt Nam.<br />
 &nbsp;</p>
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_product (id, store_id, barcode, name_product, alias, categories_id, unit_id, unit_weight, weight_product, length_product, width_product, height_product, unit_length, unit_height, unit_width, image, other_image, description, bodytext, keyword, tag_title, tag_description, inhome, allowed_rating, showprice, number_view, price_min, price_max, time_add, user_add, time_edit, user_edit, weight, status, number_order, brand, origin, price, price_special, star, number_rate, time_push, mode_push, price_sort, number_like) VALUES('3', '1', 'SP985803895', 'Nhang Mộc Tài Lộc 30cm Loại 79 Cây', 'Nhang-Moc-Tai-Loc-30cm-Loai-79-Cay', '59', '4', '2', '400', '30', '6', '1', '1', '1', '1', '2021_02/nhang_moc_tai_loc_600x600_1.jpg', '', '&nbsp;<br />
+Không cay mắt không xộc mũi. Không hóa chất, không hương liệu độc hại<br />
+Nguồn nguyên liệu đến 99,9% từ thiên nhiên.Mùi trầm hương tự nhiên xanh sạch<br />
+Thích hợp cho phòng kín máy lạnh không gian khoảng 25m2. Dành cho khách hàng đốt nhiều nhất là công ty, cửa hàng<br />
+Thành phần: bột trầm hương, keo thực vât&nbsp;(keo cây bời lời),&nbsp;tăm tre nhập khẩu.<br />
+&nbsp;', '&nbsp;
+<h2>Nhang Trầm sạch là gì?</h2>
+Từ lâu chúng ta đã quen sử dụng nhang để thắp hương trên bàn thờ tổ tiên, bàn thờ ông địa trong các ngôi nhà hay tại các văn phòng, cửa hàng, cơ quan làm việc. Và loại nhang thường hay sử dụng đó lại chính là loại nhang có tẩm hóa chất độc hại, vì vậy mùi hương sau khi đốt thường lưu lại rất lâu nhưng ngược lại, nó gây ảnh hưởng không nhỏ tới sức khỏe cũng như sinh hoạt của con người.<br />
+Với mong muốn sử dụng một loại nhang an toàn, thời gian gần đây mọi người rất quan tâm đến sản phẩm nhang sạch. Vậy nhang trầm sạch là gì?<br />
+Nhang Trầm sạch là một loại nhang được sản xuất dựa trên dây chuyền, công nghệ tiên tiến, với thành phần hoàn toàn từ các nguyên liệu có sẵn trong tự nhiên như bột trầm hương, keo thực vật và tăm tre nhập khẩu. Đặc biệt không dùng đến hóa chất hay hương liệu độc hại, nhờ đó mà nhang sạch có mùi trầm thơm tự nhiên, chứ không phải là mùi thơm hắc như nhang có tẩm hóa chất.<br />
+&nbsp;<br />
+<img alt=\"nhang trầm sạch\" height=\"450\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc_1.jpg\" title=\"nhang trầm sạch\" width=\"800\" /><br />
+&nbsp;
+<h2>Lợi ích khi sử dụng nhang sạch</h2>
+Vì nhang trầm&nbsp;sạch được sản xuất hoàn toàn từ trầm hương tự nhiên, không hóa chất, không hương liệu độc hại và phải trải qua quá trình sản xuất, kiểm định gắt gao để cho ra đời những sản phẩm nhang chất lượng. Cho nên sử dụng nhang sạch chúng ta hoàn toàn có thể yên tâm về mặt sức khỏe, &nbsp;khi không gây ra ảnh hưởng nghiêm trọng nào về mắt, da và đường hô hấp. Đặc biệt an toàn với những người bị viêm xoang, dị ứng hay đối tựơng bà bầu, trẻ nhỏ và người già.<br />
+Bên cạnh đó, mùi hương từ nhang sạch tỏa ra là mùi trầm thơm tự nhiên, nhẹ dịu nên luôn mang đến cảm giác thư giãn, thỏai mái và dễ chịu. Nhất là khi sử dụng nhang ở những nơi đông người như văn phòng làm việc, cửa hàng hay các buổi hành lễ cũng như trong không gian phòng kín, phòng lạnh. &nbsp;
+<blockquote><img alt=\"tai loc lon 3\" height=\"371\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc.jpg\" title=\"tai loc lon 3\" width=\"1000\" /><br />
+&nbsp;<br />
+Nhang Mộc là nhà sản xuất và cung cấp Nhang Trầm Thượng Hạng cho người tiêu dùng trong và ngoài nước. Nhang Mộc tự hào mang đến cho bạn một giải pháp thực sự về một dòng “Nhang Sạch” không những chất lượng cao với hương thơm nhẹ nhàng, êm dịu, mà còn đem lại rất nhiều lợi ích cho sức khỏe người tiêu dùng.<br />
+<br />
+<strong>Nguồn nguyên liệu tự nhiên</strong><br />
+Sản phẩm của Nhang Mộc được làm từ 100% trầm hương tự nhiên. Nguyên liệu được tuyển chọn những cây trầm có điều kiện và sức khỏe tốt nhất. Đảm bảo cho ra những sản phẩm với chất lượng cao nhất.<br />
+<br />
+<strong>Chất lượng luôn được đặt lên hàng đầu</strong><br />
+Những sản phẩm được Nhang Mộc tạo ra, trước khi xuất xưởng để đến tay người tiêu dùng đều được trải qua quá trình thẩm định và kiểm định chuyên nghiệp từ độ mùi, trọng lượng, chất lượng bột nhang, tăm nhang cho đến bao bì.<br />
+<br />
+<strong>Quy trình sản xuất tiên tiến</strong><br />
+Nhang Mộc phát triển quy trình sản xuất dựa trên những công nghệ khoa học – kỹ thuật tiên tiến. Nhang Mộc tự tin sản phẩm của mình có thể làm hài lòng tất cả tầng lớp người tiêu dùng.</blockquote>
+
+<h2>Nhang Trầm Sạch: Nhang mộc tài lộc&nbsp;cầu tài lộc, tiền bạc cho công ty cửa hàng</h2>
+
+<p>Theo phong tục của người Việt Nam, “có thờ có thiêng, có kiêng có lành” nên hầu hết ở các công ty, cửa hàng đều có bàn thờ Ông Địa – Thần Tài. Việc thắp nhang vào mỗi buổi sáng để cầu việc làm ăn thuận lợi là điều cần thiết. Tuy nhiên, để đảm bảo sức khỏe cũng như cầu tài lộc thì nên cân nhắc sử dụng nhang mộc tài lộc.</p>
+<img alt=\"Nhang mộc tài lộc: cầu tài lộc, tiền bạc cho công ty cửa hàng\" height=\"400\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc_4.jpg\" title=\"Nhang mộc tài lộc: cầu tài lộc, tiền bạc cho công ty cửa hàng\" width=\"800\" />
+<p>&nbsp;</p>
+
+<h2>Lý do nên sử dụng nhang mộc tài lộc</h2>
+
+<p>Trong văn hóa thờ cúng, việc sử dụng nhang là một điều cần thiết. Tuy nhiên, các loại nhang được bày bán trên thị trường hiện nay, hầu hết đều là nhang được tẩm hóa chất độc hại. Vì vậy khi đốt rất khó ngửi và gây ảnh hưởng không tốt tới sức khỏe của con người.<br />
+Đặc biệt ở khu vực cửa hàng hay các công ty là nơi sử dụng nhang mỗi ngày. Đây là nơi tập trung nhiều người qua lại, mua bán và làm việc. Việc đốt nhang có tẩm hóa chất độc hại dù với mục đích cầu tài lộc, nhưng có thể gây nên những ảnh hưởng nghiêm trọng tới sức khỏe cũng như ảnh hưởng đến hiệu quả làm việc. Vì vậy, các chủ cửa hàng, chủ công ty nên lưu ý trong việc chọn nhang. Tốt nhất nên sử dụng nhang được làm từ thảo mộc như nhang mộc tài lộc.</p>
+<img alt=\"Nhang mộc tài lộc: mang ý nghĩa cầu tài lộc, tiền bạc\" height=\"440\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc_3.jpg\" title=\"Nhang mộc tài lộc: mang ý nghĩa cầu tài lộc, tiền bạc\" width=\"660\" />
+<p>&nbsp;</p>
+
+<h2>Nhang mộc tài lộc: mang ý nghĩa cầu tài lộc, tiền bạc</h2>
+
+<p>Nhang mộc là sản phẩm nhang sạch không chỉ được người tiêu dùng trong nước, mà cả người tiêu dùng nước ngoài rất ưa chuộng. Bởi đây là sản phẩm nhang được làm hoàn toàn từ nguyên liệu tự nhiên như: bột trầm hương, keo thực vật (keo cây bời lời) và tăm tre nhập khẩu. Vì vậy, mang đến mùi hương rất dễ chịu dù có thắp nhang ở trong phòng lạnh, đóng kín với diện tích hẹp.<br />
+Đối với các cửa hàng hay công ty có nhu cầu thắp nhang vào mỗi buổi sáng để cầu tài lộc, thì sản phẩm nhang mộc tài lộc là lựa chọn không thể nào hoàn hảo hơn. Không chỉ mang ý nghĩa cầu tài lộc, tiền bạc cho công việc làm ăn, buôn bán trong ngày gặp may mắn và thuận lợi. Nhang mộc tài lộc lại không chứa hóa chất hay hương liệu độc hại, khi thắp không hề cay mắt hay xộc mũi, do đó không gây cảm giác khó chịu hay ảnh hưởng tới sức khỏe, tinh thần của mọi người ở xung quanh.<br />
+Với mùi thơm nhẹ nhàng và êm dịu do nhang mộc tài lộc mang lại, nhân viên trong công ty tập trung làm việc, khách trong cửa hàng thoải mái đi lại, mua sắm. Nhờ đó cũng có thể góp phần nâng cao hiệu suất làm việc, doanh thu cho công ty hay cửa hàng.<br />
+Xu hướng sử dụng nhang sạch đang ngày càng phát triển. Vì vậy, đối với những người làm ăn, kinh doanh như các công ty hay chủ cửa hàng, những người có nhu cầu sử dụng nhang nhiều nên sử dụng nhang mộc tài lộc, vừa mang ý nghĩa cầu tài lộc vừa an toàn cho sức khỏe lại vừa phù hợp với văn hóa thờ cúng của người Việt Nam.<br />
+&nbsp;</p>
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 <img alt=\"Nhang mộc tài lộc\" height=\"480\" src=\"/uploads/retails/2021_02/Nhang-Moc-Tai-Loc_2.jpg\" title=\"Nhang mộc tài lộc\" width=\"720\" />', '', '', '', '1', '1', '1', '169', '0', '0', '1613550398', '1', '1613637631', '3', '3', '1', '1', '1', '1', '30000', '25000', '5', '1', '1613611314', '0', '25000', '2')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
@@ -1404,7 +1560,11 @@ try {
 }
 
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_rate (id, product_id, content, image, status, time_add, time_edit, userid, star, other_image) VALUES('1', '3', 'Không cay mắt không xộc mũi. Không hóa chất, không hương liệu độc hại
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_rate (id, product_id, content, image, status, time_add, time_edit, userid, star, other_image) VALUES('1', '3', 'Không cay mắt không xộc mũi. Không hóa chất, không hương liệu độc hại
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 Nguồn nguyên liệu đến 99,9% từ thiên nhiên', '', '1', '1613553898', '', '1', '5', '2021_02/cau-tai-locdung-nhang-tai-loc.c4d65e5d87c1a5a6261a0082563c87a6.jpg|2021_02/nhang-tram-sach.d68887eb62ebc7bafb5ad892919b44e2.jpg|2021_02/nhang-tram-sach_1.1b7663ccddfbba71a405f122e117f95c.jpg')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
@@ -1669,173 +1829,296 @@ try {
 }
 
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('1', 'ready_to_pick', 'Đơn hàng được tạo thành công
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('1', 'ready_to_pick', 'Đơn hàng được tạo thành công
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('2', 'picking', 'Nhân viên giao hàng đang trên đường lấy hàng
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('2', 'picking', 'Nhân viên giao hàng đang trên đường lấy hàng
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('3', 'cancel	
 ', 'Đơn hàng bị hủy
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('3', 'cancel	
+', 'Đơn hàng bị hủy
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('4', 'money_collect_picking	
 ', 'Nhân viên giao hàng đang tương tác với chủ shop
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('4', 'money_collect_picking	
+', 'Nhân viên giao hàng đang tương tác với chủ shop
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('5', 'picked', 'Nhân viên giao hàng đã lấy hàng thành công
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('5', 'picked', 'Nhân viên giao hàng đã lấy hàng thành công
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('6', 'storing', 'Đơn hàng đang được lưu tại kho GHN
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('6', 'storing', 'Đơn hàng đang được lưu tại kho GHN
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('7', 'transporting', 'Đơn hàng đang được chung chuyển
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('7', 'transporting', 'Đơn hàng đang được chung chuyển
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('8', 'sorting', 'Đơn hàng đang được phân loại tại kho phân loại
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('8', 'sorting', 'Đơn hàng đang được phân loại tại kho phân loại
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('9', 'delivering', 'Đơn hàng đang được giao tới người nhận
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('9', 'delivering', 'Đơn hàng đang được giao tới người nhận
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('10', 'money_collect_delivering', 'Nhân viên giao hàng đang tương tác với người bán
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('10', 'money_collect_delivering', 'Nhân viên giao hàng đang tương tác với người bán
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('11', 'delivered', 'Đơn hàng được giao thành công
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('11', 'delivered', 'Đơn hàng được giao thành công
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('12', 'delivery_fail', 'Đơn hàng giao thất bại
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('12', 'delivery_fail', 'Đơn hàng giao thất bại
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('13', 'waiting_to_return', 'Đơn hàng đang trong hàng chờ hoàn trả (có thể giao lại trong 24/48h)
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('13', 'waiting_to_return', 'Đơn hàng đang trong hàng chờ hoàn trả (có thể giao lại trong 24/48h)
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('14', 'return', 'Đơn hàng đang đợi nhân viên giao hàng đến trả cho chủ shop sau 3 lần giao hàng lại thất bại
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('14', 'return', 'Đơn hàng đang đợi nhân viên giao hàng đến trả cho chủ shop sau 3 lần giao hàng lại thất bại
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('15', 'return_transporting', 'Đơn hàng đang được chung chuyển giữa các kho
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('15', 'return_transporting', 'Đơn hàng đang được chung chuyển giữa các kho
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('16', 'return_sorting	
 ', 'Đơn hàng đang được phân loại tại kho phân loại của GHN
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('16', 'return_sorting	
+', 'Đơn hàng đang được phân loại tại kho phân loại của GHN
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('17', 'returning', 'Nhân viên giao hàng đang đi trả hàng
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('17', 'returning', 'Nhân viên giao hàng đang đi trả hàng
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('18', 'return_fail', 'Đơn hàng bị trả thất bại
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('18', 'return_fail', 'Đơn hàng bị trả thất bại
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('19', 'returned', 'Đơn hàng được hoàn trả thành công
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('19', 'returned', 'Đơn hàng được hoàn trả thành công
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('20', 'exception	
 ', 'Đơn hàng được xử lý ngoại lệ (trường hợp không đi đúng quy trình)
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('20', 'exception	
+', 'Đơn hàng được xử lý ngoại lệ (trường hợp không đi đúng quy trình)
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('21', 'damage', 'Đơn hàng bị tác động làm hư hại
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('21', 'damage', 'Đơn hàng bị tác động làm hư hại
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('22', 'lost	
 ', 'Đơn hàng bị mất
 
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghn (id, status, name) VALUES('22', 'lost	
+', 'Đơn hàng bị mất
+
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('1', '-1', 'Hủy đơn hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('1', '-1', 'Hủy đơn hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('2', '1', 'Chưa tiếp nhận
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('2', '1', 'Chưa tiếp nhận
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
@@ -1846,115 +2129,191 @@ try {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('4', '3', 'Đã lấy hàng/Đã nhập kho
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('4', '3', 'Đã lấy hàng/Đã nhập kho
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('5', '4', 'Đã điều phối giao hàng/Đang giao hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('5', '4', 'Đã điều phối giao hàng/Đang giao hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('6', '5', 'Đã giao hàng/Chưa đối soát
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('6', '5', 'Đã giao hàng/Chưa đối soát
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('7', '6', 'Đã đối soát
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('7', '6', 'Đã đối soát
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('8', '7', 'Không lấy được hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('8', '7', 'Không lấy được hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('9', '8', 'Hoãn lấy hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('9', '8', 'Hoãn lấy hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('10', '9', 'Không giao được hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('10', '9', 'Không giao được hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('11', '10', 'Delay giao hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('11', '10', 'Delay giao hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('12', '11', 'Đã đối soát công nợ trả hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('12', '11', 'Đã đối soát công nợ trả hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('13', '12', 'Đã điều phối lấy hàng/Đang lấy hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('13', '12', 'Đã điều phối lấy hàng/Đang lấy hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('14', '13', 'Đơn hàng bồi hoàn
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('14', '13', 'Đơn hàng bồi hoàn
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('15', '20', 'Đang trả hàng (COD cầm hàng đi trả)
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('15', '20', 'Đang trả hàng (COD cầm hàng đi trả)
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('16', '21', 'Đã trả hàng (COD đã trả xong hàng)
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('16', '21', 'Đã trả hàng (COD đã trả xong hàng)
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('17', '123', 'Shipper báo đã lấy hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('17', '123', 'Shipper báo đã lấy hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('18', '127', 'Shipper (nhân viên lấy/giao hàng) báo không lấy được hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('18', '127', 'Shipper (nhân viên lấy/giao hàng) báo không lấy được hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('19', '128', 'Shipper báo delay lấy hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('19', '128', 'Shipper báo delay lấy hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('20', '45', 'Shipper báo đã giao hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('20', '45', 'Shipper báo đã giao hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('21', '49', 'Shipper báo không giao được giao hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('21', '49', 'Shipper báo không giao được giao hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('22', '410', 'Shipper báo delay giao hàng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_ghtk (id, status, name) VALUES('22', '410', 'Shipper báo delay giao hàng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
@@ -1966,121 +2325,201 @@ try {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('2', '1', 'Giao dịch đã tồn tại
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('2', '1', 'Giao dịch đã tồn tại
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('3', '2', 'Merchant không hợp lệ (kiểm tra lại vnp_TmnCode)
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('3', '2', 'Merchant không hợp lệ (kiểm tra lại vnp_TmnCode)
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('4', '3', 'Dữ liệu gửi sang không đúng định dạng
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('4', '3', 'Dữ liệu gửi sang không đúng định dạng
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('5', '4', 'Khởi tạo GD không thành công do Website đang bị tạm khóa
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('5', '4', 'Khởi tạo GD không thành công do Website đang bị tạm khóa
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('6', '5', 'Giao dịch không thành công do: Quý khách nhập sai mật khẩu quá số lần quy định. Xin quý khách vui lòng thực hiện lại giao dịch
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('6', '5', 'Giao dịch không thành công do: Quý khách nhập sai mật khẩu quá số lần quy định. Xin quý khách vui lòng thực hiện lại giao dịch
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('7', '13', 'Giao dịch không thành công do Quý khách nhập sai mật khẩu xác thực giao dịch (OTP). Xin quý khách vui lòng thực hiện lại giao dịch.
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('7', '13', 'Giao dịch không thành công do Quý khách nhập sai mật khẩu xác thực giao dịch (OTP). Xin quý khách vui lòng thực hiện lại giao dịch.
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('8', '7', 'Giao dịch bị nghi ngờ là giao dịch gian lận
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('8', '7', 'Giao dịch bị nghi ngờ là giao dịch gian lận
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('9', '9', 'Giao dịch không thành công do: Thẻ/Tài khoản của khách hàng chưa đăng ký dịch vụ InternetBanking tại ngân hàng.
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('9', '9', 'Giao dịch không thành công do: Thẻ/Tài khoản của khách hàng chưa đăng ký dịch vụ InternetBanking tại ngân hàng.
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('10', '10', 'Giao dịch không thành công do: Khách hàng xác thực thông tin thẻ/tài khoản không đúng quá 3 lần
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('10', '10', 'Giao dịch không thành công do: Khách hàng xác thực thông tin thẻ/tài khoản không đúng quá 3 lần
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('11', '11', 'Giao dịch không thành công do: Đã hết hạn chờ thanh toán. Xin quý khách vui lòng thực hiện lại giao dịch.
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('11', '11', 'Giao dịch không thành công do: Đã hết hạn chờ thanh toán. Xin quý khách vui lòng thực hiện lại giao dịch.
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('12', '12', 'Giao dịch không thành công do: Thẻ/Tài khoản của khách hàng bị khóa.
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('12', '12', 'Giao dịch không thành công do: Thẻ/Tài khoản của khách hàng bị khóa.
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('13', '51', 'Giao dịch không thành công do: Tài khoản của quý khách không đủ số dư để thực hiện giao dịch.
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('13', '51', 'Giao dịch không thành công do: Tài khoản của quý khách không đủ số dư để thực hiện giao dịch.
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('14', '65', 'Giao dịch không thành công do: Tài khoản của Quý khách đã vượt quá hạn mức giao dịch trong ngày.
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('14', '65', 'Giao dịch không thành công do: Tài khoản của Quý khách đã vượt quá hạn mức giao dịch trong ngày.
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('15', '8', 'Giao dịch không thành công do: Hệ thống Ngân hàng đang bảo trì. Xin quý khách tạm thời không thực hiện giao dịch bằng thẻ/tài khoản của Ngân hàng này.
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('15', '8', 'Giao dịch không thành công do: Hệ thống Ngân hàng đang bảo trì. Xin quý khách tạm thời không thực hiện giao dịch bằng thẻ/tài khoản của Ngân hàng này.
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('16', '99', 'Các lỗi khác (lỗi còn lại, không có trong danh sách mã lỗi đã liệt kê)
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('16', '99', 'Các lỗi khác (lỗi còn lại, không có trong danh sách mã lỗi đã liệt kê)
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('17', '91', 'Không tìm thấy giao dịch yêu cầu
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('17', '91', 'Không tìm thấy giao dịch yêu cầu
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('19', '97', 'Chữ ký không hợp lệ
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('19', '97', 'Chữ ký không hợp lệ
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('20', '93', 'Số tiền hoàn trả không hợp lệ. Số tiền hoàn trả phải nhỏ hơn hoặc bằng số tiền thanh toán.
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('20', '93', 'Số tiền hoàn trả không hợp lệ. Số tiền hoàn trả phải nhỏ hơn hoặc bằng số tiền thanh toán.
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('21', '94', 'Giao dịch đã được gửi yêu cầu hoàn tiền trước đó. Yêu cầu này VNPAY đang xử lý
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('21', '94', 'Giao dịch đã được gửi yêu cầu hoàn tiền trước đó. Yêu cầu này VNPAY đang xử lý
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());
 }
 try {
+<<<<<<< HEAD
     $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('22', '95', 'Giao dịch này không thành công bên VNPAY. VNPAY từ chối xử lý yêu cầu.
+=======
+    $db->query("INSERT INTO " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_vnpay (id, status_id, name) VALUES('22', '95', 'Giao dịch này không thành công bên VNPAY. VNPAY từ chối xử lý yêu cầu.
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ')");
 } catch (PDOException $e) {
     trigger_error($e->getMessage());

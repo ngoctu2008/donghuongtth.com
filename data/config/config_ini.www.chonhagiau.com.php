@@ -5,7 +5,11 @@
  * @Author VINADES.,JSC <contact@vinades.vn>
  * @Copyright (C) 2022 VINADES.,JSC. All rights reserved
  * @License GNU/GPL version 2 or any later version
+<<<<<<< HEAD
  * @Createdate Fri, 07 Jan 2022 13:10:26 GMT
+=======
+ * @Createdate Tue, 11 Jan 2022 23:18:24 GMT
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
  */
 
 if (!defined('NV_MAINFILE')) {
@@ -15,7 +19,11 @@ if (!defined('NV_MAINFILE')) {
 $sys_info['disable_classes'] = [];
 $sys_info['disable_functions'] = ['exec', 'passthru', 'shell_exec', 'system'];
 $sys_info['ini_set_support'] = true;
+<<<<<<< HEAD
 $sys_info['supports_rewrite'] = 'rewrite_mode_apache';
+=======
+$sys_info['supports_rewrite'] = false;
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 $sys_info['zlib_support'] = true;
 $sys_info['mb_support'] = true;
 $sys_info['iconv_support'] = true;
@@ -39,4 +47,8 @@ ini_set('session.gc_probability', '1');
 ini_set('track_errors', '1');
 ini_set('user_agent', 'NV4');
 
+<<<<<<< HEAD
 $iniSaveTime = 1641561026;
+=======
+$iniSaveTime = 1641943104;
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
