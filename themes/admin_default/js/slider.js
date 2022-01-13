@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $(document).ready(function() { 
 
 	$('button[type=\'submit\']').on('click', function() {
@@ -21,3 +22,28 @@ $(document).ready(function() {
 	
 	$('[data-toggle=\'tooltip\']').tooltip({container: 'body', html: true});
 }); 
+=======
+$(document).ready(function() { 
+
+	$('button[type=\'submit\']').on('click', function() {
+		$("form[id*='form-']").submit();
+	});
+
+	$('.text-danger').each(function() {
+		var element = $(this).parent().parent();
+			
+		if (element.hasClass('form-group')) {
+			element.addClass('has-error');
+		}
+	}); 
+	
+	$('body').on('click', '.alert i.fa-times', function(){
+		$(this).parent().slideUp( "slow", function() {
+			$(this).remove();
+		});
+		 
+	})
+	
+	$('[data-toggle=\'tooltip\']').tooltip({container: 'body', html: true});
+}); 
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c

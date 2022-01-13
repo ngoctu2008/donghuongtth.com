@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 /tests export-ignore
 README.md export-ignore
 *.min.js binary
 /.github export-ignore
+=======
+/tests export-ignore
+README.md export-ignore
+*.min.js binary
+/.github export-ignore
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c

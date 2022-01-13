@@ -25,6 +25,7 @@ $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $mod
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $module_data . "_reg";
 
 $sql_create_module = $sql_drop_module;
+<<<<<<< HEAD
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $module_data . "(
   userid mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   group_id smallint(5) unsigned NOT NULL DEFAULT '0',
@@ -199,6 +200,182 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $module_da
   UNIQUE KEY login (username),
   UNIQUE KEY md5username (md5username),
   UNIQUE KEY email (email)
+=======
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $module_data . "(
+  userid mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  group_id smallint(5) unsigned NOT NULL DEFAULT '0',
+  username varchar(100) NOT NULL DEFAULT '',
+  md5username char(32) NOT NULL DEFAULT '',
+  password varchar(150) NOT NULL DEFAULT '',
+  email varchar(100) NOT NULL DEFAULT '',
+  first_name varchar(100) NOT NULL DEFAULT '',
+  last_name varchar(100) NOT NULL DEFAULT '',
+  gender char(1) DEFAULT '',
+  photo varchar(255) DEFAULT '',
+  birthday int(11) NOT NULL,
+  sig text,
+  regdate int(11) NOT NULL DEFAULT '0',
+  question varchar(255) NOT NULL,
+  answer varchar(255) NOT NULL DEFAULT '',
+  passlostkey varchar(50) DEFAULT '',
+  view_mail tinyint(1) unsigned NOT NULL DEFAULT '0',
+  remember tinyint(1) unsigned NOT NULL DEFAULT '0',
+  in_groups varchar(255) DEFAULT '',
+  active tinyint(1) unsigned NOT NULL DEFAULT '0',
+  active2step tinyint(1) unsigned NOT NULL DEFAULT '0',
+  secretkey varchar(20) DEFAULT '',
+  checknum varchar(40) DEFAULT '',
+  last_login int(11) unsigned NOT NULL DEFAULT '0',
+  last_ip varchar(45) DEFAULT '',
+  last_agent varchar(255) DEFAULT '',
+  last_openid varchar(255) DEFAULT '',
+  last_update int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Thời điểm cập nhật thông tin lần cuối',
+  idsite int(11) NOT NULL DEFAULT '0',
+  safemode tinyint(1) unsigned NOT NULL DEFAULT '0',
+  safekey varchar(40) DEFAULT '',
+  email_verification_time int(11) NOT NULL DEFAULT '-1' COMMENT '-3: Tài khoản sys, -2: Admin kích hoạt, -1 không cần kích hoạt, 0: Chưa xác minh, > 0 thời gian xác minh',
+  active_obj varchar(50) NOT NULL DEFAULT 'SYSTEM' COMMENT 'SYSTEM, EMAIL, OAUTH:xxxx, quản trị kích hoạt thì lưu userid',
+  phone varchar(250) DEFAULT NULL,
+  PRIMARY KEY (userid),
+  UNIQUE KEY username (username),
+  UNIQUE KEY md5username (md5username),
+  UNIQUE KEY email (email),
+  KEY idsite (idsite)
+) ENGINE=MyISAM";
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $module_data . "_backupcodes(
+  userid mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  code varchar(20) NOT NULL,
+  is_used tinyint(1) unsigned NOT NULL DEFAULT '0',
+  time_used int(11) unsigned NOT NULL DEFAULT '0',
+  time_creat int(11) unsigned NOT NULL DEFAULT '0',
+  UNIQUE KEY userid (userid,code)
+) ENGINE=MyISAM";
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $module_data . "_config(
+  config varchar(100) NOT NULL,
+  content text,
+  edit_time int(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (config)
+) ENGINE=MyISAM";
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $module_data . "_edit(
+  userid mediumint(8) unsigned NOT NULL,
+  lastedit int(11) unsigned NOT NULL DEFAULT '0',
+  info_basic text NOT NULL,
+  info_custom text NOT NULL,
+  PRIMARY KEY (userid)
+) ENGINE=MyISAM";
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $module_data . "_field(
+  fid mediumint(8) NOT NULL AUTO_INCREMENT,
+  field varchar(25) NOT NULL,
+  weight int(10) unsigned NOT NULL DEFAULT '1',
+  field_type enum('number','date','textbox','textarea','editor','select','radio','checkbox','multiselect') NOT NULL DEFAULT 'textbox',
+  field_choices text NOT NULL,
+  sql_choices text NOT NULL,
+  match_type enum('none','alphanumeric','email','url','regex','callback') NOT NULL DEFAULT 'none',
+  match_regex varchar(250) NOT NULL DEFAULT '',
+  func_callback varchar(75) NOT NULL DEFAULT '',
+  min_length int(11) NOT NULL DEFAULT '0',
+  max_length bigint(20) unsigned NOT NULL DEFAULT '0',
+  required tinyint(3) unsigned NOT NULL DEFAULT '0',
+  show_register tinyint(3) unsigned NOT NULL DEFAULT '0',
+  user_editable tinyint(3) unsigned NOT NULL DEFAULT '0',
+  show_profile tinyint(4) NOT NULL DEFAULT '1',
+  class varchar(50) NOT NULL,
+  language text NOT NULL,
+  default_value varchar(255) NOT NULL DEFAULT '',
+  is_system tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (fid),
+  UNIQUE KEY field (field)
+) ENGINE=MyISAM";
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $module_data . "_groups(
+  group_id smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  title varchar(240) NOT NULL,
+  email varchar(100) DEFAULT '',
+  description text,
+  content text,
+  group_type tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '0:Sys, 1:approval, 2:public',
+  group_color varchar(10) NOT NULL,
+  group_avatar varchar(255) NOT NULL,
+  require_2step_admin tinyint(1) unsigned NOT NULL DEFAULT '0',
+  require_2step_site tinyint(1) unsigned NOT NULL DEFAULT '0',
+  is_default tinyint(1) unsigned NOT NULL DEFAULT '0',
+  add_time int(11) NOT NULL,
+  exp_time int(11) NOT NULL,
+  weight int(11) unsigned NOT NULL DEFAULT '0',
+  act tinyint(1) unsigned NOT NULL,
+  idsite int(11) unsigned NOT NULL DEFAULT '0',
+  numbers mediumint(9) unsigned NOT NULL DEFAULT '0',
+  siteus tinyint(4) unsigned NOT NULL DEFAULT '0',
+  config varchar(250) DEFAULT '',
+  PRIMARY KEY (group_id),
+  UNIQUE KEY ktitle (title,idsite),
+  KEY exp_time (exp_time)
+) ENGINE=MyISAM";
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $module_data . "_groups_users(
+  group_id smallint(5) unsigned NOT NULL DEFAULT '0',
+  userid mediumint(8) unsigned NOT NULL DEFAULT '0',
+  is_leader tinyint(1) unsigned NOT NULL DEFAULT '0',
+  approved tinyint(1) unsigned NOT NULL DEFAULT '0',
+  data text NOT NULL,
+  time_requested int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Thời gian yêu cầu tham gia',
+  time_approved int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Thời gian duyệt yêu cầu tham gia',
+  PRIMARY KEY (group_id,userid)
+) ENGINE=MyISAM";
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $module_data . "_info(
+  userid mediumint(8) unsigned NOT NULL,
+  PRIMARY KEY (userid)
+) ENGINE=MyISAM";
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $module_data . "_openid(
+  userid mediumint(8) unsigned NOT NULL DEFAULT '0',
+  openid varchar(255) NOT NULL DEFAULT '',
+  opid varchar(50) NOT NULL DEFAULT '',
+  email varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (opid),
+  KEY userid (userid),
+  KEY email (email)
+) ENGINE=MyISAM";
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $module_data . "_question(
+  qid smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  title varchar(240) NOT NULL DEFAULT '',
+  lang char(2) NOT NULL DEFAULT '',
+  weight mediumint(8) unsigned NOT NULL DEFAULT '0',
+  add_time int(11) unsigned NOT NULL DEFAULT '0',
+  edit_time int(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (qid),
+  UNIQUE KEY title (title,lang)
+) ENGINE=MyISAM";
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $module_data . "_reg(
+  userid mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  username varchar(100) NOT NULL DEFAULT '',
+  md5username char(32) NOT NULL DEFAULT '',
+  password varchar(150) NOT NULL DEFAULT '',
+  email varchar(100) NOT NULL DEFAULT '',
+  first_name varchar(255) NOT NULL DEFAULT '',
+  last_name varchar(255) NOT NULL DEFAULT '',
+  gender char(1) NOT NULL DEFAULT '',
+  birthday int(11) NOT NULL,
+  sig text,
+  regdate int(11) unsigned NOT NULL DEFAULT '0',
+  question varchar(255) NOT NULL,
+  answer varchar(255) NOT NULL DEFAULT '',
+  checknum varchar(50) NOT NULL DEFAULT '',
+  users_info text,
+  openid_info text,
+  idsite mediumint(8) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (userid),
+  UNIQUE KEY login (username),
+  UNIQUE KEY md5username (md5username),
+  UNIQUE KEY email (email)
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 ) ENGINE=MyISAM";
 
 $sql_create_module[] = "INSERT INTO " . $db_config['prefix'] . "_" . $module_data . "_config (config, content, edit_time) VALUES('access_admin', 'a:8:{s:15:\"access_viewlist\";a:3:{i:1;b:1;i:2;b:1;i:3;b:1;}s:12:\"access_addus\";a:3:{i:1;b:1;i:2;b:1;i:3;b:1;}s:14:\"access_waiting\";a:3:{i:1;b:1;i:2;b:1;i:3;b:1;}s:17:\"access_editcensor\";a:3:{i:1;b:1;i:2;b:1;i:3;b:1;}s:13:\"access_editus\";a:3:{i:1;b:1;i:2;b:1;i:3;b:1;}s:12:\"access_delus\";a:3:{i:1;b:1;i:2;b:1;i:3;b:1;}s:13:\"access_passus\";a:3:{i:1;b:1;i:2;b:1;i:3;b:1;}s:13:\"access_groups\";a:3:{i:1;b:1;i:2;b:1;i:3;b:1;}}', '1608516691')";

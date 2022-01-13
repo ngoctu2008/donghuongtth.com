@@ -29,7 +29,11 @@
 		
 		if (!defined('NV_IS_USER') or !$global_config['allowuserlogin']) {
 			$json[] = ['status'=>'KO', 'text'=>'Bạn vui lòng đăng nhập để sử dụng chức năng!'];
+<<<<<<< HEAD
 		print_r(json_encode($json[0]));die(); 
+=======
+			print_r(json_encode($json[0]));die(); 
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 		}
 		
 		$id=$nv_Request->get_int('id', 'get','');
@@ -44,6 +48,56 @@
 		print_r(json_encode($json[0]));die(); 
 	}
 	
+<<<<<<< HEAD
+=======
+	if($mod=="save_voucher"){
+		$voucher_id = $nv_Request->get_int('voucher_id', 'get, post','');
+		if (!defined('NV_IS_USER')) {
+			print_r( json_encode( array( 'status'=>'ERROR','link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true) ) ) );
+			die();
+			}else{
+			$check_voucher_shop = $db->query('SELECT COUNT(id) FROM ' . TABLE . '_voucher_shop WHERE store_id = '. $_SESSION["shop_id"] . ' AND id = ' . $voucher_id )->fetchColumn();
+			
+			if($check_voucher_shop){
+				
+				$check_voucher_wallet = $db->query('SELECT COUNT(id) FROM ' . TABLE . '_voucher_wallet WHERE userid = '. $user_info["userid"] . ' AND voucherid = ' . $voucher_id )->fetchColumn();
+				
+				if($check_voucher_wallet){
+					$json = ['status'=>'KO', 'text'=>'Lưu voucher thất bại'];
+					print_r(json_encode($json));die();
+				}
+				}else{
+				$json = ['status'=>'KO', 'text'=>'Lưu voucher thất bại'];
+				print_r(json_encode($json));die(); 
+			}
+			
+			
+			
+			$sql = 'INSERT INTO ' . TABLE . '_voucher_wallet (voucherid, userid, type_voucher, time_add) VALUES (:voucherid, :userid, :type_voucher, :time_add)';
+			
+			$data_insert = array();
+			$data_insert['voucherid'] = $voucher_id;
+			$data_insert['userid'] = $user_info['userid'];
+			$data_insert['type_voucher'] = 1;
+			$data_insert['time_add'] = NV_CURRENTTIME;
+			$id = $db->insert_id($sql, 'id', $data_insert);
+			
+			// print_r($id);die;
+			if($id){
+				//trừ số lượng
+				$db->query('UPDATE ' . TABLE . '_voucher_shop SET usage_limit_quantity = usage_limit_quantity - 1 WHERE id =' . $voucher_id);
+				
+				$json = ['status'=>'OK', 'text'=>'Lưu voucher thành công'];
+				print_r(json_encode($json));die(); 
+				}else{
+				$json = ['status'=>'KO', 'text'=>'Lưu voucher thất bại'];
+				print_r(json_encode($json));die(); 
+			}
+			
+		}
+		
+	}
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 	
 	if(true){
 		
@@ -56,7 +110,11 @@
 		//sprint_r($info_shop['follow']);die;
 		$page_title = $info_shop['company_name'];
 		$array_mod_title[] = array(
+<<<<<<< HEAD
 			'title' => $page_title,
+=======
+		'title' => $page_title,
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 		);
 		
 		$base_url = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $alias_detail;
@@ -178,7 +236,15 @@
 		
 		$data = $sth->fetchAll();
 		
+<<<<<<< HEAD
 		$contents = shops_info($data,$per_page,$page_new,$num_items,$cat_info,$base_url,$list_category_parrent,$getbrand_all,$page,$info_shop);
+=======
+		//danh sách voucher 
+		
+		$list_voucher = $db->query('SELECT * FROM ' . TABLE . '_voucher_shop WHERE store_id = ' . $shop_id . ' AND status = 1 ORDER BY time_to ASC' )->fetchAll();
+		
+		$contents = shops_info($data,$per_page,$page_new,$num_items,$cat_info,$base_url,$list_category_parrent,$getbrand_all,$page,$info_shop,$list_voucher);
+>>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 		
 		$description = !empty($cat_info['description']) ? $cat_info['description'] : $cat_info['name'];
 		
