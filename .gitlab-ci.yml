@@ -17,7 +17,7 @@ Deploy Changed to Server:
   script:
     - git fetch
     - CHANGED_FILES=$(git diff --name-only origin/$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME | grep 'src')
-    - echo -e "Files changed since diverge: $CHANGED_FILES"
+    - echo -e "Files changed $CHANGED_FILES"
     # - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./src/test/** $SSH_USER@$DEV_HOST:/home/ubuntu/app/
   rules:
     - if: "$CI_COMMIT_BRANCH == 'dev'"
