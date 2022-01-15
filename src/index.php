@@ -8,7 +8,7 @@
  * @Createdate 31/05/2010, 00:36
  */
 
-phpinfo();
+//phpinfo();
 
 if (isset($_GET['response_headers_detect'])) {
     exit(0);
