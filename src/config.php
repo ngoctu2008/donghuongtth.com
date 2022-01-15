@@ -14,8 +14,8 @@ if (!defined('NV_MAINFILE')) {
 
 $db_config['dbhost'] = '127.0.0.1';
 $db_config['dbport'] = '';
-$db_config['dbname'] = 'chonhagi_chonhagiau';
-$db_config['dbsystem'] = 'chonhagi_chonhagiau';
+$db_config['dbname'] = 'chonhagi_dev;
+$db_config['dbsystem'] = 'chonhagi_dev';
 $db_config['dbuname'] = 'chonhagi_chonhagiau';
 $db_config['dbpass'] = 'qwEG8;vBP-Ht';
 $db_config['dbtype'] = 'mysql';
