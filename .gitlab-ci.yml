@@ -1,12 +1,7 @@
-image: ubuntu:18.04
-
 stages:          # List of stages for jobs, and their order of execution
-  - build
-  - test
-  - deploy
+  - Build
 
 before_script:
-  # the following script is taken from https://docs.gitlab.com/ee/ci/ssh_keys/README.html
   - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
   - eval $(ssh-agent -s)
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
@@ -16,8 +11,9 @@ before_script:
   - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
 
 Deploy Changed to Server:       # This job runs in the build stage, which runs first.
-  stage: build 
+  stage: Build 
   script:
-	  - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./themes/** $SSH_USER@$DEV_HOST:/home/ubuntu/app/
+    - git diff --name-only --diff-filter=d HEAD~1 # exclude delete
+	  - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./src/** $SSH_USER@$DEV_HOST:/home/ubuntu/app/
   rules:
     - if: "$CI_COMMIT_BRANCH == 'dev'"
