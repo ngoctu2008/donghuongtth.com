@@ -4,9 +4,11 @@ stages:
 before_script:
   - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
   - eval $(ssh-agent -s)
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
   - mkdir -p ~/.ssh
-  - chmod 700 ~/.ssh
+  - cat ~/.ssh/id_rsa
+  - chmod 700 ~/.ssh/id_rsa
+  - eval "$(ssh-agent -s)"
   - ssh-add ~/.ssh/id_rsa
   - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
 
@@ -14,6 +16,6 @@ Deploy Changed to Server:
   stage: Build 
   script:
     - 'git diff --name-only --diff-filter=d HEAD~1'
-    - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./src/** $SSH_USER@$DEV_HOST:/home/ubuntu/app/
+    - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./src/test/** $SSH_USER@$DEV_HOST:/home/ubuntu/app/
   rules:
     - if: "$CI_COMMIT_BRANCH == 'dev'"
