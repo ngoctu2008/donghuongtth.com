@@ -30,11 +30,8 @@
 			$shop_id=get_info_user_shops_username($array_op[0])['id'];
 			
 			$userid_shop=get_info_user_shops_username($array_op[0])['userid_shop'];
-<<<<<<< HEAD
-=======
 			$_SESSION["shop_id"] = $shop_id;
 			$_SESSION["userid_shop"] = $userid_shop;
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 			}else{
 			$shop_id='';
 			$userid_shop='';

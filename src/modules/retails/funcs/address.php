@@ -91,12 +91,7 @@
 		//$row['centerlng'] = $nv_Request->get_string('centerlng', 'post', '');
 		//$row['centerlat'] = $nv_Request->get_string('centerlat', 'post', '');
 		//$row['maps_mapzoom'] = $nv_Request->get_string('maps_mapzoom', 'post', '');
-<<<<<<< HEAD
-		
-		
-=======
 
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 		
 		if (empty($row['address'])) {
 			$error[] = $lang_module['error_required_address'];

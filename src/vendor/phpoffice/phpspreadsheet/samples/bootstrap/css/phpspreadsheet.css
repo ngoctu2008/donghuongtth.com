@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 body {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -11,18 +10,4 @@ body {
 }
 .failed {
     color: #ff0000;
-=======
-body {
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-.navbar {
-    margin-bottom: 20px;
-}
-.passed {
-    color: #339900;
-}
-.failed {
-    color: #ff0000;
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 }

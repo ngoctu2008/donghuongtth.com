@@ -76,6 +76,13 @@ ErrorDocument 504 /error.php?code=504&nvDisableRewriteCheck=1
 </IfModule>
 # END cPanel-generated php ini directives, do not edit
 
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php73” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php73 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+
 ##################################################################################
 #nukeviet_rewrite_start //Please do not change the contents of the following lines
 ##################################################################################
@@ -100,10 +107,4 @@ RewriteRule ^([a-zA-Z0-9-]+)$ /$1/ [L,R=301]
 </IfModule>
 
 #nukeviet_rewrite_end
-
-# php -- BEGIN cPanel-generated handler, do not edit
-# Set the “ea-php73” package as the default “PHP” programming language.
-<IfModule mime_module>
-  AddHandler application/x-httpd-ea-php73 .php .php7 .phtml
-</IfModule>
-# php -- END cPanel-generated handler, do not edit
+##################################################################################

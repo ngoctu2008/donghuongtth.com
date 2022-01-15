@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ##
 ## PhpSpreadsheet
 ##
@@ -7,13 +6,3 @@
 ##	(For future use)
 ##
 currencySymbol	= £
-=======
-##
-## PhpSpreadsheet
-##
-
-##
-##	(For future use)
-##
-currencySymbol	= £
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c

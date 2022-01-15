@@ -6,7 +6,6 @@
  * @Copyright (C) 2022 VINADES.,JSC. All rights reserved
  * @License GNU/GPL version 2 or any later version
  * @Createdate Tue, 11 Jan 2022 09:38:46 GMT
-
  */
 
 if (!defined('NV_MAINFILE')) {
@@ -75,7 +74,7 @@ $global_config['login_time_ban']=5;
 $global_config['login_time_tracking']=5;
 $global_config['max_requests_300']=2000;
 $global_config['max_requests_60']=500;
-$global_config['my_domains']='chonhagiau.com,www.chonhagiau.com,chonhagiau.com.vn,www.chonhagiau.com.vn,chonhagiau.vn,www.chonhagiau.vn,dev.chonhagiau.com';
+$global_config['my_domains']='chonhagiau.com,www.chonhagiau.com,chonhagiau.com.vn,www.chonhagiau.com.vn,chonhagiau.vn,www.chonhagiau.vn';
 $global_config['notification_active']=1;
 $global_config['notification_autodel']=50;
 $global_config['nv_auto_resize']=1;

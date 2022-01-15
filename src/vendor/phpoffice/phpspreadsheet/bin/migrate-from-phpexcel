@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #!/usr/bin/env php
 <?php
 use PhpOffice\PhpSpreadsheet\Helper\Migrator;
@@ -7,13 +6,3 @@ require_once __DIR__ . '/../src/Bootstrap.php';
 
 $migrator = new Migrator();
 $migrator->migrate();
-=======
-#!/usr/bin/env php
-<?php
-use PhpOffice\PhpSpreadsheet\Helper\Migrator;
-
-require_once __DIR__ . '/../src/Bootstrap.php';
-
-$migrator = new Migrator();
-$migrator->migrate();
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c

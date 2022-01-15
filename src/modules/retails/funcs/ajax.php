@@ -2641,19 +2641,7 @@ if ( $mod == 'add_order' ) {
 		$today = NV_CURRENTTIME;
 		
 		$value_transporters['voucher_code'] = $_SESSION['shop'][$value_transporters['store_userid']];
-<<<<<<< HEAD
-		
-		$voucher = $db->query('SELECT * FROM ' . TABLE . '_voucher WHERE voucher_code = ' . $db->quote($value_transporters['voucher_code']))->fetch();
-		if($voucher){
-			
-			
-			$check_voucher_used = $db->query('SELECT COUNT(id) FROM ' . TABLE . '_order_voucher WHERE userid = ' . $user_info['userid'] . ' AND status = 1 AND voucherid = ' . $voucher['id'])->fetchColumn();
-		}
-		
-		
-=======
 
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 		if($check_voucher_used > 0){
 			$voucher['id'] = 0;
 			$voucher['discount_price'] = 0;
@@ -3676,11 +3664,7 @@ if($mod == 'testtt')
 	
 	//insert_history_admin(220, 'Lam gi do');
 	 //$a = get_name_store(2);
-<<<<<<< HEAD
-	print_r(date("d-m-Y H:i:s", 1640159168));die;
-=======
 	print_r(date("d-m-Y H:i:s", 1641747600));die;
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 	
 }
 

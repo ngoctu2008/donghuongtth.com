@@ -167,8 +167,6 @@ $('#brand').owlCarousel({
 		}
 	}
 });
-<<<<<<< HEAD
-=======
 $('#voucher_shop').owlCarousel({
     margin: 2,
     loop: false,
@@ -178,7 +176,6 @@ $('#voucher_shop').owlCarousel({
 	slideBy:3,
     items: 1
 });
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 
 // brand
 $('#brand .item a').click(function() {

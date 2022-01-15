@@ -3066,11 +3066,7 @@
 	}
 	
 	
-<<<<<<< HEAD
-	function shops_info( $array_data, $per_page, $page, $num_items, $cat_info, $base_url,$list_category_parrent,$getbrand_all,$page_check,$info_shop) {
-=======
 	function shops_info( $array_data, $per_page, $page, $num_items, $cat_info, $base_url,$list_category_parrent,$getbrand_all,$page_check,$info_shop,$list_voucher) {
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 		global $module_info, $lang_module, $lang_global, $op, $module_name, $module_upload, $db,$user_info;
 		
 		if($page_check==0){
@@ -3200,8 +3196,6 @@
 			$xtpl->parse( 'main.product' );
 		}
 		
-<<<<<<< HEAD
-=======
 		//voucher
 		
 		if(!empty($list_voucher))
@@ -3253,7 +3247,6 @@
 			$xtpl->parse( 'main.voucher' );
 		}
 		
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 		$xtpl->parse( 'main' );
 		return $xtpl->text( 'main' );
 	}

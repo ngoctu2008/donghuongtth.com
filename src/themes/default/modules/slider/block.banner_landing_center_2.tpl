@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!-- BEGIN: main -->
 		<!-- BEGIN: loop -->
 		<div class="col-auto p-0">
@@ -9,15 +8,3 @@
 		<!-- END: loop -->
 <!-- END: main -->
 
-=======
-<!-- BEGIN: main -->
-		<!-- BEGIN: loop -->
-		<div class="col-auto p-0">
-			<a href="{DATA.link}" title="{DATA.title}">
-				<img class="img-fluid banner-center" src="{DATA.image}" alt="{DATA.title}">
-			</a>
-		</div>
-		<!-- END: loop -->
-<!-- END: main -->
-
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c

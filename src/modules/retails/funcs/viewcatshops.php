@@ -29,11 +29,7 @@
 		
 		if (!defined('NV_IS_USER') or !$global_config['allowuserlogin']) {
 			$json[] = ['status'=>'KO', 'text'=>'Bạn vui lòng đăng nhập để sử dụng chức năng!'];
-<<<<<<< HEAD
-		print_r(json_encode($json[0]));die(); 
-=======
 			print_r(json_encode($json[0]));die(); 
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 		}
 		
 		$id=$nv_Request->get_int('id', 'get','');
@@ -48,8 +44,6 @@
 		print_r(json_encode($json[0]));die(); 
 	}
 	
-<<<<<<< HEAD
-=======
 	if($mod=="save_voucher"){
 		$voucher_id = $nv_Request->get_int('voucher_id', 'get, post','');
 		if (!defined('NV_IS_USER')) {
@@ -97,7 +91,6 @@
 		}
 		
 	}
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 	
 	if(true){
 		
@@ -110,11 +103,7 @@
 		//sprint_r($info_shop['follow']);die;
 		$page_title = $info_shop['company_name'];
 		$array_mod_title[] = array(
-<<<<<<< HEAD
-			'title' => $page_title,
-=======
 		'title' => $page_title,
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 		);
 		
 		$base_url = NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $alias_detail;
@@ -236,15 +225,11 @@
 		
 		$data = $sth->fetchAll();
 		
-<<<<<<< HEAD
-		$contents = shops_info($data,$per_page,$page_new,$num_items,$cat_info,$base_url,$list_category_parrent,$getbrand_all,$page,$info_shop);
-=======
 		//danh sách voucher 
 		
 		$list_voucher = $db->query('SELECT * FROM ' . TABLE . '_voucher_shop WHERE store_id = ' . $shop_id . ' AND status = 1 ORDER BY time_to ASC' )->fetchAll();
 		
 		$contents = shops_info($data,$per_page,$page_new,$num_items,$cat_info,$base_url,$list_category_parrent,$getbrand_all,$page,$info_shop,$list_voucher);
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 		
 		$description = !empty($cat_info['description']) ? $cat_info['description'] : $cat_info['name'];
 		

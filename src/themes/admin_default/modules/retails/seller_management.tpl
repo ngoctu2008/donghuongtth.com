@@ -194,11 +194,7 @@
 							{VIEW.company_name} (Địa chỉ: {VIEW.address})
 						</p>
 						<p>
-<<<<<<< HEAD
-							Mã doanh nghiệp: {VIEW.tax_code} 
-=======
 							Mã doanh nghiệp: {VIEW.company_code} 
->>>>>>> ef5fa8aaa78785a2fbdffa493fb4f01b450fd53c
 						</p>
 						<p>
 							Họ tên người đại diện: {VIEW.name} 
