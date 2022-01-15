@@ -16,7 +16,7 @@ Deploy Changed to Server:
   stage: Build 
   script:
     - git fetch
-    - CHANGED_FILES=$(git diff --name-only origin/$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME | grep 'src')
+    - CHANGED_FILES=$(git diff --name-only $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME $CI_MERGE_REQUEST_TARGET_BRANCH_NAME | grep 'src')
     - echo -e "Files changed $CHANGED_FILES"
     # - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./src/test/** $SSH_USER@$DEV_HOST:/home/ubuntu/app/
   rules:
