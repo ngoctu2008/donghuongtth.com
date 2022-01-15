@@ -15,6 +15,7 @@ before_script:
 Deploy Changed to Server:
   stage: Build 
   script:
-    - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $SSH_USER@$DEV_HOST:/home/ubuntu/app/ "ls ~"
+    - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $SSH_USER@$DEV_HOST "ls ~"
+    - bash ./deploy.sh
   rules:
     - if: "$CI_COMMIT_BRANCH == 'dev'"
