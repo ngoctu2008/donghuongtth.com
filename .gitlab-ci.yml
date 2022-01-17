@@ -18,3 +18,5 @@ Deploy Changed to Server:
     - bash ./deploy.sh
   rules:
     - if: "$CI_COMMIT_BRANCH == 'dev'"
+  tags:
+    - my-runner
