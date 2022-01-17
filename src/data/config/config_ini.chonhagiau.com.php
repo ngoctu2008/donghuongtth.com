@@ -31,11 +31,9 @@ $sys_info['ftp_support'] = false;
 $sys_info['string_handler'] = 'mb';
 $sys_info['support_cache'] = ['redis'];
 $sys_info['php_compress_methods'] = ['deflate' => 'gzdeflate', 'gzip' => 'gzencode', 'x-gzip' => 'gzencode', 'compress' => 'gzcompress', 'x-compress' => 'gzcompress'];
-<<<<<<< HEAD
-$sys_info['server_headers'] = ['server' => 'Apache','content-type' => 'text/html; charset=UTF-8'];
-=======
+
 $sys_info['server_headers'] = ['server' => 'Apache/2.4.41 (Win64) OpenSSL/1.1.1c PHP/7.3.11','x-powered-by' => 'PHP/7.3.11','content-length' => '0','content-type' => 'text/html; charset=UTF-8'];
->>>>>>> f507ab13b575f81c490270f30991479b9691d6c2
+
 $sys_info['ip6_support'] = true;
 
 ini_set('display_errors', '0');
