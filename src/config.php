@@ -11,7 +11,7 @@
 if (!defined('NV_MAINFILE')) {
     die('Stop!!!');
 }
-
+// dfsdfs s f
 $db_config['dbhost'] = '127.0.0.1';
 $db_config['dbport'] = '';
 $db_config['dbname'] = 'chonhagi_dev';

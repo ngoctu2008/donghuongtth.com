@@ -1,3 +1,4 @@
 ./src/config.php
 .idea
 .vscode
+src/config.php
