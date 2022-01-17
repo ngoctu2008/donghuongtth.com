@@ -242,3 +242,10 @@ Stack trace:
 [Mon, 17 Jan 2022 16:04:18 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: service_id] [FILE: /modules/retails/funcs/ajax.php] [LINE: 3277] [TRACE:]
 #1  LINE: 358   FILE: /index.php
 
+[Mon, 17 Jan 2022 16:16:19 +0700] [localhost] [::1] [Notice(8): unserialize(): Error at offset 0 of 333 bytes] [FILE: /vendor/vinades/nukeviet/Core/Blocker.php] [LINE: 236] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 235   FILE: /includes/mainfile.php
+#3  LINE: 40    FILE: /includes/core/flood_blocker.php
+#4  LINE: 99    FILE: /vendor/vinades/nukeviet/Core/Blocker.php
+#5  LINE: 236   FILE: /vendor/vinades/nukeviet/Core/Blocker.php
+
