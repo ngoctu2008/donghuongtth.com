@@ -11,6 +11,7 @@
 	if (!defined('NV_IS_MOD_RETAILSHOPS'))
 	die('Stop!!!');
 
+	die('fff');
 	
 	$per_page = 6;
 	$key_words = $module_info['keywords'];
