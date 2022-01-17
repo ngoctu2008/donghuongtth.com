@@ -1,2 +1,3 @@
 <?php
-    print_r('ok');
+    print_r('ok');die;
+    
