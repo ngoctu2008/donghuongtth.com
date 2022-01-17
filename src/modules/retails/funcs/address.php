@@ -7,7 +7,6 @@
 		* @License GNU/GPL version 2 or any later version
 		* @Createdate Thu, 18 Mar 2021 01:33:55 GMT
 	*/
-	
 	if (!defined('NV_IS_MOD_RETAILSHOPS'))
     die('Stop!!!');
 	if (!defined('NV_IS_USER')) {

@@ -1,19 +1,53 @@
+<<<<<<< HEAD
 [Mon, 17 Jan 2022 09:12:07 +0700] [dev.chonhagiau.com] [14.241.243.82] [Warning(2): file_put_contents(/home/chonhagiau/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): failed to open stream: No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 73] [TRACE:]
+=======
+[Mon, 17 Jan 2022 10:33:43 +0700] [localhost] [::1] [Error(1): Uncaught Error: Class 'Redis' not found in C:\Ampps\www\dev.cng\src\includes\mainfile.php:280
+Stack trace:
+#0 C:\Ampps\www\dev.cng\src\index.php(23): require()
+#1 {main}
+  thrown] [FILE: /includes/mainfile.php] [LINE: 280]
+[Mon, 17 Jan 2022 10:50:05 +0700] [localhost] [::1] [Error(1): Uncaught RedisException: No connection could be made because the target machine actively refused it.
+ in C:\Ampps\www\dev.cng\src\includes\mainfile.php:287
+Stack trace:
+#0 C:\Ampps\www\dev.cng\src\includes\mainfile.php(287): Redis->connect('127.0.0.1', 6379)
+#1 C:\Ampps\www\dev.cng\src\index.php(23): require('C:\\Ampps\\www\\de...')
+#2 {main}
+  thrown] [FILE: /includes/mainfile.php] [LINE: 287]
+[Mon, 17 Jan 2022 10:55:22 +0700] [localhost] [::1] [Notice(8): Undefined offset: 1] [FILE: /modules/retails/blocks/global.danhmuc.php] [LINE: 117] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 21    FILE: /modules/home/funcs/main.php
+#3  LINE: 322   FILE: /themes/default/theme.php
+#4  LINE: 184   FILE: /includes/core/user_functions.php
+#5  LINE: 228   FILE: /modules/retails/blocks/global.danhmuc.php
+#6  LINE: 214   FILE: /modules/retails/blocks/global.danhmuc.php
+#7  LINE: 141   FILE: /modules/retails/blocks/global.danhmuc.php
+
+[Mon, 17 Jan 2022 10:55:24 +0700] [localhost] [::1] [Warning(2): file_put_contents(C:/Ampps/www/dev.cng/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): failed to open stream: No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 73] [TRACE:]
+>>>>>>> f507ab13b575f81c490270f30991479b9691d6c2
 #1  LINE: 23    FILE: /index.php
 #2  LINE: 362   FILE: /includes/mainfile.php
 #3  LINE: 73    FILE: /includes/core/cronjobs.php
 
+<<<<<<< HEAD
 [Mon, 17 Jan 2022 09:12:07 +0700] [dev.chonhagiau.com] [14.241.243.82] [Warning(2): unlink(/home/chonhagiau/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 95] [TRACE:]
+=======
+[Mon, 17 Jan 2022 10:55:24 +0700] [localhost] [::1] [Warning(2): unlink(C:/Ampps/www/dev.cng/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 95] [TRACE:]
+>>>>>>> f507ab13b575f81c490270f30991479b9691d6c2
 #1  LINE: 23    FILE: /index.php
 #2  LINE: 362   FILE: /includes/mainfile.php
 #3  LINE: 95    FILE: /includes/core/cronjobs.php
 
+<<<<<<< HEAD
 [Mon, 17 Jan 2022 09:12:07 +0700] [dev.chonhagiau.com] [14.241.243.82] [Warning(2): opendir(/home/chonhagiau/ch-nha-giau/src/data/tmp): failed to open dir: No such file or directory] [FILE: /includes/cronjobs/temp_download_destroy.php] [LINE: 20] [TRACE:]
+=======
+[Mon, 17 Jan 2022 10:55:24 +0700] [localhost] [::1] [Warning(2): opendir(C:/Ampps/www/dev.cng/src/data/tmp,C:/Ampps/www/dev.cng/src/data/tmp): The system cannot find the file specified. (code: 2)] [FILE: /includes/cronjobs/temp_download_destroy.php] [LINE: 20] [TRACE:]
+>>>>>>> f507ab13b575f81c490270f30991479b9691d6c2
 #1  LINE: 23    FILE: /index.php
 #2  LINE: 362   FILE: /includes/mainfile.php
 #3  LINE: 76    FILE: /includes/core/cronjobs.php
 #4  LINE: 20    FILE: /includes/cronjobs/temp_download_destroy.php
 
+<<<<<<< HEAD
 [Mon, 17 Jan 2022 09:42:08 +0700] [dev.chonhagiau.com] [42.113.186.151] [Warning(2): file_put_contents(/home/chonhagiau/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): failed to open stream: No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 73] [TRACE:]
 #1  LINE: 23    FILE: /index.php
 #2  LINE: 362   FILE: /includes/mainfile.php
@@ -76,3 +110,5 @@
 #1  LINE: 358   FILE: /index.php
 #2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
 
+=======
+>>>>>>> f507ab13b575f81c490270f30991479b9691d6c2
