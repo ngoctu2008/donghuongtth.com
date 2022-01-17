@@ -154,3 +154,33 @@ Stack trace:
 #2  LINE: 121   FILE: /modules/retails/funcs/detail.php
 #3  LINE: 4007  FILE: /modules/retails/theme.php
 
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 4045] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4061] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3846] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3863] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3870] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
