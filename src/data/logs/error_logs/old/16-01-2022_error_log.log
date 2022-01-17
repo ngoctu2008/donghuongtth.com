@@ -1,0 +1,16 @@
+[Sun, 16 Jan 2022 08:58:25 +0700] [dev.chonhagiau.com] [1.53.196.25] [Warning(2): file_put_contents(/home/chonhagiau/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): failed to open stream: No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 73] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 73    FILE: /includes/core/cronjobs.php
+
+[Sun, 16 Jan 2022 08:58:25 +0700] [dev.chonhagiau.com] [1.53.196.25] [Warning(2): unlink(/home/chonhagiau/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 95] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 95    FILE: /includes/core/cronjobs.php
+
+[Sun, 16 Jan 2022 08:58:25 +0700] [dev.chonhagiau.com] [1.53.196.25] [Warning(2): opendir(/home/chonhagiau/ch-nha-giau/src/data/tmp): failed to open dir: No such file or directory] [FILE: /includes/cronjobs/temp_download_destroy.php] [LINE: 20] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 76    FILE: /includes/core/cronjobs.php
+#4  LINE: 20    FILE: /includes/cronjobs/temp_download_destroy.php
+
