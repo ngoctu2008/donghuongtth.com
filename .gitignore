@@ -3,3 +3,4 @@
 .vscode
 src/config.php
 src/data/config/config_ini.chonhagiau.com.php
+src/.htaccess
