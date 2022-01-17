@@ -184,3 +184,61 @@ Stack trace:
 #2  LINE: 121   FILE: /modules/retails/funcs/detail.php
 #3  LINE: 4007  FILE: /modules/retails/theme.php
 
+[Mon, 17 Jan 2022 16:04:06 +0700] [localhost] [127.0.0.1] [Warning(2): file_put_contents(C:/Ampps/www/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): failed to open stream: No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 73] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 73    FILE: /includes/core/cronjobs.php
+
+[Mon, 17 Jan 2022 16:04:06 +0700] [localhost] [127.0.0.1] [Warning(2): unlink(C:/Ampps/www/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 95] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 95    FILE: /includes/core/cronjobs.php
+
+[Mon, 17 Jan 2022 16:04:06 +0700] [localhost] [127.0.0.1] [Warning(2): opendir(C:/Ampps/www/ch-nha-giau/src/data/tmp,C:/Ampps/www/ch-nha-giau/src/data/tmp): The system cannot find the file specified. (code: 2)] [FILE: /includes/cronjobs/temp_download_destroy.php] [LINE: 20] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 76    FILE: /includes/core/cronjobs.php
+#4  LINE: 20    FILE: /includes/cronjobs/temp_download_destroy.php
+
+[Mon, 17 Jan 2022 16:04:12 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 4045] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 16:04:12 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4061] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 16:04:12 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3863] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 16:04:12 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 16:04:12 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 16:04:14 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: where] [FILE: /modules/retails/global.functions.php] [LINE: 2446] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 16    FILE: /modules/retails/funcs/cart.php
+#3  LINE: 1097  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 16:04:14 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: where] [FILE: /modules/retails/global.functions.php] [LINE: 2441] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 16    FILE: /modules/retails/funcs/cart.php
+#3  LINE: 1097  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 16:04:17 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: total_price_one_shop] [FILE: /modules/retails/theme.php] [LINE: 949] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 91    FILE: /modules/retails/funcs/order.php
+
+[Mon, 17 Jan 2022 16:04:18 +0700] [localhost] [127.0.0.1] [Warning(2): Invalid argument supplied for foreach()] [FILE: /modules/retails/funcs/ajax.php] [LINE: 3270] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Mon, 17 Jan 2022 16:04:18 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: service_id] [FILE: /modules/retails/funcs/ajax.php] [LINE: 3277] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
