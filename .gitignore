@@ -4,8 +4,5 @@
 src/config.php
 src/data/config/config_ini.chonhagiau.com.php
 src/.htaccess
-<<<<<<< HEAD
-=======
 *.log
 *.cache
->>>>>>> dba4783d3f364c411e7c195ca7e8ba829e4f6b98
