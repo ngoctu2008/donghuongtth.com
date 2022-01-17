@@ -1,6 +1,6 @@
 <?php
 define('NV_SYSTEM', true);
-//test code lan 2
+//test code lan 3
 define('NV_ROOTDIR', pathinfo(str_replace(DIRECTORY_SEPARATOR, '/', __file__), PATHINFO_DIRNAME));
 
 require NV_ROOTDIR . '/includes/mainfile.php';
