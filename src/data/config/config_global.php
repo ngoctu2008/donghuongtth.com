@@ -5,7 +5,7 @@
  * @Author VINADES.,JSC <contact@vinades.vn>
  * @Copyright (C) 2022 VINADES.,JSC. All rights reserved
  * @License GNU/GPL version 2 or any later version
- * @Createdate Tue, 11 Jan 2022 09:38:46 GMT
+ * @Createdate Mon, 17 Jan 2022 09:13:22 GMT
  */
 
 if (!defined('NV_MAINFILE')) {
@@ -23,8 +23,8 @@ define('NV_LIVE_COOKIE_TIME', 31104000);
 define('NV_LIVE_SESSION_TIME', 0);
 define('NV_MAX_HEIGHT', 1500);
 define('NV_MAX_WIDTH', 1500);
-define('NV_EOL', "\n");
-define('NV_UPLOAD_MAX_FILESIZE', 2097152);
+define('NV_EOL', "\r\n");
+define('NV_UPLOAD_MAX_FILESIZE', 8388608);
 $global_config['admfirewall']=1;
 $global_config['admin_2step_default']='code';
 $global_config['admin_2step_opt']='code';
@@ -42,7 +42,7 @@ $global_config['cookie_secure']=0;
 $global_config['crossadmin_restrict']=1;
 $global_config['crossadmin_valid_domains']=[];
 $global_config['crossadmin_valid_ips']=[];
-$global_config['crosssite_restrict']=1;
+$global_config['crosssite_restrict']=0;
 $global_config['crosssite_valid_domains']=[];
 $global_config['crosssite_valid_ips']=[];
 $global_config['display_errors_list']=32767;
@@ -63,7 +63,7 @@ $global_config['ftp_port']=21;
 $global_config['ftp_server']='localhost';
 $global_config['ftp_user_name']='';
 $global_config['ftp_user_pass']='rkS2BYJ3t0xK0pdt7wH7LA,,';
-$global_config['gfx_chk']=1;
+$global_config['gfx_chk']=0;
 $global_config['gzip_method']=1;
 $global_config['is_flood_blocker']=1;
 $global_config['is_login_blocker']=1;
@@ -74,7 +74,7 @@ $global_config['login_time_ban']=5;
 $global_config['login_time_tracking']=5;
 $global_config['max_requests_300']=2000;
 $global_config['max_requests_60']=500;
-$global_config['my_domains']='chonhagiau.com,www.chonhagiau.com,chonhagiau.com.vn,www.chonhagiau.com.vn,chonhagiau.vn,www.chonhagiau.vn,dev.chonhagiau.com,localhost';
+$global_config['my_domains']='localhost,chonhagiau.com,www.chonhagiau.com,chonhagiau.com.vn,www.chonhagiau.com.vn,chonhagiau.vn,www.chonhagiau.vn';
 $global_config['notification_active']=1;
 $global_config['notification_autodel']=50;
 $global_config['nv_auto_resize']=1;
@@ -97,7 +97,7 @@ $global_config['site_lang']='vi';
 $global_config['site_timezone']='byCountry';
 $global_config['spadmin_add_admin']=1;
 $global_config['str_referer_blocker']=0;
-$global_config['timestamp']=1641893926;
+$global_config['timestamp']=1642410802;
 $global_config['two_step_verification']=0;
 $global_config['upload_alt_require']=1;
 $global_config['upload_auto_alt']=1;
