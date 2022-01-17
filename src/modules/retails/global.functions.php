@@ -26,7 +26,7 @@
 	$global_status_complain = $nv_Cache->db($sql, 'weight', $module_name);
 	
 	$global_catalogys = json_decode($redis->get('catalogy_main'),true);	
-	
+	//print_r($global_catalogys);die;
 	// lấy tất cả địa chỉ
 	$global_location = json_decode($redis->get('location_all'),true);	
 	//print_r($global_location);die;
