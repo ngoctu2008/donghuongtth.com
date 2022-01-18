@@ -1,0 +1,251 @@
+<<<<<<< HEAD
+[Mon, 17 Jan 2022 09:12:07 +0700] [dev.chonhagiau.com] [14.241.243.82] [Warning(2): file_put_contents(/home/chonhagiau/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): failed to open stream: No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 73] [TRACE:]
+=======
+[Mon, 17 Jan 2022 10:33:43 +0700] [localhost] [::1] [Error(1): Uncaught Error: Class 'Redis' not found in C:\Ampps\www\dev.cng\src\includes\mainfile.php:280
+Stack trace:
+#0 C:\Ampps\www\dev.cng\src\index.php(23): require()
+#1 {main}
+  thrown] [FILE: /includes/mainfile.php] [LINE: 280]
+[Mon, 17 Jan 2022 10:50:05 +0700] [localhost] [::1] [Error(1): Uncaught RedisException: No connection could be made because the target machine actively refused it.
+ in C:\Ampps\www\dev.cng\src\includes\mainfile.php:287
+Stack trace:
+#0 C:\Ampps\www\dev.cng\src\includes\mainfile.php(287): Redis->connect('127.0.0.1', 6379)
+#1 C:\Ampps\www\dev.cng\src\index.php(23): require('C:\\Ampps\\www\\de...')
+#2 {main}
+  thrown] [FILE: /includes/mainfile.php] [LINE: 287]
+[Mon, 17 Jan 2022 10:55:22 +0700] [localhost] [::1] [Notice(8): Undefined offset: 1] [FILE: /modules/retails/blocks/global.danhmuc.php] [LINE: 117] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 21    FILE: /modules/home/funcs/main.php
+#3  LINE: 322   FILE: /themes/default/theme.php
+#4  LINE: 184   FILE: /includes/core/user_functions.php
+#5  LINE: 228   FILE: /modules/retails/blocks/global.danhmuc.php
+#6  LINE: 214   FILE: /modules/retails/blocks/global.danhmuc.php
+#7  LINE: 141   FILE: /modules/retails/blocks/global.danhmuc.php
+
+[Mon, 17 Jan 2022 10:55:24 +0700] [localhost] [::1] [Warning(2): file_put_contents(C:/Ampps/www/dev.cng/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): failed to open stream: No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 73] [TRACE:]
+>>>>>>> f507ab13b575f81c490270f30991479b9691d6c2
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 73    FILE: /includes/core/cronjobs.php
+
+<<<<<<< HEAD
+[Mon, 17 Jan 2022 09:12:07 +0700] [dev.chonhagiau.com] [14.241.243.82] [Warning(2): unlink(/home/chonhagiau/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 95] [TRACE:]
+=======
+[Mon, 17 Jan 2022 10:55:24 +0700] [localhost] [::1] [Warning(2): unlink(C:/Ampps/www/dev.cng/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 95] [TRACE:]
+>>>>>>> f507ab13b575f81c490270f30991479b9691d6c2
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 95    FILE: /includes/core/cronjobs.php
+
+<<<<<<< HEAD
+[Mon, 17 Jan 2022 09:12:07 +0700] [dev.chonhagiau.com] [14.241.243.82] [Warning(2): opendir(/home/chonhagiau/ch-nha-giau/src/data/tmp): failed to open dir: No such file or directory] [FILE: /includes/cronjobs/temp_download_destroy.php] [LINE: 20] [TRACE:]
+=======
+[Mon, 17 Jan 2022 10:55:24 +0700] [localhost] [::1] [Warning(2): opendir(C:/Ampps/www/dev.cng/src/data/tmp,C:/Ampps/www/dev.cng/src/data/tmp): The system cannot find the file specified. (code: 2)] [FILE: /includes/cronjobs/temp_download_destroy.php] [LINE: 20] [TRACE:]
+>>>>>>> f507ab13b575f81c490270f30991479b9691d6c2
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 76    FILE: /includes/core/cronjobs.php
+#4  LINE: 20    FILE: /includes/cronjobs/temp_download_destroy.php
+
+<<<<<<< HEAD
+[Mon, 17 Jan 2022 09:42:08 +0700] [dev.chonhagiau.com] [42.113.186.151] [Warning(2): file_put_contents(/home/chonhagiau/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): failed to open stream: No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 73] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 73    FILE: /includes/core/cronjobs.php
+
+[Mon, 17 Jan 2022 09:42:08 +0700] [dev.chonhagiau.com] [42.113.186.151] [Warning(2): unlink(/home/chonhagiau/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 95] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 95    FILE: /includes/core/cronjobs.php
+
+[Mon, 17 Jan 2022 09:44:01 +0700] [dev.chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Mon, 17 Jan 2022 09:44:01 +0700] [dev.chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 4045] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 09:44:01 +0700] [dev.chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4061] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 09:44:01 +0700] [dev.chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3846] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 09:44:01 +0700] [dev.chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3863] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 09:44:01 +0700] [dev.chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3870] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 09:44:01 +0700] [dev.chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3889] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 09:44:01 +0700] [dev.chonhagiau.com] [42.113.186.151] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 09:44:01 +0700] [dev.chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 09:44:01 +0700] [dev.chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 10:14:19 +0700] [dev.chonhagiau.com] [42.113.186.151] [Warning(2): opendir(/home/chonhagiau/ch-nha-giau/src/data/tmp): failed to open dir: No such file or directory] [FILE: /includes/cronjobs/temp_download_destroy.php] [LINE: 20] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 76    FILE: /includes/core/cronjobs.php
+#4  LINE: 20    FILE: /includes/cronjobs/temp_download_destroy.php
+
+[Mon, 17 Jan 2022 11:23:26 +0700] [dev.chonhagiau.com] [42.113.186.151] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3357] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+=======
+>>>>>>> f507ab13b575f81c490270f30991479b9691d6c2
+[Mon, 17 Jan 2022 11:44:24 +0700] [localhost] [::1] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 47] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Mon, 17 Jan 2022 11:44:24 +0700] [localhost] [::1] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 4045] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 11:44:24 +0700] [localhost] [::1] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4061] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 11:44:24 +0700] [localhost] [::1] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3846] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 11:44:24 +0700] [localhost] [::1] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3863] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 11:44:24 +0700] [localhost] [::1] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3870] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 11:44:24 +0700] [localhost] [::1] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3889] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 11:44:24 +0700] [localhost] [::1] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 11:44:24 +0700] [localhost] [::1] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 11:44:24 +0700] [localhost] [::1] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 4045] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4061] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3846] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3863] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3870] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 13:55:58 +0700] [localhost] [::1] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 16:04:06 +0700] [localhost] [127.0.0.1] [Warning(2): file_put_contents(C:/Ampps/www/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): failed to open stream: No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 73] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 73    FILE: /includes/core/cronjobs.php
+
+[Mon, 17 Jan 2022 16:04:06 +0700] [localhost] [127.0.0.1] [Warning(2): unlink(C:/Ampps/www/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 95] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 95    FILE: /includes/core/cronjobs.php
+
+[Mon, 17 Jan 2022 16:04:06 +0700] [localhost] [127.0.0.1] [Warning(2): opendir(C:/Ampps/www/ch-nha-giau/src/data/tmp,C:/Ampps/www/ch-nha-giau/src/data/tmp): The system cannot find the file specified. (code: 2)] [FILE: /includes/cronjobs/temp_download_destroy.php] [LINE: 20] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 76    FILE: /includes/core/cronjobs.php
+#4  LINE: 20    FILE: /includes/cronjobs/temp_download_destroy.php
+
+[Mon, 17 Jan 2022 16:04:12 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 4045] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 16:04:12 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4061] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 98    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 16:04:12 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3863] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 16:04:12 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 16:04:12 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 121   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 16:04:14 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: where] [FILE: /modules/retails/global.functions.php] [LINE: 2446] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 16    FILE: /modules/retails/funcs/cart.php
+#3  LINE: 1097  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 16:04:14 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: where] [FILE: /modules/retails/global.functions.php] [LINE: 2441] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 16    FILE: /modules/retails/funcs/cart.php
+#3  LINE: 1097  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 16:04:17 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: total_price_one_shop] [FILE: /modules/retails/theme.php] [LINE: 949] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 91    FILE: /modules/retails/funcs/order.php
+
+[Mon, 17 Jan 2022 16:04:18 +0700] [localhost] [127.0.0.1] [Warning(2): Invalid argument supplied for foreach()] [FILE: /modules/retails/funcs/ajax.php] [LINE: 3270] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Mon, 17 Jan 2022 16:04:18 +0700] [localhost] [127.0.0.1] [Notice(8): Undefined variable: service_id] [FILE: /modules/retails/funcs/ajax.php] [LINE: 3277] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Mon, 17 Jan 2022 16:16:19 +0700] [localhost] [::1] [Notice(8): unserialize(): Error at offset 0 of 333 bytes] [FILE: /vendor/vinades/nukeviet/Core/Blocker.php] [LINE: 236] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 235   FILE: /includes/mainfile.php
+#3  LINE: 40    FILE: /includes/core/flood_blocker.php
+#4  LINE: 99    FILE: /vendor/vinades/nukeviet/Core/Blocker.php
+#5  LINE: 236   FILE: /vendor/vinades/nukeviet/Core/Blocker.php
+

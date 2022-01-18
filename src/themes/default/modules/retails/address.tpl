@@ -436,7 +436,7 @@ initializeMap();
             }
         });
     }
-	
+	//test
 </script>
        
 <!-- END: main -->

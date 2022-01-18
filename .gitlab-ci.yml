@@ -6,7 +6,6 @@ before_script:
   - eval $(ssh-agent -s)
   - mkdir -p ~/.ssh
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-  - cat ~/.ssh/id_rsa
   - chmod 700 ~/.ssh/id_rsa
   - eval "$(ssh-agent -s)"
   - ssh-add ~/.ssh/id_rsa
@@ -19,3 +18,5 @@ Deploy Changed to Server:
     - bash ./deploy.sh
   rules:
     - if: "$CI_COMMIT_BRANCH == 'dev'"
+  tags:
+    - my-runner

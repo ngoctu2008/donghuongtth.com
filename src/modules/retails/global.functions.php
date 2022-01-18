@@ -25,8 +25,6 @@
 	$sql = "SELECT * FROM " . TABLE . "_complain_status WHERE status = 1 ORDER BY weight ASC";
 	$global_status_complain = $nv_Cache->db($sql, 'weight', $module_name);
 	
-	$global_catalogys = json_decode($redis->get('catalogy_main'),true);	
-	
 	// lấy tất cả địa chỉ
 	$global_location = json_decode($redis->get('location_all'),true);	
 	//print_r($global_location);die;
@@ -3946,14 +3944,9 @@
 			
 			foreach($list_brand as $brand)
 			{
-				if(!empty($brand['logo']))
-				{
-					$brand['logo'] = NV_BASE_SITEURL . NV_FILES_DIR . '/' . $module_upload . '/' . $brand['logo'];
+				$brand['logo'] = NV_BASE_SITEURL . NV_FILES_DIR . '/' . $module_upload . '/' . $brand['logo'];
 					
-					$arr[] = $brand;
-				}
-				
-				
+				$arr[] = $brand;
 			}
 			
 		}

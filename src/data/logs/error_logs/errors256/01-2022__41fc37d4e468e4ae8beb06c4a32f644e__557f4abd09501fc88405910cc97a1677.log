@@ -1,6 +1,0 @@
-TIME: Thu, 06 Jan 2022 16:58:37 +0700
-IP: 49.213.78.2
-INFO: User Error(256): Your request is blocked
-FILE: /vendor/vinades/nukeviet/Core/Request.php
-LINE: 452
-USER-AGENT: _zbot
