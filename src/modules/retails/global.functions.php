@@ -2881,6 +2881,41 @@
 		return $data;
 		
 	}
+
+	//viettel post
+	function get_token_vtp(){
+		global $config_setting;
+
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => 'https://partner.viettelpost.vn/v2/user/Login',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'POST',
+		CURLOPT_POSTFIELDS =>'{
+		"USERNAME": . ,
+		"PASSWORD":"ct4084115"
+		}',
+		CURLOPT_HTTPHEADER => array(
+			'Content-Type: application/json',
+			'Cookie: SERVERID=C'
+		),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		echo $response;
+
+	}
+
+
+	//viettel post
 	
 	function post_data($url, $param_array, $token)
 	{
@@ -2927,8 +2962,8 @@
 		global $config_setting;
 		$url = 'https://partner.viettelpost.vn/v2/user/Login';
 		$param = array(
-        "USERNAME" => $config_setting['username_viettelpost'],
-        "PASSWORD" => $config_setting['password_viettelpost']
+        "USERNAME" => $config_setting['username_vtpost'],
+        "PASSWORD" => $config_setting['password_vtpost']
 		);
 		$data = post_data($url, $param, '');
 		
