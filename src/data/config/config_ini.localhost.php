@@ -5,7 +5,7 @@
  * @Author VINADES.,JSC <contact@vinades.vn>
  * @Copyright (C) 2022 VINADES.,JSC. All rights reserved
  * @License GNU/GPL version 2 or any later version
- * @Createdate Tue, 18 Jan 2022 03:53:31 GMT
+ * @Createdate Wed, 19 Jan 2022 03:54:17 GMT
  */
 
 if (!defined('NV_MAINFILE')) {
@@ -38,4 +38,4 @@ ini_set('session.cookie_httponly', '1');
 ini_set('session.gc_maxlifetime', '3600');
 ini_set('user_agent', 'NV4');
 
-$iniSaveTime = 1642478011;
+$iniSaveTime = 1642564457;

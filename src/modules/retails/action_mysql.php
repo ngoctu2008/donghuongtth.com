@@ -69,8 +69,19 @@ $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lan
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_order_seller_delivery_failed";
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_admin_ecng";
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_voucher_wallet";
+$sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_warehouse_transport";
 
 $sql_create_module = $sql_drop_module;
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_warehouse_transport(
+  id mediumint(8) NOT NULL AUTO_INCREMENT,
+  warehouse_id int(11) DEFAULT '0' COMMENT 'Id kho',
+  transportid_ecng varchar(50) COMMENT 'Id đơn vị vận chuyển trong bảng transport',
+  storeid_transport int(11) COMMENT 'id cửa hàng của các đơn vị vận chuyển',
+  time_add int(11),
+  status tinyint(1)
+  PRIMARY KEY (id)
+) ENGINE=MyISAM";
 
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_voucher_wallet(
   id int(11) NOT NULL AUTO_INCREMENT,

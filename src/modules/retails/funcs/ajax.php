@@ -3664,8 +3664,42 @@ if($mod == 'testtt')
 	
 	//insert_history_admin(220, 'Lam gi do');
 	 //$a = get_name_store(2);
-	print_r(date("d-m-Y H:i:s", 1641747600));die;
+	//$a = create_warehouse_viettelpost('0374600090', 'shop test', '99A Cộng hòa', 493);
+	//$a['data'][0]['cusId'];
+	$b =  Array
+	(
+		'status' => 200,
+		'error' => '',
+		'message' =>'OK'
 	
+	);
+	$b['data'] = Array();
+	$b['data'][] =  Array(
+				'groupaddressId' => '10436450',
+				'cusId'=> '10486964',
+				'name' => 'shop test',
+				'phone'=> '0374600090',
+				'address' => '99A Cộng hòa',
+				'provinceId' => '1',
+				'districtId' => '25',
+				'wardsId' => '493',
+				'postId' => '',
+				'merchant' =>'' ,
+			);
+
+			$b['data'][] =   Array(
+				'groupaddressId' => '10432627',
+				'cusId' => '10486964',
+				'name' => 'Luân Test 2',
+				'phone' => '0968625207',
+				'address' => '61 K2 Cầu Diễn',
+				'provinceId' => '1',
+				'districtId' => '25',
+				'wardsId' => '493',
+				'postId' => '',
+				'merchant' => '',
+			);
+	print_r($b['data'][0]['cusId']);die;
 }
 
 die();

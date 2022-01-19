@@ -66,7 +66,7 @@
 		$row['userid'] = $nv_Request->get_int('userid', 'post', 0);
 		
 		
-		
+		print_r($row['store']);die;
 		
 		// kiểm tra store_code không được trùng
 		$where = '';
@@ -74,7 +74,7 @@
 			$where = ' AND id !='. $row['id'];
 		}
 		
-		$exits_company_code = $db->query('SELECT count(*) FROM '. TABLE .'_seller_management where store_code='.$db->quote($row['store_code']). $where)->fetchColumn();
+		$exits_company_code = $db->query('SELECT count(*) FROM '. TABLE .'_seller_management where store_code='.$db->quote($row['store_code']) . $where)->fetchColumn();
 		if($exits_company_code)
 		{
 			$error[] = 'Mã gian hàng không được trùng';
@@ -272,7 +272,7 @@
 			try {
 				if (empty($row['id'])) {
 					
-					$_user['in_groups']=5;
+					$_user['in_groups'] = 5;
 					$sql = "INSERT INTO " . NV_TABLE_USER . " (
 					group_id, username, md5username, password, email, first_name, last_name, gender, birthday, sig, regdate,
 					question, answer, passlostkey, view_mail,
@@ -370,85 +370,107 @@
 					}
 					$nv_Cache->delMod($module_name);
 					if (empty($row['id'])) {
-						$sell_id=$db->query('SELECT max(id) FROM ' . TABLE . '_seller_management')->fetchColumn();
+						$sell_id = $db->query('SELECT max(id) FROM ' . TABLE . '_seller_management')->fetchColumn();
 						
 						// khởi tạo tất cả đơn vị vận chuyển đang hoạt động cho cửa hàng mới tạo này
-						$list_tranpost = $db->query('SELECT id FROM ' .TABLE . '_transporters WHERE status = 1 ORDER BY weight ASC')->fetchAll(); 
+						$list_tranpost = $db->query('SELECT id FROM ' . TABLE . '_transporters WHERE status = 1 ORDER BY weight ASC')->fetchAll(); 
 						
 						foreach($list_tranpost as $tranpost)
 						{
 							// thêm vào
-							$db->query('INSERT INTO ' . TABLE . '_transporters_shop(sell_id,transporters_id,status) VALUES('.$sell_id.','.$tranpost['id'].',1)');
+							$db->query('INSERT INTO ' . TABLE . '_transporters_shop(sell_id, transporters_id, status) VALUES(' . $sell_id . ',' . $tranpost['id'] . ',1)');
 						}
-						
-						
-						
-						$store='';
-						foreach($row['store'] as $key=>$value){
-						
-						
-							$shops_id_ghn_data=create_store_ghn(get_info_district($value['district_id'])['ghnid'],get_info_ward($value['ward_id'])['ghnid'],$value['name_send'],$value['phone_send'],$value['address']);
-							$shops_id_ghn=$shops_id_ghn_data['data']['shop_id'];
-							$groupaddressId=0;
+
+						$store = '';
+						foreach($row['store'] as $key => $value){
+							
+							//$shops_id_ghn_data = create_store_ghn(get_info_district($value['district_id'])['ghnid'], get_info_ward($value['ward_id'])['ghnid'], $value['name_send'], $value['phone_send'], $value['address']);
+							$shops_id_ghn = 0;
+							
+							$groupaddressId = 0;
 							$cusId=0;
 							
 							$sell_userid = $db->query('SELECT userid FROM ' . TABLE .'_seller_management WHERE id ='. $sell_id)->fetchColumn();
 							
-							$db->query('INSERT INTO ' . TABLE . '_warehouse(sell_id,sell_userid,name_warehouse,name_send,phone_send,address,province_id,district_id,ward_id,user_add,time_add,status,shops_id_ghn,lat,lng,groupaddressId,cusId,centerlat,centerlng,maps_mapzoom) VALUES('.$sell_id.','. $sell_userid .','.$db->quote($value['name_warehouse']).','.$db->quote($value['name_send']).','.$db->quote($value['phone_send']).','.$db->quote($value['address']).','.$db->quote($value['province_id']).','.$db->quote($value['district_id']).','.$db->quote($value['ward_id']).','.$admin_info['userid'].','.NV_CURRENTTIME.',1,'.$shops_id_ghn.','.$db->quote($value['lat']).','.$db->quote($value['lng']).','.$groupaddressId.','.$cusId.','.$db->quote($value['centerlat']).','.$db->quote($value['centerlng']).','.$db->quote($value['maps_mapzoom']).')');
-							$store_id=$db->query('SELECT max(id) FROM ' . TABLE . '_warehouse')->fetchColumn();
-							if($key==1){
-								$store=$store_id;
+							$db->query('INSERT INTO ' . TABLE . '_warehouse(sell_id, sell_userid, name_warehouse, name_send, phone_send, address, province_id, district_id, ward_id, user_add, time_add, status, shops_id_ghn, lat, lng, groupaddressId, cusId, centerlat, centerlng, maps_mapzoom) VALUES(' . $sell_id . ',' . $sell_userid .',' . $db->quote($value['name_warehouse']) . ',' . $db->quote($value['name_send']) . ','. $db->quote($value['phone_send']) . ',' . $db->quote($value['address']) . ',' . $db->quote($value['province_id']) . ',' . $db->quote($value['district_id']) . ',' . $db->quote($value['ward_id']) . ',' . $admin_info['userid'] . ',' . NV_CURRENTTIME . ',1,' . $shops_id_ghn . ',' . $db->quote($value['lat']) . ',' . $db->quote($value['lng']) . ',' . $groupaddressId . ',' . $cusId . ',' . $db->quote($value['centerlat']) . ',' . $db->quote($value['centerlng']) . ',' . $db->quote($value['maps_mapzoom']) . ')');
+							//bao nhiêu đơn vị vc sẽ thêm hoặc sửa bấy nhiêu
+							//viettel post   
+							$shops_id_vtp_data = create_warehouse_viettelpost($value['phone_send'], $value['name_send'], $value['address'], get_info_ward($value['ward_id'])['vtpid']);
+							$shop_id_vtp = $shops_id_vtp_data['data'][0]['groupaddressId'];
+							$sql = "INSERT INTO " . TABLE . "_warehouse_transport
+							( transportid_ecng, storeid_transport, time_add, status)
+							VALUES
+							(:transportid_ecng, :storeid_transport, :time_add, :status)";
+							$data_insert = array();
+							$data_insert['transportid_ecng'] = '1';
+							$data_insert['storeid_transport'] = $shop_id_vtp;
+							$data_insert['time_add'] =NV_CURRENTTIME;
+							$data_insert['status'] = 1;
+							$vtp_id = $db->insert_id( $sql, 'id', $data_insert );
+							//viettel post 
+							$store_id = $db->query('SELECT max(id) FROM ' . TABLE . '_warehouse')->fetchColumn();
+							if($key == 1){
+								$store = $store_id;
 								}else{
-								$store=$store.','.$store_id;
+								$store = $store . ',' . $store_id;
 							}
 						}
-						$db->query('UPDATE ' . TABLE . '_seller_management SET store='.$db->quote($store).' where id='.$sell_id);
+						$db->query('UPDATE ' . TABLE . '_seller_management SET store = ' . $db->quote($store) . ' where id = ' . $sell_id);
 						nv_insert_logs(NV_LANG_DATA, $module_name, 'Add Seller_management', ' ', $admin_info['userid']);
 						} else {
 						$sell_id = $row['id'];
-						if($row['password1']!=''){
-							$db->query('UPDATE '. NV_TABLE_USER .' SET last_name='.$db->quote($row['company_name']).', email='.$db->quote($row['email']).',phone='.$db->quote($row['phone']).',password='.$db->quote($crypt->hash_password($row['password1'], $global_config['hashprefix'])).' where userid='.$row['userid']);
+						if($row['password1'] != ''){
+							$db->query('UPDATE ' . NV_TABLE_USER . ' SET last_name = '. $db->quote($row['company_name']) . ', email = ' . $db->quote($row['email']) . ', phone = ' . $db->quote($row['phone']) . ', password = ' . $db->quote($crypt->hash_password($row['password1'], $global_config['hashprefix'])) . ' where userid = ' . $row['userid']);
 							}else{
-							$db->query('UPDATE '. NV_TABLE_USER .' SET last_name='.$db->quote($row['company_name']).', email='.$db->quote($row['email']).',phone='.$db->quote($row['phone']).' where userid='.$row['userid']);
+							$db->query('UPDATE ' . NV_TABLE_USER . ' SET last_name = ' . $db->quote($row['company_name']) . ', email = ' . $db->quote($row['email']) .', phone = ' . $db->quote($row['phone']) . ' where userid = ' . $row['userid']);
 						}
-						$store='';
-						$shops_id_ghn='';
+						$store = '';
+						$shops_id_ghn = '';
 						
 						
 						foreach($row['store'] as $key=>$value){
-							$check_shops_id=$db->query('SELECT shops_id_ghn FROM ' . TABLE . '_warehouse where name_warehouse='.$db->quote($value['name_warehouse']).' and name_send='.$db->quote($value['name_send']).' and phone_send='.$db->quote($value['phone_send']).' and address='.$db->quote($value['address']).' and province_id='.$value['province_id'].' and district_id='.$value['district_id'].' and ward_id='.$value['ward_id'])->fetchColumn();
-							$groupaddressId=0;
-							$cusId=0;
-							
+							$check_shops_id = $db->query('SELECT shops_id_ghn FROM ' . TABLE . '_warehouse where name_warehouse = ' . $db->quote($value['name_warehouse']) . ' and name_send = ' . $db->quote($value['name_send']) . ' and phone_send = ' . $db->quote($value['phone_send']) . ' and address = ' . $db->quote($value['address']) . ' and province_id = ' . $value['province_id'] . ' and district_id = ' . $value['district_id'] . ' and ward_id = ' . $value['ward_id'])->fetchColumn();
+							$groupaddressId = 0;
+							$cusId = 0;
+
 							//print_r($check_shops_id);die;
 							
 							
 							if(!$check_shops_id){
-								$shops_id_ghn_data=create_store_ghn(get_info_district($value['district_id'])['ghnid'],get_info_ward($value['ward_id'])['ghnid'],$value['name_send'],$value['phone_send'],$value['address']);
-								$shops_id_ghn=$shops_id_ghn_data['data']['shop_id'];
+								$shops_id_ghn_data = create_store_ghn(get_info_district($value['district_id'])['ghnid'], get_info_ward($value['ward_id'])['ghnid'],$value['name_send'], $value['phone_send'], $value['address']);
+								$shops_id_ghn = $shops_id_ghn_data['data']['shop_id'];
 								}else{
-								$shops_id_ghn=$db->query('SELECT shops_id_ghn FROM ' . TABLE . '_warehouse where name_warehouse='.$db->quote($value['name_warehouse']).' and name_send='.$db->quote($value['name_send']).' and phone_send='.$db->quote($value['phone_send']).' and address='.$db->quote($value['address']))->fetchColumn();
+								$shops_id_ghn=$db->query('SELECT shops_id_ghn FROM ' . TABLE . '_warehouse where name_warehouse = ' . $db->quote($value['name_warehouse']) . ' and name_send = ' . $db->quote($value['name_send']) . ' and phone_send = ' . $db->quote($value['phone_send']).' and address = ' . $db->quote($value['address']))->fetchColumn();
 							}
 							
 							
-						
+							//update kho và đơn vị vc
 							if($value['warehouse_id']>0){
 								
-								$db->query('UPDATE ' . TABLE . '_warehouse SET name_warehouse='.$db->quote($value['name_warehouse']).',name_send='.$db->quote($value['name_send']).',phone_send='.$db->quote($value['phone_send']).',address='.$db->quote($value['address']).',shops_id_ghn='.$shops_id_ghn.',province_id='.$db->quote($value['province_id']).',district_id='.$db->quote($value['district_id']).',ward_id='.$db->quote($value['ward_id']).',user_edit='.$admin_info['userid'].',time_edit='.NV_CURRENTTIME.',status=1, lat='.$db->quote($value['lat']).', lng='.$db->quote($value['lng']).',cusId='.$cusId.',groupaddressId='.$groupaddressId.',centerlat='.$db->quote($value['centerlat']).',centerlng='.$db->quote($value['centerlng']).',maps_mapzoom='.$db->quote($value['maps_mapzoom']).' where id='.$value['warehouse_id']);
+								$db->query('UPDATE ' . TABLE . '_warehouse SET name_warehouse = ' . $db->quote($value['name_warehouse']) . ',name_send = ' .$db->quote($value['name_send']) . ', phone_send = ' . $db->quote($value['phone_send']) . ', address = ' . $db->quote($value['address']).', shops_id_ghn = ' . $shops_id_ghn . ',province_id = ' . $db->quote($value['province_id']) . ',district_id = '.$db->quote($value['district_id']) . ',ward_id = ' . $db->quote($value['ward_id']) . ', user_edit = ' . $admin_info['userid'] . ',time_edit = ' . NV_CURRENTTIME . ', status = 1, lat = ' . $db->quote($value['lat']) . ', lng = ' . $db->quote($value['lng']). ',cusId = ' . $cusId . ' , groupaddressId = ' . $groupaddressId . ',centerlat = ' . $db->quote($value['centerlat']) . ',centerlng = ' .$db->quote($value['centerlng']) . ',maps_mapzoom = '. $db->quote($value['maps_mapzoom']) . ' where id = '. $value['warehouse_id']);
+
+								//viettel post
+								$shop_id_vtp = $db->query('SELECT storeid_transport FROM ' . TABLE . '_warehouse_transport WHERE warehouse_id = ' . $value['warehouse_id'] . ' AND FIND_IN_SET(1, transportid_ecng)' )->fetchColumn();
+
+								$db->query('UPDATE ' . TABLE . '_warehouse_transport SET storeid_transport = ' . $shop_id_vtp . ' WHERE warehouse_id = ' . $value['warehouse_id'] . ' AND FIND_IN_SET(1, transportid_ecng');
+
+								//viettel post
 								if($store == ''){
-									$store=$value['warehouse_id'];
+									$store = $value['warehouse_id'];
 									}else{ 
 									
-									$store=$store.','.$value['warehouse_id'];
+									$store = $store . ',' . $value['warehouse_id'];
 								}
+
+
 								}else{
 								
 								$db->query('INSERT INTO ' . TABLE . '_warehouse(sell_id,name_warehouse,name_send,phone_send,address,province_id,district_id,ward_id,user_add,time_add,status,shops_id_ghn,lat,lng,groupaddressId,cusId,centerlat,centerlng,maps_mapzoom) VALUES('.$sell_id.','.$db->quote($value['name_warehouse']).','.$db->quote($value['name_send']).','.$db->quote($value['phone_send']).','.$db->quote($value['address']).','.$value['province_id'].','.$value['district_id'].','.$value['ward_id'].','.$admin_info['userid'].','.NV_CURRENTTIME.',1,'.$shops_id_ghn.','.$db->quote($value['lat']).','.$db->quote($value['lng']).','.$groupaddressId.','.$cusId.','.$db->quote($value['centerlat']).','.$db->quote($value['centerlng']).','.$db->quote($value['maps_mapzoom']).')');
 								$store_id=$db->query('SELECT max(id) FROM ' . TABLE . '_warehouse')->fetchColumn();
 								if($store == ''){
-									$store=$store_id;
+									$store = $store_id;
 									}else{
-									$store=$store.','.$store_id;
+									$store = $store . ',' . $store_id;
 								}
 							}
 						}
