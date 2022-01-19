@@ -5,7 +5,7 @@
  * @Author VINADES.,JSC <contact@vinades.vn>
  * @Copyright (C) 2022 VINADES.,JSC. All rights reserved
  * @License GNU/GPL version 2 or any later version
- * @Createdate Tue, 18 Jan 2022 13:08:36 GMT
+ * @Createdate Wed, 19 Jan 2022 06:27:38 GMT
  */
 
 if (!defined('NV_MAINFILE')) {
@@ -20,14 +20,14 @@ $sys_info['zlib_support'] = true;
 $sys_info['mb_support'] = true;
 $sys_info['iconv_support'] = true;
 $sys_info['allowed_set_time_limit'] = true;
-$sys_info['os'] = 'LINUX';
+$sys_info['os'] = 'WINDOWS NT';
 $sys_info['fileuploads_support'] = true;
 $sys_info['curl_support'] = true;
-$sys_info['ftp_support'] = true;
+$sys_info['ftp_support'] = false;
 $sys_info['string_handler'] = 'mb';
 $sys_info['support_cache'] = ['redis'];
 $sys_info['php_compress_methods'] = ['deflate' => 'gzdeflate', 'gzip' => 'gzencode', 'x-gzip' => 'gzencode', 'compress' => 'gzcompress', 'x-compress' => 'gzcompress'];
-$sys_info['server_headers'] = [];
+$sys_info['server_headers'] = ['server' => 'Apache/2.4.41 (Win64) OpenSSL/1.1.1c PHP/7.3.11','x-powered-by' => 'PHP/7.3.11','content-length' => '0','content-type' => 'text/html; charset=UTF-8'];
 $sys_info['ip6_support'] = true;
 
 ini_set('display_errors', '0');
@@ -35,14 +35,7 @@ ini_set('display_startup_errors', '0');
 ini_set('log_errors', '0');
 ini_set('memory_limit', '6400M');
 ini_set('session.cookie_httponly', '1');
-ini_set('session.gc_divisor', '1000');
 ini_set('session.gc_maxlifetime', '3600');
-ini_set('session.gc_probability', '1');
-ini_set('track_errors', '1');
 ini_set('user_agent', 'NV4');
 
-<<<<<<< HEAD
-$iniSaveTime = 1642511316;
-=======
-$iniSaveTime = 1642478011;
->>>>>>> 4bc3a001ee3f4b176fb4c02c98e0c7780c694638
+$iniSaveTime = 1642573658;

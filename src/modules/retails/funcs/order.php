@@ -7,7 +7,7 @@
 		* @License GNU/GPL version 2 or any later version
 		* @Createdate Thu, 24 Dec 2020 01:27:14 GMT
 	*/
-	
+	$_SESSION['payment'] = true;
 	if (!defined('NV_IS_MOD_RETAILSHOPS'))
 	die('Stop!!!');
 	if (!defined('NV_IS_USER')) {
@@ -21,6 +21,12 @@
 			echo 'alert("Bạn đã là người bán nên không thể mua hàng. Vui lòng tạo lại tài khoản người mua");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=main',true).'"';
 			echo '</script>';
 		}
+	}
+	//kiểm tra đơn hàng đã thanh toán chưa nếu chưa thanh toán -> re-payment
+	if($_SESSION['payment'] == false){
+		echo '<script language="javascript">';
+			echo 'window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=re-payment',true).'"';
+			echo '</script>';
 	}
 	$mod = $nv_Request->get_string('mod', 'post, get', 0);
 	
@@ -88,7 +94,7 @@
 	$address_df = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_address WHERE userid = ' . $user_info['userid'] . ' AND status = 1' )->fetch();
 	
 	
-	$contents = nv_theme_retailshops_order($_SESSION[$module_name . '_cart'],$info_order_old,$list_address,$address_df);
+	$contents = nv_theme_retailshops_order($_SESSION[$module_name . '_cart'], $list_address, $address_df);
 	$page_title = $lang_module['order'];
 	
 	

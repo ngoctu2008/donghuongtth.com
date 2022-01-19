@@ -4,6 +4,70 @@
 	var tongvoucher = 0;
 	const isEmpty = sel =>![... document.querySelectorAll(sel)].some(el => el.innerHTML.trim() !== "");
 </script>
+<style>
+	.modal-backdrop.show {
+	display:none;
+	}
+	.modal-open{
+	overflow: inherit;
+	padding-right:inherit !important;
+	}
+	.list_voucher_order{
+	max-height: 350px;
+	overflow: scroll;
+	}
+	.coupons_voucher_wallet .coupons_right:before {
+	content: '';
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	bottom: -13px;
+	background: white;
+	border-radius: 50%;
+	left: 4px;
+	}
+	.coupons_voucher_wallet .coupons_right:after {
+	content: '';
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	top: -13px;
+	background: white;
+	border-radius: 50%;
+	left: 4px;
+	}
+	.coupons_voucher_wallet .coupons_left:before {
+	width: 16px;
+    height: 16px;
+	bottom: -10px;
+	-webkit-box-shadow: inset 0px 1px 1px 1px rgba(214,214,214,1);
+	-moz-box-shadow: inset 0px 1px 4px 1px rgba(214,214,214,1);
+	box-shadow: inset 0px 1px 4px 1px rgba(214,214,214,1);
+	}
+	.coupons_voucher_wallet .coupons_left:after {
+	width: 16px;
+    height: 16px;
+	bottom: -10px;
+	-webkit-box-shadow: inset 0px 1px 1px 1px rgba(214,214,214,1);
+	-moz-box-shadow: inset 0px 1px 4px 1px rgba(214,214,214,1);
+	box-shadow: inset 0px 1px 4px 1px rgba(214,214,214,1);
+    transform: rotate(180deg);
+	}
+	.modal-content{
+	border:0;
+	-webkit-box-shadow: 0px 1px 4px 1px rgba(214,214,214,1);
+	-moz-box-shadow: 0px 1px 4px 1px rgba(214,214,214,1);
+	box-shadow: 0px 1px 4px 1px rgba(214,214,214,1);
+	}
+	.coupons_voucher_wallet{
+	-webkit-box-shadow: 0px 1px 4px 1px rgba(214,214,214,1);
+	-moz-box-shadow: 0px 1px 4px 1px rgba(214,214,214,1);
+	box-shadow: 0px 1px 4px 1px rgba(214,214,214,1);
+	}
+	.coupons_voucher_wallet .coupons_left {
+	background:none;
+	}
+</style>
 <div class="container_payment">
 	<div class="bg_white mb-3  rounded-lg ">
 		<div class="row  text-center">
@@ -165,7 +229,7 @@
 		<!-- BEGIN: loop -->
 		
 		<div class="payment_product mb-10 pt-4">
-			<div class="row d-flex pl-lg-3 pl-md-0   align-items-center">
+			<div class="row d-flex pl-lg-3 pl-md-0 align-items-center">
 				<div class="col-md-1 ">
 					<a class="d-flex justify-content-center align-items-center w-100 h-100" href="{LOOP_INFO_PRODUCT.alias}"><img src="{LOOP_INFO_PRODUCT.image}" alt="" style="max-width: 100%; max-height: 100%;"></a>
 				</div>
@@ -186,38 +250,256 @@
 		</div>
         
 		<!-- END: loop -->
-		<input type="hidden" id="total_price_one_shop_{info_store.userid}"  value="{total_price_one_shop}">
+		
 		<!-- voucher -->
-		<div class="row align-items-center" id="voucher">
-			<div class="col-4 col-md-6">
-				<div class="row pl-3 py-3 rounded" style="background: rgb(242, 242, 242)">
-					<div class="col-8">
-						<input type="text" class="form-control cart_coupon" id="voucher_code_{info_store.userid}" name="voucher_code_{info_store.userid}" placeholder="Nhập mã voucher">
-					</div>
-					<div class="col-4">
-						<button type="submit" id="apply_{info_store.userid}" onclick="add_voucher({info_store.userid})" class="btn_ecng">Áp dụng</button>
-						<button type="submit" id="delete_{info_store.userid}" onclick="delete_voucher({info_store.userid})" class="btn_ecng d-none" style="width: 87%">Hủy</button>
-					</div>
-					<div class="notifi_error voucher_id_{info_store.userid} d-none fs_12 pl-2 mt-1"></div>
+		<div class="row align-items-center">
+			<span hidden id="voucherid_choosed_{info_store.id}">{voucherid_optimal}</span>
+			<span hidden id="price_choosed_{info_store.id}">{max_price_voucher_value}</span>
+			<div class="w-100 position-relative"> 
+				<div class="text-right">
+					<span id="max_price_voucher_{info_store.id}" class="{border} secondary_text p-1">{max_price_voucher}</span>
+					<span id="select_voucher_{info_store.id}" class="pl-2 secondary_text" style="cursor:pointer" data-toggle="modal" data-target="#voucher_modal_{info_store.id}">
+						Chọn Voucher 
+					</span>
 				</div>
-				
-			</div>
-			<div class="col-4 ml-4 d-none" id='voucher_id_{info_store.userid}' >
-				<svg style="filter: drop-shadow(rgba(0, 0, 0, 0.15) 0px 1px 3px);height: 60px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 457 132" class="coupon-bg position-relative"><g fill="none" fill-rule="evenodd"><g><g><g><g><g><g transform="translate(-3160 -2828) translate(3118 80) translate(42 2487) translate(0 140) translate(0 85) translate(0 36)"><path fill="#FFF" d="M449 0c4.418 0 8 3.582 8 8v116c0 4.418-3.582 8-8 8H140.5c0-4.419-3.582-8-8-8s-8 3.581-8 8H8c-4.418 0-8-3.582-8-8V8c0-4.418 3.582-8 8-8h116.5c0 4.418 3.582 8 8 8s8-3.582 8-8H392z"></path><g stroke="#EEE" stroke-dasharray="2 4" stroke-linecap="square" mask="url(#14s2l20tnb)"><path d="M0.5 0L0.5 114" transform="translate(132 11)"></path></g></g></g></g></g></g></g></g></svg>
-				<div class="position-absolute d-flex h-100 align-items-center" style="top:0">
-					
-					<div class="col-3">
-						<img src="/themes/default/chonhagiau/images/chonhagiau_voucher.png" class="img-fluid"/>
-					</div>
-					<div class="col-9 pl-4">
-						<p class="secondary_text m-0">Giảm giá sản phẩm</p>
-						<div class="pt-2 fw_500">-<span id='voucher_price_{info_store.userid}'></span>đ</div>
+				<!-- modal voucher -->
+				<div class="modal fade p-1" data-toggle="modal" style="position: absolute;top:6px;right:-18px;left:none;height: initial;left: initial;width: 360px;" id="voucher_modal_{info_store.id}">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							
+							<!-- Modal Header -->
+							<div class="modal-header">
+								{info_store.company_name} Voucher
+							</div>
+							<!-- Modal body -->
+							<div class="modal-body list_voucher_order">
+								
+								<div id="list_voucher_shop_{info_store.id}">
+								</div>
+								
+								<!-- BEGIN: voucher_shop_not -->
+								Không có voucher
+								<!-- END: voucher_shop_not -->
+							</div>
+						</div>
 					</div>
 				</div>
-				
 			</div>
 		</div>
-		<!-- voucher -->
+		
+		
+		<script>
+			$(document).click(function () {
+				$('.modal').modal('hide');
+			});
+			$('.modal-content').click(function(e)
+			{
+				e.stopPropagation();          
+			});
+			
+			$( document ).ready(function() {
+				sum_voucher_{info_store.id}({info_store.id});
+			});
+			var list_voucher_{info_store.id} = [];
+			<!-- BEGIN: voucher_shop_js -->
+			
+			var product = [];
+			<!-- BEGIN: product_id -->
+			product.push('{product_id_voucher}');
+			<!-- END: product_id -->
+			
+			
+			list_voucher_{info_store.id}.push({'voucherid':'{VOUCHER.voucherid}','voucher_name':'{VOUCHER.voucher_name}','time_to':'{VOUCHER.time_to}','type_discount':'{VOUCHER.type_discount}','maximum_discount':'{VOUCHER.maximum_discount}','minimum_price':'{VOUCHER.minimum_price}','list_product':'{VOUCHER.list_product}','discount_price':'{VOUCHER.discount_price}','price':'{VOUCHER.price}','status':'{VOUCHER.status}','product_id':product});
+			<!-- END: voucher_shop_js -->
+			//console.log(list_voucher_{info_store.id});
+			//load list voucher ra trước
+			show_list_voucher_{info_store.id}({info_store.id});
+			//tính tổng voucher đã giảm được
+			
+			
+			function sum_voucher_{info_store.id}(store_id){
+				var price_voucher = $('#price_choosed_'+ store_id ).text();
+				tongvoucher = Number(tongvoucher) + Number(price_voucher);
+				sum_phivanchuyen();
+				hien();
+			}
+			$('#voucher_modal_{info_store.id}').on('shown.bs.modal', function (e) {
+				show_list_voucher_{info_store.id}({info_store.id})
+			})
+			//'
+			
+			function show_list_voucher_{info_store.id}(store_id){
+				var content = '';
+				
+				$.map( list_voucher_{info_store.id}, function(giatri, chiso) {
+					
+					content += '<div class="mb-3 coupons_voucher_wallet rounded d-flex" style="height:100px">';
+					content += '<div class="coupons_left w-25">';
+					content += '<div class="pl-2">';
+					content += '<img class="img-fluid rounded" src="/ch-nha-giau/src/uploads/logo_ecng_1.png" alt=""/>';
+					content += '</div>';
+					content += '<div class="coupons_left-border">';
+					content += '</div>';
+					content += '</div>';
+					content += '<div class="coupons_right pl-4 py-3 w-75 position-relative rounded">';
+					content += '<div class="d-flex justify-content-between">';
+					content += '<div>';
+					
+					content += '<span class="fs_12">Giảm '+ giatri["discount_price"] +' tất cả đơn giá của bạn</span>';
+					content += '</div>';
+					content += '</div>';
+					if( giatri["maximum_discount"] > 0 ){
+						content += '<span class="text_gray_color"> Giảm tối đa ' + format_number(Number(giatri["maximum_discount"])) + 'đ </span>';
+					}
+					else{
+						content += '<span class="text_gray_color">&ensp;</span>';
+					}
+					content += '<div class="d-flex w-100 h-50 pr-2 justify-content-between align-items-end">';
+					content += '<span class="fs_12"> HSD: ' + giatri["time_to"] +'</span>';
+					
+					var ojb = JSON.stringify(giatri).replace(/"/g, '&quot;');
+					<!-- content += '<p>'+ giatri["list_product"] +'</p>'; -->
+					if(giatri["status"] == 1){
+						content += '<button id="btn_voucher_'+ store_id +'" class="fs_12 text-white border-0 rounded" style="background:#e1a208" onclick="remove_choose_voucher_' + store_id + '(' + giatri["voucherid"] + ','+ store_id +')">Bỏ chọn</button>';
+						}else{
+						content += '<button class="fs_12 text-white border-0 rounded" style="background:#e1a208" onclick="apply_voucher_'+ store_id +'('+ ojb + ','+ store_id + ','+ chiso +');">Áp dụng</button>';	
+					}
+					content += '</div>';
+					content += '</div>';
+					content += '</div>';
+					
+					
+					
+					<!-- content += '<p>' + giatri["voucher_name"] +'</p>'; -->
+					<!-- content += '<p> HSD '+ giatri["time_to"] +'</p>'; -->
+					
+					<!-- content += '<p> Giảm '+ giatri["discount_price"] +'</p>'; -->
+					<!-- if(giatri["maximum_discount"] > 0){ -->
+					<!-- content += '<p> Giảm tối đa ' + format_number(Number(giatri["maximum_discount"])) + 'đ' +'</p>'; -->
+					<!-- } -->
+					
+					<!-- content += '<p> Đơn tối thiểu ' + format_number(Number(giatri["minimum_price"])) + 'đ' +'</p>'; -->
+					
+					<!-- var ojb = JSON.stringify(giatri).replace(/"/g, '&quot;'); -->
+					<!-- content += '<p>'+ giatri["list_product"] +'</p>'; -->
+					<!-- if(giatri["status"] == 1){ -->
+					<!-- content += '<button onclick="remove_choose_voucher_' + store_id + '(' + giatri["voucherid"] + ','+ store_id +')">Bỏ chọn</button>'; -->
+					<!-- }else{ -->
+					<!-- content += '<button onclick="apply_voucher_'+ store_id +'('+ ojb + ','+ store_id + ','+ chiso +');">Áp dụng</button>';	 -->
+					<!-- } -->
+				});	
+				$('#list_voucher_shop_' + store_id).html(content);
+				
+			}
+			
+			
+			function apply_voucher_{info_store.id}(value, store_id, chiso){
+				//đổi thông tin session voucherid
+				$.ajax({
+					type : 'GET',
+					url : nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=apply_voucher_shop',
+					dataType: "json",
+					data:{
+						voucherid: value.voucherid,
+						product_id: value.product_id,
+						store_id: store_id,
+						total_price_one_shop: {total_price_one_shop},
+					},
+					beforeSend: function() { 
+						$('#btn_voucher_'+store_id).prop('disabled', true);
+						
+					},	
+					complete: function() {
+						$('#btn_voucher_'+store_id).prop('disabled', false);
+					},
+					success : function(res){
+						if (res.status == "OK")
+						{
+							//cap nhat tat ca status = 0
+							updateAll_status_{info_store.id}(value.voucherid);
+							//var as = JSON.parse(value.product_id);
+							list_voucher_{info_store.id}.unshift({'voucherid':'' + value.voucherid + '','voucher_name':'' + value.voucher_name + '','time_to':'' + value.time_to + '','type_discount':'' + value.type_discount + '','maximum_discount':'' + value.maximum_discount + '','minimum_price':'' + value.minimum_price + '','list_product':'' + value.list_product + '','discount_price':'' + value.discount_price + '','price':'' + value.price + '','product_id':'' + value.product_id + '','status':'' + 1 + ''});
+							//đóng modal
+							$('#voucher_modal_'+ store_id).modal('hide');
+							//xóa voucher đã chọn
+							remove_voucher_{info_store.id}(chiso);
+							//tính tiền lại
+							var price_voucher_old = $('#price_choosed_'+ store_id ).text();
+							tongvoucher = Number(tongvoucher) + Number(value.price) - Number(price_voucher_old);
+							sum_phivanchuyen();
+							hien();
+							//thay đổi các chỉ số
+							$('#voucherid_choosed_'+ store_id ).text(value.voucherid);
+							$('#price_choosed_'+ store_id ).text(value.price);
+							$('#max_price_voucher_'+ store_id ).html('-' + format_number(Number(value.price)) + 'đ');
+							//cập nhật
+							show_list_voucher_{info_store.id}(store_id);
+						}
+						else 
+						{
+							alert('Xin vui lòng thử lại');
+						}
+					}
+					
+				});
+				
+			}
+			
+			function updateAll_status_{info_store.id}(voucherid){
+				objIndex = list_voucher_{info_store.id}.findIndex((obj => obj.voucherid > 1));
+				list_voucher_{info_store.id}[objIndex].status = "0";
+				
+			}
+			
+			function remove_voucher_{info_store.id}(item){
+				list_voucher_{info_store.id}.splice(item + 1, 1);
+			}
+			
+			function remove_choose_voucher_{info_store.id}(voucherid, store_id){
+				
+				$.ajax({
+					type : 'GET',
+					url : nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=remove_voucher_shop',
+					dataType: "json",
+					data:{
+						store_id: store_id
+					},
+					beforeSend: function() { 
+						//$('#apply_'+shop_id).prop('disabled', true);
+					},	
+					complete: function() {
+						//$('#apply_'+shop_id).prop('disabled', false);
+					},
+					success : function(res){
+						if (res.status == "OK")
+						{
+							//cập nhật status =0
+							objIndex = list_voucher_{info_store.id}.findIndex((obj => obj.voucherid == voucherid));
+							list_voucher_{info_store.id}[objIndex].status = "0";
+							$('#voucher_modal_'+ store_id).modal('hide');
+							
+							//tính tiền lại
+							var price_voucher_old = $('#price_choosed_'+ store_id ).text();
+							tongvoucher = Number(tongvoucher)  - Number(price_voucher_old);
+							sum_phivanchuyen();
+							hien();
+							//thay đổi các chỉ số
+							$('#voucherid_choosed_'+ store_id ).text(0);
+							$('#price_choosed_'+ store_id ).text(0);
+							$('#max_price_voucher_'+ store_id ).html('');
+							//cập nhật
+							show_list_voucher_{info_store.id}(store_id);
+						}
+						else 
+						{
+							alert('Xin vui lòng thử lại');
+						}
+					}
+					
+				});
+			}
+			
+		</script>
 		
 		<div class="payment_option mt-3">
 			<div class="row border-top">
@@ -248,20 +530,25 @@
 						<input class="hidden transporter_store_active" id="transporter_first_{info_store.id}_{key_warehouse}" value="{transporter_first}"/>đ</div>
 						<script>			
 							$( document ).ready(function() {
-								shop_tu_giao({info_store.id}, {key_warehouse});
+								
+								
+								if(transporter_{info_store.id} == ''){
+									shop_tu_giao({info_store.id}, {key_warehouse});
+								}
+								
 								
 								function shop_tu_giao(store_id, warehouse_id){
 									if(transporter_{info_store.id} == ''){
-										$('#shipping_price_'+store_id+'_'+warehouse_id).html('0');
-										$("#button_change_method_tranfer_"+store_id+"_"+warehouse_id).html('');
-										$("#method_transfer_"+store_id+"_"+warehouse_id).html(' <p class="mb-0 text-center text_gray_color" >Cửa hàng giao sản phẩm</p>');
-										tongphivanchuyen = tongphivanchuyen + 0;
+										$('#shipping_price_' + store_id + '_' + warehouse_id).html('{self_transport_price_max}');
+										$("#button_change_method_tranfer_" + store_id + "_" + warehouse_id).html('');
+										$("#method_transfer_" + store_id + "_" + warehouse_id).html('<p class="mb-0 text-center text_gray_color" >Cửa hàng giao sản phẩm</p>');
+										tongphivanchuyen = tongphivanchuyen + {self_transport_price_max_value};
+										
 										sum_phivanchuyen();
 									}
 								}
 								
 								load_tranposter_next({info_store.id},{key_warehouse},{total_weight},{total_width},{total_length},{total_height},{total_warehouse},transporter_{info_store.id});
-								
 								
 							});
 						</script>
@@ -273,7 +560,7 @@
 						<!-- modal vận chuyển  -->
 						
 						<div class="modal fade" id="transporter_{info_store.id}_{key_warehouse}">
-							<div class="modal-dialog m modal-dialog-centered">
+							<div class="modal-dialog modal-dialog-centered">
 								<div class="modal-content p-4">
 									<div class="modal-header pt-0">
 										<h5 class="modal-title" id="">Chọn đơn vận chuyển</h5>
@@ -291,26 +578,21 @@
 								</div>
 							</div>
 						</div>
-						<!-- thêm vận chuyển  -->
-						
-						
 					</div>
 				</div>
-				
 			</div>
 		</div>
+		
+		
 		<script>
+			
 			var transporter_{info_store.id} = [];
 			<!-- BEGIN: transporters_loop_js -->
-			
 			transporter_{info_store.id}.push({"id":{CARRIER.id},"name_transporters":"{CARRIER.name_transporters}","description":"{CARRIER.description}"});
 			<!-- END: transporters_loop_js -->
-			
-			
+			console.log(transporter_{info_store.id});
 		</script>
-		
 		<!-- END: warehouse -->
-		
 	</div>
 	<!-- END: store -->
 	
@@ -334,17 +616,14 @@
 								<input hidden="" type="number" name="total_merchandise" id="total_merchandise" value="{total}">
 							</td>
 							<td class="float-right">{total_format}đ</td>
-							
 						</tr>
 						<tr>
 							<td class="text_gray_color">Phí vận chuyển</td>
 							<td class="float-right"><span id="tongphivanchuyen"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>đ</td>
-							
 						</tr>
 						<tr class="row_voucher">
 							<td class="text_gray_color">Voucher</td>
 							<td class="float-right">- <span id="tongvoucher"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>đ</td>
-							
 						</tr>
 						<tr>
 							<td class="mb-0">Tổng thanh toán</td>
@@ -365,103 +644,8 @@
 	</div>
 	
 </div>
+
 <script>
-	
-	function add_voucher(shop_id){
-		var voucher_code = $('input[name=voucher_code_' + shop_id + ']').val();
-		var voucher_pice_one_shop = $('#total_price_one_shop_' + shop_id).val();
-		//alert(voucher_pice_one_shop);
-		$.ajax({
-			type : 'POST',
-			url : nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax',
-			dataType: "json",
-			data:{
-				mod: 'add_voucher',
-				voucher_code: voucher_code,
-				shop_id: shop_id,
-				method: 1,
-				voucher_pice_one_shop: voucher_pice_one_shop,
-			},
-			beforeSend: function() { 
-				$('#apply_'+shop_id).prop('disabled', true);
-			},	
-			complete: function() {
-				$('#apply_'+shop_id).prop('disabled', false);
-			},
-			success : function(res){
-				if (res.status == "ERROR")
-				{
-					notifi_error(res.mess);
-					$('.voucher_id_'+shop_id).addClass('d-block');
-					//window.location.href = '{list_voucher}';
-					}else {
-					$('#voucher_price_'+shop_id).append(format_number(res.voucher_price));
-					$('#voucher_name_'+shop_id).append(res.voucher_name);
-					$('#minimum_price_'+shop_id).append(format_number(res.minimum_price));
-					$('#voucher_id_'+shop_id).addClass('d-block');
-					
-					$('#apply_'+shop_id).addClass('d-none').removeClass('d-block');
-					$('#delete_'+shop_id).addClass('d-block').removeClass('d-none');
-					$('.voucher_id_'+shop_id).addClass('d-none').removeClass('d-block');
-					
-					tongvoucher = tongvoucher + Number(res.voucher_price);
-					sum_phivanchuyen();
-					hien();
-				}
-			}
-			
-		});	
-		
-	}
-	
-	function delete_voucher(shop_id){
-		var voucher_code = $('input[name=voucher_code_' + shop_id + ']').val();
-		var voucher_pice_one_shop = $('#total_price_one_shop_' + shop_id).val();
-		$.ajax({
-			type : 'POST',
-			url : nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax',
-			dataType: "json",
-			data:{
-				mod: 'add_voucher',
-				voucher_code: voucher_code,
-				shop_id: shop_id,
-				method: 0,
-				voucher_pice_one_shop: voucher_pice_one_shop,
-			},
-			beforeSend: function() { 
-				$('#delete_'+shop_id).prop('disabled', true);
-			},	
-			complete: function() {
-				$('#delete_'+shop_id).prop('disabled', false);
-			},
-			success : function(res){
-				if (res.status == "ERROR")
-				{
-					notifi_error(res.mess);
-					//window.location.href = '{list_voucher}';
-					}else if (res.status == "OK"){
-					
-					$('#voucher_price_'+shop_id).html('');
-					$('#voucher_name_'+shop_id).html('');
-					$('#minimum_price_'+shop_id).html('');
-					$('#voucher_id_'+shop_id).addClass('d-none').removeClass('d-block');
-					
-					$('#apply_'+shop_id).addClass('d-block');
-					$('#delete_'+shop_id).addClass('d-none').removeClass('d-block');
-					$('.notifi_error').hide();
-					tongvoucher = tongvoucher - Number(res.voucher_price);
-					
-					//alert( tongvoucher);
-					sum_phivanchuyen();
-					hien();
-				}
-			}
-			
-		});	
-	}
-</script>
-<script>
-	
 	
 	function nv_carrier_change(store_id,warehouse_id,a)
 	{ 
@@ -488,8 +672,6 @@
 		sum_phivanchuyen(); 
 		
 		$('#transporter_'+ store_id +'_'+ warehouse_id).modal('toggle');
-		
-		
 	}
 	function load_data_tranposter_next(store_id,warehouse_id,transporter_id,name_transporters,description,phivanchuyen){
 		var transporter_first = document.getElementById('transporter_first_'+store_id+'_'+warehouse_id).value;
@@ -529,7 +711,7 @@
 							height : Number(total_height),
 							province_id : province_id,
 							district_id : district_id,
-							shops_id : warehouse_id, 
+							shops_id : warehouse_id,
 							total : Number(total_warehouse),
 							transporters_id : element.id,
 							lat : lat, 
@@ -556,7 +738,7 @@
 					}else if(element.id  == 3){
 					
 					$.ajax({
-						type : 'POST',
+						type : 'GET',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
 						dataType: "json",
 						data:{weight: Number(total_weight),
@@ -566,7 +748,8 @@
 							province_id : province_id,
 							ward_id : ward_id,
 							district_id : district_id,
-							shops_id : warehouse_id, 
+							shops_id : store_id,
+							warehouse_id : warehouse_id,
 							total : Number(total_warehouse),
 							transporters_id : element.id,
 							lat : lat, 
@@ -624,6 +807,7 @@
 							province_id : province_id,
 							district_id : district_id,
 							shops_id : warehouse_id, 
+							warehouse_id : warehouse_id, 
 							total : Number(total_warehouse),
 							transporters_id : element.id,
 							lat : lat, 
@@ -667,7 +851,7 @@
 					}else if(element.id  == 3 ){
 					
 					$.ajax({
-						type : 'POST',
+						type : 'GET',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
 						dataType: "json",
 						data:{weight: Number(total_weight),
@@ -677,7 +861,8 @@
 							province_id : province_id,
 							ward_id : ward_id,
 							district_id : district_id,
-							shops_id : warehouse_id, 
+							shops_id : store_id,
+							warehouse_id : warehouse_id, 
 							total : Number(total_warehouse),
 							transporters_id : element.id,
 							lat : lat, 
@@ -758,8 +943,6 @@
 		$('.number_transport').html(arr_transport.length);
 	}
 	
-	
-	
 	function order_product_check_out(){
 		var list_transporters = [];
 		var order_name=$('input[name=order_name1]').val();
@@ -803,16 +986,15 @@
 			var error = 0;
 			<!-- BEGIN: storejsorder -->
 			<!-- BEGIN: warehousejs -->
-			var transporters_id=document.getElementById('transporter_first_{key_store}_{key_warehouse}').value;
-			var note_product=document.getElementById('note_product_{key_store}_{key_warehouse}').value;
-			//var voucher_code=documentdocument.getElementById('voucher_code_{info_warehouse.sell_userid}').value;
+			var transporters_id = document.getElementById('transporter_first_{key_store}_{key_warehouse}').value;
+			var note_product = document.getElementById('note_product_{key_store}_{key_warehouse}').value;
+			
 			if(transporters_id == ''){
 				transporters_id = 0;
 			}
 			
 			var fee = (document.getElementById("shipping_price_{key_store}_{key_warehouse}").textContent).split(" ")[0];
 			fee = Number(fee.replaceAll(",", ""));
-			
 			
 			if(Number.isNaN(fee)){
 				fee = 0;
@@ -838,7 +1020,7 @@
 				//console.log(nv_base_siteurl + 'index.php' + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=add_order&order_name=' + order_name+'&order_email='+order_email+'&order_phone='+order_phone+'&address='+address+'&province_id='+province_name+'&district_id='+district_name+'&ward_id='+ward_name+'&list_transporters='+JSON.stringify(list_transporters)+'&lat='+lat+'&lng='+lng);
 				
 				$.ajax({
-					type : 'POST',
+					type : 'GET',
 					url : nv_base_siteurl + 'index.php' + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=add_order',
 					dataType: "json",
 					data:{
@@ -860,7 +1042,7 @@
 						
 					},
 					success : function(res){
-						console.log(res);
+						
 						if (res.status != 'OK') {
 							if(res.status=='error'){
 								$("#button-payment-method").attr("disabled", false);

@@ -32,5 +32,3 @@ $global_config['hashprefix'] = '{SSHA512}';
 $global_config['cached'] = 'files';
 $global_config['session_handler'] = 'files';
 $global_config['extension_setup'] = 3; 
-
-//luuw code them
