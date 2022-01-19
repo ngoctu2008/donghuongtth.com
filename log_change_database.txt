@@ -1,0 +1,7 @@
+
+19/01/2022
+ALTER TABLE `tms_vi_retails_voucher_wallet` ADD `status` TINYINT(2) NULL DEFAULT '1' AFTER `time_add`; 
+
+18/01/2021
+INSERT INTO `tms_vi_retails_config` (`id`, `config_name`, `config_value`) VALUES (NULL, 'username_vtpost', '');
+INSERT INTO `tms_vi_retails_config` (`id`, `config_name`, `config_value`) VALUES (NULL, 'password_vtpost', '');

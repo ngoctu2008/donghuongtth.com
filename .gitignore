@@ -1,0 +1,10 @@
+./src/config.php
+.idea
+.vscode
+src/config.php
+src/data/config/config_ini.*.php
+src/.htaccess
+src/data/logs/ip_logs/*.log
+*.log
+*.cache
+src/data/config/config_global.php
