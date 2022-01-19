@@ -165,6 +165,73 @@
 		$id = $db->insert_id($sql, 'id', $data_insert);
 	}
 	
+	//tổng tiền hàng của shop
+	function total_price_shop($warehouse)
+	{
+		$tong = 0;
+		foreach($warehouse as $product)
+		{	
+			if($product['status_check']){
+				$tong += $product['num'] * $product['price'];
+			}
+		}
+		return $tong;
+		
+	}
+	
+	//check voucher order
+	
+	function check_voucher_order($shop_id, $voucherid){
+		global $db, $user_info;
+		$today = NV_CURRENTTIME;
+		
+		$voucher = $db->query('SELECT id FROM ' . TABLE . '_voucher_shop WHERE status = 1 AND usage_limit_quantity > 0 AND store_id = ' . $shop_id . ' AND time_from < ' . $today . ' AND time_to > ' . $today . ' AND id = ' . $voucherid . '  UNION SELECT t2.id FROM ' . TABLE . '_voucher_wallet t1 INNER JOIN ' . TABLE . '_voucher_shop t2 ON t2.id = t1.voucherid WHERE t1.userid = ' . $user_info['userid'] . '  AND t2.time_from < ' . $today . ' AND t2.time_to > ' . $today . ' AND t1.status = 1 AND t2.id = ' . $voucherid)->fetchColumn();
+		
+		return $voucher;
+		
+	}
+	//chọn voucher giảm giá tối ưu nhất
+	function voucher_price_optimal($product_id, $total_price_shop, $shop_id, $array_voucher_use){
+		global $db, $user_info;
+		$today = NV_CURRENTTIME;
+		//lay danh sach voucher cua shop còn sài đc và từ ví
+		$list_voucher = $db->query('SELECT id, voucher_name, type_discount, discount_price, maximum_discount, minimum_price, time_to, list_product FROM ' . TABLE . '_voucher_shop WHERE status = 1 AND usage_limit_quantity > 0 AND store_id = ' . $shop_id . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND time_from < ' . $today . ' AND time_to > ' . $today . ' AND minimum_price <= ' . $total_price_shop . '  UNION SELECT t2.id, t2.voucher_name, t2.type_discount, t2.discount_price, t2.maximum_discount, t2.minimum_price, t2.time_to, t2.list_product FROM ' . TABLE . '_voucher_wallet t1 INNER JOIN ' . TABLE . '_voucher_shop t2 ON t2.id = t1.voucherid WHERE t1.userid = ' . $user_info['userid'] . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND t2.time_from < ' . $today . ' AND t2.time_to > ' . $today . ' AND t1.status = 1  AND minimum_price <= ' . $total_price_shop . ' AND t2.store_id = ' . $shop_id)->fetchAll();
+		
+		foreach($list_voucher as $voucher){
+			$price = 0;
+			if($voucher['type_discount'])
+			{
+				$price = $total_price_shop * $voucher['discount_price'] / 100;
+				$price = floor($price);
+				if($voucher['maximum_discount']){
+					if($price > $voucher['maximum_discount']){
+						$price = $voucher['maximum_discount'];
+					}
+				}
+				
+			}
+			else
+			{	
+				$price = $voucher['discount_price'];
+			}
+			
+			$array_product = array();
+			$array_product[] = $product_id;
+			if($array_voucher_use[$voucher['id']])
+			{
+				foreach($array_voucher_use[$voucher['id']]['product_id'] as $pro)
+				{
+					$array_product[] = $pro;
+				}
+			}
+			
+			$array_voucher_use[$voucher['id']] = array('price' => $price, 'voucherid' => $voucher['id'],'product_id' => $array_product, 'voucher_name' => $voucher['voucher_name'], 'time_to' => $voucher['time_to'], 'type_discount' => $voucher['type_discount'], 'maximum_discount' => $voucher['maximum_discount'], 'minimum_price' => $voucher['minimum_price'], 'list_product' => $voucher['list_product'], 'discount_price' => $voucher['discount_price'] );
+			
+		}
+
+		return $array_voucher_use;
+	
+	}
 	
 	//check voucher
 	function check_voucher ($voucher_code, $voucher_id, $shop_id){

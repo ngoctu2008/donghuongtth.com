@@ -2479,6 +2479,102 @@ if($mod == 'add_voucher'){
 	
 }
 
+if($mod == 'remove_voucher_shop'){
+	if (!defined('NV_IS_USER')) {
+		
+		$contents1 = array(
+		'status' => 'ERROR',
+		'mess' => 'Vui lòng đăng nhập hệ thống'
+		);
+		print_r( json_encode($contents1));die;
+		
+		}else{
+		$userid=$user_info['userid'];
+	}
+	$store_id = $nv_Request->get_int( 'store_id', 'get,post', '' );
+	if(empty($store_id)){
+		print_r( json_encode( array('status'=>'ERROR','mess'=>'Chưa nhập voucher' ) ));
+		die();
+	}
+	
+	unset($_SESSION['voucher_shop'][$store_id]);
+	
+	print_r( json_encode( array('status'=>'OK','mess'=>'Đổi voucher thành công' ) ));
+	die();
+}
+
+if($mod == 'apply_voucher_shop'){
+	if (!defined('NV_IS_USER')) {
+		
+		$contents1 = array(
+		'status' => 'ERROR',
+		'mess' => 'Vui lòng đăng nhập hệ thống'
+		);
+		print_r( json_encode($contents1));die;
+		
+		}else{
+		$userid=$user_info['userid'];
+	}
+	
+	$voucherid = $nv_Request->get_int( 'voucherid', 'get,post', '' );
+	$store_id = $nv_Request->get_int( 'store_id', 'get,post', '' );
+	$total_price_shop = $nv_Request->get_int( 'total_price_one_shop', 'get,post', '' );
+	$list_product = $nv_Request->get_array( 'product_id', 'get,post', '' );
+	$today = NV_CURRENTTIME;
+	foreach($list_product as $key => $value){
+		$list_product_voucher =  explode(',', $value);
+	}
+	
+	
+	//kt thông số đầu vào
+	if(empty($voucherid) or empty($store_id) or empty($total_price_shop)){
+		print_r( json_encode( array('status'=>'ERROR','mess'=>'Chưa nhập voucher' ) ));
+		die();
+	}
+	$check_voucher = $db ->query('SELECT id FROM ' . TABLE . '_voucher_shop WHERE id = ' . $voucherid)->fetchColumn();
+	if(!$check_voucher){
+		print_r( json_encode( array('status'=>'ERROR','mess'=>'Chưa nhập voucher' ) ));
+		die();
+	}
+	//check voucher từng sp
+	$arr_product = array();
+	if($list_product){
+		foreach($list_product_voucher as $product_id){
+			
+			$voucher = $db->query('SELECT id, voucher_name, type_discount, discount_price, maximum_discount, minimum_price, time_to, list_product FROM ' . TABLE . '_voucher_shop WHERE status = 1 AND usage_limit_quantity > 0 AND store_id = ' . $store_id . '  AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND time_from < ' . $today . ' AND time_to > ' . $today . ' AND minimum_price <= ' . $total_price_shop . ' AND id = ' . $voucherid . ' UNION SELECT t2.id, t2.voucher_name, t2.type_discount, t2.discount_price, t2.maximum_discount, t2.minimum_price, t2.time_to, t2.list_product FROM ' . TABLE . '_voucher_wallet t1 INNER JOIN ' . TABLE . '_voucher_shop t2 ON t2.id = t1.voucherid WHERE t1.userid = ' . $user_info['userid'] . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND t2.time_from < ' . $today . ' AND t2.time_to > ' . $today . ' AND minimum_price <= ' . $total_price_shop . ' AND t2.id = ' . $voucherid)->fetch();
+			
+			$voucher['price'] = 0;
+			if($voucher['type_discount'])
+			{
+				$voucher['price'] = $total_price_shop * $voucher['discount_price'] / 100;
+				$voucher['price'] = floor($voucher['price']);
+				if($voucher['maximum_discount']){
+					if($voucher['price'] > $voucher['maximum_discount']){
+						$voucher['price'] = $voucher['maximum_discount'];
+					}
+				}
+				
+			}
+			else
+			{	
+				$voucher['price'] = $voucher['discount_price'];
+			}
+			
+			
+			if($voucher['id']){
+				array_push($arr_product, $product_id);
+				$voucher['product_id'] = $arr_product;
+			}
+			
+		}
+		
+		$_SESSION['voucher_shop'][$store_id] = $voucher;
+		print_r( json_encode( array('status'=>'OK','mess'=>'Đổi voucher thành công' ) ));
+		die();
+	}
+	
+}
+
 
 if ( $mod == 'add_order' ) {
 	
@@ -3250,7 +3346,8 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	$ward_id_ghn_receive = get_info_ward( $ward_id )['ghnid'];
 	$district_id = $nv_Request->get_int( 'district_id', 'get,post', 0 );
 	$district_id_ghn_receive = get_info_district( $district_id )['ghnid'];
-	$warehouse_id = $nv_Request->get_int( 'shops_id', 'get,post', 0 );
+	$shops_id_session = $nv_Request->get_int( 'shops_id', 'get,post', 0 );
+	$warehouse_id = $nv_Request->get_int( 'warehouse_id', 'get,post', 0 );
 	$info_warehouse = get_info_warehouse( $warehouse_id );
 	$province_id_ghn_send = get_info_province( $info_warehouse['province_id'] )['ghnid'];
 	$district_id_ghn_send = get_info_district( $info_warehouse['district_id'] )['ghnid'];
@@ -3263,6 +3360,7 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	$service['code_message_value'];
 	
 	if($weight_product == 0 and $length_product == 0 and $width_product == 0 and $height_product == 0  ){
+		$_SESSION['tranposter_fee'][$shops_id_session][3] = 0;
 		print_r( json_encode( array('fee'=>0, 'mess'=>$service['code_message_value']) ) );
 		die;
 	}
@@ -3273,7 +3371,7 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 		}
 	}
 	
-
+	
 	$fee = get_price_ghn( $service_id, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
 	
 	
@@ -3300,6 +3398,8 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 		}
 	}
 	//print_r( json_encode( $tranposter_fee ) );
+	$_SESSION['tranposter_fee'][$shops_id_session][3] = $tranposter_fee;
+	
 	print_r( json_encode( array('fee'=>$tranposter_fee, 'mess'=>$service['code_message_value']) ) );
 	die;
 	
