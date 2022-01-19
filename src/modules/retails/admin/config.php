@@ -104,6 +104,9 @@ if( ! empty( $saveconfig ) )
 	$config_setting['shop_id_ghn'] = $nv_Request->get_string('shop_id_ghn', 'post', '');
 	$config_setting['voucher_maximum_percent'] = $nv_Request->get_string('voucher_maximum_percent', 'post', '');
 	$config_setting['children_fund'] = $nv_Request->get_string('children_fund', 'post', '');
+	//viettel post
+	$config_setting['username_vtpost'] = $nv_Request->get_string('username_vtpost', 'post', '');
+	$config_setting['password_vtpost'] = $nv_Request->get_string('password_vtpost', 'post', '');
 	
 	
 	$config_setting['terms_of_use'] = $nv_Request->get_editor('terms_of_use', '', NV_ALLOWED_HTML_TAGS);

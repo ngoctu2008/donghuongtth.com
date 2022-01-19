@@ -282,6 +282,35 @@
 						<input class="form-control" type="password" value="{DATA.password_vnpost}" name="password_vnpost"/>
 					</td>
 				</tr>
+
+				<tr>
+					<td colspan="2" style="background: #3ea00b;color: #fff;text-transform: uppercase;">
+						<strong>
+							Viettel Post
+						</strong>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>
+							Tên đăng nhập	
+						</strong>
+					</td>
+					<td>
+						<input class="form-control" type="text" value="{DATA.username_vtpost}" name="username_vtpost"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong>
+							Mật khẩu	
+						</strong>
+					</td>
+					<td>
+						<input class="form-control" type="text" value="{DATA.password_vtpost}" name="password_vtpost"/>
+					</td>
+				</tr>
+
 				<tr>
 					<td colspan="2" style="background: #3ea00b;color: #fff;text-transform: uppercase;">
 						<strong>
