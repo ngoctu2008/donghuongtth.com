@@ -8,4 +8,3 @@ src/data/logs/ip_logs/*.log
 *.log
 *.cache
 
-config_ecng/.htaccess
