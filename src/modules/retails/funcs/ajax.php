@@ -2784,6 +2784,7 @@ if ( $mod == 'add_order' ) {
 	if(count($error)==0){
 		
 		// thanh toán vnpay
+		print_r($payment_method);die;
 		if($payment_method=='vnpay'){
 			$list_order=array();
 			$list_order_code=array();
