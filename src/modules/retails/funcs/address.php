@@ -17,6 +17,7 @@
 	}
 	$mod = $nv_Request->get_string('mod', 'post, get', 0);
 	
+
 	if($mod=="set_default"){
 		$id=$nv_Request->get_int('id', 'get',0);
 		$db->query('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_address SET status = 0 WHERE userid = ' . $user_info['userid']);
@@ -133,15 +134,20 @@
 
 				$address_full = $row['address'] . $address;
 				
-				
-				if (empty($row['id'])) {
+				if(!$user_info){
 					
-					$stmt = $db->prepare('INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_address (lat,lng,address,name, userid, status, time_add, ward_id, district_id, province_id, phone,centerlat,centerlng,maps_mapzoom) VALUES (:lat,:lng,:address,:name, :userid, :status, :time, :ward_id, :district_id, :province_id, :phone,:centerlat,:centerlng,:maps_mapzoom)');
+				}else{
+					if (empty($row['id'])) {
 					
-					} else {
-					
-					$stmt = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_address SET lat = :lat,lng = :lng,name = :name,address = :address, userid = :userid, status = :status, time_edit = :time, ward_id = :ward_id, district_id = :district_id, province_id = :province_id, phone = :phone, centerlat=:centerlat,centerlng=:centerlng,maps_mapzoom=:maps_mapzoom WHERE id=' . $row['id']);
+						$stmt = $db->prepare('INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_address (lat,lng,address,name, userid, status, time_add, ward_id, district_id, province_id, phone,centerlat,centerlng,maps_mapzoom) VALUES (:lat,:lng,:address,:name, :userid, :status, :time, :ward_id, :district_id, :province_id, :phone,:centerlat,:centerlng,:maps_mapzoom)');
+						
+						} else {
+						
+						$stmt = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_address SET lat = :lat,lng = :lng,name = :name,address = :address, userid = :userid, status = :status, time_edit = :time, ward_id = :ward_id, district_id = :district_id, province_id = :province_id, phone = :phone, centerlat=:centerlat,centerlng=:centerlng,maps_mapzoom=:maps_mapzoom WHERE id=' . $row['id']);
+					}
 				}
+
+				
 				
 				$stmt->bindParam(':status', $row['status'], PDO::PARAM_INT);
 				$stmt->bindParam(':address', $address_full, PDO::PARAM_STR);
