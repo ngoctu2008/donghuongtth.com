@@ -7,6 +7,7 @@ if ($nv_Request->isset_request('load_product_new', 'post')) {
 	$page = $nv_Request->get_int( 'page_loading', 'post', 0 );
 	$limit = $nv_Request->get_int( 'limit_loading', 'post', 0 );
 	$content = '';
+
 	
 	// lấy danh sách sản phẩm mới ra 
 	$db->select( 'id,image,alias,name_product,star,price,price_special,number_order,free_ship' )
@@ -2386,7 +2387,7 @@ if($mod=='load_order'){
 		$view['fee_transport']=number_format($view['fee_transport']);
 		$view['total']=number_format($view['total']);
 		$view['time_add']=date('d-m-Y H:i',$view['time_add']);
-		if($view['payment_method']==0){
+		if($view['payment_method']=='recieve'){
 			$view['payment_method']='Thanh toán khi nhận hàng';
 			}else{
 			$view['payment_method']='Thanh toán qua ví tiền';
@@ -2581,11 +2582,12 @@ if ( $mod == 'add_order' ) {
 	$order_name = $nv_Request->get_string( 'order_name', 'get,post', '' );
 	$order_email = $nv_Request->get_string( 'order_email', 'get,post', '' );
 	$order_phone = $nv_Request->get_string( 'order_phone', 'get,post', '' );
+	$payment_method = $nv_Request->get_string( 'payment_method', 'get,post', '' );
 	$address = $nv_Request->get_string( 'address', 'get,post', '' );
 	$province_id = $nv_Request->get_int( 'province_id', 'get,post', 0 );
 	$district_id = $nv_Request->get_int( 'district_id', 'get,post', 0 );
 	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
-	$payment_method = 2;
+	//$payment_method = 2;
 	$total_full = 0;
 	$lat = $nv_Request->get_string( 'lat', 'get,post', '' );
 	$lng = $nv_Request->get_string( 'lng', 'get,post', '' );
@@ -2782,7 +2784,7 @@ if ( $mod == 'add_order' ) {
 	if(count($error)==0){
 		
 		// thanh toán vnpay
-		if($payment_method==2){
+		if($payment_method=='vnpay'){
 			$list_order=array();
 			$list_order_code=array();
 			foreach ( $list_transporters as $value_transporters ) {
