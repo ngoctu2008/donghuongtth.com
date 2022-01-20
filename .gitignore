@@ -7,3 +7,4 @@ src/data/logs/ip_logs/*.log
 *.log
 *.cache
 src/data/config/config_global.php
+src/data/logs/ref_logs/*.log
