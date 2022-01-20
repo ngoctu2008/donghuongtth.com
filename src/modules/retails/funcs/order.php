@@ -89,12 +89,13 @@
 		echo 'alert("Bạn chưa thiết lập địa chỉ!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=address&id=0',true).'"';
 		echo '</script>';
 	}
+	$array_payment = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_payment WHERE active = 1' )->fetchAll();
 	
 	//print_r($list_address);
 	$address_df = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_address WHERE userid = ' . $user_info['userid'] . ' AND status = 1' )->fetch();
 	
 	
-	$contents = nv_theme_retailshops_order($_SESSION[$module_name . '_cart'], $list_address, $address_df);
+	$contents = nv_theme_retailshops_order($_SESSION[$module_name . '_cart'], $list_address, $address_df,$array_payment);
 	$page_title = $lang_module['order'];
 	
 	

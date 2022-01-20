@@ -599,8 +599,10 @@
 	<div class="payment_methods bg_white my-2 p-4">
 		<div class="fs_18"><span class="secondary_text">Phương thưc thanh toán</span>
 			
-			<button class="btn_ecng_outline ml-4"><i class="fa fa-id-card-o" aria-hidden="true"></i> VNPAY</button>
+			<button class="btn_ecng_outline ml-4" ><i class="fa fa-id-card-o" aria-hidden="true"></i> VNPAY</button>
+			<!-- BEGIN: payment -->
 			<button class="btn_ecng_outline ml-4"><i class="fa fa-id-card-o" aria-hidden="true"></i> {LANG.recieve}</button>
+			<!-- END: payment -->
 		</div>
 	</div>
 	
