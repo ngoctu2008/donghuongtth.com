@@ -202,8 +202,8 @@
 	
 	//print_r($op);
 	//die($op);
-function add_order($list_transporters){
-	global $db;
+function add_order($list_transporters,$info_customer){
+	global $db,$config_setting;
 	$list_order=array();
 	$list_order_code=array();
 	foreach ( $list_transporters as $value_transporters ) {
@@ -225,13 +225,13 @@ function add_order($list_transporters){
 		$data_insert['userid']=$userid;
 		$data_insert['store_id'] = $value_transporters['store_id'];
 		$data_insert['warehouse_id'] = $value_transporters['warehouse_id'];
-		$data_insert['order_name'] = $order_name;
-		$data_insert['email'] = $order_email;
-		$data_insert['phone'] = $order_phone;
-		$data_insert['province_id'] = $province_id;
-		$data_insert['district_id'] = $district_id;
-		$data_insert['ward_id'] = $ward_id;
-		$data_insert['address'] = $address;
+		$data_insert['order_name'] = $info_customer['order_name'];
+		$data_insert['email'] = $info_customer['order_email'];
+		$data_insert['phone'] = $info_customer['order_phone'];
+		$data_insert['province_id'] = $info_customer['province_id'];
+		$data_insert['district_id'] = $info_customer['district_id'];
+		$data_insert['ward_id'] = $info_customer['ward_id'];
+		$data_insert['address'] = $info_customer['address'];
 		//$data_insert['transporters_id'] = $value_transporters['transporters_id'];
 		$data_insert['transporters_id'] = 0;
 		$data_insert['total_product'] = $value_transporters['total_product'];
@@ -244,9 +244,9 @@ function add_order($list_transporters){
 		$data_insert['total_height'] =  $value_transporters['total_height'];
 		$data_insert['total_width'] = $value_transporters['total_width'];
 		$data_insert['total_length'] = $value_transporters['total_length'];
-		$data_insert['payment_method'] = $payment_method;
-		$data_insert['lat'] = $lat;
-		$data_insert['lng'] = $lng;
+		$data_insert['payment_method'] = $info_customer['payment_method'];
+		$data_insert['lat'] = $info_customer['lat'];
+		$data_insert['lng'] = $info_customer['lng'];
 		$data_insert['payment'] = 0;
 		$data_insert['voucherid'] = $value_transporters['voucherid'];
 		$data_insert['voucher_price'] = $value_transporters['discount_price'];
