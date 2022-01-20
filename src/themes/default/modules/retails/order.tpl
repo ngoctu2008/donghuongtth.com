@@ -601,7 +601,7 @@
 			
 			<button class="btn_ecng_outline ml-4" ><i class="fa fa-id-card-o" aria-hidden="true"></i> VNPAY</button>
 			<!-- BEGIN: payment -->
-			<button class="btn_ecng_outline ml-4"><i class="fa fa-id-card-o" aria-hidden="true"></i> {LANG.recieve}</button>
+			<button class="btn_ecng_outline ml-4" onclick="change_payment_method('{PAYMENT.payment}')"><i class="fa fa-id-card-o" aria-hidden="true"></i> {PAYMENT.paymentname}</button>
 			<!-- END: payment -->
 		</div>
 	</div>
