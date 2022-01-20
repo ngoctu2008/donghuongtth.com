@@ -1,5 +1,18 @@
+20/01/2021
+$sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_payment";
+$sql_create_module[] = "CREATE TABLE IF NOT EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_payment (
+ payment varchar(100) NOT NULL,
+ paymentname varchar(250) NOT NULL,
+ domain varchar(250) NOT NULL,
+ active tinyint(4) NOT NULL default '0',
+ weight int(11) NOT NULL default '0',
+ config text NOT NULL,
+ images_button varchar(250) NOT NULL,
+ PRIMARY KEY (payment)
+) ENGINE=MyISAM";
 
-<<<<<<< HEAD
+
+
 19/01/2021
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_warehouse_transport(
   id mediumint(8) NOT NULL AUTO_INCREMENT,
@@ -11,10 +24,8 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
   PRIMARY KEY (id)
 ) ENGINE=MyISAM";
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_warehouse_transport";
-=======
 19/01/2022
 ALTER TABLE `tms_vi_retails_voucher_wallet` ADD `status` TINYINT(2) NULL DEFAULT '1' AFTER `time_add`; 
->>>>>>> 5cfc04f09c258aaf53857e2bbd69432103949bb5
 
 18/01/2021
 INSERT INTO `tms_vi_retails_config` (`id`, `config_name`, `config_value`) VALUES (NULL, 'username_vtpost', '');

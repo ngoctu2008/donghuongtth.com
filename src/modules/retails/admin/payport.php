@@ -17,7 +17,7 @@ $page_title = $lang_module['setup_payment'];
 $array_setting_payment = array();
 
 // Load config template payment port in data
-$sql = "SELECT * FROM " . $db_config['prefix'] . "_" . $module_data . "_payment ORDER BY weight ASC";
+$sql = "SELECT * FROM " . TABLE . "_payment ORDER BY weight ASC";
 $result = $db->query($sql);
 $num_items = $result->rowCount();
 
@@ -76,10 +76,10 @@ if (! empty($payment)) {
     // Get data have not in database
     if (! in_array($payment, $array_setting_payment_key)) {
         if (! empty($array_payment_other[$payment])) {
-            $weight = $db->query("SELECT max(weight) FROM " . $db_config['prefix'] . "_" . $module_data . "_payment")->fetchColumn();
+            $weight = $db->query("SELECT max(weight) FROM " . TABLE . "_payment")->fetchColumn();
             $weight = intval($weight) + 1;
 
-            $sql = "REPLACE INTO " . $db_config['prefix'] . "_" . $module_data . "_payment (payment, paymentname, domain, active, weight, config,images_button) VALUES (" . $db->quote($payment) . ", " . $db->quote($array_payment_other[$payment]['paymentname']) . ", " . $db->quote($array_payment_other[$payment]['domain']) . ", '0', '" . $weight . "', '" . nv_base64_encode(serialize($array_payment_other[$payment]['config'])) . "', " . $db->quote($array_payment_other[$payment]['images_button']) . ")";
+            $sql = "REPLACE INTO " . TABLE . "_payment (payment, paymentname, domain, active, weight, config,images_button) VALUES (" . $db->quote($payment) . ", " . $db->quote($array_payment_other[$payment]['paymentname']) . ", " . $db->quote($array_payment_other[$payment]['domain']) . ", '0', '" . $weight . "', '" . nv_base64_encode(serialize($array_payment_other[$payment]['config'])) . "', " . $db->quote($array_payment_other[$payment]['images_button']) . ")";
 
             $db->query($sql);
 
@@ -88,7 +88,7 @@ if (! empty($payment)) {
     }
 
     // Get data have in database
-    $stmt = $db->prepare("SELECT * FROM " . $db_config['prefix'] . "_" . $module_data . "_payment WHERE payment= :payment");
+    $stmt = $db->prepare("SELECT * FROM " . TABLE . "_payment WHERE payment= :payment");
     $stmt->bindParam(':payment', $payment, PDO::PARAM_STR);
     $stmt->execute();
     $data_pay = $stmt->fetch();
@@ -109,7 +109,7 @@ if ($nv_Request->isset_request('saveconfigpaymentedit', 'post')) {
         $images_button = '';
     }
 
-    $stmt = $db->prepare("UPDATE " . $db_config['prefix'] . "_" . $module_data . "_payment SET paymentname = :paymentname, domain = :domain, active=" . $active . ", config = '" . nv_base64_encode(serialize($array_config)) . "',images_button= :images_button WHERE payment = :payment");
+    $stmt = $db->prepare("UPDATE " . TABLE . "_payment SET paymentname = :paymentname, domain = :domain, active=" . $active . ", config = '" . nv_base64_encode(serialize($array_config)) . "',images_button= :images_button WHERE payment = :payment");
     $stmt->bindParam(':paymentname', $paymentname, PDO::PARAM_STR);
     $stmt->bindParam(':domain', $domain, PDO::PARAM_STR);
     $stmt->bindParam(':images_button', $images_button, PDO::PARAM_STR);
