@@ -485,3 +485,4 @@ $lang_module['payment'] = 'Cổng thanh toán';
 $lang_module['paymentname'] = 'Tên cổng thanh toán';
 $lang_module['browse_image'] = 'Chọn hình ảnh';
 $lang_module['images_button'] = 'Ảnh nút thanh toán tại giỏ hàng';
+$lang_module['domain'] = 'Domain';
