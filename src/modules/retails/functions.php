@@ -203,7 +203,7 @@
 	//print_r($op);
 	//die($op);
 function add_order($list_transporters){
-	global $db,
+	global $db;
 	$list_order=array();
 	$list_order_code=array();
 	foreach ( $list_transporters as $value_transporters ) {
