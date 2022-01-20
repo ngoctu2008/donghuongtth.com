@@ -595,7 +595,7 @@
 		<!-- END: warehouse -->
 	</div>
 	<!-- END: store -->
-	<input type="hidden" checked name="payment_method" value="vnpay">
+	<input type="hidden" checked name="payment_method" id="payment_method" value="vnpay">
 	<div class="payment_methods bg_white my-2 p-4">
 		<div class="fs_18"><span class="secondary_text">Phương thưc thanh toán</span>
 			
@@ -1102,7 +1102,9 @@
 		}else{
 		$(".row_voucher").hide();
 	};
-	
+	function change_payment_method(payment_method){
+		$('#payment_method').val(payment_method);
+	};
 </script>
 
 
