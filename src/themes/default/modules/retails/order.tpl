@@ -595,13 +595,15 @@
 		<!-- END: warehouse -->
 	</div>
 	<!-- END: store -->
-	
+	<input type="hidden" checked name="payment_method" value="vnpay">
 	<div class="payment_methods bg_white my-2 p-4">
 		<div class="fs_18"><span class="secondary_text">Phương thưc thanh toán</span>
-			<input type="hidden" checked name="payment_method" value="2">
+			
 			<button class="btn_ecng_outline ml-4"><i class="fa fa-id-card-o" aria-hidden="true"></i> VNPAY</button>
+			<button class="btn_ecng_outline ml-4"><i class="fa fa-id-card-o" aria-hidden="true"></i> {LANG.recieve}</button>
 		</div>
 	</div>
+	
 	<div class="payment_total bg_white my-2">
 		<div class="row border-bottom">
 			<div class="col-6">
