@@ -15,7 +15,7 @@ if (! defined('NV_IS_FILE_ADMIN')) {
 $payment = $nv_Request->get_string('id', 'post,get', '');
 $value = $nv_Request->get_int('value', 'post,get', 0);
 
-$table = $db_config['prefix'] . '_' . $module_data . '_payment';
+$table = TABLE . '_payment';
 $contents = $lang_module['active_change_not_complete'];
 
 if (! empty($payment)) {
