@@ -101,9 +101,5 @@
 		return false;
 	});
 </script>
-<!-- BEGIN: guide -->
-<div class="infoalert">
-	<a target="_blank" href="http://wiki.nukeviet.vn/nukeviet:admin:shops:payport">{LANG.setup_payment_guide}</a>
-</div>
-<!-- END: guide -->
+
 <!-- END: main -->
