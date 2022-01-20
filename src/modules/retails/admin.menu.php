@@ -49,6 +49,7 @@ $submenu['order_punish_list']=$lang_module['order_punish_list'];
 $submenu['vnpay_refund']=$lang_module['vnpay_refund'];
 $submenu['history_vnpay']=$lang_module['history_vnpay'];
 $submenu['history_vnpos']=$lang_module['history_vnpos'];
+$submenu['payport']=$lang_module['setup_payment'];
 
 
 
