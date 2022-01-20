@@ -933,3 +933,16 @@ function change_district(id){
 		}
 	});
 }
+
+function nv_chang_pays(payid, object, url_change, url_back) {
+	var value = $(object).val();
+	$.ajax({
+		type : 'POST',
+		url : url_change,
+		data : 'oid=' + payid + '&w=' + value,
+		success : function(data) {
+			window.location = url_back;
+		}
+	});
+	return;
+}
