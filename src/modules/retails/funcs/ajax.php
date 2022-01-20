@@ -2784,8 +2784,7 @@ if ( $mod == 'add_order' ) {
 	if(count($error)==0){
 		
 		// thanh toán vnpay
-		print_r($payment_method);die;
-		if($payment_method=='vnpay'){
+		if($payment_method == 'vnpay'){
 			$list_order=array();
 			$list_order_code=array();
 			foreach ( $list_transporters as $value_transporters ) {
@@ -2897,8 +2896,15 @@ if ( $mod == 'add_order' ) {
 			);
 			print_r( json_encode($contents1));die;
 			die();
+		}elseif($payment_method == 'recieve'){
+			$contents1 = array(
+				'status' => 'OK_RECIEVE',
+				'link' => $order
+				);
+				print_r( json_encode($contents1));die;
 		}
-		}else{
+	}else{
+			
 		$contents1 = array(
 		'status' => 'error',
 		'mess' => $error
