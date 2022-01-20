@@ -1494,7 +1494,7 @@ if($mod=='send_ghtk'){
 	} 
 	$payment_method = $info_order['payment_method'];
 	$ServiceName=get_info_transporters($info_order['transporters_id'])['code_transporters'];
-	if($payment_method>0){
+	if($payment_method!=''){
 		if($ServiceName==1){
 			$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],0,$info_order['total'],'road','');
 			}else if($ServiceName==2){
