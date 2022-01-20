@@ -16,7 +16,7 @@ $payment = $nv_Request->get_string('oid', 'post', '');
 $new_weight = $nv_Request->get_int('w', 'post', 0);
 
 $content = "NO_" . $payment;
-$table = $db_config['prefix'] . "_" . $module_data . "_payment";
+$table = TABLE . "_payment";
 
 $stmt = $db->prepare("SELECT payment, weight FROM " . $table . " WHERE payment= :payment");
 $stmt->bindParam(':payment', $payment, PDO::PARAM_STR);
