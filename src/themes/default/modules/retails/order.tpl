@@ -958,15 +958,17 @@
 		var province_name = $('input[name=province_id]').val();
 		var district_name = $('input[name=district_id]').val();
 		var ward_name = $('input[name=ward_id]').val();
-		var payment_method = document.getElementsByName('payment_method');
-		var total_merchandise = document.getElementById('total_merchandise').value;
-		var total_full = Number(total_merchandise) + Number(tongphivanchuyen);
-		for (var i = 0, length = payment_method.length; i < length; i++) {
-			if (payment_method[i].checked) {
-				payment_method = payment_method[i].value;
-				break;
-			}
-		};
+		var payment_method = $('#payment_method').val();
+		// var payment_method = document.getElementsByName('payment_method');
+		//var total_merchandise = document.getElementById('total_merchandise').value;
+		//var total_full = Number(total_merchandise) + Number(tongphivanchuyen);
+		//for (var i = 0, length = payment_method.length; i < length; i++) {
+			//if (payment_method[i].checked) {
+				//payment_method = payment_method[i].value;
+				//break;
+			//}
+		//};
+		
 		
 		if(order_name==''){
 			alert('Vui lòng nhập họ và tên')
@@ -1036,6 +1038,7 @@
 						ward_id : ward_name,
 						district_id : district_name,
 						list_transporters : list_transporters, 
+						payment_method : payment_method, 
 						lat : lat, 
 						lng : lng
 					},
