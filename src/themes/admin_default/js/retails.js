@@ -946,3 +946,16 @@ function nv_chang_pays(payid, object, url_change, url_back) {
 	});
 	return;
 }
+
+
+function ChangeActive(idobject, url_active) {
+	var id = $(idobject).attr('id');
+	$.ajax({
+		type : 'POST',
+		url : url_active,
+		data : 'id=' + id,
+		success : function(data) {
+			alert(data);
+		}
+	});
+}
