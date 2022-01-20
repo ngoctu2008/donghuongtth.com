@@ -471,3 +471,8 @@ $lang_module['complain_deadline'] = 'Thời hạn khiếu nại';
 
 //Lang for function order_not_received_seller
 $lang_module['order_seller_delivery_failed'] = 'Đơn hàng Seller giao không thành công';
+
+
+//lang payport
+$lang_module['setup_payment'] = 'Tích hợp cổng thanh toán';
+$lang_module['setup_payment_guide'] = 'Xem hướng dẫn Tích hợp cổng thanh toán';
