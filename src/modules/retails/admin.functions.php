@@ -666,3 +666,24 @@
 		
 	}
 	
+
+/**
+ * drawselect_number()
+ *
+ * @param string $select_name
+ * @param integer $number_start
+ * @param integer $number_end
+ * @param integer $number_curent
+ * @param string $func_onchange
+ * @return
+ */
+function drawselect_number($select_name = "", $number_start = 0, $number_end = 1, $number_curent = 0, $func_onchange = "")
+{
+    $html = "<select class=\"form-control\" name=\"" . $select_name . "\" onchange=\"" . $func_onchange . "\">";
+    for ($i = $number_start; $i < $number_end; $i++) {
+        $select = ($i == $number_curent) ? "selected=\"selected\"" : "";
+        $html .= "<option value=\"" . $i . "\"" . $select . ">" . $i . "</option>";
+    }
+    $html .= "</select>";
+    return $html;
+}
