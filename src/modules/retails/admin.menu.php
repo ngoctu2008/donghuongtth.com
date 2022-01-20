@@ -49,7 +49,7 @@ $submenu['order_punish_list']=$lang_module['order_punish_list'];
 $submenu['vnpay_refund']=$lang_module['vnpay_refund'];
 $submenu['history_vnpay']=$lang_module['history_vnpay'];
 $submenu['history_vnpos']=$lang_module['history_vnpos'];
-$submenu['payport']=$lang_module['setup_payment'];
+
 
 
 
@@ -69,5 +69,5 @@ $config['status_ghn']=$lang_module['status_ghn'];
 $config['status_error_ghn']=$lang_module['status_error_ghn'];
 $config['complain_status']=$lang_module['complain_status'];
 $config['penalize']=$lang_module['penalize'];
-
+$config['payport']=$lang_module['setup_payment'];
 $submenu['config']= array( 'title' => $lang_module['config'], 'submenu' => $config );
