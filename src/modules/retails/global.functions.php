@@ -2950,46 +2950,38 @@
 	}
 
 	//viettel post
-	function get_token_vtp(){
+	function login_viettel_post()
+	{
 		global $config_setting;
-
-		$curl = curl_init();
-
-		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'https://partner.viettelpost.vn/v2/user/Login',
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'POST',
-		CURLOPT_POSTFIELDS =>'{
-		"USERNAME": . ,
-		"PASSWORD":"ct4084115"
-		}',
-		CURLOPT_HTTPHEADER => array(
-			'Content-Type: application/json',
-			'Cookie: SERVERID=C'
-		),
-		));
-
-		$response = curl_exec($curl);
-
-		curl_close($curl);
-		echo $response;
-
+		$url = 'https://partner.viettelpost.vn/v2/user/Login';
+		$param = array(
+        "USERNAME" => $config_setting['username_vtpost'],
+        "PASSWORD" => $config_setting['password_vtpost']
+		);
+		$data = post_data($url, $param, '');
+		
+		return $data;
 	}
 
-
+	function create_warehouse_viettelpost($phone, $name, $address, $ward_id)
+	{
+		$url = 'https://partner.viettelpost.vn/v2/user/registerInventory';
+		$param = array(
+        "PHONE" => $phone,
+        "NAME" => $name,
+        "ADDRESS" => $address,
+        "WARDS_ID" => $ward_id
+		);
+		$token = login_viettel_post();
+		$data = post_data($url, $param, $token['data']['token']);
+		return $data;
+	}
 	//viettel post
 	
 	function post_data($url, $param_array, $token)
 	{
 		$json = json_encode($param_array);
-		
-		
-		
+
 		// URL có chứa hai thông tin name và diachi
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
@@ -3024,18 +3016,7 @@
 		return $result;
 	}
 	
-	function login_viettel_post()
-	{
-		global $config_setting;
-		$url = 'https://partner.viettelpost.vn/v2/user/Login';
-		$param = array(
-        "USERNAME" => $config_setting['username_vtpost'],
-        "PASSWORD" => $config_setting['password_vtpost']
-		);
-		$data = post_data($url, $param, '');
-		
-		return $data;
-	}
+	
 	function get_price_vnpost($MaDichVu, $MaTinhGui, $MaQuanGui, $MaTinhNhan, $MaQuanNhan, $ThuCuocNguoiNhan, $LstDichVuCongThem, $length_product, $width_product, $height_product, $weight_product)
 	{
 		$url = 'https://donhang.vnpost.vn/api/api/TinhCuoc/TinhTatCaCuoc';
@@ -3547,19 +3528,8 @@
 		return $data;
 		
 	}
-	function create_warehouse_viettelpost($phone, $name, $address, $ward_id)
-	{
-		$url = 'https://partner.viettelpost.vn/v2/user/registerInventory';
-		$param = array(
-        "PHONE" => $phone,
-        "NAME" => $name,
-        "ADDRESS" => $address,
-        "WARDS_ID" => $ward_id
-		);
-		$token = login_viettel_post();
-		$data = post_data($url, $param, $token['data']['token']);
-		return $data;
-	}
+	
+
 	function send_viettelpost($PRODUCT_PRICE, $MONEY_COLLECTION, $ORDER_SERVICE_ADD, $ORDER_SERVICE, $SENDER_PROVINCE, $SENDER_DISTRICT, $SENDER_WARD, $SENDER_LATITUDE, $SENDER_LONGITUDE, $RECEIVER_PROVINCE, $RECEIVER_DISTRICT, $PRODUCT_TYPE, $ORDER_NUMBER, $GROUPADDRESS_ID, $CUS_ID, $SENDER_FULLNAME, $SENDER_ADDRESS, $SENDER_PHONE, $RECEIVER_FULLNAME, $RECEIVER_ADDRESS, $RECEIVER_PHONE, $PRODUCT_NAME, $PRODUCT_DESCRIPTION, $PRODUCT_QUANTITY, $ORDER_PAYMENT, $list_item, $PRODUCT_WEIGHT, $PRODUCT_LENGTH, $PRODUCT_WIDTH, $PRODUCT_HEIGHT, $RECEIVER_WARD, $RECEIVER_LATITUDE, $RECEIVER_LONGITUDE)
 	{
 		
