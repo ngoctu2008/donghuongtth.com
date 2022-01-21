@@ -192,7 +192,7 @@
 			<p>
 				Email <sup>(*)</sup>
 			</p>
-			<input id="b_email" type="email" name="order_email1" onchange="check_email_error(this)" value="{USER_INFO.email}" class="form-control">
+			<input id="b_email" type="email" name="order_email1" onchange="check_email_error(this)" value="{EMAIL_USER}" class="form-control">
 		</span>
 		<span>
 			<p>

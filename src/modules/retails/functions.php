@@ -222,8 +222,14 @@ function add_order($list_transporters,$info_customer){
 		$sql = 'INSERT INTO ' . TABLE . '_order ( userid,order_code,store_id,warehouse_id,order_name,email,phone,province_id,district_id,ward_id,address,transporters_id,total_product,fee_transport,total,note,time_add,status,payment,total_weight,total_height,total_width,total_length,payment_method,lat,lng, voucherid, voucher_price ) VALUES (:userid,:order_code,:store_id,:warehouse_id,:order_name,:email,:phone,:province_id,:district_id,:ward_id,:address,:transporters_id,:total_product,:fee_transport,:total,:note,:time_add,-1,:payment,:total_weight,:total_height,:total_width,:total_length,:payment_method,:lat,:lng, :voucherid, :voucher_price)';
 		
 		$data_insert = array();
+		if($info_customer['userid']){
+			$userid = $info_customer['userid'];
+		}
+		else{
+			$userid = 0;
+		}
 		$data_insert['order_code'] = $order_code;
-		$data_insert['userid']=$info_customer['userid']; 
+		$data_insert['userid']=$userid; 
 		$data_insert['store_id'] = $value_transporters['store_id'];
 		$data_insert['warehouse_id'] = $value_transporters['warehouse_id'];
 		$data_insert['order_name'] = $info_customer['order_name'];
