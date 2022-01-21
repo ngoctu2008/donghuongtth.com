@@ -2795,6 +2795,8 @@ if ( $mod == 'add_order' ) {
 		);
 		// add order
 		$data = add_order($list_transporters,$info_customer);
+		print_r($data);
+
 		// thanh toán vnpay
 		if($payment_method == 'vnpay'){
 			
