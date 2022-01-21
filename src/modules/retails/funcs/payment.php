@@ -214,6 +214,7 @@ if ($thanhtoan)
 		$inputData['format_vnp_Amount'] = number_format($inputData['vnp_Amount']/100,0,",",",");
 		$xtpl->assign('thanhtoan', $inputData);
 	}elseif($payment_method == 'recieve'){
+		print_r($info_order);
 		$inputData['vnp_txnref'] = implode(' - ',$array_order);
 		
 		$inputData['date_create'] = date("d/m/Y H:i",$info_order['time_add']);//$ngay . '/' . $thang . '/' . $nam . ' - ' . $gio . ':' . $phut;
