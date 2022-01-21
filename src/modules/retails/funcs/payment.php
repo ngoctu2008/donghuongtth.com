@@ -183,7 +183,7 @@ if ($thanhtoan)
 		$order_code = $inputData['vnp_TxnRef'];
 	}elseif($payment_method == 'recieve'){
 		$order_code = $inputData['order_code'];
-	}	
+	}	print_r($order_code);
 	$array_order = array();
 	if(!empty($order_code))
 	{
