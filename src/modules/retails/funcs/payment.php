@@ -185,7 +185,7 @@ if ($thanhtoan)
 		$order_code = $inputData['order_code'];
 	}	
 	$array_order = array();
-	if(!empty($order_code)
+	if(!empty($order_code))
 	{
 		$list_order = $db->query('SELECT order_code FROM ' . TABLE .'_order WHERE id IN('. $order_code .')')->fetchAll();
 		foreach($list_order as $order)
