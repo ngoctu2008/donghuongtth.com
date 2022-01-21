@@ -2889,7 +2889,7 @@ if ( $mod == 'update_status_check' ) {
 }
 
 if ( $mod == 'add_cart' ) {
-	
+		
 	$product_id = $nv_Request->get_int( 'product_id', 'get,post', 0 );
 	$warehouse_id = $nv_Request->get_int( 'warehouse_id', 'get,post', 0 );
 	
@@ -2906,10 +2906,103 @@ if ( $mod == 'add_cart' ) {
 		
 		// lấy thông tin link chi tiết sản phẩm lưu vào SESSION
 		
-		$_SESSION['back_link'] = $get_info_product['link'];
+		// $_SESSION['back_link'] = $get_info_product['link'];
 		
-		print_r( json_encode( array( 'status'=>'ERROR_LOGIN','link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true) ) ) );
-		die();
+		//print_r( json_encode( array( 'status'=>'ERROR_LOGIN','link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true) ) ) );
+		// die();
+		// $check_seller=$db->query('SELECT count(*) FROM '.TABLE.'_seller_management where userid='.$user_info['userid'])->fetchColumn();
+		if($check_seller>0){
+			print_r( json_encode( array( 'status'=>'ERROR_SELLER','mess' => "Bạn đã là người bán nên không thể mua hàng. Vui lòng tạo lại tài khoản người mua" ) ) );
+			die();
+			}else{
+			
+			$classify_id_value1 = $nv_Request->get_int( 'classify_id_value1', 'get,post', 0 );
+			$classify_id_value2 = $nv_Request->get_int( 'classify_id_value2', 'get,post', 0 );
+			
+			
+			// lấy thông tin sản phẩm giá, giá niêm yết, sl tồn kho
+			$info_product = get_price_classify_new($product_id,$warehouse_id,$classify_id_value1,$classify_id_value2);
+			
+			if(!$info_product)
+			{
+				print_r( json_encode( array( 'status'=>'ERROR_SELLER','mess' => "Sản phẩm không tồn tại" ) ) );
+				die();
+			}
+			
+			// id thuộc tính chung
+			$classify_value_product_id = $info_product['id'];
+			if(!$classify_value_product_id)
+			$classify_value_product_id = 0;
+			
+			// tính giá tiền
+			$price = $info_product['price'];
+			
+			
+			$quantity = $nv_Request->get_int( 'quantity', 'get,post', 0 );
+			if($quantity <= 0)
+			{
+				print_r( json_encode( array( 'status'=>'ERROR_SELLER','mess' => "Số lượng phải lớn hơn 0" ) ) );
+				die();
+			}
+			
+			
+			// xử lý kiểm tra sản phẩm còn trong kho hay không
+			if($quantity > $info_product['sl_tonkho'])
+			{
+				print_r( json_encode( array( 'status'=>'ERROR_SELLER','mess' => "Số lượng trong kho không đủ" ) ) );
+				die();
+			}
+			
+			// kiem tra so luong ton kho
+			// chua xu ly
+			$exist = false;
+			
+			if(isset($_SESSION[$module_data . '_cart'][$get_info_product['store_id']][$warehouse_id]))
+			{
+				foreach ( $_SESSION[$module_data . '_cart'] as $key_store => $value_store ) {
+					foreach ( $value_store as $key_warehouse => $value_warehouse ) {
+						foreach ( $value_warehouse as $key_product => $value ) {
+							if ( $value['product_id'] == $product_id && $value['classify_value_product_id'] == $classify_value_product_id ) {
+								$value['num'] = $value['num'] + $quantity;
+								$_SESSION[$module_data . '_cart'][$key_store][$key_warehouse][$key_product] = $value;
+								$exist = true;
+								break;
+							}
+						}
+					}
+				}
+				
+				
+			}
+			
+			if(!$exist)
+			{
+				$_SESSION[$module_data . '_cart'][$get_info_product['store_id']][$warehouse_id][] = array(
+				'product_id' => $product_id,
+				'num' => $quantity,
+				'price' => $price,
+				'classify_value_product_id' => $classify_value_product_id,
+				'weight_product' => $get_info_product['weight_product'],
+				'weight_unit' => $get_info_product['unit_weight'],
+				'length_product' => $get_info_product['length_product'],
+				'unit_length' => $get_info_product['unit_length'],
+				'width_product' => $get_info_product['width_product'],
+				'unit_width' => $get_info_product['unit_width'],
+				'height_product' => $get_info_product['height_product'],
+				'unit_height' => $get_info_product['unit_height'],
+				'name_product' => $get_info_product['name_product'],
+				'alias' => $get_info_product['alias'],
+				'image' => $get_info_product['image'],
+				'free_ship' => $get_info_product['free_ship'],
+				'self_transport' => $get_info_product['self_transport'],
+				'status_check'=>1
+				);
+			}
+			
+			print_r( json_encode( array('status'=>'OK','mess'=>'Thêm sản phẩm vào giỏ hàng thành công' ) ));
+			die();
+		}
+		
 		}else{
 		$check_seller=$db->query('SELECT count(*) FROM '.TABLE.'_seller_management where userid='.$user_info['userid'])->fetchColumn();
 		if($check_seller>0){
@@ -2991,6 +3084,11 @@ if ( $mod == 'add_cart' ) {
 				'unit_width' => $get_info_product['unit_width'],
 				'height_product' => $get_info_product['height_product'],
 				'unit_height' => $get_info_product['unit_height'],
+				'name_product' => $get_info_product['name_product'],
+				'alias' => $get_info_product['alias'],
+				'image' => $get_info_product['image'],
+				'free_ship' => $get_info_product['free_ship'],
+				'self_transport' => $get_info_product['self_transport'],
 				'status_check'=>1
 				);
 			}
