@@ -2793,10 +2793,12 @@ if ( $mod == 'add_order' ) {
 			'lat' => $lat,
 			'lng' => $lng
 		);
+		// add order
+		$data = add_order($list_transporters,$info_customer);
 		// thanh toán vnpay
 		if($payment_method == 'vnpay'){
 			
-			$data = add_order($list_transporters,$info_customer);
+			//$data = add_order($list_transporters,$info_customer);
 			$list_order = $data['list_order'];
 			$list_order_code = $data['list_order_code'];
 			$order_full=implode(',',$list_order);
@@ -2818,7 +2820,7 @@ if ( $mod == 'add_order' ) {
 			print_r( json_encode($contents1));die;
 			die();
 		}elseif($payment_method == 'recieve'){
-			$data = add_order($list_transporters,$info_customer);
+			
 			$list_order = $data['list_order'];
 			$list_order_code = $data['list_order_code'];
 			$contents1 = array(

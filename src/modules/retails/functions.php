@@ -289,13 +289,13 @@ function add_order($list_transporters,$info_customer){
 					if ( count( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] ) == 0 ) {
 						unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] );
 					}
-					$list_product[]=$value_product;
+					$$data['list_product'][]=$value_product;
 				}
 			}
 		}
 		
-		$list_order[]=$order_id;
-		$list_order_code[]=$order_code;
+		$data['list_order'][]=$order_id;
+		$data['list_order_code'][]=$order_code;
 	}
 	$data['list_order'] = $list_order;
 	$data['list_order_code'] = $list_order_code;
