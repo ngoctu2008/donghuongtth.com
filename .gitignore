@@ -6,6 +6,5 @@ src/.htaccess
 src/data/logs/ip_logs/*.log
 *.log
 *.cache
-src/data/config/config_global.php
+src/data/config/config_global.*
 src/data/logs/ref_logs/*.log
-src/data/config/config_global.php
