@@ -471,3 +471,18 @@ $lang_module['complain_deadline'] = 'Thời hạn khiếu nại';
 
 //Lang for function order_not_received_seller
 $lang_module['order_seller_delivery_failed'] = 'Đơn hàng Seller giao không thành công';
+
+
+//lang payport
+$lang_module['setup_payment'] = 'Tích hợp cổng thanh toán';
+$lang_module['setup_payment_guide'] = 'Xem hướng dẫn Tích hợp cổng thanh toán';
+$lang_module['editpayment'] = 'Sửa cổng thanh toán: %1$s';
+$lang_module['checkpayment'] = 'Kiểm tra lại giao dịch';
+$lang_module['paymentcaption'] = 'Các cổng thanh toán đã tích hợp';
+$lang_module['paymentcaption_other'] = 'Các cổng thanh toán khả dụng khác chưa tích hợp';
+$lang_module['payment_integrat'] = 'Tích hợp';
+$lang_module['payment'] = 'Cổng thanh toán';
+$lang_module['paymentname'] = 'Tên cổng thanh toán';
+$lang_module['browse_image'] = 'Chọn hình ảnh';
+$lang_module['images_button'] = 'Ảnh nút thanh toán tại giỏ hàng';
+$lang_module['domain'] = 'Domain';

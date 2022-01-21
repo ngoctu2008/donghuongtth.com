@@ -997,6 +997,7 @@ function change_province(id) {
         }
     });
 }
+<<<<<<< HEAD
 
 function change_district(id) {
     var districtid = $('.district_id_' + id).find('option:selected').val();
@@ -1026,3 +1027,60 @@ function change_district(id) {
         }
     });
 }
+=======
+function change_district(id){
+	var districtid = $('.district_id_'+id).find('option:selected').val();
+	
+	$('.ward_id_'+id).empty();
+	$('.ward_id_'+id).select2({
+		placeholder: "Mời bạn chọn phường xã",
+		ajax: {
+			url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable +
+			'=ajax&mod=get_ward',
+			dataType: 'json',
+			delay: 250,
+			data: function(params) {
+				var query = {
+					q: params.term,
+					districtid:districtid
+				}
+				return query;
+			},
+			method: 'post',
+			processResults: function(data) {
+				return {
+					results: data
+				};
+			},
+			cache: true
+		}
+	});
+}
+
+function nv_chang_pays(payid, object, url_change, url_back) {
+	var value = $(object).val();
+	$.ajax({
+		type : 'POST',
+		url : url_change,
+		data : 'oid=' + payid + '&w=' + value,
+		success : function(data) {
+			console.log(data);
+			//window.location = url_back;
+		}
+	});
+	return;
+}
+
+
+function ChangeActive(idobject, url_active) {
+	var id = $(idobject).attr('id');
+	$.ajax({
+		type : 'POST',
+		url : url_active,
+		data : 'id=' + id,
+		success : function(data) {
+			alert(data);
+		}
+	});
+}
+>>>>>>> 9bf729c1ff73db29d075c9dcbb1e18e310676000
