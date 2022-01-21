@@ -2802,11 +2802,12 @@ if ( $mod == 'add_order' ) {
 			$list_order = $data['list_order'];
 			$list_order_code = $data['list_order_code'];
 			
+			$list_order=implode(',',$list_order);
 			$list_order_code=implode(',',$list_order_code);
 			unset( $_SESSION[$module_data . '_cart'] );
 			$contents1 = array(
 				'status' => 'OK_RECIEVE',
-				'link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&payment_method=recieve&order_code='.$list_order_code , true )
+				'link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&payment_method=recieve&order_code='.$list_order , true )
 				);
 				print_r( json_encode($contents1));die;
 		}
