@@ -2791,6 +2791,7 @@ if ( $mod == 'add_order' ) {
 			'district_id' => $district_id,
 			'ward_id' => $ward_id,
 			'address' => $address,
+			'payment_method' => $payment_method,
 			'lat' => $lat,
 			'lng' => $lng
 		);
@@ -2842,51 +2843,51 @@ if ( $mod == 'add_order' ) {
 			$data_insert['voucherid'] = $value_transporters['voucherid'];
 			$data_insert['voucher_price'] = $value_transporters['discount_price'];
 			//print_r($db);
-		$order_id = $db->insert_id( $sql, 'id', $data_insert );
-		
-		if($value_transporters['discount_price'] > 0){
+			$order_id = $db->insert_id( $sql, 'id', $data_insert );
 			
-			$sql = 'INSERT INTO ' . TABLE . '_order_voucher ( voucherid, order_id, userid, discount_price, time_add, status) VALUES (:voucherid, :order_id, :userid, :discount_price, :time_add, :status)';
-			
-			$data_insert = array();
-			$data_insert['voucherid'] = $value_transporters['voucherid'];
-			$data_insert['order_id'] = $order_id ;
-			$data_insert['userid'] = $userid;
-			$data_insert['discount_price'] = $value_transporters['discount_price'];
-			$data_insert['time_add'] = NV_CURRENTTIME;
-			$data_insert['status'] = 0;
-			
-			$voucher_id = $db->insert_id( $sql, 'voucherid', $data_insert );
-		}
-		if ( $order_id > 0 ) {
-			foreach ( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] as $key_product=>$value_product ) {
-				if ( $value_product['status_check'] == 1 ) {
-					$total_weight = $value_product['weight_product']*get_info_unit_weight( $value_product['weight_unit'] )['exchange']*$value_product['num'];
-					$total_length = $value_product['length_product']*get_info_unit_length( $value_product['unit_length'] )['exchange']*$value_product['num'];
-					$total_width = $value_product['width_product']*get_info_unit_length( $value_product['unit_width'] )['exchange']*$value_product['num'];
-					$total_height = $value_product['height_product']*get_info_unit_length( $value_product['unit_height'] )['exchange']*$value_product['num'];
-					$total_length = $value_product['length_product']*get_info_unit_length( $value_product['unit_length'] )['exchange']*$value_product['num'];
-					$total = $value_product['price']*$value_product['num'];
-					
-					
-					$db->query( 'INSERT INTO ' . TABLE . '_order_item(order_id,product_id,weight,length,height,width,price,classify_value_product_id,quantity,total) VALUES('.$order_id.','.$value_product['product_id'].','.$total_weight.','.$total_length.','.$total_height.','.$total_width.','.$value_product['price'].','.$value_product['classify_value_product_id'].','.$value_product['num'].','.$total.')' );
-					
-					
-					
-					unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']][$key_product] );
-					if ( count( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] ) == 0 ) {
-						unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] );
+			if($value_transporters['discount_price'] > 0){
+				
+				$sql = 'INSERT INTO ' . TABLE . '_order_voucher ( voucherid, order_id, userid, discount_price, time_add, status) VALUES (:voucherid, :order_id, :userid, :discount_price, :time_add, :status)';
+				
+				$data_insert = array();
+				$data_insert['voucherid'] = $value_transporters['voucherid'];
+				$data_insert['order_id'] = $order_id ;
+				$data_insert['userid'] = $userid;
+				$data_insert['discount_price'] = $value_transporters['discount_price'];
+				$data_insert['time_add'] = NV_CURRENTTIME;
+				$data_insert['status'] = 0;
+				
+				$voucher_id = $db->insert_id( $sql, 'voucherid', $data_insert );
+			}
+			if ( $order_id > 0 ) {
+				foreach ( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] as $key_product=>$value_product ) {
+					if ( $value_product['status_check'] == 1 ) {
+						$total_weight = $value_product['weight_product']*get_info_unit_weight( $value_product['weight_unit'] )['exchange']*$value_product['num'];
+						$total_length = $value_product['length_product']*get_info_unit_length( $value_product['unit_length'] )['exchange']*$value_product['num'];
+						$total_width = $value_product['width_product']*get_info_unit_length( $value_product['unit_width'] )['exchange']*$value_product['num'];
+						$total_height = $value_product['height_product']*get_info_unit_length( $value_product['unit_height'] )['exchange']*$value_product['num'];
+						$total_length = $value_product['length_product']*get_info_unit_length( $value_product['unit_length'] )['exchange']*$value_product['num'];
+						$total = $value_product['price']*$value_product['num'];
+						
+						
+						$db->query( 'INSERT INTO ' . TABLE . '_order_item(order_id,product_id,weight,length,height,width,price,classify_value_product_id,quantity,total) VALUES('.$order_id.','.$value_product['product_id'].','.$total_weight.','.$total_length.','.$total_height.','.$total_width.','.$value_product['price'].','.$value_product['classify_value_product_id'].','.$value_product['num'].','.$total.')' );
+						
+						
+						
+						unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']][$key_product] );
+						if ( count( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] ) == 0 ) {
+							unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] );
+						}
+						if ( count( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] ) == 0 ) {
+							unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] );
+						}
+						$$data['list_product'][]=$value_product;
 					}
-					if ( count( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] ) == 0 ) {
-						unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] );
-					}
-					$$data['list_product'][]=$value_product;
 				}
 			}
-		}
-		
-		$data['list_order'][]=$order_id;
-		$data['list_order_code'][]=$order_code;
+			
+			$data['list_order'][]=$order_id;
+			$data['list_order_code'][]=$order_code;
 	}
 		//print_r($data);
 
