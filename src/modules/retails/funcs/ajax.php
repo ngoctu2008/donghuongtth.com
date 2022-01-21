@@ -2578,7 +2578,6 @@ if($mod == 'apply_voucher_shop'){
 
 
 if ( $mod == 'add_order' ) {
-	
 	$order_name = $nv_Request->get_string( 'order_name', 'get,post', '' );
 	$order_email = $nv_Request->get_string( 'order_email', 'get,post', '' );
 	$order_phone = $nv_Request->get_string( 'order_phone', 'get,post', '' );
@@ -2594,8 +2593,7 @@ if ( $mod == 'add_order' ) {
 	$list_transporters = $nv_Request->get_array( 'list_transporters', 'get,post', '' ) ;
 	if (defined('NV_IS_USER')) {	
 		$userid=$user_info['userid'];
-	}
-	
+	}	
 	
 	$error=array();
 	$total_full_total = 0;
@@ -2706,7 +2704,7 @@ if ( $mod == 'add_order' ) {
 		if(!$tu_giao)
 		{
 			// có đơn vị vận chuyển
-			$check_vc = $db->query('SELECT COUNT(t1.id) FROM ' . TABLE . '_transporters t1 INNER JOIN ' . TABLE . '_transporters_shop t2 ON t1.id = t2.transporters_id WHERE t1.status = 1 AND t2.status = 1 AND t2.sell_id = ' . $value_transporters['store_id'] . ' AND t1.id = ' . $value_transporters['transporters_id']  )->fetchColumn();
+			$check_vc = $db->query('SELECT COUNT(t1.id) FROM ' . TABLE . '_transporters t1 INNER JOIN ' . TABLE . '_transporters_shop t2 ON t1.id = t2.transporters_id WHERE t1.status = 1 AND t2.status = 1 AND t2.sell_id = ' . $value_transporters['store_id'] . ' AND t1.id = ' . $value_transporters['transporters_id'])->fetchColumn();
 			if($check_vc < 1){
 				$contents1 = array(
 				'status' => 'error',
@@ -2717,53 +2715,38 @@ if ( $mod == 'add_order' ) {
 			if($value_transporters['transporters_id'] == 4 || $value_transporters['transporters_id'] == 5){
 				$free_ship = get_free_ship_vnpost($value_transporters['warehouse_id'], $total_weight_ship, $total_length_ship, $total_width_ship, $total_height_ship, $total_product, $province_id, $district_id, $value_transporters['transporters_id'] );
 				}elseif($value_transporters['transporters_id'] == 3){
-				$free_ship = get_free_ship_ghn(2, $total_weight_ship, $total_length_ship, $total_width_ship, $total_height_ship, $total_product, $province_id, $district_id , $ward_id, $value_transporters['transporters_id'], $value_transporters['store_id'] );
+				$free_ship = $_SESSION['tranposter_fee'][$value_transporters['store_id']][3];
 			}
+			
 		}
 		else
 		{
 			// miễn phí vận chuyển
-			$free_ship = 0;
+			$free_ship = $_SESSION['self_transport_price_shop'][$value_transporters['store_id']];
 		}
 		
-		//tính số tiền giảm voucher
-		$today = NV_CURRENTTIME;
-		
-		$value_transporters['voucher_code'] = $_SESSION['shop'][$value_transporters['store_userid']];
-
-		if($check_voucher_used > 0){
-			$voucher['id'] = 0;
-			$voucher['discount_price'] = 0;
-		}
-		if(!$voucher){
-			$voucher['id'] = 0;
-			$voucher['discount_price'] = 0;
-			}else{
-			if( $today <= $voucher['time_from'] || $today > $voucher['time_to'] ){
-				$voucher['id'] = 0;
-				$voucher['discount_price'] = 0;
-				}elseif($voucher['usage_limit_quantity'] < 1){
-				$voucher['id'] = 0;
-				$voucher['discount_price'] = 0;
-				}elseif($check_voucher['minimum_price'] > $total_full){
-				$voucher['id'] = 0;
-				$voucher['discount_price'] = 0;
+		//kiểm tra lại voucher -> ok -> lấy trong SESSION ra 
+			
+		if($_SESSION['voucher_shop'][$value_transporters['store_id']]['voucherid']){
+			$check_voucher = check_voucher_order($value_transporters['store_id'], $_SESSION['voucher_shop'][$value_transporters['store_id']]['voucherid']);
+			if($check_voucher){
+				$list_transporters[$index]['voucherid'] = $_SESSION['voucher_shop'][$value_transporters['store_id']]['voucherid'];
+				$list_transporters[$index]['discount_price'] = $_SESSION['voucher_shop'][$value_transporters['store_id']]['price'];
 				}else{
-				$check_voucher = 1;
-				
+				$error[] = 'Voucher không khả dụng, vui lòng thử lại sau!';
 			}
-		}	
-		
-		
-		$list_transporters[$index]['voucherid'] = $voucher['id'];
-		$list_transporters[$index]['discount_price'] = $voucher['discount_price'];
+			
+			}else{
+			$list_transporters[$index]['voucherid'] = 0;
+			$list_transporters[$index]['discount_price'] = 0;
+		}
 		
 		// phí ship khách hàng chịu
 		$list_transporters[$index]['fee'] = $free_ship;
-		
-		
-		$total_full = $total_full + $free_ship - $voucher['discount_price'];
-		
+		if(!$_SESSION['voucher_shop'][$value_transporters['store_id']]['price']){
+			$_SESSION['voucher_shop'][$value_transporters['store_id']]['price'] = 0;
+		}
+		$total_full = $total_full + $free_ship - $_SESSION['voucher_shop'][$value_transporters['store_id']]['price'];
 	}
 	
 	if(!$total_full)
@@ -2789,7 +2772,6 @@ if ( $mod == 'add_order' ) {
 		// add order
 		$data = add_order($list_transporters,$info_customer);
 		
-		//print_r($data);
 
 		// thanh toán vnpay
 		if($payment_method == 'vnpay'){
@@ -2834,6 +2816,60 @@ if ( $mod == 'add_order' ) {
 		print_r( json_encode($contents1));die;
 	}
 	
+}
+
+if ( $mod == 'address_no_login' ) {
+	$row['address'] = $nv_Request->get_title('maps_address', 'get', '');
+	$row['ward_id'] = $nv_Request->get_int('ward_id', 'get', 0);
+	$row['district_id'] = $nv_Request->get_int('district_id', 'get', 0);
+	$row['province_id'] = $nv_Request->get_int('province_id', 'get', 0);
+	$row['phone'] = $nv_Request->get_title('phone', 'get', '');
+	$row['name'] = $nv_Request->get_title('name', 'get', '');
+	$row['email'] = $nv_Request->get_title('email', 'get', '');
+
+	if(!$row['address']){
+		print_r( json_encode(array('status'=>'ERROR','mess'=>'Bạn chưa nhập địa chỉ!')));die();
+	}
+	else if (!$row['ward_id']){
+		print_r( json_encode(array('status'=>'ERROR','mess'=>'Bạn chưa nhập địa chỉ!')));die();
+	}
+	else if (!$row['district_id']){
+		print_r( json_encode(array('status'=>'ERROR','mess'=>'Bạn chưa nhập địa chỉ!')));die();
+	}
+	else if (!$row['province_id']){
+		print_r( json_encode(array('status'=>'ERROR','mess'=>'Bạn chưa nhập địa chỉ!')));die();
+	}
+	else if (!$row['phone']){
+		print_r( json_encode(array('status'=>'ERROR','mess'=>'Bạn chưa nhập số điện thoại!')));die();
+	}
+	else if (!$row['name']){
+		print_r( json_encode(array('status'=>'ERROR','mess'=>'Bạn chưa nhập tên!')));die();
+	}
+	else if (!$row['email']){
+		print_r( json_encode(array('status'=>'ERROR','mess'=>'Bạn chưa nhập email!')));die();
+	}
+
+	function email_validation($str) {
+		return (!preg_match(
+	"^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $str)) ? FALSE : TRUE;
+	}
+	if(!email_validation($row['email'])) {
+		print_r( json_encode(array('status'=>'ERROR','mess'=>'Email không đúng định dạng!')));die();
+	}
+
+
+	$_SESSION['address_no_login'] = array(
+		'address' => $row['address'],
+		'ward_id' => $row['ward_id'],
+		'district_id' => $row['district_id'],
+		'province_id' => $row['province_id'],
+		'phone' => $row['phone'],
+		'name' => $row['name'],
+		'email' => $row['email'],
+	);
+		
+	print_r( json_encode(array('status'=>'OK','mess'=>'Lưu địa chỉ thành công','link'=> nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=order',true))));
+	die();
 }
 
 if ( $mod == 'remove_cart' ) {
