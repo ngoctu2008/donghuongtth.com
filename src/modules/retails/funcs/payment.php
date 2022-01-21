@@ -218,7 +218,7 @@ if ($thanhtoan)
 		
 		$inputData['date_create'] = date("d/m/Y H:i",$info_order['time_add']);//$ngay . '/' . $thang . '/' . $nam . ' - ' . $gio . ':' . $phut;
 		
-		$inputData['format_vnp_Amount'] = number_format($info_order['total'],0,",",",");
+		$inputData['format_vnp_Amount'] = number_format($info_order['total']/100,0,",",",");
 		$xtpl->assign('thanhtoan', $inputData);
 	}	
 	
