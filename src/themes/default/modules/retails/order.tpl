@@ -1058,6 +1058,8 @@
 								alert(res.mess);
 								}else if(res.status=='OK_VNPAY'){
 								location.href = res.link
+								}else if(res.status=='OK_RECIEVE'){
+								location.href = res.link
 								}else if(res.status=='error_password_money'){
 								$("#button-payment-method").attr("disabled", false);
 								$("#button-payment-method").html("Đặt hàng");
