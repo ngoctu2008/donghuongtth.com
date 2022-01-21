@@ -18,6 +18,8 @@
 			echo '</script>';
 		}
 	}
+	
+	
 	//kiểm tra đơn hàng đã thanh toán chưa nếu chưa thanh toán -> re-payment
 	if($_SESSION['payment'] == false){
 		echo '<script language="javascript">';
@@ -59,18 +61,22 @@
 	}
 	
 	
-	
-	
 	if($status_check==0){
 		
 		// kiểm tra trạng thái session đã thanh toán chưa. giỏ hàng trống
 		if(isset($_SESSION[$module_name . '_vnpay']) and !$_SESSION[$module_name . '_vnpay'])
 		{
 			$_SESSION[$module_name . '_vnpay'] = true;
-			
-			echo '<script language="javascript">';
-			echo 'alert("Thanh toán thất bại!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=re-payment',true).'"';
-			echo '</script>';
+			if($user_info['userid']){
+				echo '<script language="javascript">';
+				echo 'alert("Thanh toán thất bại!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=re-payment',true).'"';
+				echo '</script>';
+			}
+			else{
+				echo '<script language="javascript">';
+				echo 'alert("Thanh toán thất bại!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=tracking-order',true).'"';
+				echo '</script>';
+			}
 		}
 		else
 		{

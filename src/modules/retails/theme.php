@@ -806,9 +806,11 @@
 		$xtpl->assign( 'CART', NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=cart');
 		
 		$xtpl->assign( 'OP', $op );
-		$total=0;
+		$total = 0;
+
 		unset($_SESSION['voucher_shop']);
 		if(!$user_info['userid']){
+		
 			$xtpl->assign('show_address', 'd-none');
 			$address = get_full_address($_SESSION['address_no_login']['ward_id'],$_SESSION['address_no_login']['district_id'],$_SESSION['address_no_login']['province_id']);
 			$full_address = $_SESSION['address_no_login']['address'] . $address;
@@ -902,9 +904,10 @@
 					$self_transport_price_max = 0;
 					if($value['status_check']){
 						//voucher
-						
-						// lay gia voucher san pham nếu 2 sp cùng 1 voucher thì distinct
+						if($user_info['userid']){
+							// lay gia voucher san pham nếu 2 sp cùng 1 voucher thì distinct
 						$array_voucher_shop = voucher_price_optimal($value['product_id'], $total_price_shop, $key_store, $array_voucher_shop);
+						}
 						
 						//lấy giá giảm nhiều nhất
 						$max_price_voucher = max(array_column($array_voucher_shop, 'price', 'voucherid'));
