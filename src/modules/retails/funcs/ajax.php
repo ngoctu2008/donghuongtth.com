@@ -2783,6 +2783,7 @@ if ( $mod == 'add_order' ) {
 	
 	if(count($error)==0){
 		$info_customer=array(
+			'userid' => $userid,
 			'order_name' => $order_name,
 			'order_email' => $order_email,
 			'order_phone' => $order_phone,

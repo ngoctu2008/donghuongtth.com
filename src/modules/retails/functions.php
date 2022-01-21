@@ -223,7 +223,7 @@ function add_order($list_transporters,$info_customer){
 		
 		$data_insert = array();
 		$data_insert['order_code'] = $order_code;
-		$data_insert['userid']=$userid;
+		$data_insert['userid']=$info_customer['userid']; 
 		$data_insert['store_id'] = $value_transporters['store_id'];
 		$data_insert['warehouse_id'] = $value_transporters['warehouse_id'];
 		$data_insert['order_name'] = $info_customer['order_name'];
