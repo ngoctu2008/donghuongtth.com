@@ -24,7 +24,7 @@
                 <div class="text_gray_color">Mã giao dịch: <span class="secondary_text">{thanhtoan.vnp_TransactionNo}</span> </div>
             </div>
             <div class="p-3 my-2 d-block w-100" style="background-color: #F7E7C1;border-radius: 5px;">
-                <i class="fa fa-check secondary_text" aria-hidden="true"></i> <span class="text_gray_color ml-2">Giao dịch thành công</span>
+                <i class="fa fa-check secondary_text" aria-hidden="true"></i> <span class="text_gray_color ml-2">Tạo đơn hàng thành công</span>
             </div>
             <table class="table table-borderless">
 

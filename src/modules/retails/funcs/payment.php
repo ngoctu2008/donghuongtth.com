@@ -223,7 +223,7 @@ if ($thanhtoan)
 $xtpl->parse('main');
 $contents = $xtpl->text('main');
 
-$page_title = $lang_module['payment_vnpay_success'];
+$page_title = $lang_module['payment_' . $payment_method . '_success'];
 
 include NV_ROOTDIR . '/includes/header.php';
 echo nv_site_theme($contents);
