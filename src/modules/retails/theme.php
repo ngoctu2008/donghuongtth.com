@@ -793,9 +793,13 @@
 		$xtpl->assign( 'NV_OP_VARIABLE', NV_OP_VARIABLE );
 		$xtpl->assign( 'MODULE_NAME', $module_name );
 		$xtpl->assign( 'MODULE_UPLOAD', $module_upload );
-		$xtpl->assign( 'USER_INFO', $user_info );
-		$xtpl->assign( 'TEMPLATE', $module_info['template'] );
-		
+		$xtpl->assign( 'TEMPLATE', $module_info['template']);
+		if($user_info['userid']){
+			$xtpl->assign( 'EMAIL_USER', $user_info['email']);
+		}
+		else{
+			$xtpl->assign( 'EMAIL_USER', $_SESSION['address_no_login']['email']);
+		}
 		$xtpl->assign( 'ADDRESS_DF', $address_df );
 		$xtpl->assign( 'NV_ASSETS_DIR', NV_ASSETS_DIR );
 		$xtpl->assign( 'LINK_ADDRESS', NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=address&id=0');
