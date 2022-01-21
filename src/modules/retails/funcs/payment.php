@@ -1,8 +1,5 @@
 <?php
 
-if (!defined('NV_IS_USER') or !$global_config['allowuserlogin']) {
-        nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users');
-}
 
 	sleep(2);
 	
@@ -11,8 +8,8 @@ if (!defined('NV_IS_USER') or !$global_config['allowuserlogin']) {
 
 		
 		$_SESSION[$module_name . '_vnpay'] = true;
-	}	
-		$xtpl = new XTemplate('payment_vnpay_success.tpl', NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file);
+	}
+		$xtpl = new XTemplate('payment_' . $payment_method . '_success.tpl', NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file);
 		$xtpl->assign('LANG', $lang_module);
 		$xtpl->assign('NV_LANG_VARIABLE', NV_LANG_VARIABLE);
 		$xtpl->assign('NV_LANG_DATA', NV_LANG_DATA);
@@ -161,6 +158,9 @@ if (!defined('NV_IS_USER') or !$global_config['allowuserlogin']) {
 			// ket thuc xu ly chuan
 	}elseif($payment_method = 'recieve'){
 		$thanhtoan = true;
+		$inputData = array();
+		$inputData['order_code'] = $nv_Request->get_title('order_code', 'get', '', 1);
+
 	}	
 
 if (!empty($error))
@@ -179,35 +179,44 @@ if ($thanhtoan)
 {
 	// thông tin đơn hàng
 	// lấy thông tin order code
+	if($payment_method = 'vnpay'){
+		$order_code = $inputData['vnp_TxnRef'];
+	}elseif($payment_method = 'recieve'){
+		$order_code = $inputData['order_code'];
+	}	
 	$array_order = array();
-	if(!empty($inputData['vnp_TxnRef']))
+	if(!empty($order_code)
 	{
-		$list_order = $db->query('SELECT order_code FROM ' . TABLE .'_order WHERE id IN('. $inputData['vnp_TxnRef'] .')')->fetchAll();
+		$list_order = $db->query('SELECT order_code FROM ' . TABLE .'_order WHERE id IN('. $order_code .')')->fetchAll();
 		foreach($list_order as $order)
 		{
 			$array_order[] = $order['order_code'];
 		}
 		
-		$info_order = $db->query('SELECT * FROM ' . TABLE .'_order WHERE id IN('. $inputData['vnp_TxnRef'] .')')->fetch();
+		$info_order = $db->query('SELECT * FROM ' . TABLE .'_order WHERE id IN('. $order_code .')')->fetch();
 		
 		
 		$xtpl->assign('LOGO_SRC', NV_BASE_SITEURL . $global_config['site_logo']);
 		
 		$xtpl->assign('info_order', $info_order);
 	}
+	if($payment_method = 'vnpay'){
+		$inputData['vnp_txnref'] = implode(' - ',$array_order);
+		
+		$nam = substr( $inputData['vnp_PayDate'],  0, 4);
+		$thang = substr( $inputData['vnp_PayDate'],  4, 2);
+		$ngay = substr( $inputData['vnp_PayDate'],  6, 2);
+		$gio = substr( $inputData['vnp_PayDate'],  8, 2);
+		$phut = substr( $inputData['vnp_PayDate'],  10, 2);
+		
+		$inputData['date_create'] = $ngay . '/' . $thang . '/' . $nam . ' - ' . $gio . ':' . $phut;
+		
+		$inputData['format_vnp_Amount'] = number_format($inputData['vnp_Amount']/100,0,",",",");
+		$xtpl->assign('thanhtoan', $inputData);
+	}elseif($payment_method = 'recieve'){
+		$xtpl->assign('thanhtoan', $inputData);
+	}	
 	
-	$inputData['vnp_txnref'] = implode(' - ',$array_order);
-	
-	$nam = substr( $inputData['vnp_PayDate'],  0, 4);
-	$thang = substr( $inputData['vnp_PayDate'],  4, 2);
-	$ngay = substr( $inputData['vnp_PayDate'],  6, 2);
-	$gio = substr( $inputData['vnp_PayDate'],  8, 2);
-	$phut = substr( $inputData['vnp_PayDate'],  10, 2);
-	
-	$inputData['date_create'] = $ngay . '/' . $thang . '/' . $nam . ' - ' . $gio . ':' . $phut;
-	
-	$inputData['format_vnp_Amount'] = number_format($inputData['vnp_Amount']/100,0,",",",");
-	$xtpl->assign('thanhtoan', $inputData);
     $xtpl->parse('main.thanhcong');
 }
 
