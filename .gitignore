@@ -1,6 +1,6 @@
 .idea
 .vscode
-src/config.php
+src/config.*
 src/data/config/config_ini.*.php
 src/.htaccess
 src/data/logs/ip_logs/*.log
