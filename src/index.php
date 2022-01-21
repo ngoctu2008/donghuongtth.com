@@ -9,7 +9,7 @@
  */
 
 //phpinfo();
-
+print_r(ok);die;
 if (isset($_GET['response_headers_detect'])) {
     exit(0);
 }

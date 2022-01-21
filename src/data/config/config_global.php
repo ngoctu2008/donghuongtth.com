@@ -5,7 +5,7 @@
  * @Author VINADES.,JSC <contact@vinades.vn>
  * @Copyright (C) 2022 VINADES.,JSC. All rights reserved
  * @License GNU/GPL version 2 or any later version
- * @Createdate Wed, 19 Jan 2022 01:33:45 GMT
+ * @Createdate Fri, 21 Jan 2022 06:59:43 GMT
  */
 
 if (!defined('NV_MAINFILE')) {
@@ -74,9 +74,7 @@ $global_config['login_time_ban']=5;
 $global_config['login_time_tracking']=5;
 $global_config['max_requests_300']=2000;
 $global_config['max_requests_60']=500;
-
-$global_config['my_domains']='localhost,chonhagiau.com,www.chonhagiau.com,chonhagiau.com.vn,www.chonhagiau.com.vn,chonhagiau.vn,www.chonhagiau.vn, dev.cng';
-
+$global_config['my_domains']='dev.cng,localhost,chonhagiau.com,www.chonhagiau.com,chonhagiau.com.vn,www.chonhagiau.com.vn,chonhagiau.vn,www.chonhagiau.vn';
 $global_config['notification_active']=1;
 $global_config['notification_autodel']=50;
 $global_config['nv_auto_resize']=1;
@@ -99,7 +97,7 @@ $global_config['site_lang']='vi';
 $global_config['site_timezone']='byCountry';
 $global_config['spadmin_add_admin']=1;
 $global_config['str_referer_blocker']=0;
-$global_config['timestamp']=1642556025;
+$global_config['timestamp']=1642748383;
 $global_config['two_step_verification']=0;
 $global_config['upload_alt_require']=1;
 $global_config['upload_auto_alt']=1;
