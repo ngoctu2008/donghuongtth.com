@@ -159,7 +159,7 @@ if (!defined('NV_IS_USER') or !$global_config['allowuserlogin']) {
 			}
 
 			// ket thuc xu ly chuan
-	}elseif(){
+	}elseif($payment_method = 'recieve'){
 		$thanhtoan = true;
 	}	
 
