@@ -206,6 +206,7 @@ function add_order($list_transporters,$info_customer){
 	global $db,$config_setting;
 	$list_order=array();
 	$list_order_code=array();
+	$data=array();
 	foreach ( $list_transporters as $value_transporters ) {
 				
 		if($value_transporters['transporters_id'] == 4 || $value_transporters['transporters_id'] == 5){
@@ -297,7 +298,7 @@ function add_order($list_transporters,$info_customer){
 		$data['list_order'][]=$order_id;
 		$data['list_order_code'][]=$order_code;
 	}
-	$data['list_order'] = $list_order;
-	$data['list_order_code'] = $list_order_code;
+	//$data['list_order'] = $list_order;
+	//$data['list_order_code'] = $list_order_code;
 	return $data;
 }
