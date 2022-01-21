@@ -12,7 +12,8 @@ $sql_create_module[] = "CREATE TABLE IF NOT EXISTS " . $db_config['prefix'] . "_
 ) ENGINE=MyISAM";
 
 ALTER TABLE `tms_vi_retails_order` CHANGE `payment_method` `payment_method` VARCHAR(100) NOT NULL COMMENT 'Phương thức thành toán';
-
+UPDATE `tms_vi_retails_order` SET `payment_method` = 'vnpay' WHERE `payment_method` = '2'
+UPDATE `tms_vi_retails_order` SET `payment_method` = 'momo' WHERE `payment_method` = '1' 
 
 19/01/2021
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_warehouse_transport(

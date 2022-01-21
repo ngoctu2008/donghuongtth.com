@@ -10,11 +10,7 @@
 	//TEST3
 	if (!defined('NV_IS_MOD_RETAILSHOPS'))
     die('Stop!!!');
-	if (!defined('NV_IS_USER')) {
-		echo '<script language="javascript">';
-		echo 'window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true).'"';
-		echo '</script>';
-	}
+	
 	$mod = $nv_Request->get_string('mod', 'post, get', 0);
 	
 
@@ -279,6 +275,12 @@
 	if($row['status'])
 	{
 		$xtpl->assign('checked', 'checked=checked');	
+	}
+	if($user_info['userid']){
+		$xtpl->assign('show_email', 'd-none');	
+		$xtpl->assign('show_submit', 'd-none');	
+	}else{
+		$xtpl->assign('show_submit1', 'd-none');
 	}
 	
 	$xtpl->assign('Q', $q);

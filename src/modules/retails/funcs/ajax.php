@@ -2592,15 +2592,7 @@ if ( $mod == 'add_order' ) {
 	$lat = $nv_Request->get_string( 'lat', 'get,post', '' );
 	$lng = $nv_Request->get_string( 'lng', 'get,post', '' );
 	$list_transporters = $nv_Request->get_array( 'list_transporters', 'get,post', '' ) ;
-	if (!defined('NV_IS_USER')) {
-		
-		$contents1 = array(
-		'status' => 'error',
-		'mess' => 'Vui lòng đăng nhập hệ thống'
-		);
-		print_r( json_encode($contents1));die;
-		
-		}else{
+	if (defined('NV_IS_USER')) {	
 		$userid=$user_info['userid'];
 	}
 	
@@ -2608,7 +2600,6 @@ if ( $mod == 'add_order' ) {
 	$error=array();
 	$total_full_total = 0;
 	$fee_transport_total = 0;
-	//print_r($list_transporters);die;	
 	foreach ( $list_transporters as $index => $value_transporters ) {
 		//print_r($value_transporters);die;
 		$total_product = 0;

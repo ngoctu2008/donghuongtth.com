@@ -10,11 +10,7 @@
 	$_SESSION['payment'] = true;
 	if (!defined('NV_IS_MOD_RETAILSHOPS'))
 	die('Stop!!!');
-	if (!defined('NV_IS_USER')) {
-		echo '<script language="javascript">';
-		echo 'window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true).'"';
-		echo '</script>';
-		}else{
+	if (defined('NV_IS_USER')){
 		$check_seller=$db->query('SELECT count(*) FROM '.TABLE.'_seller_management where userid='.$user_info['userid'])->fetchColumn();
 		if($check_seller>0){
 			echo '<script language="javascript">';
@@ -46,6 +42,9 @@
 		$db->query('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_address SET status = 1 WHERE id = ' . $id);
 		$json[] = ['status'=>'OK', 'text'=>'Đặt địa chỉ mặc định thành công'];
 		print_r(json_encode($json[0]));die(); 
+	}
+	if (!defined('NV_IS_USER')) {
+		$user_info['userid'] = 0;
 	}
 	$info_order_old=$db->query('SELECT * FROM ' . TABLE . '_order where userid=' . $user_info['userid'] . ' and status>=3 order by id DESC limit 1')->fetch(); 
 	$status_check=0;
@@ -82,18 +81,23 @@
 	}
 	$list_address = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_address WHERE userid = ' . $user_info['userid'] )->fetchAll();
 	
-	// kiểm tra user đã có địa chỉ chưa
-	$check_address = $db->query('SELECT COUNT(id) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_address WHERE userid = ' . $user_info['userid'] )->fetchColumn();
-	if(!$check_address){
-		echo '<script language="javascript">';
-		echo 'alert("Bạn chưa thiết lập địa chỉ!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=address&id=0',true).'"';
-		echo '</script>';
+	if($user_info['userid'] > 0 or !isset($_SESSION['address_no_login'])){
+		// kiểm tra user đã có địa chỉ chưa
+		$check_address = $db->query('SELECT COUNT(id) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_address WHERE userid = ' . $user_info['userid'] )->fetchColumn();
+		if(!$check_address){
+			echo '<script language="javascript">';
+			echo 'alert("Bạn chưa thiết lập địa chỉ!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=address&id=0',true).'"';
+			echo '</script>';
+		}
 	}
+
 	$array_payment = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_payment WHERE active = 1 ORDER BY weight ASC' )->fetchAll();
 	
-	//print_r($list_address);
 	$address_df = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_address WHERE userid = ' . $user_info['userid'] . ' AND status = 1' )->fetch();
 	
+	if($_SESSION['address_no_login']){
+		$address_df = $_SESSION['address_no_login'];
+	}
 	
 	$contents = nv_theme_retailshops_order($_SESSION[$module_name . '_cart'], $list_address, $address_df,$array_payment);
 	$page_title = $lang_module['order'];

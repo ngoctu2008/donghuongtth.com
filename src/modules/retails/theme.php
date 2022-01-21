@@ -803,7 +803,18 @@
 		
 		$xtpl->assign( 'OP', $op );
 		$total=0;
-		
+		unset($_SESSION['voucher_shop']);
+		if(!$user_info['userid']){
+			$xtpl->assign('show_address', 'd-none');
+			$address = get_full_address($_SESSION['address_no_login']['ward_id'],$_SESSION['address_no_login']['district_id'],$_SESSION['address_no_login']['province_id']);
+			$full_address = $_SESSION['address_no_login']['address'] . $address;
+			$xtpl->assign( 'FULL_ADDRESS', $full_address);
+			$xtpl->assign( 'FULL_NAME', $_SESSION['address_no_login']['name']);
+			$xtpl->assign( 'FULL_PHONE', $_SESSION['address_no_login']['phone']);
+			$xtpl->assign( 'FULL_EMAIL', $_SESSION['address_no_login']['email']);
+
+			$xtpl->parse('main.address_no_login');
+		}
 		if($list_address){
 			foreach ($list_address as $key => $value) {
 				
