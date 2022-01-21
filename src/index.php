@@ -9,7 +9,7 @@
  */
 
 //phpinfo();
-print_r(ok);die;
+
 if (isset($_GET['response_headers_detect'])) {
     exit(0);
 }
@@ -21,7 +21,7 @@ define('NV_SYSTEM', true);
 define('NV_ROOTDIR', pathinfo(str_replace(DIRECTORY_SEPARATOR, '/', __file__), PATHINFO_DIRNAME));
 
 require NV_ROOTDIR . '/includes/mainfile.php';
-
+print_r(ok);die;
 require NV_ROOTDIR . '/includes/core/user_functions.php';
 
 // Google Sitemap
