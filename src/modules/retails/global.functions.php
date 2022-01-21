@@ -4653,4 +4653,103 @@
 		
 		return true;
 	}
+	function xulythanhtoanthanhcong_recieve($order_text, $inputData)
+	{
+		global $db, $db_config, $user_info, $module_name, $lang_module;
+		
+		$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
+		
+		// cập nhật kho hàng sau khi thanh toán thành công
+		foreach ($list_order as $order)
+		{
+			//update voucher 
+			
+			$update_voucher = $db->query('UPDATE ' . TABLE . '_voucher SET usage_limit_quantity = usage_limit_quantity - 1 WHERE id = ' . $order['voucherid']);
+			
+			$update_order_voucher = $db->query('UPDATE ' . TABLE . '_order_voucher SET status =  1 WHERE order_id = ' . $order['id']);
+			
+			// lấy danh sách sản phẩm của đơn hàng
+			$list_product = $db->query('SELECT product_id, quantity, classify_value_product_id, quantity, price FROM ' . TABLE . '_order_item WHERE order_id =' . $order['id'])->fetchAll();
+			//print_r($list_product);die;
+			foreach ($list_product as $product)
+			{
+				// cập nhật kho sau khi thanh toán thành công
+				
+				$where = '';
+				
+				if($product['classify_value_product_id'])
+				{
+					$where .= ' AND id=' . $product['classify_value_product_id'];
+				}
+				
+				$db->query('UPDATE ' . TABLE . '_product_classify_value_product SET sl_tonkho = sl_tonkho - '. $product['quantity'] .' WHERE product_id =' . $product['product_id'] . $where);
+				
+				$db->query('UPDATE ' . TABLE . '_product SET number_order = number_order + '. $product['quantity'] .' WHERE id = ' . $product['product_id']);
+				
+			}
+			
+			// gửi thông báo email về cho khách hàng, cửa hàng
+			$content_ip = 'Hiện có 1 đơn hàng mới';
+			if (!empty($user_info))
+			{	
+				$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_notification(language,area,module,admin_view_allowed,logic_mode ,send_from,send_to,content,add_time,obid,type) VALUES (' . $db->quote(NV_LANG_DATA) . ',1,' . $db->quote($module_name) . ',0,0,' . $user_info['userid'] . ',' . $order['store_id'] . ',' . $db->quote($content_ip) . ',' . NV_CURRENTTIME . ',' . $order['id'] . ',"order")');
+				$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_notification_shop(language,area,module,admin_view_allowed,logic_mode ,send_from,send_to,content,add_time,obid,type) VALUES (' . $db->quote(NV_LANG_DATA) . ',1,' . $db->quote($module_name) . ',0,0,' . $user_info['userid'] . ',' . $order['store_id'] . ',' . $db->quote($content_ip) . ',' . NV_CURRENTTIME . ',' . $order['id'] . ',"order")');
+			}
+			else
+			{	
+				$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_notification(language,area,module,admin_view_allowed,logic_mode ,send_from,send_to,content,add_time,obid,type) VALUES (' . $db->quote(NV_LANG_DATA) . ',1,' . $db->quote($module_name) . ',0,0,0,' . $order['store_id'] . ',' . $db->quote($content_ip) . ',' . NV_CURRENTTIME . ',' . $order['id'] . ',"order")');
+				$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_notification_shop(language,area,module,admin_view_allowed,logic_mode ,send_from,send_to,content,add_time,obid,type) VALUES (' . $db->quote(NV_LANG_DATA) . ',1,' . $db->quote($module_name) . ',0,0,0,' . $order['store_id'] . ',' . $db->quote($content_ip) . ',' . NV_CURRENTTIME . ',' . $order['id'] . ',"order")');
+			}
+			
+			$content = 'Đơn hàng mới đã xác nhận';
+			if (!empty($user_info))
+			{
+				
+				$db->query('INSERT INTO ' . TABLE . '_logs_order(order_id,status_id_old,content,time_add,user_add) VALUES(' . $order['id'] . ',1,' . $db->quote($content) . ',' . NV_CURRENTTIME . ',' . $user_info['userid'] . ')');
+			}
+			else
+			{	
+				$db->query('INSERT INTO ' . TABLE . '_logs_order(order_id,status_id_old,content,time_add,user_add) VALUES(' . $order['id'] . ',1,' . $db->quote($content) . ',' . NV_CURRENTTIME . ',1)');
+			}
+			
+			
+			if($order['transporters_id'])
+			{
+				$order['name_transporters'] = $db->query('SELECT name_transporters FROM ' . TABLE . '_transporters WHERE id =' . $order['transporters_id'])->fetchColumn();
+			}
+			else
+			{
+				$order['name_transporters'] = $lang_module['tranposter_tugiao'];
+			}
+			
+			
+			// Gui mail thong bao den khach hang
+			$data_order['id'] = $order['id'];
+			$info_order = $order;
+			$data_order['order_code'] = $order['order_code'];
+			
+			$email_title = $lang_module['order_email_title'];
+			$email_contents = call_user_func('email_new_order_payment_khach', $data_order, $list_product, $info_order);
+			
+			
+			
+			nv_sendmail(array(
+            $global_config['site_name'],
+            $global_config['site_email']
+			) , $order['email'], sprintf($email_title, $data_order['order_code']) , $email_contents);
+			
+			
+			// Gui mail thong bao den nhà bán hàng
+			$email_contents = call_user_func('email_new_order_payment', $data_order, $list_product, $info_order);
+			$email_title = $lang_module['order_email_title'];
+			
+			nv_sendmail(array(
+            $global_config['site_name'],
+            $global_config['site_email']
+			) , get_info_store($order['store_id'])['email'], sprintf($email_title, $data_order['order_code']) , $email_contents);
+			
+		}
+		
+		return true;
+	}
 	

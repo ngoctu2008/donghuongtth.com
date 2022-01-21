@@ -183,7 +183,7 @@ if ($thanhtoan)
 		$order_code = $inputData['vnp_TxnRef'];
 	}elseif($payment_method == 'recieve'){
 		$order_code = $inputData['order_code'];
-	}	print_r($order_code);
+	}	
 	$array_order = array();
 	if(!empty($order_code))
 	{
@@ -214,11 +214,13 @@ if ($thanhtoan)
 		$inputData['format_vnp_Amount'] = number_format($inputData['vnp_Amount']/100,0,",",",");
 		$xtpl->assign('thanhtoan', $inputData);
 	}elseif($payment_method == 'recieve'){
+		
+		
 		$inputData['vnp_txnref'] = implode(' - ',$array_order);
 		
 		$inputData['date_create'] = date("d/m/Y H:i",$info_order['time_add']);//$ngay . '/' . $thang . '/' . $nam . ' - ' . $gio . ':' . $phut;
 		
-		$inputData['format_Amount'] = number_format($info_order['total']/100,0,",",",");
+		$inputData['format_Amount'] = number_format($info_order['total'],0,",",",");
 		$xtpl->assign('thanhtoan', $inputData);
 	}	
 	
