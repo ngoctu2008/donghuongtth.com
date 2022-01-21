@@ -780,7 +780,7 @@
 		$xtpl->parse('main');
 		return $xtpl->text( 'main' );
 	}
-	function nv_theme_retailshops_order($array_data, $list_address , $address_df){
+	function nv_theme_retailshops_order($array_data, $list_address , $address_df,$array_payment){
 		global $module_info, $lang_module, $lang_global, $op, $module_upload, $module_name,$db,$db_config, $user_info, $global_location;
 		
 		$xtpl = new XTemplate( $op . '.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme'] );
@@ -803,7 +803,18 @@
 		
 		$xtpl->assign( 'OP', $op );
 		$total=0;
-		
+		unset($_SESSION['voucher_shop']);
+		if(!$user_info['userid']){
+			$xtpl->assign('show_address', 'd-none');
+			$address = get_full_address($_SESSION['address_no_login']['ward_id'],$_SESSION['address_no_login']['district_id'],$_SESSION['address_no_login']['province_id']);
+			$full_address = $_SESSION['address_no_login']['address'] . $address;
+			$xtpl->assign( 'FULL_ADDRESS', $full_address);
+			$xtpl->assign( 'FULL_NAME', $_SESSION['address_no_login']['name']);
+			$xtpl->assign( 'FULL_PHONE', $_SESSION['address_no_login']['phone']);
+			$xtpl->assign( 'FULL_EMAIL', $_SESSION['address_no_login']['email']);
+
+			$xtpl->parse('main.address_no_login');
+		}
 		if($list_address){
 			foreach ($list_address as $key => $value) {
 				
@@ -1163,7 +1174,10 @@
 				$xtpl->parse( 'main.storejsorder' );
 			}
 		}//SHOP
-		
+		foreach($array_payment as $payment){
+			$xtpl->assign( 'PAYMENT', $payment );
+			$xtpl->parse( 'main.payment' );
+		}
 		$xtpl->assign( 'total', $total );
 		$xtpl->assign( 'total_format', number_format($total));
 		$xtpl->parse( 'main' );

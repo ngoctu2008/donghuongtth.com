@@ -117,7 +117,7 @@ class Database extends PDO
                 return $this->lastInsertId();
             }
         } catch (PDOException $e) {
-            trigger_error($e->getMessage());
+            //die($e->getMessage());
         }
         return false;
     }

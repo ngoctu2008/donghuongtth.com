@@ -111,7 +111,24 @@
 		</div>
 		<!-- END: address_list1 -->
 		<div class="payment_addressChange_save mt-3">
-			<a href="{LINK_ADDRESS}" class="btn_ecng botton_add_address">+ Thêm địa chỉ mới</a>
+			<a href="{LINK_ADDRESS}" class="btn_ecng botton_add_address {show_address}">+ Thêm địa chỉ mới</a>
+			<!--  Thêm địa chỉ mua hàng không cần đăng nhập -->
+
+			<!-- BEGIN: address_no_login -->
+
+				<div class="row mt-4">
+					<div class="col-11">
+						<p class="fs_16 d-flex justify-content-between">
+							<span class="text-break">{FULL_NAME}</span>
+							<span class="text-break">{FULL_ADDRESS}</span>
+							<span class="ml-2 mr-3">{FULL_PHONE}</span>
+							<span class="text-break">{FULL_EMAIL}</span>
+						</p>
+					</div>
+					<a href="{LINK_ADDRESS}" class="col-1 text-center secondary_text">Thay đổi</a>
+				</div>
+
+			<!-- END: address_no_login -->
 		</div>   
 	</div>
 	
@@ -595,13 +612,17 @@
 		<!-- END: warehouse -->
 	</div>
 	<!-- END: store -->
-	
+	<input type="hidden" checked name="payment_method" id="payment_method" value="vnpay">
 	<div class="payment_methods bg_white my-2 p-4">
 		<div class="fs_18"><span class="secondary_text">Phương thưc thanh toán</span>
-			<input type="hidden" checked name="payment_method" value="2">
-			<button class="btn_ecng_outline ml-4"><i class="fa fa-id-card-o" aria-hidden="true"></i> VNPAY</button>
+			
+			<button class="btn_ecng_outline ml-4" ><i class="fa fa-id-card-o" aria-hidden="true"></i> VNPAY</button>
+			<!-- BEGIN: payment -->
+			<button class="btn_ecng_outline ml-4" onclick="change_payment_method('{PAYMENT.payment}')"><i class="fa fa-id-card-o" aria-hidden="true"></i> {PAYMENT.paymentname}</button>
+			<!-- END: payment -->
 		</div>
 	</div>
+	
 	<div class="payment_total bg_white my-2">
 		<div class="row border-bottom">
 			<div class="col-6">
@@ -954,15 +975,17 @@
 		var province_name = $('input[name=province_id]').val();
 		var district_name = $('input[name=district_id]').val();
 		var ward_name = $('input[name=ward_id]').val();
-		var payment_method = document.getElementsByName('payment_method');
-		var total_merchandise = document.getElementById('total_merchandise').value;
-		var total_full = Number(total_merchandise) + Number(tongphivanchuyen);
-		for (var i = 0, length = payment_method.length; i < length; i++) {
-			if (payment_method[i].checked) {
-				payment_method = payment_method[i].value;
-				break;
-			}
-		};
+		var payment_method = $('#payment_method').val();
+		// var payment_method = document.getElementsByName('payment_method');
+		//var total_merchandise = document.getElementById('total_merchandise').value;
+		//var total_full = Number(total_merchandise) + Number(tongphivanchuyen);
+		//for (var i = 0, length = payment_method.length; i < length; i++) {
+			//if (payment_method[i].checked) {
+				//payment_method = payment_method[i].value;
+				//break;
+			//}
+		//};
+		
 		
 		if(order_name==''){
 			alert('Vui lòng nhập họ và tên')
@@ -1032,6 +1055,7 @@
 						ward_id : ward_name,
 						district_id : district_name,
 						list_transporters : list_transporters, 
+						payment_method : payment_method, 
 						lat : lat, 
 						lng : lng
 					},
@@ -1050,6 +1074,8 @@
 								$("#button-payment-method").removeClass("no_action");
 								alert(res.mess);
 								}else if(res.status=='OK_VNPAY'){
+								location.href = res.link
+								}else if(res.status=='OK_RECIEVE'){
 								location.href = res.link
 								}else if(res.status=='error_password_money'){
 								$("#button-payment-method").attr("disabled", false);
@@ -1098,7 +1124,9 @@
 		}else{
 		$(".row_voucher").hide();
 	};
-	
+	function change_payment_method(payment_method){
+		$('#payment_method').val(payment_method);
+	};
 </script>
 
 
