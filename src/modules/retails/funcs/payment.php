@@ -4,7 +4,7 @@
 	sleep(2);
 	
 	$payment_method = $nv_Request->get_string( 'payment_method', 'get,post', '' );
-	if($payment_method = 'vnpay'){
+	if($payment_method == 'vnpay'){
 
 		
 		$_SESSION[$module_name . '_vnpay'] = true;
@@ -22,7 +22,7 @@
 		$xtpl->assign('OP', $op);
 		
 		$thanhtoan = false;
-	if($payment_method = 'vnpay'){
+	if($payment_method == 'vnpay'){
 		$xtpl->assign('HISTORY', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=ordercustomer',true));
 		
 		$xtpl->assign('RE_PAYMENT', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=re-payment',true));
@@ -156,7 +156,7 @@
 			}
 
 			// ket thuc xu ly chuan
-	}elseif($payment_method = 'recieve'){
+	}elseif($payment_method == 'recieve'){
 		$thanhtoan = true;
 		$inputData = array();
 		$inputData['order_code'] = $nv_Request->get_title('order_code', 'get', '', 1);
@@ -179,9 +179,9 @@ if ($thanhtoan)
 {
 	// thông tin đơn hàng
 	// lấy thông tin order code
-	if($payment_method = 'vnpay'){
+	if($payment_method == 'vnpay'){
 		$order_code = $inputData['vnp_TxnRef'];
-	}elseif($payment_method = 'recieve'){
+	}elseif($payment_method == 'recieve'){
 		$order_code = $inputData['order_code'];
 	}	
 	$array_order = array();
@@ -200,7 +200,7 @@ if ($thanhtoan)
 		
 		$xtpl->assign('info_order', $info_order);
 	}
-	if($payment_method = 'vnpay'){
+	if($payment_method == 'vnpay'){
 		$inputData['vnp_txnref'] = implode(' - ',$array_order);
 		
 		$nam = substr( $inputData['vnp_PayDate'],  0, 4);
@@ -213,7 +213,7 @@ if ($thanhtoan)
 		
 		$inputData['format_vnp_Amount'] = number_format($inputData['vnp_Amount']/100,0,",",",");
 		$xtpl->assign('thanhtoan', $inputData);
-	}elseif($payment_method = 'recieve'){
+	}elseif($payment_method == 'recieve'){
 		$xtpl->assign('thanhtoan', $inputData);
 	}	
 	
