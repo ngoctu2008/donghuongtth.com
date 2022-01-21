@@ -212,7 +212,7 @@ function add_order($list_transporters,$info_customer){
 		if($value_transporters['transporters_id'] == 4 || $value_transporters['transporters_id'] == 5){
 			$value_transporters['transporters_id'] = 0;
 		}
-		//print_r($value_transporters['transporters_id']);die;
+		print_r($value_transporters['transporters_id']);
 		$check = $db->query( 'SELECT max(id) FROM '. TABLE .'_order' )->fetchColumn();
 		if ( $check == 0 ) {
 			$order_code = $config_setting['raw_order_prefix'].'00001';

@@ -2796,7 +2796,7 @@ if ( $mod == 'add_order' ) {
 		);
 		// add order
 		$data = add_order($list_transporters,$info_customer);
-		print_r($data);
+		//print_r($data);
 
 		// thanh toán vnpay
 		if($payment_method == 'vnpay'){
@@ -2828,7 +2828,7 @@ if ( $mod == 'add_order' ) {
 			$list_order_code = $data['list_order_code'];
 			$contents1 = array(
 				'status' => 'OK_RECIEVE',
-				'link' => $order
+				'link' => 'https://chonhagiau.com/retails/payment/'
 				);
 				print_r( json_encode($contents1));die;
 		}
