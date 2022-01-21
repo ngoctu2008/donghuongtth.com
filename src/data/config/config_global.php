@@ -75,7 +75,7 @@ $global_config['login_time_tracking']=5;
 $global_config['max_requests_300']=2000;
 $global_config['max_requests_60']=500;
 
-$global_config['my_domains']='localhost,chonhagiau.com,www.chonhagiau.com,chonhagiau.com.vn,www.chonhagiau.com.vn,chonhagiau.vn,www.chonhagiau.vn, dev.cng';
+$global_config['my_domains']='localhost,chonhagiau.com,www.chonhagiau.com,chonhagiau.com.vn,www.chonhagiau.com.vn,chonhagiau.vn,www.chonhagiau.vn, dev.cng, dev.chonhagiau.com';
 
 $global_config['notification_active']=1;
 $global_config['notification_autodel']=50;
