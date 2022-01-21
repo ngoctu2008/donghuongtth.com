@@ -111,7 +111,24 @@
 		</div>
 		<!-- END: address_list1 -->
 		<div class="payment_addressChange_save mt-3">
-			<a href="{LINK_ADDRESS}" class="btn_ecng botton_add_address">+ Thêm địa chỉ mới</a>
+			<a href="{LINK_ADDRESS}" class="btn_ecng botton_add_address {show_address}">+ Thêm địa chỉ mới</a>
+			<!--  Thêm địa chỉ mua hàng không cần đăng nhập -->
+
+			<!-- BEGIN: address_no_login -->
+
+				<div class="row mt-4">
+					<div class="col-11">
+						<p class="fs_16 d-flex justify-content-between">
+							<span class="text-break">{FULL_NAME}</span>
+							<span class="text-break">{FULL_ADDRESS}</span>
+							<span class="ml-2 mr-3">{FULL_PHONE}</span>
+							<span class="text-break">{FULL_EMAIL}</span>
+						</p>
+					</div>
+					<a href="{LINK_ADDRESS}" class="col-1 text-center secondary_text">Thay đổi</a>
+				</div>
+
+			<!-- END: address_no_login -->
 		</div>   
 	</div>
 	
@@ -175,7 +192,7 @@
 			<p>
 				Email <sup>(*)</sup>
 			</p>
-			<input id="b_email" type="email" name="order_email1" onchange="check_email_error(this)" value="{USER_INFO.email}" class="form-control">
+			<input id="b_email" type="email" name="order_email1" onchange="check_email_error(this)" value="{ADDRESS_DF.email}" class="form-control">
 		</span>
 		<span>
 			<p>
