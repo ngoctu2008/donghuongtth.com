@@ -27,7 +27,7 @@
 	
 	// lấy tất cả địa chỉ
 	$global_location = json_decode($redis->get('location_all'),true);	
-	//print_r($global_location);die;
+	
 	// lấy tất cả tỉnh thành
 	$global_province = json_decode($redis->get('location_province'),true);	
 	
