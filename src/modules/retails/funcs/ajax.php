@@ -2813,7 +2813,7 @@ if ( $mod == 'add_order' ) {
 				);
 				print_r( json_encode($contents1));die;
 		}elseif($payment_method == 'momo'){
-			require_once(NV_ROOTDIR.'modules/retails/payment/momo.checkorders.php');
+			require_once(NV_ROOTDIR.'/modules/retails/payment/momo.checkorders.php');
 			$list_order = $data['list_order'];
 			$list_order_code = $data['list_order_code'];
 			
