@@ -285,7 +285,7 @@ background: #fff !important; }
 background-color: #EFEFEF; }
 
 .primary_text {
-color: #000; }
+color: #444444; }
 .primary_text:hover {
 color: #000; }
 
@@ -302,7 +302,6 @@ color: #fff; }
 
 .text_black {
 color: #000; }
-
 .text_red {
 color: #FF0000; }
 
