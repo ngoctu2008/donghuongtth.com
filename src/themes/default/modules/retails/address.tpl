@@ -46,7 +46,7 @@
 
 <!-- BEGIN: edit -->
 	<div class="d-flex justify-content-between p-4">
-		<div class=" fs_20">Địa Chỉ Nhận Hàng</div>
+		<div class=" fs_20">Địa Chỉ Nhận Hàng </div>
                    
 	</div>
 
