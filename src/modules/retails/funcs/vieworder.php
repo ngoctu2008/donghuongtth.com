@@ -444,7 +444,6 @@
 	
 	if($info_order['voucherid']){
 		$xtpl->parse( 'main.view.voucher' );
-		
 	}
 	
 	

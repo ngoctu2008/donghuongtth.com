@@ -8,7 +8,6 @@
  * @Createdate Mon, 04 Jan 2021 09:28:10 GMT
  */
 
-		
 if (!defined('NV_IS_MOD_RETAILSHOPS'))
     die('Stop!!!');
 if (!defined('NV_IS_USER')) {
@@ -28,6 +27,7 @@ if ($nv_Request->isset_request('delete_id', 'get') and $nv_Request->isset_reques
         nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op);
     }
 }
+
 
 $q = $nv_Request->get_title( 'q', 'post,get' );
 $sea_flast = $nv_Request->get_int( 'sea_flast', 'post,get' );
