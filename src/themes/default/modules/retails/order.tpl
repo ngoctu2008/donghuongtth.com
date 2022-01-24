@@ -620,7 +620,7 @@
 				<!-- BEGIN: payment -->
 				<div class="d-flex mr-5">
 					<label class="ecng_label_radio m-0" onclick="change_payment_method('{PAYMENT.payment}')">
-						<input value="M" type="radio" name="gender" {checked}>
+						<input value="{PAYMENT.payment}" type="radio" name="gender" {checked}>
 						<span class="checkmark mt-2"></span>
 						<p class="fs_16 pl-2"><img src="{PAYMENT.images_button}" ><span class="d-inline-block" style="padding-top: 0.1rem;padding-left: 0.5rem;">{PAYMENT.paymentname}</span></p>
 					</label>
@@ -677,7 +677,7 @@
 
 <script>
 	function change_payment(){
-		var input_checked =  $(".payment_methods input[type='radio']:checked").attr('name');
+		var input_checked =  $(".payment_methods input[type='radio']:checked").val();
 		$('#payment_method').val(input_checked);
 	};
 	change_payment();
