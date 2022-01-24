@@ -12,117 +12,54 @@ if (! defined('NV_IS_MOD_SHOPS')) {
     die('Stop!!!');
 }
 
-/**
- * null2unknown()
- *
- * @param mixed $data
- * @return
+$env = new Environment("https://test-payment.momo.vn/pay/pos", new PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development');
+$publicKey = "-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkpa+qMXS6O11x7jBGo9W3yxeHEsAdyDE
+40UoXhoQf9K6attSIclTZMEGfq6gmJm2BogVJtPkjvri5/j9mBntA8qKMzzanSQaBEbr8FyByHnf
+226dsLt1RbJSMLjCd3UC1n0Yq8KKvfHhvmvVbGcWfpgfo7iQTVmL0r1eQxzgnSq31EL1yYNMuaZj
+pHmQuT24Hmxl9W9enRtJyVTUhwKhtjOSOsR03sMnsckpFT9pn1/V9BE2Kf3rFGqc6JukXkqK6ZW9
+mtmGLSq3K+JRRq2w8PVmcbcvTr/adW4EL2yc1qk9Ec4HtiDhtSYd6/ov8xLVkKAQjLVt7Ex3/agR
+PfPrNwIDAQAB
+-----END PUBLIC KEY-----";
+$requestId = time() . "";
+$partnerRefId = time() . "";
+
+/** Pay Processes:
+ * App-In-App
+ * POS
+ * QR Code
+ * Payment Confirmation
+ * Transaction Query
+ * Transaction Refund
  */
-function null2unknown($data)
-{
-    return $data == "" ? "No Value Returned" : $data;
-}
 
-$SECURE_SECRET = $payment_config['secure_secret'];
-$vpc_Txn_Secure_Hash = $_GET["vpc_SecureHash"];
-unset($_GET["vpc_SecureHash"]);
+//get new Token from MoMoApp and put in appData
+//uncomment to use AppPay function
+//$appData = '' ;
+//$customerNumber = '0917003000';
+//$pKey = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkpa+qMXS6O11x7jBGo9W3yxeHEsAdyDE40UoXhoQf9K6attSIclTZMEGfq6gmJm2BogVJtPkjvri5/j9mBntA8qKMzzanSQaBEbr8FyByHnf226dsLt1RbJSMLjCd3UC1n0Yq8KKvfHhvmvVbGcWfpgfo7iQTVmL0r1eQxzgnSq31EL1yYNMuaZjpHmQuT24Hmxl9W9enRtJyVTUhwKhtjOSOsR03sMnsckpFT9pn1/V9BE2Kf3rFGqc6JukXkqK6ZW9mtmGLSq3K+JRRq2w8PVmcbcvTr/adW4EL2yc1qk9Ec4HtiDhtSYd6/ov8xLVkKAQjLVt7Ex3/agRPfPrNwIDAQAB';
+//AppPay::process(new Environment("https://test-payment.momo.vn/pay/app", new PartnerInfo("IICsyHpuwP8IzVvE", 'CGV01', 'vLujzooXM8ySdHJOBFuwmWB3T4ZBYLJ'), 'development'), 10000, $appData, $pKey, $customerNumber, $partnerRefId);
 
-if (strlen($SECURE_SECRET) > 0 and $_GET["vpc_TxnResponseCode"] != "7" and $_GET["vpc_TxnResponseCode"] != "No Value Returned") {
-    $stringHashData = "";
+//POSPay::process($env, 'MM587977818202493946', 50000, $publicKey, $partnerRefId, '', '', '');
 
-    foreach ($_GET as $key => $value) {
-        if ($key != "vpc_SecureHash" and (strlen($value) > 0) and ((substr($key, 0, 4) == "vpc_") || (substr($key, 0, 5) == "user_"))) {
-            $stringHashData .= $key . "=" . $value . "&";
-        }
-    }
+$qrRawData = '{
+  "partnerCode": "MOMOIQA420180417",
+  "accessKey": "mTCKt9W3eU1m39TW",
+  "amount": 10000,
+  "partnerRefId": "B001221",
+  "partnerTransId": "",
+  "transType": "momo_wallet",
+  "momoTransId": "43121679",
+  "status": 0,
+  "message": "Thành Công",
+  "responseTime": 1555472829549,
+  "signature": "e33dcd33ea016023a1ca49877241fa35609163e967e86716f9fc974e91a23164",
+  "storeId": "store001"
+}';
+//QRNotify::process($env, $qrRawData);
 
-    $stringHashData = rtrim($stringHashData, "&");
+PaymentConfirmation::process(new Environment("https://test-payment.momo.vn/pay/confirm", new PartnerInfo("IICsyHpuwP8IzVvE", 'CGV01', 'vLujzooXM8ySdHJOBFuwmWB3T4ZBYLJ'), 'development'), 'e671ffb0-af61-11e9-ba3c-4b08721e3699', "capture", "2305581638", $requestId);
 
-    if (strtoupper($vpc_Txn_Secure_Hash) == strtoupper(hash_hmac('SHA256', $stringHashData, pack('H*', $SECURE_SECRET)))) {
-        $hashValidated = "CORRECT";
-    } else {
-        $hashValidated = "INVALID HASH";
-    }
-} else {
-    $hashValidated = "INVALID HASH";
-}
+TransactionQuery::process(new Environment("https://test-payment.momo.vn/pay/query-status", new PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development'), '1562138468', $publicKey, '1562138427');
 
-$amount = null2unknown($_GET["vpc_Amount"]); // So tien thanh toan
-$orderInfo = null2unknown($_GET["vpc_OrderInfo"]); // Ma hoa don (ID dat hang)
-$txnResponseCode = null2unknown($_GET["vpc_TxnResponseCode"]); // Ma tra ve
-$vpc_MerchTxnRef = null2unknown($_GET["vpc_MerchTxnRef"]); // Ma giao dich do OnePage Sinh ra dung de QueryDR sau nay
-$payment_id = ( int )$_GET['vpc_TransactionNo'];
-
-if ($hashValidated == "CORRECT" and $txnResponseCode == "0") {
-    // Giao dich thanh cong
-    $nv_transaction_status = 4;
-} elseif ($hashValidated == "INVALID HASH" and $txnResponseCode == "0") {
-    // Tam giu
-    $nv_transaction_status = 2;
-} else {
-    // Giao dich that bai
-    $nv_transaction_status = 3;
-}
-
-$error_text = "";
-
-// Chi tiet
-$transaction_i = array();
-$transaction_i['nv_transaction_status'] = $nv_transaction_status;
-$transaction_i['amount'] = round(( int )$amount / 100);
-$transaction_i['created_time'] = NV_CURRENTTIME;
-$transaction_i['vpc_MerchTxnRef'] = $vpc_MerchTxnRef;
-
-$payment_amount = intval($transaction_i['amount']);
-$payment_time = $transaction_i['created_time'];
-
-$stmt = $db->prepare("SELECT order_id FROM " . $db_config['prefix'] . "_" . $module_data . "_orders WHERE order_code= :order_code");
-$stmt->bindParam(':order_code', $orderInfo, PDO::PARAM_STR);
-$stmt->execute();
-$order_id = $stmt->fetchColumn();
-
-if ($order_id > 0) {
-    $error_update = false;
-    $payment_data = nv_base64_encode(serialize($transaction_i));
-
-    $db->sqlreset()->select('payment_data')->from($db_config['prefix'] . "_" . $module_data . "_transaction")->where("payment='" . $payment . "' AND payment_id= :payment_id")->order('transaction_id DESC')->limit(1);
-
-    $stmt = $db->prepare($db->sql());
-    $stmt->bindParam(':payment_id', $payment_id, PDO::PARAM_STR);
-    $stmt->execute();
-    $payment_data_old = $stmt->fetchColumn();
-
-    if ($payment_data != $payment_data_old) {
-        $transaction_id = $db->insert_id("INSERT INTO " . $db_config['prefix'] . "_" . $module_data . "_transaction (transaction_id, transaction_time, transaction_status, order_id, userid, payment, payment_id, payment_time, payment_amount, payment_data) VALUES (NULL, UNIX_TIMESTAMP(), '" . $nv_transaction_status . "', '" . $order_id . "', '0', '" . $payment . "', '" . $payment_id . "', '" . $payment_time . "', '" . $payment_amount . "', '" . $payment_data . "')");
-        if ($transaction_id > 0) {
-            $db->query("UPDATE " . $db_config['prefix'] . "_" . $module_data . "_orders SET transaction_status=" . $nv_transaction_status . " , transaction_id = " . $transaction_id . " , transaction_count = transaction_count+1 WHERE order_id=" . $order_id);
-        } else {
-            $error_update = true;
-        }
-        $nv_transaction_status = intval($transaction_i['nv_transaction_status']);
-
-        if ($transaction_id > 0) {
-            $db->query("UPDATE " . $db_config['prefix'] . "_" . $module_data . "_orders SET transaction_status=" . $nv_transaction_status . " , transaction_id = " . $transaction_id . " , transaction_count = transaction_count+1 WHERE order_id=" . $order_id);
-        } else {
-            $error_update = true;
-        }
-    }
-    if (! $error_update) {
-        // Cap nhat diem tich luy
-        $data_content = array();
-        $result = $db->query('SELECT * FROM ' . $db_config['prefix'] . '_' . $module_data . '_orders WHERE order_id=' . $order_id);
-        $data_content = $result->fetch();
-        if (! empty($data_content)) {
-            UpdatePoint($data_content);
-        }
-
-        $nv_redirect = NV_BASE_SITEURL . "index.php?" . NV_LANG_VARIABLE . "=" . NV_LANG_DATA . "&" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=history";
-        $contents = redict_link($lang_module['payment_complete'], $lang_module['back_history'], $nv_redirect);
-    }
-}
-
-if ($error_text != "") {
-    $contents = $error_text;
-} else {
-    $contents = $lang_module['payment_erorr'];
-}
+TransactionRefund::process(new Environment("https://test-payment.momo.vn/pay/refund", new PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development'), $requestId, 10000, $publicKey, '1562138427', '2305016460');
