@@ -24,7 +24,7 @@ class Environment
         $this->momoEndpoint = $momoEndpoint;
         $this->partnerInfo = $partnerInfo;
         $this->target = $target;
-        $this->logger = new MoMoLogger($channelName, $loggingOff, $handlers, $processors);
+        //$this->logger = new MoMoLogger($channelName, $loggingOff, $handlers, $processors);
     }
 
     /**
