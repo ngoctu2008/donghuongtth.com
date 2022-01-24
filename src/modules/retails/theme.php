@@ -780,8 +780,8 @@
 		$xtpl->parse('main');
 		return $xtpl->text( 'main' );
 	}
-	function nv_theme_retailshops_order($array_data,$info_order_old,$list_address,$address_df){
-		global $module_info, $lang_module, $lang_global, $op, $module_upload, $module_name,$db,$db_config, $user_info ;
+	function nv_theme_retailshops_order($array_data, $list_address , $address_df,$array_payment){
+		global $module_info, $lang_module, $lang_global, $op, $module_upload, $module_name,$db,$db_config, $user_info, $global_location;
 		
 		$xtpl = new XTemplate( $op . '.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme'] );
 		$xtpl->assign( 'LANG', $lang_module );
@@ -793,24 +793,34 @@
 		$xtpl->assign( 'NV_OP_VARIABLE', NV_OP_VARIABLE );
 		$xtpl->assign( 'MODULE_NAME', $module_name );
 		$xtpl->assign( 'MODULE_UPLOAD', $module_upload );
-		$xtpl->assign( 'USER_INFO', $user_info );
-		$xtpl->assign( 'TEMPLATE', $module_info['template'] );
-		
+		$xtpl->assign( 'TEMPLATE', $module_info['template']);
+		if($user_info['userid']){
+			$xtpl->assign( 'EMAIL_USER', $user_info['email']);
+		}
+		else{
+			$xtpl->assign( 'EMAIL_USER', $_SESSION['address_no_login']['email']);
+		}
 		$xtpl->assign( 'ADDRESS_DF', $address_df );
 		$xtpl->assign( 'NV_ASSETS_DIR', NV_ASSETS_DIR );
 		$xtpl->assign( 'LINK_ADDRESS', NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=address&id=0');
 		$xtpl->assign( 'CART', NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=cart');
 		
 		$xtpl->assign( 'OP', $op );
-		$total=0;
-		if(!empty($info_order_old)){
-			$info_order_old['province_name']=get_info_province($info_order_old['province_id'])['title'];
-			$info_order_old['district_name']=get_info_district($info_order_old['district_id'])['title'];
-			$info_order_old['ward_name']=get_info_ward($info_order_old['ward_id'])['title'];
-			$xtpl->assign( 'info_order_old', $info_order_old );
-			$xtpl->parse( 'main.addressjs_old' );
-		}
+		$total = 0;
+
+		unset($_SESSION['voucher_shop']);
+		if(!$user_info['userid']){
 		
+			$xtpl->assign('show_address', 'd-none');
+			$address = get_full_address($_SESSION['address_no_login']['ward_id'],$_SESSION['address_no_login']['district_id'],$_SESSION['address_no_login']['province_id']);
+			$full_address = $_SESSION['address_no_login']['address'] . $address;
+			$xtpl->assign( 'FULL_ADDRESS', $full_address);
+			$xtpl->assign( 'FULL_NAME', $_SESSION['address_no_login']['name']);
+			$xtpl->assign( 'FULL_PHONE', $_SESSION['address_no_login']['phone']);
+			$xtpl->assign( 'FULL_EMAIL', $_SESSION['address_no_login']['email']);
+
+			$xtpl->parse('main.address_no_login');
+		}
 		if($list_address){
 			foreach ($list_address as $key => $value) {
 				
@@ -838,7 +848,7 @@
 					}
 					$xtpl->assign('diachi', $value['address'] . ' , ' . $value['ward_id'] . ' , '. $value['district_id'] . ' , '.$value['province_id'] );
 					$xtpl->parse( 'main.address_list' );
-					$xtpl->parse( 'main.address_list2' );
+					
 				}
 				$xtpl->assign('diachi', $value['address'] . ' , ' . $value['ward_id'] . ' , '. $value['district_id'] . ' , '.$value['province_id'] );
 				
@@ -850,53 +860,97 @@
 			$xtpl->assign( 'address_other', 'hidden' );
 		}
 		
+		$_SESSION['voucher_shop'] = array();
 		
 		foreach($array_data as $key_store => $store){
+			$voucher_all = array();
 			$list_tranposter = get_full_transporters( $key_store );
-			$count_store=0;
-			$info_store=get_info_store($key_store);
+			$count_store = 0;
+			$total_price_shop = 0;
+			$info_store = get_info_store($key_store);
 			$xtpl->assign( 'info_store', $info_store );
 			$alias_store = $db->query('SELECT username FROM ' . NV_TABLE_USER . ' WHERE userid = ' . $info_store['userid'])->fetchColumn();
-			
 			$xtpl->assign('ALIAS_STORE', nv_url_rewrite( NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $alias_store  , true ));
-			$checked=0; 
+			$checked = 0; 
 			$xtpl->assign('key_store', $key_store);
-
+			
 			$xtpl->assign('store_userid', $info_store['userid']);
+			
 			foreach ($store as $key_warehouse => $warehouse) {
-				$total_weight=0;
-				$total_length=0;
-				$total_width=0;
-				$total_height=0;
-				$total_warehouse=0;
-				$info_warehouse = $db->query("SELECT * FROM " .$db_config['dbsystem']. '.'.NV_PREFIXLANG. '_' . $module_name . "_warehouse where id=".$key_warehouse)->fetch();
+			
+				$array_voucher_shop = array();
+				$total_weight = 0;
+				$total_length = 0;
+				$total_width = 0;
+				$total_height = 0;
+				$total_warehouse = 0;
+				$info_warehouse = $db->query("SELECT * FROM " . $db_config['dbsystem'] . '.' . NV_PREFIXLANG . '_' . $module_name . "_warehouse where id= " . $key_warehouse)->fetch();
 				$xtpl->assign('info_warehouse', $info_warehouse);
 				$xtpl->assign('key_warehouse', $key_warehouse);
-				$count_product_warehouse=0;
+				$count_product_warehouse = 0;
 				
 				// cờ tự giao
 				$tu_giao = false;
-				foreach($warehouse as $key_product=>$value){
+				$where = '';
+				$number_product = 0;
+				$total_price_one_shop = 0;
+				// lay tong tien hang cua hang
+				
+				$total_price_shop = total_price_shop($warehouse);
+				$arr_product = array();
+				foreach($warehouse as $key_product => $value){
 					
-					if($value['status_check']==1){
-						$count_product_warehouse=1;
-						$xtpl->assign('key_store', $key_store);
-						$xtpl->assign('key_product', $key_product);
-						$list_product = $db->query("SELECT id, store_id, name_product, alias, unit_id, unit_weight, weight_product, length_product, width_product, height_product, free_ship, self_transport, unit_length, unit_height, unit_width, image, status, price, price_special  FROM " .$db_config['dbsystem']. '.'.NV_PREFIXLANG. '_' . $module_name . "_product where id=".$value['product_id'])->fetch();
-						
-						if($list_product['self_transport'])
-						{
-							$tu_giao = true;
+					$self_transport_price = 0;
+					$self_transport_price_max = 0;
+					if($value['status_check']){
+						//voucher
+						if($user_info['userid']){
+							// lay gia voucher san pham nếu 2 sp cùng 1 voucher thì distinct
+						$array_voucher_shop = voucher_price_optimal($value['product_id'], $total_price_shop, $key_store, $array_voucher_shop);
 						}
 						
-						//print_r($list_product);die;
-						$list_product['alias'] = nv_url_rewrite( NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $list_product['alias'].'-'.$value['product_id'], true );
+						//lấy giá giảm nhiều nhất
+						$max_price_voucher = max(array_column($array_voucher_shop, 'price', 'voucherid'));
+						//vocherid từ $max_price_voucher
+						$voucherid_optimal = array_keys(array_combine(array_keys($array_voucher_shop), array_column($array_voucher_shop, 'price')), $max_price_voucher);
+						
+						$count_product_warehouse = 1;
+						$xtpl->assign('key_store', $key_store);
+						$xtpl->assign('key_product', $key_product);
+						
+						$list_product['alias'] = $value['alias'];
+						$list_product['image'] = $value['image'];
+						$list_product['self_transport'] = $value['self_transport'];
+						$list_product['free_ship'] = $value['free_ship'];
+						$list_product['name_product'] = $value['name_product'];
+						
+						//shop tự giao
+						if($list_product['self_transport'])
+						{
+							//lấy danh các tỉnh shop tự giao
+							$get_province_self_transport = $db->query('SELECT json_self_transport FROM ' . TABLE . '_product_detail WHERE product_id = ' . $value['product_id'])->fetchColumn();
+							
+							$arr = json_decode($get_province_self_transport,true);
+							//lấy id khu vực có tỉnh giao
+							$get_id_area = $db->query('SELECT id_area FROM '. $db_config['prefix'] .'_location_area_province WHERE FIND_IN_SET('. $address_df['province_id'] .', districtid)')->fetchColumn();
+							
+							foreach($arr as $row)
+							{
+								if(($get_id_area == $row['area']) and (in_array($address_df['province_id'], $row['province']) or in_array(0, $row['province'])))
+								{
+									$tu_giao = true;
+									$self_transport_price = $row['price_ship'];
+								}
+							}
+						}
+						
+						$list_product['alias'] = nv_url_rewrite( NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $list_product['alias'].'-'. $value['product_id'], true );
 						
 						if (!empty($list_product['image'] ) and is_file(NV_UPLOADS_REAL_DIR . '/' . $module_upload . '/' . $list_product['image'] )) {
 							$list_product['image']  = NV_BASE_SITEURL . NV_FILES_DIR . '/' . $module_upload. '/' . $list_product['image'] ;
 							}else{
 							$server = 'banhang.'.$_SERVER["SERVER_NAME"];
-							$list_product['image']  ='https://'. $server .NV_BASE_SITEURL . NV_FILES_DIR . '/' . $module_upload. '/' . $list_product['image'] ;
+							$list_product['image']  ='https://' . $server . NV_BASE_SITEURL . NV_FILES_DIR . '/' . $module_upload. '/' . $list_product['image'] ;
 						}
 						if($value['classify_value_product_id']>0){
 							$classify_value_product_id=get_info_classify_value_product($value['classify_value_product_id']);
@@ -911,27 +965,50 @@
 							}
 							$list_product['name_group'] = '('.$name_group.')';
 						}
+						
+						
 						$list_product['quantity'] = $value['num'];
 						if($value['status_check']==1){
-							$total=$total+$value['price']*$value['num'];
-							$total_warehouse=$total_warehouse+$value['price']*$value['num'];
+							$total = $total + $value['price'] * $value['num'];
+							$total_warehouse = $total_warehouse + $value['price'] * $value['num'];
 						}
+						
 						$list_product['price_format'] =  number_format($value['price']);
 						$list_product['price'] =  $value['price'];
-						//áp dụng freeship khi gửi check vc
-						if(!$list_product['free_ship']){
-							$total_weight=$total_weight+$value['weight_product']*get_info_unit_weight($value['weight_unit'])['exchange']*$value['num'];
+						//tỉnh thành có hỗ trợ free ship
+						if($list_product['free_ship'])
+						{	
+							//lấy danh các tỉnh có hỗ trợ free ship
+							$get_province_free_ship = $db->query('SELECT json_free_ship FROM ' . TABLE . '_product_detail WHERE product_id = ' . $value['product_id'])->fetchColumn();
+							
+							$arr_free_ship = json_decode($get_province_free_ship,true);
+							//lấy id khu vực có tỉnh giao
+							$get_id_area = $db->query('SELECT id_area FROM '. $db_config['prefix'] . '_location_area_province WHERE FIND_IN_SET('. $address_df['province_id'] .', districtid)')->fetchColumn();
+							
+							foreach($arr_free_ship as $row)
+							{	
+								if(($get_id_area == $row['area']) and (in_array($address_df['province_id'], $row['province']) or in_array(0, $row['province'])))
+								{
+									$list_product['free_ship'] = true;
+									}else{
+									$list_product['free_ship'] = false;
+								}
+							}
 						}
 						
 						if(!$list_product['free_ship']){
-							$total_length_current = $value['length_product']*get_info_unit_length($value['unit_length'])['exchange'];
+							$total_weight = $total_weight + $value['weight_product'] * $value['num'];
+						}
+						
+						if(!$list_product['free_ship']){
+							$total_length_current = $value['length_product'];
 							if($total_length_current > $total_length){
 								$total_length = $total_length_current;
 							}
 						}
 						
 						if(!$list_product['free_ship']){
-							$total_width_current = $value['width_product']*get_info_unit_length($value['unit_width'])['exchange'];
+							$total_width_current = $value['width_product'];
 							
 							if($total_width_current > $total_width){
 								$total_width = $total_width_current;
@@ -939,22 +1016,105 @@
 						}
 						
 						if(!$list_product['free_ship']){
-							$total_height=$total_height+$value['height_product']*get_info_unit_length($value['unit_height'])['exchange']*$value['num'];
+							$total_height = $total_height + $value['height_product'] * $value['num'];
 						}
 						
-						
-						$list_product['total_input'] =  $value['price']*$value['num'];
-						$list_product['total'] = number_format($value['price']*$value['num']);
+						$list_product['total_input'] =  $value['price'] * $value['num'];
+						$list_product['total'] = number_format($value['price'] * $value['num']);
 						
 						$total_price_one_shop = $total_price_one_shop + $list_product['total_input'];
 						$xtpl->assign('LOOP_INFO_PRODUCT', $list_product);
 						$xtpl->parse('main.store.warehouse.loop');
-					}
-				}
+						//lấy phí ship cao nhất
+						if($self_transport_price > $self_transport_price_max){
+							$self_transport_price_max = $self_transport_price;
+							//lưu SESSION phí ship shop tự giao 
+							$_SESSION['self_transport_price_shop'][$key_store] = $self_transport_price_max;
+						}else{
+							$_SESSION['self_transport_price_shop'][$key_store] = $self_transport_price;
+						}
+						
+					}//product check
+				}//product
+				
 				
 				//lấy tổng giá của 1 cửa hàng
 				$xtpl->assign('total_price_one_shop', $total_price_one_shop);
-				if($count_product_warehouse==1){
+				
+				if($max_price_voucher){
+					$xtpl->assign('max_price_voucher','-'. number_format( $max_price_voucher ) . 'đ');
+					$xtpl->assign('max_price_voucher_value', $max_price_voucher);
+					//voucherid
+					$xtpl->assign('voucherid_optimal', $voucherid_optimal[0]);
+					$xtpl->assign('border', 'border');
+				}
+				else
+				{
+					$xtpl->assign('max_price_voucher','');
+					$xtpl->assign('max_price_voucher_value', 0);
+					//voucherid
+					$xtpl->assign('voucherid_optimal', 0);
+					$xtpl->assign('border', '');
+				}
+				
+				if($array_voucher_shop)
+				{
+					
+					//danh sach voucher shop
+					//sắp xếp giá tối ưu giảm dần
+					array_multisort(array_column($array_voucher_shop, 'price'), SORT_DESC, $array_voucher_shop);
+					$number_voucher = 0;
+					foreach($array_voucher_shop as $voucher){
+						
+						if(!$number_voucher){
+							$voucher['status'] = 1;
+							// lưu thông tin voucher vào session
+							if($voucher['voucherid'])
+							{
+								$_SESSION['voucher_shop'][$key_store] = $voucher;
+							}
+							
+							}else{
+							$voucher['status'] = 0;	
+						}
+						if($voucher['list_product'] == 0){
+							
+							$voucher['list_product'] = 'Voucher áp dụng cho tất cả sản phẩm của Shop';
+						}
+						else{
+							$voucher['list_product'] = 'Voucher áp dụng cho một số sản phẩm';
+						}
+						if($voucher['type_discount']){
+							$voucher['discount_price'] = $voucher['discount_price'] . '%';
+						}
+						else
+						{
+							$voucher['discount_price'] = number_format( $voucher['discount_price'] ).'đ'; 
+						}
+						
+						if($voucher['product_id'])
+						{
+							foreach($voucher['product_id'] as $product_id)
+							{
+								$xtpl->assign( 'product_id_voucher', $product_id);
+								$xtpl->parse( 'main.store.warehouse.voucher_shop_js.product_id' );
+							}
+						}
+						
+						$voucher['time_to'] = date("d-m-Y", $voucher['time_to']);
+						$xtpl->assign( 'VOUCHER', $voucher);
+						
+						$xtpl->parse( 'main.store.warehouse.voucher_shop_js' );
+						$number_voucher++;
+					}
+					//voucher giá tối ưu 
+				}
+				else
+				{
+					$xtpl->parse( 'main.store.warehouse.voucher_shop_not' );
+				}
+				
+				if($count_product_warehouse == 1){
 					
 					$xtpl->assign('total_weight', $total_weight);
 					$xtpl->assign('total_width', $total_width);
@@ -967,19 +1127,14 @@
 					$list_tranposter_new=[];
 					
 					foreach ( $list_tranposter as $key => $value ) {
-						//print_r($value);die;
 						if($value['max_weight'] >= $total_weight && $value['max_length'] >= $total_length && $value['max_width'] >= $total_width && $value['max_height'] >= $total_height){
 							$list_tranposter_new[] = $value;
 						}
 					}
-					
-					//print_r($list_tranposter_new);
-					
 					$transporter_first = true;
-					
 					if(count($list_tranposter_new)>0){
 						foreach($list_tranposter_new as $key=>$value){
-							//print_r($value['id']);die;
+							
 							$xtpl->assign( 'CARRIER', $value );
 							
 							if($transporter_first)
@@ -988,6 +1143,9 @@
 									$value['id'] = 0;
 								}
 								$xtpl->assign( 'transporter_first', $value['id']);
+								$xtpl->assign( 'self_transport_price_max_value', $self_transport_price_max);
+								$xtpl->assign( 'self_transport_price_max', number_format($self_transport_price_max));
+								
 							}
 							
 							$transporter_first = false;
@@ -996,7 +1154,6 @@
 							{
 								$xtpl->parse( 'main.store.warehouse.transporters_loop_js' );
 							}
-							
 						}
 						$xtpl->parse( 'main.store.warehouse.transporters' );
 						
@@ -1014,21 +1171,26 @@
 					$xtpl->parse( 'main.storejsorder.warehousejs' );
 				}
 				
-			}
+			}//KHO
+			
+			$voucher_all[$key_store] = $array_voucher_shop;
 			if($count_store==1){
 				// xử lý shop tự giao
-				
 				$xtpl->parse( 'main.store' );
 				$xtpl->parse( 'main.storejs' );
 				$xtpl->parse( 'main.storejsorder' );
-				
 			}
+		}//SHOP
+		foreach($array_payment as $payment){
+			$xtpl->assign( 'PAYMENT', $payment );
+			$xtpl->parse( 'main.payment' );
 		}
 		$xtpl->assign( 'total', $total );
 		$xtpl->assign( 'total_format', number_format($total));
 		$xtpl->parse( 'main' );
 		return $xtpl->text( 'main' );
 	}
+	
 	function nv_theme_retailshops_cart($array_data){
 		global $module_info, $lang_module, $lang_global, $op, $module_upload, $module_name,$db,$db_config ;
 		

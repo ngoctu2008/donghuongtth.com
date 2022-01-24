@@ -508,3 +508,51 @@ ul.nav.nav-pills li a{
 #voucher_shop .owl-nav .owl-next{
 	font-size:35px;
 }
+.coupons_voucher_wallet{
+	height:160px;
+}
+.coupons_voucher_wallet .coupons_left{
+	width: 7.375rem;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient( 
+	90deg,transparent 0,transparent 0.1875rem,#efefef  0);
+}
+.coupons_voucher_wallet .coupons_left:after{
+	content:'';
+	display:block;
+	width:20px;
+	height:20px;
+	border-radius:50%;
+	background:#fff;
+	position:absolute;
+	top:-10px;
+	right:-20px;
+}
+.coupons_voucher_wallet .coupons_left:before{
+	content:'';
+	display:block;
+	width:20px;
+	height:20px;
+	background:#fff;;
+	border-radius:50%;
+	position:absolute;
+	bottom:-10px;
+	right:-20px;
+}
+.coupons_voucher_wallet .coupons_left .coupons_left-border{
+	position: absolute;
+    top: 0;
+    left: -5px;
+    width: 5px;
+    height: 100%;
+    background: radial-gradient(circle at 0,at .25rem,transparent 0,transparent .1875rem,#efefef  0);
+    background: radial-gradient(circle at 0 0.25rem,transparent 0,transparent 0.188rem,#efefef  0);
+	background-repeat: repeat;
+	background-size: auto;
+    background-size: 3.25rem 0.63rem;
+    background-repeat: repeat-y;
+}

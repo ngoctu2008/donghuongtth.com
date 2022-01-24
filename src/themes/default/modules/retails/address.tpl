@@ -5,7 +5,7 @@
 				
 <!-- BEGIN: view -->
 	<div class="d-flex justify-content-between p-4">
-		<div class=" fs_20">Thông Tin Địa Chỉ</div>
+		<div class=" fs_20">Địa Chỉ Nhận Hàng</div>
 	   <a href="{address}" class="btn_ecng_outline" onclick="newDoc()">+ Thêm địa chỉ</a>
 	</div>
 	 <!-- BEGIN: loop --> 
@@ -36,11 +36,7 @@
 				<!-- BEGIN: set_default -->
 				<button onclick="set_default({VIEW.id})" class="btn_ecng_outline">Đặt làm địa chỉ mặc định</button>
 				<!-- END: set_default -->
-				
-				
-				
-				
-				
+
 			</div>
 		</div>
 	</div>
@@ -66,8 +62,6 @@
     <div class="panel-body">
         <form class="form-horizontal" action="{NV_BASE_SITEURL}index.php?{NV_LANG_VARIABLE}={NV_LANG_DATA}&amp;{NV_NAME_VARIABLE}={MODULE_NAME}&amp;{NV_OP_VARIABLE}={OP}" method="post" id="form_add_address">
             <input type="hidden" name="id" value="{ROW.id}" />
-			
-			
 			<div class="row">			  
 			  <div class="col-9 p-4">
 				<div class="form-group row">
@@ -76,6 +70,17 @@
 						<div class="input-group mb-4 border rounded-lg  input_ecng">
 							<div class="input_error_noIcon">
 								<input type="text" name="name" value="{ROW.name}" class="form-control bg-none border-0 " required="required"  maxlength="45">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group row {show_email}">
+					<label for="staticEmail" class="col-3 col-form-label">Email(<span class="text_red">*</span>) </label>
+					<div class="col-9">
+						<div class="input-group mb-4 border rounded-lg  input_ecng">
+							<div class="input_error_noIcon">
+								<input type="text" name="email" value="{ROW.email}" onkeypress="validErrorHidden(this);" data-mess="{GLANG.email_empty}" class="form-control bg-none border-0 required" required="required"  maxlength="100">
 							</div>
 						</div>
 					</div>
@@ -97,10 +102,10 @@
 						<div class="input-group mb-4 rounded-lg  input_ecng">
 							<div class="input_error_noIcon w-100">
 								<select id="province_id" name="province_id" required="required" class="form-control">
-								 <!-- BEGIN: province_id -->
-								 <option value="{STATUS.provinceid}" {STATUS.selected}>
+								<!-- BEGIN: province_id -->
+									<option value="{STATUS.provinceid}" {STATUS.selected}>
 									{STATUS.title}
-								</option>
+									</option>
 								<!-- END: province_id -->
 								</select>
 							</div>
@@ -150,10 +155,9 @@
 								<input type="text" name="maps_address" id="maps_address" placeholder="Nhập địa chỉ" value="{AD}" class="form-control bg-none border-0 " required="required"  maxlength="150">
 							</div>
 						</div>
-						
 					</div>
 				</div>
-				<div class="form-group row">
+				<div class="form-group row {show_submit1}">
 					<div class="col-3">
 					</div>
 					<div class="col-9 d-flex">
@@ -183,7 +187,9 @@
 
 
 <div class="form-group pb-4" style="text-align: center">
-    <input class="btn_ecng" name="submit" type="submit" value="{LANG.save}" />
+    <input class="btn_ecng {show_submit1}" name="submit" type="submit" value="{LANG.save}" />
+    <!-- Lưu địa chỉ không cần login -->
+    <input id="submit_no_login" class="btn_ecng {show_submit}" name="submit" type="submit" value="{LANG.save}" />
 </div>
 </form>
 </div>
@@ -197,6 +203,10 @@
                 name: {
                     required: true,
                     minlength: 4,
+                },
+                email: {
+                    required: true,
+                    email: true,
                 },
 
                 phone: {
@@ -222,6 +232,10 @@
                 name: {
                     required: "Vui lòng nhập tên",
                     minlength: "Vui lòng nhập ít nhất 4 ký tự "
+                },
+                email: {
+                    required: "Vui lòng nhập email",
+                    email:"Email chưa nhập đúng định dạng"
                 },
 
                 phone: {
@@ -436,6 +450,35 @@ initializeMap();
             }
         });
     }
+
+    $("#submit_no_login").click(function(e) {
+			e.preventDefault();
+			$.ajax({               
+                type: "GET", 
+                dataType:'JSON',
+                url: nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=address_no_login',
+                data: $('#form_add_address').serialize(),
+                beforeSend: function() {
+                    
+                },	               
+                complete: function() {
+                    
+                },                 
+                success: function(res) {
+                    if(res.status == 'OK'){
+                        window.location = res.link;
+                    }else{
+                        alert(res.mess);
+                    }
+                    //window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=order',true).'";
+                    // window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=address&id=0',true).'";
+                },                 
+                error: function(xhr, ajaxOptions, thrownError) {
+                    
+                    console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }                  
+		    }); 
+	});
 	
 </script>
        

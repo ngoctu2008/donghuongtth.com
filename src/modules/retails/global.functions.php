@@ -25,8 +25,11 @@
 	$sql = "SELECT * FROM " . TABLE . "_complain_status WHERE status = 1 ORDER BY weight ASC";
 	$global_status_complain = $nv_Cache->db($sql, 'weight', $module_name);
 	
+<<<<<<< HEAD
 	$global_catalogys = json_decode($redis->get('catalogy_main'),true);	
 	//print_r($global_catalogys);die;
+=======
+>>>>>>> 51e323f879bff758f1209edacdfc304ffe118e02
 	// lấy tất cả địa chỉ
 	$global_location = json_decode($redis->get('location_all'),true);	
 	//print_r($global_location);die;
@@ -167,6 +170,76 @@
 		$id = $db->insert_id($sql, 'id', $data_insert);
 	}
 	
+	//tổng tiền hàng của shop
+	function total_price_shop($warehouse)
+	{
+		$tong = 0;
+		foreach($warehouse as $product)
+		{	
+			if($product['status_check']){
+				$tong += $product['num'] * $product['price'];
+			}
+		}
+		return $tong;
+		
+	}
+	
+	//check voucher order
+	
+	function check_voucher_order($shop_id, $voucherid){
+		global $db, $user_info;
+		$today = NV_CURRENTTIME;
+		
+		$voucher = $db->query('SELECT id FROM ' . TABLE . '_voucher_shop WHERE status = 1 AND usage_limit_quantity > 0 AND store_id = ' . $shop_id . ' AND time_from < ' . $today . ' AND time_to > ' . $today . ' AND id = ' . $voucherid . '  UNION SELECT t2.id FROM ' . TABLE . '_voucher_wallet t1 INNER JOIN ' . TABLE . '_voucher_shop t2 ON t2.id = t1.voucherid WHERE t1.userid = ' . $user_info['userid'] . '  AND t2.time_from < ' . $today . ' AND t2.time_to > ' . $today . ' AND t1.status = 1 AND t2.id = ' . $voucherid)->fetchColumn();
+		
+		return $voucher;
+		
+	}
+	//chọn voucher giảm giá tối ưu nhất
+	function voucher_price_optimal($product_id, $total_price_shop, $shop_id, $array_voucher_use){
+		global $db, $user_info;
+		$today = NV_CURRENTTIME;
+		//lay danh sach voucher cua shop còn sài đc và từ ví
+		//print_r('SELECT id, voucher_name, type_discount, discount_price, maximum_discount, minimum_price, time_to, list_product FROM ' . TABLE . '_voucher_shop WHERE status = 1 AND usage_limit_quantity > 0 AND store_id = ' . $shop_id . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND time_from < ' . $today . ' AND time_to > ' . $today . ' AND minimum_price <= ' . $total_price_shop . '  UNION SELECT t2.id, t2.voucher_name, t2.type_discount, t2.discount_price, t2.maximum_discount, t2.minimum_price, t2.time_to, t2.list_product FROM ' . TABLE . '_voucher_wallet t1 INNER JOIN ' . TABLE . '_voucher_shop t2 ON t2.id = t1.voucherid WHERE t1.userid = ' . $user_info['userid'] . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND t2.time_from < ' . $today . ' AND t2.time_to > ' . $today . ' AND t1.status = 1  AND minimum_price <= ' . $total_price_shop . ' AND t2.store_id = ' . $shop_id);die;
+
+
+		$list_voucher = $db->query('SELECT id, voucher_name, type_discount, discount_price, maximum_discount, minimum_price, time_to, list_product FROM ' . TABLE . '_voucher_shop WHERE status = 1 AND usage_limit_quantity > 0 AND store_id = ' . $shop_id . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND time_from < ' . $today . ' AND time_to > ' . $today . ' AND minimum_price <= ' . $total_price_shop . '  UNION SELECT t2.id, t2.voucher_name, t2.type_discount, t2.discount_price, t2.maximum_discount, t2.minimum_price, t2.time_to, t2.list_product FROM ' . TABLE . '_voucher_wallet t1 INNER JOIN ' . TABLE . '_voucher_shop t2 ON t2.id = t1.voucherid WHERE t1.userid = ' . $user_info['userid'] . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND t2.time_from < ' . $today . ' AND t2.time_to > ' . $today . ' AND t1.status = 1  AND minimum_price <= ' . $total_price_shop . ' AND t2.store_id = ' . $shop_id)->fetchAll();
+		
+		foreach($list_voucher as $voucher){
+			$price = 0;
+			if($voucher['type_discount'])
+			{
+				$price = $total_price_shop * $voucher['discount_price'] / 100;
+				$price = floor($price);
+				if($voucher['maximum_discount']){
+					if($price > $voucher['maximum_discount']){
+						$price = $voucher['maximum_discount'];
+					}
+				}
+				
+			}
+			else
+			{	
+				$price = $voucher['discount_price'];
+			}
+			
+			$array_product = array();
+			$array_product[] = $product_id;
+			if($array_voucher_use[$voucher['id']])
+			{
+				foreach($array_voucher_use[$voucher['id']]['product_id'] as $pro)
+				{
+					$array_product[] = $pro;
+				}
+			}
+			
+			$array_voucher_use[$voucher['id']] = array('price' => $price, 'voucherid' => $voucher['id'],'product_id' => $array_product, 'voucher_name' => $voucher['voucher_name'], 'time_to' => $voucher['time_to'], 'type_discount' => $voucher['type_discount'], 'maximum_discount' => $voucher['maximum_discount'], 'minimum_price' => $voucher['minimum_price'], 'list_product' => $voucher['list_product'], 'discount_price' => $voucher['discount_price'] );
+			
+		}
+
+		return $array_voucher_use;
+	
+	}
 	
 	//check voucher
 	function check_voucher ($voucher_code, $voucher_id, $shop_id){
@@ -2883,13 +2956,40 @@
 		return $data;
 		
 	}
+
+	//viettel post
+	function login_viettel_post()
+	{
+		global $config_setting;
+		$url = 'https://partner.viettelpost.vn/v2/user/Login';
+		$param = array(
+        "USERNAME" => $config_setting['username_vtpost'],
+        "PASSWORD" => $config_setting['password_vtpost']
+		);
+		$data = post_data($url, $param, '');
+		
+		return $data;
+	}
+
+	function create_warehouse_viettelpost($phone, $name, $address, $ward_id)
+	{
+		$url = 'https://partner.viettelpost.vn/v2/user/registerInventory';
+		$param = array(
+        "PHONE" => $phone,
+        "NAME" => $name,
+        "ADDRESS" => $address,
+        "WARDS_ID" => $ward_id
+		);
+		$token = login_viettel_post();
+		$data = post_data($url, $param, $token['data']['token']);
+		return $data;
+	}
+	//viettel post
 	
 	function post_data($url, $param_array, $token)
 	{
 		$json = json_encode($param_array);
-		
-		
-		
+
 		// URL có chứa hai thông tin name và diachi
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
@@ -2924,18 +3024,7 @@
 		return $result;
 	}
 	
-	function login_viettel_post()
-	{
-		global $config_setting;
-		$url = 'https://partner.viettelpost.vn/v2/user/Login';
-		$param = array(
-        "USERNAME" => $config_setting['username_viettelpost'],
-        "PASSWORD" => $config_setting['password_viettelpost']
-		);
-		$data = post_data($url, $param, '');
-		
-		return $data;
-	}
+	
 	function get_price_vnpost($MaDichVu, $MaTinhGui, $MaQuanGui, $MaTinhNhan, $MaQuanNhan, $ThuCuocNguoiNhan, $LstDichVuCongThem, $length_product, $width_product, $height_product, $weight_product)
 	{
 		$url = 'https://donhang.vnpost.vn/api/api/TinhCuoc/TinhTatCaCuoc';
@@ -3447,19 +3536,8 @@
 		return $data;
 		
 	}
-	function create_warehouse_viettelpost($phone, $name, $address, $ward_id)
-	{
-		$url = 'https://partner.viettelpost.vn/v2/user/registerInventory';
-		$param = array(
-        "PHONE" => $phone,
-        "NAME" => $name,
-        "ADDRESS" => $address,
-        "WARDS_ID" => $ward_id
-		);
-		$token = login_viettel_post();
-		$data = post_data($url, $param, $token['data']['token']);
-		return $data;
-	}
+	
+
 	function send_viettelpost($PRODUCT_PRICE, $MONEY_COLLECTION, $ORDER_SERVICE_ADD, $ORDER_SERVICE, $SENDER_PROVINCE, $SENDER_DISTRICT, $SENDER_WARD, $SENDER_LATITUDE, $SENDER_LONGITUDE, $RECEIVER_PROVINCE, $RECEIVER_DISTRICT, $PRODUCT_TYPE, $ORDER_NUMBER, $GROUPADDRESS_ID, $CUS_ID, $SENDER_FULLNAME, $SENDER_ADDRESS, $SENDER_PHONE, $RECEIVER_FULLNAME, $RECEIVER_ADDRESS, $RECEIVER_PHONE, $PRODUCT_NAME, $PRODUCT_DESCRIPTION, $PRODUCT_QUANTITY, $ORDER_PAYMENT, $list_item, $PRODUCT_WEIGHT, $PRODUCT_LENGTH, $PRODUCT_WIDTH, $PRODUCT_HEIGHT, $RECEIVER_WARD, $RECEIVER_LATITUDE, $RECEIVER_LONGITUDE)
 	{
 		
@@ -3946,14 +4024,9 @@
 			
 			foreach($list_brand as $brand)
 			{
-				if(!empty($brand['logo']))
-				{
-					$brand['logo'] = NV_BASE_SITEURL . NV_FILES_DIR . '/' . $module_upload . '/' . $brand['logo'];
+				$brand['logo'] = NV_BASE_SITEURL . NV_FILES_DIR . '/' . $module_upload . '/' . $brand['logo'];
 					
-					$arr[] = $brand;
-				}
-				
-				
+				$arr[] = $brand;
 			}
 			
 		}
@@ -4545,6 +4618,105 @@
 			$update_status_payment_vnpay = $db->query('UPDATE ' . TABLE . '_order SET status_payment_vnpay = 1, status = 1, payment =' . $order['total'] . ', vnpay_code ="'. $inputData['vnp_TransactionNo'] .'" WHERE id =' . $order['id']);
 			
 			update_time_add_order($order['id']);
+			
+			if($order['transporters_id'])
+			{
+				$order['name_transporters'] = $db->query('SELECT name_transporters FROM ' . TABLE . '_transporters WHERE id =' . $order['transporters_id'])->fetchColumn();
+			}
+			else
+			{
+				$order['name_transporters'] = $lang_module['tranposter_tugiao'];
+			}
+			
+			
+			// Gui mail thong bao den khach hang
+			$data_order['id'] = $order['id'];
+			$info_order = $order;
+			$data_order['order_code'] = $order['order_code'];
+			
+			$email_title = $lang_module['order_email_title'];
+			$email_contents = call_user_func('email_new_order_payment_khach', $data_order, $list_product, $info_order);
+			
+			
+			
+			nv_sendmail(array(
+            $global_config['site_name'],
+            $global_config['site_email']
+			) , $order['email'], sprintf($email_title, $data_order['order_code']) , $email_contents);
+			
+			
+			// Gui mail thong bao den nhà bán hàng
+			$email_contents = call_user_func('email_new_order_payment', $data_order, $list_product, $info_order);
+			$email_title = $lang_module['order_email_title'];
+			
+			nv_sendmail(array(
+            $global_config['site_name'],
+            $global_config['site_email']
+			) , get_info_store($order['store_id'])['email'], sprintf($email_title, $data_order['order_code']) , $email_contents);
+			
+		}
+		
+		return true;
+	}
+	function xulythanhtoanthanhcong_recieve($order_text, $inputData)
+	{
+		global $db, $db_config, $user_info, $module_name, $lang_module;
+		
+		$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
+		
+		// cập nhật kho hàng sau khi thanh toán thành công
+		foreach ($list_order as $order)
+		{
+			//update voucher 
+			
+			$update_voucher = $db->query('UPDATE ' . TABLE . '_voucher SET usage_limit_quantity = usage_limit_quantity - 1 WHERE id = ' . $order['voucherid']);
+			
+			$update_order_voucher = $db->query('UPDATE ' . TABLE . '_order_voucher SET status =  1 WHERE order_id = ' . $order['id']);
+			
+			// lấy danh sách sản phẩm của đơn hàng
+			$list_product = $db->query('SELECT product_id, quantity, classify_value_product_id, quantity, price FROM ' . TABLE . '_order_item WHERE order_id =' . $order['id'])->fetchAll();
+			//print_r($list_product);die;
+			foreach ($list_product as $product)
+			{
+				// cập nhật kho sau khi thanh toán thành công
+				
+				$where = '';
+				
+				if($product['classify_value_product_id'])
+				{
+					$where .= ' AND id=' . $product['classify_value_product_id'];
+				}
+				
+				$db->query('UPDATE ' . TABLE . '_product_classify_value_product SET sl_tonkho = sl_tonkho - '. $product['quantity'] .' WHERE product_id =' . $product['product_id'] . $where);
+				
+				$db->query('UPDATE ' . TABLE . '_product SET number_order = number_order + '. $product['quantity'] .' WHERE id = ' . $product['product_id']);
+				
+			}
+			
+			// gửi thông báo email về cho khách hàng, cửa hàng
+			$content_ip = 'Hiện có 1 đơn hàng mới';
+			if (!empty($user_info))
+			{	
+				$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_notification(language,area,module,admin_view_allowed,logic_mode ,send_from,send_to,content,add_time,obid,type) VALUES (' . $db->quote(NV_LANG_DATA) . ',1,' . $db->quote($module_name) . ',0,0,' . $user_info['userid'] . ',' . $order['store_id'] . ',' . $db->quote($content_ip) . ',' . NV_CURRENTTIME . ',' . $order['id'] . ',"order")');
+				$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_notification_shop(language,area,module,admin_view_allowed,logic_mode ,send_from,send_to,content,add_time,obid,type) VALUES (' . $db->quote(NV_LANG_DATA) . ',1,' . $db->quote($module_name) . ',0,0,' . $user_info['userid'] . ',' . $order['store_id'] . ',' . $db->quote($content_ip) . ',' . NV_CURRENTTIME . ',' . $order['id'] . ',"order")');
+			}
+			else
+			{	
+				$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_notification(language,area,module,admin_view_allowed,logic_mode ,send_from,send_to,content,add_time,obid,type) VALUES (' . $db->quote(NV_LANG_DATA) . ',1,' . $db->quote($module_name) . ',0,0,0,' . $order['store_id'] . ',' . $db->quote($content_ip) . ',' . NV_CURRENTTIME . ',' . $order['id'] . ',"order")');
+				$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_notification_shop(language,area,module,admin_view_allowed,logic_mode ,send_from,send_to,content,add_time,obid,type) VALUES (' . $db->quote(NV_LANG_DATA) . ',1,' . $db->quote($module_name) . ',0,0,0,' . $order['store_id'] . ',' . $db->quote($content_ip) . ',' . NV_CURRENTTIME . ',' . $order['id'] . ',"order")');
+			}
+			
+			$content = 'Đơn hàng mới đã xác nhận';
+			if (!empty($user_info))
+			{
+				
+				$db->query('INSERT INTO ' . TABLE . '_logs_order(order_id,status_id_old,content,time_add,user_add) VALUES(' . $order['id'] . ',1,' . $db->quote($content) . ',' . NV_CURRENTTIME . ',' . $user_info['userid'] . ')');
+			}
+			else
+			{	
+				$db->query('INSERT INTO ' . TABLE . '_logs_order(order_id,status_id_old,content,time_add,user_add) VALUES(' . $order['id'] . ',1,' . $db->quote($content) . ',' . NV_CURRENTTIME . ',1)');
+			}
+			
 			
 			if($order['transporters_id'])
 			{

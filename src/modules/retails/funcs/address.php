@@ -7,16 +7,13 @@
 		* @License GNU/GPL version 2 or any later version
 		* @Createdate Thu, 18 Mar 2021 01:33:55 GMT
 	*/
-	print('alo123');
+	//TEST3
 	if (!defined('NV_IS_MOD_RETAILSHOPS'))
     die('Stop!!!');
-	if (!defined('NV_IS_USER')) {
-		echo '<script language="javascript">';
-		echo 'window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true).'"';
-		echo '</script>';
-	}
+	
 	$mod = $nv_Request->get_string('mod', 'post, get', 0);
 	
+
 	if($mod=="set_default"){
 		$id=$nv_Request->get_int('id', 'get',0);
 		$db->query('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_address SET status = 0 WHERE userid = ' . $user_info['userid']);
@@ -133,15 +130,20 @@
 
 				$address_full = $row['address'] . $address;
 				
-				
-				if (empty($row['id'])) {
+				if(!$user_info){
 					
-					$stmt = $db->prepare('INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_address (lat,lng,address,name, userid, status, time_add, ward_id, district_id, province_id, phone,centerlat,centerlng,maps_mapzoom) VALUES (:lat,:lng,:address,:name, :userid, :status, :time, :ward_id, :district_id, :province_id, :phone,:centerlat,:centerlng,:maps_mapzoom)');
+				}else{
+					if (empty($row['id'])) {
 					
-					} else {
-					
-					$stmt = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_address SET lat = :lat,lng = :lng,name = :name,address = :address, userid = :userid, status = :status, time_edit = :time, ward_id = :ward_id, district_id = :district_id, province_id = :province_id, phone = :phone, centerlat=:centerlat,centerlng=:centerlng,maps_mapzoom=:maps_mapzoom WHERE id=' . $row['id']);
+						$stmt = $db->prepare('INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_address (lat,lng,address,name, userid, status, time_add, ward_id, district_id, province_id, phone,centerlat,centerlng,maps_mapzoom) VALUES (:lat,:lng,:address,:name, :userid, :status, :time, :ward_id, :district_id, :province_id, :phone,:centerlat,:centerlng,:maps_mapzoom)');
+						
+						} else {
+						
+						$stmt = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_address SET lat = :lat,lng = :lng,name = :name,address = :address, userid = :userid, status = :status, time_edit = :time, ward_id = :ward_id, district_id = :district_id, province_id = :province_id, phone = :phone, centerlat=:centerlat,centerlng=:centerlng,maps_mapzoom=:maps_mapzoom WHERE id=' . $row['id']);
+					}
 				}
+
+				
 				
 				$stmt->bindParam(':status', $row['status'], PDO::PARAM_INT);
 				$stmt->bindParam(':address', $address_full, PDO::PARAM_STR);
@@ -273,6 +275,12 @@
 	if($row['status'])
 	{
 		$xtpl->assign('checked', 'checked=checked');	
+	}
+	if($user_info['userid']){
+		$xtpl->assign('show_email', 'd-none');	
+		$xtpl->assign('show_submit', 'd-none');	
+	}else{
+		$xtpl->assign('show_submit1', 'd-none');
 	}
 	
 	$xtpl->assign('Q', $q);

@@ -7,20 +7,24 @@
 		* @License GNU/GPL version 2 or any later version
 		* @Createdate Thu, 24 Dec 2020 01:27:14 GMT
 	*/
-	
+	$_SESSION['payment'] = true;
 	if (!defined('NV_IS_MOD_RETAILSHOPS'))
 	die('Stop!!!');
-	if (!defined('NV_IS_USER')) {
-		echo '<script language="javascript">';
-		echo 'window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true).'"';
-		echo '</script>';
-		}else{
+	if (defined('NV_IS_USER')){
 		$check_seller=$db->query('SELECT count(*) FROM '.TABLE.'_seller_management where userid='.$user_info['userid'])->fetchColumn();
 		if($check_seller>0){
 			echo '<script language="javascript">';
 			echo 'alert("Bạn đã là người bán nên không thể mua hàng. Vui lòng tạo lại tài khoản người mua");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=main',true).'"';
 			echo '</script>';
 		}
+	}
+	
+	
+	//kiểm tra đơn hàng đã thanh toán chưa nếu chưa thanh toán -> re-payment
+	if($_SESSION['payment'] == false){
+		echo '<script language="javascript">';
+			echo 'window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=re-payment',true).'"';
+			echo '</script>';
 	}
 	$mod = $nv_Request->get_string('mod', 'post, get', 0);
 	
@@ -41,6 +45,9 @@
 		$json[] = ['status'=>'OK', 'text'=>'Đặt địa chỉ mặc định thành công'];
 		print_r(json_encode($json[0]));die(); 
 	}
+	if (!defined('NV_IS_USER')) {
+		$user_info['userid'] = 0;
+	}
 	$info_order_old=$db->query('SELECT * FROM ' . TABLE . '_order where userid=' . $user_info['userid'] . ' and status>=3 order by id DESC limit 1')->fetch(); 
 	$status_check=0;
 	foreach($_SESSION[$module_name . '_cart'] as $value){
@@ -54,18 +61,22 @@
 	}
 	
 	
-	
-	
 	if($status_check==0){
 		
 		// kiểm tra trạng thái session đã thanh toán chưa. giỏ hàng trống
 		if(isset($_SESSION[$module_name . '_vnpay']) and !$_SESSION[$module_name . '_vnpay'])
 		{
 			$_SESSION[$module_name . '_vnpay'] = true;
-			
-			echo '<script language="javascript">';
-			echo 'alert("Thanh toán thất bại!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=re-payment',true).'"';
-			echo '</script>';
+			if($user_info['userid']){
+				echo '<script language="javascript">';
+				echo 'alert("Thanh toán thất bại!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=re-payment',true).'"';
+				echo '</script>';
+			}
+			else{
+				echo '<script language="javascript">';
+				echo 'alert("Thanh toán thất bại!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=tracking-order',true).'"';
+				echo '</script>';
+			}
 		}
 		else
 		{
@@ -76,19 +87,25 @@
 	}
 	$list_address = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_address WHERE userid = ' . $user_info['userid'] )->fetchAll();
 	
-	// kiểm tra user đã có địa chỉ chưa
-	$check_address = $db->query('SELECT COUNT(id) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_address WHERE userid = ' . $user_info['userid'] )->fetchColumn();
-	if(!$check_address){
-		echo '<script language="javascript">';
-		echo 'alert("Bạn chưa thiết lập địa chỉ!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=address&id=0',true).'"';
-		echo '</script>';
+	if($user_info['userid'] > 0 or !isset($_SESSION['address_no_login'])){
+		// kiểm tra user đã có địa chỉ chưa
+		$check_address = $db->query('SELECT COUNT(id) FROM ' . NV_PREFIXLANG . '_' . $module_data . '_address WHERE userid = ' . $user_info['userid'] )->fetchColumn();
+		if(!$check_address){
+			echo '<script language="javascript">';
+			echo 'alert("Bạn chưa thiết lập địa chỉ!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=address&id=0',true).'"';
+			echo '</script>';
+		}
 	}
+
+	$array_payment = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_payment WHERE active = 1 ORDER BY weight ASC' )->fetchAll();
 	
-	//print_r($list_address);
 	$address_df = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_address WHERE userid = ' . $user_info['userid'] . ' AND status = 1' )->fetch();
 	
+	if($_SESSION['address_no_login']){
+		$address_df = $_SESSION['address_no_login'];
+	}
 	
-	$contents = nv_theme_retailshops_order($_SESSION[$module_name . '_cart'],$info_order_old,$list_address,$address_df);
+	$contents = nv_theme_retailshops_order($_SESSION[$module_name . '_cart'], $list_address, $address_df,$array_payment);
 	$page_title = $lang_module['order'];
 	
 	

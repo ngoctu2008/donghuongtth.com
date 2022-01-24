@@ -10,6 +10,10 @@
 	
 	if (!defined('NV_IS_MOD_RETAILSHOPS'))
 	die('Stop!!!');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 51e323f879bff758f1209edacdfc304ffe118e02
 	
 	$per_page = 6;
 	$key_words = $module_info['keywords'];
