@@ -15,7 +15,7 @@
 	$key_words = $module_info['keywords'];
 	$array_data = array();
 	$array_data=get_info_product($id);
-	//print_r('ggggg');die;
+	print_r($global_ward);die;
 	if($array_data['inhome'] < 1 or $array_data['status'] == 0){
 		echo '<script language="javascript">';
 		echo 'window.location = "' . NV_BASE_SITEURL .'"';
