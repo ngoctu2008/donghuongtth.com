@@ -620,8 +620,6 @@
 				<!-- BEGIN: payment -->
 				<div class="d-flex mr-5">
 					<label class="ecng_label_radio m-0" onclick="change_payment_method('{PAYMENT.payment}')">
-						<input value="M" type="radio" name="gender" checked>
-						<span class="checkmark"></span>
 						<input value="M" type="radio" name="gender" {checked}>
 						<span class="checkmark mt-2"></span>
 						<p class="fs_16 pl-2"><img src="{PAYMENT.images_button}" ><span class="d-inline-block" style="padding-top: 0.1rem;padding-left: 0.5rem;">{PAYMENT.paymentname}</span></p>
