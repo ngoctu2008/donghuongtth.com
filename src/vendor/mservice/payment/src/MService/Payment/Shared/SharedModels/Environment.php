@@ -3,7 +3,7 @@
 
 namespace MService\Payment\Shared\SharedModels;
 
-use MService\Payment\Shared\SharedModels\MoMoLogger;
+use MService\Payment\Shared\SharedModels\MoMoLogger MoMoLogger;
 
 class Environment
 {
@@ -24,7 +24,7 @@ class Environment
         $this->momoEndpoint = $momoEndpoint;
         $this->partnerInfo = $partnerInfo;
         $this->target = $target;
-        //$this->logger = new MoMoLogger($channelName, $loggingOff, $handlers, $processors);
+        $this->logger = new MoMoLogger($channelName, $loggingOff, $handlers, $processors);
     }
 
     /**
