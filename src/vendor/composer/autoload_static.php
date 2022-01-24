@@ -23,6 +23,7 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         'P' => 
         array (
 			'Psr\\SimpleCache\\' => 16,
+			'Psr\\Log\\' => 8,
             'PhpOffice\\PhpSpreadsheet\\' => 25,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
@@ -65,6 +66,10 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
 		'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
+		'Psr\\log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
         ),
         'PhpOffice\\PhpSpreadsheet\\' => 
         array (
