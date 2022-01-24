@@ -37,7 +37,6 @@
 	// lấy tất cả xã phường
 	$global_ward = json_decode($redis->get('location_ward'),true);
 	
-	
 	//$redis->delete('catalogy_main');
 	
 	if(!$redis->exists('catalogy_main'))
