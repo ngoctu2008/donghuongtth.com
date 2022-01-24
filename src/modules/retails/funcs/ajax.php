@@ -2804,7 +2804,6 @@ if ( $mod == 'add_order' ) {
 			
 			$list_order=implode(',',$list_order);
 			$list_order_code=implode(',',$list_order_code);
-			unset( $_SESSION[$module_data . '_cart'] );
 			
 			xulythanhtoanthanhcong_recieve($list_order, $info_order);
 			$contents1 = array(

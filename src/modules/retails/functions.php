@@ -304,6 +304,7 @@ function add_order($list_transporters,$info_customer){
 		$data['list_order'][]=$order_id;
 		$data['list_order_code'][]=$order_code;
 	}
+	unset( $_SESSION[$module_data . '_cart'] );
 	//$data['list_order'] = $list_order;
 	//$data['list_order_code'] = $list_order_code;
 	return $data;
