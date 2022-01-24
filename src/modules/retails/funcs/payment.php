@@ -222,7 +222,11 @@ if ($thanhtoan)
 		
 		$inputData['format_Amount'] = number_format($info_order['total'],0,",",",");
 		$xtpl->assign('thanhtoan', $inputData);
-	}	
+	}elseif($payment_method == 'momo'){
+		require_once(NV_ROOTDIR.'modules/retails/payment/momo.complete.php')
+		
+	}
+		
 	
     $xtpl->parse('main.thanhcong');
 }
