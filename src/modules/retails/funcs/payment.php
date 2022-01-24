@@ -157,6 +157,7 @@
 
 			// ket thuc xu ly chuan
 	}elseif($payment_method == 'recieve'){
+		
 		$thanhtoan = true;
 		$inputData = array();
 		$inputData['order_code'] = $nv_Request->get_title('order_code', 'get', '', 1);

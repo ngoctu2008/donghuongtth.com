@@ -1136,7 +1136,7 @@
 					$transporter_first = true;
 					if(count($list_tranposter_new)>0){
 						foreach($list_tranposter_new as $key=>$value){
-							
+						
 							$xtpl->assign( 'CARRIER', $value );
 							
 							if($transporter_first)
