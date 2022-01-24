@@ -1,7 +1,7 @@
 <!-- BEGIN: main -->
 
  <div class="bg_white" style="min-height: 378px">
-                
+ 
 				
 <!-- BEGIN: view -->
 	<div class="d-flex justify-content-between p-4">
@@ -75,7 +75,7 @@
 					</div>
 				</div>
 
-				<div class="form-group row {show_email}">
+				<div class="form-group row {show_email} ">
 					<label for="staticEmail" class="col-3 col-form-label">Email(<span class="text_red">*</span>) </label>
 					<div class="col-9">
 						<div class="input-group mb-4 border rounded-lg  input_ecng">
