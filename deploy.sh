@@ -11,10 +11,6 @@ ssh -o StrictHostKeyChecking=no $SSH_USER@$DEV_HOST << 'ENDSSH'
   chmod -Rf 755 ./*
   find ./ -type f -exec chmod 644 {} +;
   chmod 777 /home/chonhagiau/ch-nha-giau/src/.htaccess
-  cd /home/chonhagiau/ch-nha-giau/
-  git add .
-  git commit -m "server update"
-  git pull origin dev
-  git push orgin dev
+
   exec "$@"
 ENDSSH
