@@ -607,7 +607,7 @@
 			<!-- BEGIN: transporters_loop_js -->
 			transporter_{info_store.id}.push({"id":{CARRIER.id},"name_transporters":"{CARRIER.name_transporters}","description":"{CARRIER.description}"});
 			<!-- END: transporters_loop_js -->
-			console.log(transporter_{info_store.id});
+			//console.log(transporter_{info_store.id});
 		</script>
 		<!-- END: warehouse -->
 	</div>
@@ -621,11 +621,11 @@
 				<div class="d-flex mr-5">
 					<label class="ecng_label_radio m-0" onclick="change_payment_method('{PAYMENT.payment}')">
 						<input value="M" type="radio" name="gender" checked>
-						<span class="checkmark"></span>
+						<span class="checkmark mt-2"></span>
 						<p class="fs_16 pl-2"><img src="{PAYMENT.images_button}" ><span class="d-inline-block" style="padding-top: 0.1rem;padding-left: 0.5rem;">{PAYMENT.paymentname}</span></p>
 					</label>
 				</div>
-			<!-- END: payment -->
+				<!-- END: payment -->
 			</div>
 
 		</div>
@@ -676,7 +676,11 @@
 </div>
 
 <script>
-	
+
+	$('button.close').click(function(){
+		$('.modal').modal('hide');
+	})
+
 	function nv_carrier_change(store_id,warehouse_id,a)
 	{ 
 		
@@ -792,7 +796,7 @@
 							
 						},
 						success : function(res){
-							//console.log(res);
+							console.log(res);
 							if(Number(res.fee)==-1){
 								}else{
 								if(Number(res.fee)==0){
@@ -879,9 +883,8 @@
 						
 					})
 					}else if(element.id  == 3 ){
-					
 					$.ajax({
-						type : 'GET',
+						type : 'POST',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
 						dataType: "json",
 						data:{weight: Number(total_weight),
@@ -905,7 +908,7 @@
 							$('#button-payment-method').prop('disabled', false);
 						},
 						success : function(res){
-							//console.log(res);
+							console.log(res);
 							if(Number(res.fee)==-1){
 								if(vitri+1==transporter.length){
 									$('#shipping_price_'+store_id+'_'+warehouse_id).html('Đơn hàng của bạn hiện không có nhà vận chuyển nào đáp ứng được. Vui lòng tách đơn')
@@ -924,7 +927,7 @@
 									}else{
 									$('#shipping_price_'+store_id+'_'+warehouse_id).html(format_number(Number(res.fee)));
 									tongphivanchuyen = tongphivanchuyen + Number(res.fee);
-									//$('#method_time_'+store_id+'_'+warehouse_id ).html(res.mess);
+									$('#method_time_' + store_id + '_' + warehouse_id ).html(res.mess);
 									sum_phivanchuyen();
 								}
 							}

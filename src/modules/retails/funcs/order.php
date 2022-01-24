@@ -109,7 +109,7 @@
 			echo '</script>';
 		}
 	}
-
+	
 	$array_payment = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_payment WHERE active = 1 ORDER BY weight ASC' )->fetchAll();
 	
 	$address_df = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_address WHERE userid = ' . $user_info['userid'] . ' AND status = 1' )->fetch();
@@ -120,7 +120,6 @@
 	
 	$contents = nv_theme_retailshops_order($_SESSION[$module_name . '_cart'], $list_address, $address_df,$array_payment);
 	$page_title = $lang_module['order'];
-	
 	
 	$_SESSION[$module_name . '_vnpay'] = false;
 	$_SESSION[$module_name . '_recieve'] = false;
