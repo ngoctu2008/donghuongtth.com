@@ -1184,6 +1184,11 @@
 			}
 		}//SHOP
 		foreach($array_payment as $payment){
+			if($payment['is_default'] == 1){
+				$xtpl->assign( 'checked', 'checked="checked"' );
+			}else{
+				$xtpl->assign( 'checked', '' );
+			}
 			$xtpl->assign( 'PAYMENT', $payment );
 			$xtpl->parse( 'main.payment' );
 		}

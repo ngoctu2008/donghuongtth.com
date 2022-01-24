@@ -612,7 +612,7 @@
 		<!-- END: warehouse -->
 	</div>
 	<!-- END: store -->
-	<input type="hidden" checked name="payment_method" id="payment_method" value="vnpay">
+	<input type="hidden" checked name="payment_method" id="payment_method" value="">
 	<div class="payment_methods bg_white my-2 p-4">
 		<div class="fs_18">
 			<span class="mb-3">Phương thưc thanh toán</span>
@@ -620,8 +620,13 @@
 				<!-- BEGIN: payment -->
 				<div class="d-flex mr-5">
 					<label class="ecng_label_radio m-0" onclick="change_payment_method('{PAYMENT.payment}')">
+<<<<<<< HEAD
 						<input value="M" type="radio" name="gender" checked>
 						<span class="checkmark"></span>
+=======
+						<input value="M" type="radio" name="gender" {checked}>
+						<span class="checkmark mt-2"></span>
+>>>>>>> 9e6815916c5ebbbe90f07bda0e9c342757ef0b91
 						<p class="fs_16 pl-2"><img src="{PAYMENT.images_button}" ><span class="d-inline-block" style="padding-top: 0.1rem;padding-left: 0.5rem;">{PAYMENT.paymentname}</span></p>
 					</label>
 				</div>
@@ -881,7 +886,6 @@
 						}
 						
 					})
-<<<<<<< HEAD
 					}
 					if(element.id == 2){ 
 					
@@ -940,9 +944,6 @@
 					}
 					else if(element.id  == 3 ){
 					
-=======
-					}else if(element.id  == 3 ){
->>>>>>> 298d80b656e571097c4cf7f12cff1dd34011da9e
 					$.ajax({
 						type : 'GET',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
