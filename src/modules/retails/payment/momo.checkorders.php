@@ -21,7 +21,8 @@ if (! defined('NV_IS_MOD_RETAILSHOPS')) {
 }
 
 
-$env = new Environment("https://test-payment.momo.vn/pay/pos", new PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development');
+$env = new MService\Payment\Shared\SharedModels\Environment("https://test-payment.momo.vn/pay/pos", new MService\Payment\Shared\SharedModels\PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development');
+print_r($env);
 $publicKey = "-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkpa+qMXS6O11x7jBGo9W3yxeHEsAdyDE
 40UoXhoQf9K6attSIclTZMEGfq6gmJm2BogVJtPkjvri5/j9mBntA8qKMzzanSQaBEbr8FyByHnf
@@ -67,9 +68,10 @@ $qrRawData = '{
 }';
 //QRNotify::process($env, $qrRawData);
 
-PaymentConfirmation::process(new Environment("https://test-payment.momo.vn/pay/confirm", new PartnerInfo("IICsyHpuwP8IzVvE", 'CGV01', 'vLujzooXM8ySdHJOBFuwmWB3T4ZBYLJ'), 'development'), 'e671ffb0-af61-11e9-ba3c-4b08721e3699', "capture", "2305581638", $requestId);
+//PaymentConfirmation::process(new Environment("https://test-payment.momo.vn/pay/confirm", new PartnerInfo("IICsyHpuwP8IzVvE", 'CGV01', 'vLujzooXM8ySdHJOBFuwmWB3T4ZBYLJ'), 'development'), 'e671ffb0-af61-11e9-ba3c-4b08721e3699', "capture", "2305581638", $requestId);
 
-TransactionQuery::process(new Environment("https://test-payment.momo.vn/pay/query-status", new PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development'), '1562138468', $publicKey, '1562138427');
+//TransactionQuery::process(new Environment("https://test-payment.momo.vn/pay/query-status", new PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development'), '1562138468', $publicKey, '1562138427');
 
-TransactionRefund::process(new Environment("https://test-payment.momo.vn/pay/refund", new PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development'), $requestId, 10000, $publicKey, '1562138427', '2305016460');
+//TransactionRefund::process(new Environment("https://test-payment.momo.vn/pay/refund", new PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development'), $requestId, 10000, $publicKey, '1562138427', '2305016460');
 
+die(oke);
