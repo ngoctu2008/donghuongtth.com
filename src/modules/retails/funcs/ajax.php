@@ -2771,7 +2771,7 @@ if ( $mod == 'add_order' ) {
 		);
 		// add order
 		$data = add_order($list_transporters,$info_customer);
-		
+		unset( $_SESSION[$module_data . '_cart'] );
 
 		// thanh toán vnpay
 		if($payment_method == 'vnpay'){
@@ -2795,6 +2795,7 @@ if ( $mod == 'add_order' ) {
 			'status' => 'OK_VNPAY',
 			'link' => $check_vnpay
 			);
+			
 			print_r( json_encode($contents1));die;
 			die();
 		}elseif($payment_method == 'recieve'){
