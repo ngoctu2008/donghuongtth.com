@@ -15,7 +15,6 @@ if (isset($_GET['response_headers_detect'])) {
 }
 define('NV_SYSTEM', true);
 
- 
 
 // Xac dinh thu muc goc cua site
 define('NV_ROOTDIR', pathinfo(str_replace(DIRECTORY_SEPARATOR, '/', __file__), PATHINFO_DIRNAME));

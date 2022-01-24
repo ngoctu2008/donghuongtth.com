@@ -25,11 +25,6 @@
 	$sql = "SELECT * FROM " . TABLE . "_complain_status WHERE status = 1 ORDER BY weight ASC";
 	$global_status_complain = $nv_Cache->db($sql, 'weight', $module_name);
 	
-<<<<<<< HEAD
-	$global_catalogys = json_decode($redis->get('catalogy_main'),true);	
-	//print_r($global_catalogys);die;
-=======
->>>>>>> 51e323f879bff758f1209edacdfc304ffe118e02
 	// lấy tất cả địa chỉ
 	$global_location = json_decode($redis->get('location_all'),true);	
 	//print_r($global_location);die;
