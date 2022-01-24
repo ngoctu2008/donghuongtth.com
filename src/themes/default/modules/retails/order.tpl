@@ -614,12 +614,20 @@
 	<!-- END: store -->
 	<input type="hidden" checked name="payment_method" id="payment_method" value="vnpay">
 	<div class="payment_methods bg_white my-2 p-4">
-		<div class="fs_18"><span class="secondary_text">Phương thưc thanh toán</span>
-			
-			<button class="btn_ecng_outline ml-4" ><i class="fa fa-id-card-o" aria-hidden="true"></i> VNPAY</button>
-			<!-- BEGIN: payment -->
-			<button class="btn_ecng_outline ml-4" onclick="change_payment_method('{PAYMENT.payment}')"><i class="fa fa-id-card-o" aria-hidden="true"></i> {PAYMENT.paymentname}</button>
+		<div class="fs_18">
+			<span class="mb-3">Phương thưc thanh toán</span>
+			<div class="mt-4">
+				<!-- BEGIN: payment -->
+				<div class="d-flex mr-5">
+					<label class="ecng_label_radio m-0" onclick="change_payment_method('{PAYMENT.payment}')">
+						<input value="M" type="radio" name="gender">
+						<span class="checkmark"></span>
+						<p class="fs_16 pl-2"><img src="/themes/default/chonhagiau/images/vnpay.svg" ><span class="d-inline-block" style="padding-top: 0.1rem;padding-left: 0.5rem;">{PAYMENT.paymentname}</span></p>
+					</label>
+				</div>
 			<!-- END: payment -->
+			</div>
+
 		</div>
 	</div>
 	
