@@ -7,6 +7,14 @@
  * @License GNU/GPL version 2 or any later version
  * @Createdate 04/18/2017 09:47
  */
+use MService\Payment\Pay\Processors\AppPay;
+use MService\Payment\Pay\Processors\PaymentConfirmation;
+use MService\Payment\Pay\Processors\POSPay;
+use MService\Payment\Pay\Processors\QRNotify;
+use MService\Payment\Pay\Processors\TransactionQuery;
+use MService\Payment\Pay\Processors\TransactionRefund;
+use MService\Payment\Shared\SharedModels\Environment;
+use MService\Payment\Shared\SharedModels\PartnerInfo;
 
 if (! defined('NV_IS_MOD_RETAILSHOPS')) {
     die('Stop!!!');

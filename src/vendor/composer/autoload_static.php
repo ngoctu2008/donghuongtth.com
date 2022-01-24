@@ -34,6 +34,10 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         array (
             'NukeViet\\' => 9,
         ),
+        'M' => 
+        array (
+            'MService\\' => 9,
+        ),
         'L' => 
         array (
             'League\\Url\\' => 11,
@@ -76,6 +80,10 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         'NukeViet\\' => 
         array (
             0 => __DIR__ . '/..' . '/vinades/nukeviet',
+        ),
+        'MService\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mservice/payment/src/MService',
         ),
         'League\\Url\\' => 
         array (
