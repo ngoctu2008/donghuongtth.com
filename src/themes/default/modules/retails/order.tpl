@@ -621,7 +621,7 @@
 				<div class="d-flex mr-5">
 					<label class="ecng_label_radio m-0" onclick="change_payment_method('{PAYMENT.payment}')">
 						<input value="M" type="radio" name="gender" checked>
-						<span class="checkmark"></span>
+						<span class="checkmark mt-2"></span>
 						<p class="fs_16 pl-2"><img src="{PAYMENT.images_button}" ><span class="d-inline-block" style="padding-top: 0.1rem;padding-left: 0.5rem;">{PAYMENT.paymentname}</span></p>
 					</label>
 				</div>
@@ -676,7 +676,11 @@
 </div>
 
 <script>
-	
+
+	$('button.close').click(function(){
+		$('.modal').modal('hide');
+	})
+
 	function nv_carrier_change(store_id,warehouse_id,a)
 	{ 
 		
@@ -905,7 +909,7 @@
 							$('#button-payment-method').prop('disabled', false);
 						},
 						success : function(res){
-							//console.log(res);
+							console.log(res);
 							if(Number(res.fee)==-1){
 								if(vitri+1==transporter.length){
 									$('#shipping_price_'+store_id+'_'+warehouse_id).html('Đơn hàng của bạn hiện không có nhà vận chuyển nào đáp ứng được. Vui lòng tách đơn')
