@@ -36,7 +36,6 @@
 				<!-- BEGIN: set_default -->
 				<button onclick="set_default({VIEW.id})" class="btn_ecng_outline">Đặt làm địa chỉ mặc định</button>
 				<!-- END: set_default -->
-
 			</div>
 		</div>
 	</div>
