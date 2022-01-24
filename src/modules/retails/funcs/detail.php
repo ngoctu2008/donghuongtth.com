@@ -10,13 +10,12 @@
 	
 	if (!defined('NV_IS_MOD_RETAILSHOPS'))
 	die('Stop!!!');
-
 	
 	$per_page = 6;
 	$key_words = $module_info['keywords'];
 	$array_data = array();
 	$array_data=get_info_product($id);
-	//print_r('window.location = "' . NV_BASE_SITEURL);
+	//print_r('ggggg');die;
 	if($array_data['inhome'] < 1 or $array_data['status'] == 0){
 		echo '<script language="javascript">';
 		echo 'window.location = "' . NV_BASE_SITEURL .'"';

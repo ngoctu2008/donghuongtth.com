@@ -1,0 +1,103 @@
+[Mon, 17 Jan 2022 10:43:40 +0700] [localhost] [::1] [User Notice(1024): SQLSTATE[HY000] [1045] Access denied for user 'chonhagi_chonhagiau'@'localhost' (using password: YES)] [FILE: /vendor/vinades/nukeviet/Core/Database.php] [LINE: 85] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 248   FILE: /includes/mainfile.php
+#3  LINE: 85    FILE: /vendor/vinades/nukeviet/Core/Database.php
+
+[Mon, 17 Jan 2022 10:43:40 +0700] [localhost] [::1] [User Error(256): Sorry! Could not connect to data server] [FILE: /includes/mainfile.php] [LINE: 250] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 250   FILE: /includes/mainfile.php
+
+[Mon, 17 Jan 2022 10:44:30 +0700] [localhost] [::1] [Error(1): Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.tms_vi_retails_categories WHERE status = 1 AND inhome = 1 AND parrent_id =0 ORD' at line 1 in D:\Ampps\www\ch-nha-giau\src\vendor\vinades\nukeviet\Core\Database.php:496
+Stack trace:
+#0 D:\Ampps\www\ch-nha-giau\src\vendor\vinades\nukeviet\Core\Database.php(496): PDO->query('SELECT id, name...')
+#1 D:\Ampps\www\ch-nha-giau\src\modules\retails\blocks\global.danhmuc.php(130): NukeViet\Core\Database->query('SELECT id, name...')
+#2 D:\Ampps\www\ch-nha-giau\src\modules\retails\blocks\global.danhmuc.php(214): get_categories_all_lev_block(0, Array)
+#3 D:\Ampps\www\ch-nha-giau\src\modules\retails\blocks\global.danhmuc.php(228): nvb_home_danhmuc(Array)
+#4 D:\Ampps\www\ch-nha-giau\src\includes\core\user_functions.php(184): include('D:\\Ampps\\www\\ch...')
+#5 D:\Ampps\www\ch-nha-giau\src\themes\default\theme.ph] [FILE: /vendor/vinades/nukeviet/Core/Database.php] [LINE: 496]
+[Mon, 17 Jan 2022 10:50:15 +0700] [localhost] [::1] [Warning(2): Use of undefined constant ffff - assumed 'ffff' (this will throw an Error in a future version of PHP)] [FILE: /includes/mainfile.php] [LINE: 301] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+
+[Mon, 17 Jan 2022 10:53:36 +0700] [localhost] [::1] [Warning(2): Use of undefined constant fff - assumed 'fff' (this will throw an Error in a future version of PHP)] [FILE: /modules/retails/blocks/global.danhmuc.php] [LINE: 129] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 21    FILE: /modules/home/funcs/main.php
+#3  LINE: 322   FILE: /themes/default/theme.php
+#4  LINE: 184   FILE: /includes/core/user_functions.php
+#5  LINE: 228   FILE: /modules/retails/blocks/global.danhmuc.php
+#6  LINE: 214   FILE: /modules/retails/blocks/global.danhmuc.php
+
+[Mon, 17 Jan 2022 10:57:42 +0700] [localhost] [::1] [Notice(8): Undefined offset: 1] [FILE: /modules/retails/blocks/global.danhmuc.php] [LINE: 117] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 21    FILE: /modules/home/funcs/main.php
+#3  LINE: 322   FILE: /themes/default/theme.php
+#4  LINE: 184   FILE: /includes/core/user_functions.php
+#5  LINE: 228   FILE: /modules/retails/blocks/global.danhmuc.php
+#6  LINE: 214   FILE: /modules/retails/blocks/global.danhmuc.php
+#7  LINE: 141   FILE: /modules/retails/blocks/global.danhmuc.php
+
+[Mon, 17 Jan 2022 10:57:43 +0700] [localhost] [::1] [Warning(2): file_put_contents(D:/Ampps/www/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): failed to open stream: No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 73] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 73    FILE: /includes/core/cronjobs.php
+
+[Mon, 17 Jan 2022 10:57:43 +0700] [localhost] [::1] [Warning(2): unlink(D:/Ampps/www/ch-nha-giau/src/data/logs/data_logs/cronjobs_1bf1c791d1dd4b4c2dbfe9ee331ebaf4.txt): No such file or directory] [FILE: /includes/core/cronjobs.php] [LINE: 95] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 95    FILE: /includes/core/cronjobs.php
+
+[Mon, 17 Jan 2022 10:57:43 +0700] [localhost] [::1] [Warning(2): opendir(D:/Ampps/www/ch-nha-giau/src/data/tmp,D:/Ampps/www/ch-nha-giau/src/data/tmp): The system cannot find the file specified. (code: 2)] [FILE: /includes/cronjobs/temp_download_destroy.php] [LINE: 20] [TRACE:]
+#1  LINE: 23    FILE: /index.php
+#2  LINE: 362   FILE: /includes/mainfile.php
+#3  LINE: 76    FILE: /includes/core/cronjobs.php
+#4  LINE: 20    FILE: /includes/cronjobs/temp_download_destroy.php
+
+[Mon, 17 Jan 2022 11:07:50 +0700] [localhost] [::1] [Warning(2): Use of undefined constant fff - assumed 'fff' (this will throw an Error in a future version of PHP)] [FILE: /modules/retails/global.functions.php] [LINE: 29] [TRACE:]
+#1  LINE: 338   FILE: /index.php
+#2  LINE: 15    FILE: /modules/retails/functions.php
+
+[Mon, 17 Jan 2022 11:07:59 +0700] [localhost] [::1] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3357] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 137   FILE: /modules/retails/funcs/viewcat.php
+
+[Mon, 17 Jan 2022 11:09:06 +0700] [localhost] [::1] [Notice(8): Undefined index: userid] [FILE: /modules/retails/funcs/detail.php] [LINE: 46] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+
+[Mon, 17 Jan 2022 11:09:06 +0700] [localhost] [::1] [Notice(8): Undefined variable: module_name] [FILE: /modules/retails/theme.php] [LINE: 4045] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 97    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 11:09:06 +0700] [localhost] [::1] [Notice(8): Undefined variable: orderby_sql] [FILE: /modules/retails/theme.php] [LINE: 4061] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 97    FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 11:09:06 +0700] [localhost] [::1] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3846] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 120   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 11:09:06 +0700] [localhost] [::1] [Notice(8): Undefined variable: first_image] [FILE: /modules/retails/theme.php] [LINE: 3863] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 120   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 11:09:06 +0700] [localhost] [::1] [Notice(8): Undefined index: image_classify] [FILE: /modules/retails/theme.php] [LINE: 3870] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 120   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 11:09:06 +0700] [localhost] [::1] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3889] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 120   FILE: /modules/retails/funcs/detail.php
+
+[Mon, 17 Jan 2022 11:09:06 +0700] [localhost] [::1] [Notice(8): Undefined variable: base_url] [FILE: /modules/retails/theme.php] [LINE: 3018] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 120   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 11:09:06 +0700] [localhost] [::1] [Notice(8): Undefined index: number_view] [FILE: /modules/retails/theme.php] [LINE: 3021] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 120   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
+[Mon, 17 Jan 2022 11:09:06 +0700] [localhost] [::1] [Notice(8): Undefined index: userid] [FILE: /modules/retails/theme.php] [LINE: 3024] [TRACE:]
+#1  LINE: 358   FILE: /index.php
+#2  LINE: 120   FILE: /modules/retails/funcs/detail.php
+#3  LINE: 4007  FILE: /modules/retails/theme.php
+
