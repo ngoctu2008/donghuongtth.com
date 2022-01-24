@@ -23,6 +23,7 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         'P' => 
         array (
 			'Psr\\SimpleCache\\' => 16,
+			'Psr\\Log\\' => 8,
             'PhpOffice\\PhpSpreadsheet\\' => 25,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
@@ -33,6 +34,11 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         'N' => 
         array (
             'NukeViet\\' => 9,
+        ),
+        'M' => 
+        array (
+            'MService\\' => 9,
+            'Monolog\\' => 8,
         ),
         'L' => 
         array (
@@ -61,6 +67,10 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
+		'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
+        ),
         'PhpOffice\\PhpSpreadsheet\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
@@ -76,6 +86,14 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         'NukeViet\\' => 
         array (
             0 => __DIR__ . '/..' . '/vinades/nukeviet',
+        ),
+        'MService\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mservice/payment/src/MService',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/src/Monolog',
         ),
         'League\\Url\\' => 
         array (

@@ -781,7 +781,7 @@
 		return $xtpl->text( 'main' );
 	}
 	function nv_theme_retailshops_order($array_data, $list_address , $address_df,$array_payment){
-		global $module_info, $lang_module, $lang_global, $op, $module_upload, $module_name,$db,$db_config, $user_info, $global_location;
+		global $module_info, $lang_module, $lang_global, $op, $module_upload, $module_name,$db,$db_config, $user_info, $global_location, $config_setting;
 		
 		$xtpl = new XTemplate( $op . '.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme'] );
 		$xtpl->assign( 'LANG', $lang_module );
@@ -800,11 +800,13 @@
 		else{
 			$xtpl->assign( 'EMAIL_USER', $_SESSION['address_no_login']['email']);
 		}
+		$xtpl->assign('children_fund', $config_setting['children_fund'] . '%');
+
 		$xtpl->assign( 'ADDRESS_DF', $address_df );
 		$xtpl->assign( 'NV_ASSETS_DIR', NV_ASSETS_DIR );
 		$xtpl->assign( 'LINK_ADDRESS', NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=address&id=0');
 		$xtpl->assign( 'CART', NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=cart');
-		
+
 		$xtpl->assign( 'OP', $op );
 		$total = 0;
 

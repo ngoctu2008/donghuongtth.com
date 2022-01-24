@@ -614,12 +614,20 @@
 	<!-- END: store -->
 	<input type="hidden" checked name="payment_method" id="payment_method" value="vnpay">
 	<div class="payment_methods bg_white my-2 p-4">
-		<div class="fs_18"><span class="secondary_text">Phương thưc thanh toán</span>
-			
-			<button class="btn_ecng_outline ml-4" ><i class="fa fa-id-card-o" aria-hidden="true"></i> VNPAY</button>
-			<!-- BEGIN: payment -->
-			<button class="btn_ecng_outline ml-4" onclick="change_payment_method('{PAYMENT.payment}')"><i class="fa fa-id-card-o" aria-hidden="true"></i> {PAYMENT.paymentname}</button>
+		<div class="fs_18">
+			<span class="mb-3">Phương thưc thanh toán</span>
+			<div class="mt-4">
+				<!-- BEGIN: payment -->
+				<div class="d-flex mr-5">
+					<label class="ecng_label_radio m-0" onclick="change_payment_method('{PAYMENT.payment}')">
+						<input value="M" type="radio" name="gender" checked>
+						<span class="checkmark"></span>
+						<p class="fs_16 pl-2"><img src="{PAYMENT.images_button}" ><span class="d-inline-block" style="padding-top: 0.1rem;padding-left: 0.5rem;">{PAYMENT.paymentname}</span></p>
+					</label>
+				</div>
 			<!-- END: payment -->
+			</div>
+
 		</div>
 	</div>
 	
@@ -655,10 +663,11 @@
 			</div>
 		</div>
 		<div class="row p-4 align-items-center">
-			<div class="col-md-8">
-				Khi nhấn hoàn tất đồng nghĩa bạn đã kiểm tra kỹ đơn hàng và đồng ý với <a class="secondary_text" title="Các điều khoản của ECNG" href="https://chonhagiau.com/ecng/quy-dinh-va-hinh-thuc-thanh-toan.html" target="_blank" >các điều khoản của ECNG</a>
+			<div class="col-md-9">
+				<div class="primary_text">Khi nhấn hoàn tất đồng nghĩa bạn đã kiểm tra kỹ đơn hàng và đồng ý với <a class="secondary_text" title="Các điều khoản của ECNG" href="https://chonhagiau.com/ecng/quy-dinh-va-hinh-thuc-thanh-toan.html" target="_blank" >các điều khoản của ECNG</a></div>
+				<div class="fw_500 primary_text pt-2">Khi bạn thanh toán đơn hàng là bạn đã ủng hộ <span style="color:#1358B9">{children_fund}</span> tổng giá trị đơn hàng này vào quỹ  “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</div>
 			</div>
-			<div class="col-md-4 text-right">
+			<div class="col-md-3 text-right">
 				<button id="button-payment-method" class="btn_ecng_lg" onclick="order_product_check_out()"  >Hoàn tất đơn hàng</button>
 			</div>
 		</div>

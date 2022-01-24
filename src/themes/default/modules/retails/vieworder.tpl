@@ -5,8 +5,8 @@
 			<p class="fs_18 "><span class="text_gray_color">Chi tiết đơn hàng {info_order.order_code}</span> - <span>{info_order.status}</span></p>
 			<p>Ngày mua: {info_order.time_add}</p>
 		</div>
-		
-		
+		<div class="primary_text">Bạn vừa ủng hộ <span style="color:#1358B9">{children_fund}</span> tổng giá trị đơn hàng này vào quỹ  “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</div>
+
 		<div class="row">
 			<div class="col-md-12">
 				<div class="status_vnpost">
@@ -28,9 +28,7 @@
 				</div>
 			</div>
 		</div>
-		</br>
-		
-		
+		<div class="pb-2">Địa chỉ nhận hàng</div>
 		<div class="row px-2">
 			<div class="col-md-7 p-4 border">
 				<p><span class="pr-2">Tên: </span> {info_order.order_name}</p>

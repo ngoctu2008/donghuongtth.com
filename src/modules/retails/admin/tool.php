@@ -9,9 +9,20 @@
 	*/
 	
 	
-	 
-	
 	/*
+	
+	// xử lý xã phường, bỏ text số
+	$list_ward = $db->query('SELECT wardid, title, type, alias FROM tms_location_ward WHERE alias like"%so-%"')->fetchAll();
+	foreach($list_ward as $ward)
+	{
+		// xử lý lại title
+		$ward['title_new'] = str_replace("Số ","",$ward['title']);
+		// cập nhật
+		$db->query('UPDATE tms_location_ward SET title ="'. $ward['title_new'] .'" WHERE wardid =' . $ward['wardid']);
+		
+	} 
+	print_r(ok);die;
+	
 	
 	// tạo ECNG 
 	$list_product = $db->query('SELECT id, name_product, keyword FROM '. TABLE .'_product ORDER BY id ASC')->fetchAll();
