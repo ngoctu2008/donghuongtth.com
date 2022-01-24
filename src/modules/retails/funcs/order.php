@@ -77,6 +77,19 @@
 				echo 'alert("Thanh toán thất bại!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=tracking-order',true).'"';
 				echo '</script>';
 			}
+		}elseif(isset($_SESSION[$module_name . '_recieve']) and !$_SESSION[$module_name . '_recieve'])
+		{
+			$_SESSION[$module_name . '_recieve'] = true;
+			if($user_info['userid']){
+				echo '<script language="javascript">';
+				echo 'alert("Bạn đã tạo đơn hàng rồi, vui lòng xem lại lịch sử đơn hàng");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=re-payment',true).'"';
+				echo '</script>';
+			}
+			else{
+				echo '<script language="javascript">';
+				echo 'alert("Đơn hàng đã được tạo");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=tracking-order',true).'"';
+				echo '</script>';
+			}
 		}
 		else
 		{
@@ -110,6 +123,7 @@
 	
 	
 	$_SESSION[$module_name . '_vnpay'] = false;
+	$_SESSION[$module_name . '_recieve'] = false;
 	unset($_SESSION['shop']);
 	$_SESSION['back_link'] = nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '='. $module_name .'&amp;' . NV_OP_VARIABLE . '=' . $op, true);
 	

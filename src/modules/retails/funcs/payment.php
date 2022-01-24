@@ -3,7 +3,8 @@
 
 	sleep(2);
 	
-	$payment_method = $nv_Request->get_string( 'payment_method', 'get,post', '' );
+	$payment_method = $db->query('SELECT payment_method FROM ' . TABLE . '_order where id IN (' . $order_code . ' ) GROUP BY payment_method')->fetch(); 
+
 	if($payment_method == 'vnpay'){
 
 		
