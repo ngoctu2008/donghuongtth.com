@@ -21,7 +21,7 @@ if (! defined('NV_IS_MOD_RETAILSHOPS')) {
 }
 
 
-$env = new MService\Payment\Shared\SharedModels\Environment("https://test-payment.momo.vn/pay/pos", new PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development');
+$env = new MService\Payment\Shared\SharedModels\Environment("https://test-payment.momo.vn/pay/pos", new MService\Payment\Shared\SharedModels\PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development');
 print_r($env);
 $publicKey = "-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkpa+qMXS6O11x7jBGo9W3yxeHEsAdyDE
