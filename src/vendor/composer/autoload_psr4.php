@@ -14,6 +14,7 @@ return array(
     'OAuth\\' => array($vendorDir . '/and/oauth/src'),
     'NukeViet\\' => array($vendorDir . '/vinades/nukeviet'),
     'MService\\' => array($vendorDir . '/mservice/payment/src/MService'),
+    'Monolog\\' => array($vendorDir . '/monolog/src/Monolog'),
     'Matrix\\' => array($vendorDir . '/markbaker/matrix/classes/src'),
     'League\\Url\\' => array($vendorDir . '/league/url/src'),
     'Endroid\\QrCode\\' => array($vendorDir . '/endroid/qrcode/src'),

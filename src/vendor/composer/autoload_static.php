@@ -37,6 +37,7 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         'M' => 
         array (
             'MService\\' => 9,
+            'Monolog\\' => 8,
         ),
         'L' => 
         array (
@@ -84,6 +85,10 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         'MService\\' => 
         array (
             0 => __DIR__ . '/..' . '/mservice/payment/src/MService',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/src/Monolog',
         ),
         'League\\Url\\' => 
         array (
