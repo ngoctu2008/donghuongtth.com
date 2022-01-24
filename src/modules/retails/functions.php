@@ -203,7 +203,7 @@
 	//print_r($op);
 	//die($op);
 function add_order($list_transporters,$info_customer){
-	global $db,$config_setting;
+	global $db,$config_setting,$_SESSION;
 	$list_order=array();
 	$list_order_code=array();
 	$data=array();
