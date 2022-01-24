@@ -1,3 +1,6 @@
+24/01/2022
+"TRUNCATE ` tms_vi_retails_transporters_shop `"?
+ALTER TABLE `tms_vi_retails_voucher_wallet` ADD `status` TINYINT(2) NULL DEFAULT '1' AFTER `time_add`;
 
 21/01/2022
 ALTER TABLE `tms_vi_retails_warehouse` CHANGE `centerlat` `centerlat` DOUBLE NULL;
