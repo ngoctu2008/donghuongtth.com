@@ -14,6 +14,7 @@ ssh -o StrictHostKeyChecking=no $SSH_USER@$DEV_HOST << 'ENDSSH'
   cd /home/chonhagiau/ch-nha-giau/
   git add .
   git commit -m "server update"
-  git push dev
+  git pull origin dev
+  git push orgin dev
   exec "$@"
 ENDSSH
