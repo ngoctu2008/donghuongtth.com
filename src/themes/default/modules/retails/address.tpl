@@ -5,7 +5,7 @@
 				
 <!-- BEGIN: view -->
 	<div class="d-flex justify-content-between p-4">
-		<div class=" fs_20">Địa Chỉ Nhận Hàng </div>
+		<div class=" fs_20">Địa Chỉ Nhận Hàng</div>
 	   <a href="{address}" class="btn_ecng_outline" onclick="newDoc()">+ Thêm địa chỉ</a>
 	</div>
 	 <!-- BEGIN: loop --> 
@@ -36,7 +36,6 @@
 				<!-- BEGIN: set_default -->
 				<button onclick="set_default({VIEW.id})" class="btn_ecng_outline">Đặt làm địa chỉ mặc định</button>
 				<!-- END: set_default -->
-
 			</div>
 		</div>
 	</div>
@@ -46,7 +45,7 @@
 
 <!-- BEGIN: edit -->
 	<div class="d-flex justify-content-between p-4">
-		<div class=" fs_20">Thông Tin Địa Chỉ</div>
+		<div class=" fs_20">Địa Chỉ Nhận Hàng</div>
                    
 	</div>
 

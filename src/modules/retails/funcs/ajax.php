@@ -2785,7 +2785,7 @@ if ( $mod == 'add_order' ) {
 			$vnp_OrderInfo='Thanh toan giao dich '.$list_order_code.' vao thoi gian '.date('d-m-Y H:i',NV_CURRENTTIME);
 			
 			
-			$vnp_ReturnUrl= nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&payment_method=vnpay' , true );
+			$vnp_ReturnUrl= nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment' , true );
 			
 			// lấy thông tin ip server
 			$vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -2806,10 +2806,10 @@ if ( $mod == 'add_order' ) {
 			$list_order=implode(',',$list_order);
 			$list_order_code=implode(',',$list_order_code);
 			
-			//xulythanhtoanthanhcong_recieve($list_order, $info_order);
+			xulythanhtoanthanhcong_recieve($list_order, $info_order);
 			$contents1 = array(
 				'status' => 'OK_RECIEVE',
-				'link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&amp;payment_method=recieve&amp;order_code='.$list_order , true )
+				'link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&amp;order_code='.$list_order , true )
 				);
 				print_r( json_encode($contents1));die;
 		}elseif($payment_method == 'momo'){

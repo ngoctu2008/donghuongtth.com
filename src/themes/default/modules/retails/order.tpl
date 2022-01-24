@@ -881,6 +881,7 @@
 						}
 						
 					})
+<<<<<<< HEAD
 					}
 					if(element.id == 2){ 
 					
@@ -939,6 +940,9 @@
 					}
 					else if(element.id  == 3 ){
 					
+=======
+					}else if(element.id  == 3 ){
+>>>>>>> 298d80b656e571097c4cf7f12cff1dd34011da9e
 					$.ajax({
 						type : 'GET',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
