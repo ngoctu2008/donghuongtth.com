@@ -203,11 +203,12 @@
 	//print_r($op);
 	//die($op);
 function add_order($list_transporters,$info_customer){
-	global $db,$config_setting,$_SESSION;
+	global $db,$config_setting,$_SESSION,$module_data;
 	$list_order=array();
 	$list_order_code=array();
 	$data=array();
 	$time_add = NV_CURRENTTIME;
+	
 	foreach ( $list_transporters as $value_transporters ) {
 				
 		if($value_transporters['transporters_id'] == 4 || $value_transporters['transporters_id'] == 5){
@@ -275,9 +276,8 @@ function add_order($list_transporters,$info_customer){
 			
 			$voucher_id = $db->insert_id( $sql, 'voucherid', $data_insert );
 		}
-
-		if ( $order_id > 0 ) {
-			foreach ( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] as $key_product => $value_product ) {
+		if ( $order_id > 0 ) {	
+			foreach ($_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] as $key_product => $value_product ) {
 				if ( $value_product['status_check'] == 1 ) {
 					$arr_product_id_voucher = $_SESSION['voucher_shop'][$value_transporters['store_id']]['product_id'];
 					if(in_array($value_product['product_id'], $arr_product_id_voucher)){
@@ -285,7 +285,6 @@ function add_order($list_transporters,$info_customer){
 						}else{
 						$price_voucher = 0;
 					}
-
 					$total_weight = $value_product['weight_product'] * $value_product['num'];
 					$total_length = $value_product['length_product'] * $value_product['num'];
 					$total_width = $value_product['width_product'] * $value_product['num'];

@@ -258,7 +258,7 @@
 		
 		$today = NV_CURRENTTIME;
 		
-		$check_voucher = $db->query('SELECT * FROM ' . TABLE . '_voucher WHERE userid = ' . $shop_id . ' AND status = 1 ' . $where )->fetch();
+		// $check_voucher = $db->query('SELECT * FROM ' . TABLE . '_voucher WHERE userid = ' . $shop_id . ' AND status = 1 ' . $where )->fetch();
 		
 		if(!$check_voucher['id'])
 		{
