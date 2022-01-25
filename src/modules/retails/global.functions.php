@@ -7,7 +7,6 @@
 	define('NV_TABLE_WARD', $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_location_ward');
 	define('NV_TABLE_WALLET', $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_wallet');
 	
-	
 	// trạng thái order
 	$sql = "SELECT * FROM " . TABLE . "_status_order ORDER BY weight ASC";
 	$global_status_order = $nv_Cache->db($sql, 'status_id', $module_name);
@@ -502,7 +501,7 @@
 		{
 			//update voucher 
 			
-			$update_voucher = $db->query('UPDATE ' . TABLE . '_voucher SET usage_limit_quantity = usage_limit_quantity - 1 WHERE id = ' . $order['voucherid']);
+			// $update_voucher = $db->query('UPDATE ' . TABLE . '_voucher SET usage_limit_quantity = usage_limit_quantity - 1 WHERE id = ' . $order['voucherid']);
 			
 			$update_order_voucher = $db->query('UPDATE ' . TABLE . '_order_voucher SET status =  1 WHERE order_id = ' . $order['id']);
 			

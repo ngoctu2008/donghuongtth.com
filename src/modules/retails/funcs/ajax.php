@@ -3787,11 +3787,11 @@ if ( $mod == 'tonkho' ) {
 
 if($mod == 'testtt')
 {
-	//send_mail_payment_fail(626);
+	// send_mail_payment_fail(714);
 	
-	//$order = get_info_order(641);
-	//send_email_order_cancel($order);
-	
+	// $order = get_info_order(714);
+	// send_email_order_cancel($order);
+	// xulythanhtoanthanhcong(714, '');
 	//send_mail_order_delivered($order);
 	
 	//update_time_add_order(647);
@@ -3802,40 +3802,40 @@ if($mod == 'testtt')
 	 //$a = get_name_store(2);
 	//$a = create_warehouse_viettelpost('0374600090', 'shop test', '99A Cộng hòa', 493);
 	//$a['data'][0]['cusId'];
-	$b =  Array
-	(
-		'status' => 200,
-		'error' => '',
-		'message' =>'OK'
+	// $b =  Array
+	// (
+	// 	'status' => 200,
+	// 	'error' => '',
+	// 	'message' =>'OK'
 	
-	);
-	$b['data'] = Array();
-	$b['data'][] =  Array(
-				'groupaddressId' => '10436450',
-				'cusId'=> '10486964',
-				'name' => 'shop test',
-				'phone'=> '0374600090',
-				'address' => '99A Cộng hòa',
-				'provinceId' => '1',
-				'districtId' => '25',
-				'wardsId' => '493',
-				'postId' => '',
-				'merchant' =>'' ,
-			);
+	// );
+	// $b['data'] = Array();
+	// $b['data'][] =  Array(
+	// 			'groupaddressId' => '10436450',
+	// 			'cusId'=> '10486964',
+	// 			'name' => 'shop test',
+	// 			'phone'=> '0374600090',
+	// 			'address' => '99A Cộng hòa',
+	// 			'provinceId' => '1',
+	// 			'districtId' => '25',
+	// 			'wardsId' => '493',
+	// 			'postId' => '',
+	// 			'merchant' =>'' ,
+	// 		);
 
-			$b['data'][] =   Array(
-				'groupaddressId' => '10432627',
-				'cusId' => '10486964',
-				'name' => 'Luân Test 2',
-				'phone' => '0968625207',
-				'address' => '61 K2 Cầu Diễn',
-				'provinceId' => '1',
-				'districtId' => '25',
-				'wardsId' => '493',
-				'postId' => '',
-				'merchant' => '',
-			);
-	print_r($b['data'][0]['cusId']);die;
+	// 		$b['data'][] =   Array(
+	// 			'groupaddressId' => '10432627',
+	// 			'cusId' => '10486964',
+	// 			'name' => 'Luân Test 2',
+	// 			'phone' => '0968625207',
+	// 			'address' => '61 K2 Cầu Diễn',
+	// 			'provinceId' => '1',
+	// 			'districtId' => '25',
+	// 			'wardsId' => '493',
+	// 			'postId' => '',
+	// 			'merchant' => '',
+	// 		);
+	// print_r($b['data'][0]['cusId']);die;
 }
 
 die();
