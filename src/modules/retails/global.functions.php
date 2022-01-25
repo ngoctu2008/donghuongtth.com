@@ -2982,7 +2982,6 @@
 	function post_data($url, $param_array, $token)
 	{
 		$json = json_encode($param_array);
-
 		// URL có chứa hai thông tin name và diachi
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
@@ -3326,44 +3325,24 @@
 		
 		return $data;
 	}
-	function get_price_ghtk($pick_address, $pick_province, $pick_district, $pick_ward, $address, $province, $district, $ward, $weight, $insurance_value, $transport, $deliver_option)
+	function get_price_ghtk($pick_address, $pick_province, $pick_district, $province, $district, $address, $weight, $transport, $deliver_option)
 	{
 		global $config_setting;
 		$url = $config_setting['url_ghtk'] . '/services/shipment/fee';
-		if ($transport == '')
-		{
-			$param = array(
-            "pick_address" => $pick_address,
-            "pick_province" => $pick_province,
-            "pick_district" => $pick_district,
-            "pick_ward" => $pick_ward,
-            "address" => $address,
-            "province" => $province,
-            "district" => $district,
-            "ward" => $ward,
-            "weight" => $weight,
-            "value" => $insurance_value,
-            "deliver_option" => $deliver_option
-			);
-		}
-		else
-		{
-			$param = array(
-            "pick_address" => $pick_address,
-            "pick_province" => $pick_province,
-            "pick_district" => $pick_district,
-            "pick_ward" => $pick_ward,
-            "address" => $address,
-            "province" => $province,
-            "district" => $district,
-            "ward" => $ward,
-            "weight" => $weight,
-            "value" => $insurance_value,
-            "transport" => $transport,
-            "deliver_option" => $deliver_option
-			);
-		}
+		
+		$param = array(
+		"pick_address" => $pick_address,
+		"pick_province" => $pick_province,
+		"pick_district" => $pick_district,
+		"address" => $address,
+		"province" => $province,
+		"district" => $district,
+		"weight" => $weight,
+		"transport" => $transport,
+		"deliver_option" => $deliver_option
+		);
 		$data = post_data($url, $param, $config_setting['token_ghtk']);
+		
 		return $data;
 	}
 	function get_token_ahamove()

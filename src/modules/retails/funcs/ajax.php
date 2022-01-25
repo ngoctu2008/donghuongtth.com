@@ -3493,82 +3493,32 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 }
 if ( $mod == 'get_transport_fee_ghtk' ) {
 	$weight_product = $nv_Request->get_int( 'weight', 'get,post', 0 );
-	$length_product = $nv_Request->get_int( 'length', 'get,post', 0 );
-	$width_product = $nv_Request->get_int( 'width', 'get,post', 0 );
-	$height_product = $nv_Request->get_int( 'height', 'get,post', 0 );
-	$total = $nv_Request->get_int( 'total', 'get,post', 0 );
 	$province_id = $nv_Request->get_int( 'province_id', 'get,post', 0 );
-	$address = $nv_Request->get_string( 'address', 'get,post', 0 );
-	$province_id_ghtk_receive = get_info_province( $province_id )['title'];
-	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
-	if ( $ward_id>0 ) {
-		$ward_id_ghtk_receive = get_info_ward( $ward_id )['title'];
-	}
 	$district_id = $nv_Request->get_int( 'district_id', 'get,post', 0 );
-	$district_id_ghtk_receive = get_info_district( $district_id )['title'];
-	$warehouse_id = $nv_Request->get_int( 'shops_id', 'get,post', 0 );
+	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
+	$address = $nv_Request->get_string( 'address', 'get,post', 0 );
+	$warehouse_id = $nv_Request->get_int( 'warehouse_id', 'get,post', 0 );
 	$info_warehouse = get_info_warehouse( $warehouse_id );
-	$province_id_ghtk_send = get_info_province( $info_warehouse['province_id'] )['title'];
-	$district_id_ghtk_send = get_info_district( $info_warehouse['district_id'] )['title'];
-	$ward_id_ghtk_send = get_info_ward( $info_warehouse['ward_id'] )['title'];
-	$transporters_id = $nv_Request->get_int( 'transporters_id', 'get,post', 0 );
-	$code_transporters = get_info_transporters( $transporters_id )['code_transporters'];
-	$shop_id = $info_warehouse['shops_id_ghn'];
-	if ( $ward_id>0 ) {
-		if($code_transporters==1){
-			$fee = get_price_ghtk( $info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, $ward_id_ghtk_receive, $weight_product, $total ,'road','none');
-			}else if($code_transporters==2){
-			$fee_road = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send, $address, $province_id_ghtk_receive, $district_id_ghtk_receive, $ward_id_ghtk_receive, $weight_product, $total ,'road','none');
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send, $address, $province_id_ghtk_receive, $district_id_ghtk_receive, $ward_id_ghtk_receive, $weight_product, $total ,'fly','none');
-			}else if($code_transporters==3){
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send, $address, $province_id_ghtk_receive, $district_id_ghtk_receive, $ward_id_ghtk_receive, $weight_product, $total ,'','xteam');
-		}
+	//format thông tin
+	$pick_province = $global_province[$info_warehouse['province_id']]['title'];
+	$pick_district = $global_district[$info_warehouse['district_id']]['title'];
+	$address_shop = explode(',', $info_warehouse['address']);
+	$pick_address = $address_shop[0];
+	//nhận
+	$province = $global_province[$province_id]['title'];
+	$district = $global_district[$district_id]['title'];
+	$address = explode(',', $address);
+	$address = $address[0];
+	
+	$fee = get_price_ghtk($pick_address, $pick_province, $pick_district, $province, $district, $address, $weight_product,'road','none');
+	
+	if ($fee['fee']['delivery']) {
+		$tranposter_fee = $fee['fee']['fee'];
+		// cộng thêm phí vận chuyển hệ thống sàn thương mại
+		$tranposter_fee = $tranposter_fee + (($tranposter_fee * $config_setting['percent_of_ship'])/100);
+		$tranposter_fee = rounding($tranposter_fee);
 		} else {
-		if($code_transporters==1){
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, '', $weight_product, $total,'road','none' );
-			}else if($code_transporters==2){
-			$fee_road = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, '', $weight_product, $total,'road','none' );
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, '', $weight_product, $total,'fly','none' ); 
-			}else if($code_transporters==3){
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, '', $weight_product, $total,'','xteam' );
-		}
-	}
-	if ( empty( $fee ) ) {
-		$tranposter_fee = -1;
-		} else {
-		if($code_transporters!=2){
-			if ( get_info_transporters( $transporters_id )['type'] == 0 ) {
-				$tranposter_fee = $fee['fee']['fee']+get_info_transporters( $transporters_id )['money'];
-				} else {
-				$tranposter_fee = $fee['fee']['fee']-get_info_transporters( $transporters_id )['money'];
-				if ( $tranposter_fee<0 ) {
-					$tranposter_fee = 0;
-				}
-			}
-			$mod = $tranposter_fee%1000;
-			if($mod>0){
-				$thuong = ceil($tranposter_fee / 1000);
-				$tranposter_fee=$thuong*1000;
-			}
-			}else{
-			if($fee != $fee_road){
-				if ( get_info_transporters( $transporters_id )['type'] == 0 ) {
-					$tranposter_fee = $fee['fee']['fee']+get_info_transporters( $transporters_id )['money'];
-					} else {
-					$tranposter_fee = $fee['fee']['fee']-get_info_transporters( $transporters_id )['money'];
-					if ( $tranposter_fee<0 ) {
-						$tranposter_fee = 0;
-					}
-				}
-				$mod = $tranposter_fee%1000;
-				if($mod>0){
-					$thuong = ceil($tranposter_fee / 1000);
-					$tranposter_fee=$thuong*1000;
-				}
-				}else{
-				$tranposter_fee = -1;
-			}
-		}
+			$tranposter_fee = -1;
 	}
 	print_r( json_encode( $tranposter_fee ) );
 	die;
