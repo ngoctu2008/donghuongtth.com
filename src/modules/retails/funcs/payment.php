@@ -12,14 +12,21 @@
 		$i = 0;
 		$max_i = count($orders);
 		$flag = false;
-		if($max_i > 1){
+		if(count($order) > 1 && $max_i > 1){
+			$flags = array();
 			foreach($orders as $key=>$order){
 				if($i<$max_i && $orders[$i+1]['time_add'] == $orders[$i]['time_add'] && $orders[$i+1]['payment_method'] == $orders[$i]['payment_method']){
-					$flag = true;
+					$flags[] = 1;
+				}else{
+					$flags[] = 0;
 				}
 				$i++;
 			}
-		}else{
+
+			if(in_array(0,$flags) == 0 ){
+				$flag = true;
+			}
+		}elseif(count($order) > 1 && $max_i == 1) {
 			$flag = true;
 		}
 		
