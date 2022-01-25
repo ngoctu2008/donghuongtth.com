@@ -734,7 +734,6 @@
 			transporter_store.forEach((element,index)=>{
 				
 				if(element.id == 5 || element.id  == 4){
-					
 					$.ajax({
 						type : 'POST',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_vnpost',
@@ -751,26 +750,41 @@
 							lat : lat, 
 							lng : lng
 						},
-						beforeSend: function() { 
-							//
-						},	
-						complete: function() {
-							
-						},
 						success : function(res){
-							//
 							//console.log(res);
 							if(Number(res)==-1){
 								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,'Miến phí vận chuyển');
 								}else{
 								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,format_number(Number(res)));
-								
 							}
 						}
-						
 					})
-					}else if(element.id  == 3){
-					
+				}
+				else if(element.id == 2){
+					$.ajax({
+						type : 'GET',
+						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghtk',
+						dataType: "json",
+						data:{weight: Number(total_weight),
+							province_id : province_id,
+							district_id : district_id,
+							ward_id : ward_id,
+							address: address,
+							shops_id : store_id, 
+							warehouse_id : warehouse_id, 
+							//transporters_id: element.id, sau này nếu chọn thêm hình thức của GHTK sẽ truyển thêm
+						},
+						success : function(res){
+							//console.log(res);
+							if(Number(res)==-1){
+								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,'Miến phí vận chuyển');
+								}else{
+								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,format_number(Number(res)));
+							}
+						}
+					})
+				}
+				else if(element.id  == 3){
 					$.ajax({
 						type : 'GET',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
@@ -789,12 +803,6 @@
 							lat : lat, 
 							lng : lng
 						},
-						beforeSend: function() { 
-							
-						},	
-						complete: function() {
-							
-						},
 						success : function(res){
 							//console.log(res);
 							if(Number(res.fee)==-1){
@@ -807,9 +815,8 @@
 								}
 							}
 						}
-						
-					})
 					
+					})
 				}
 			})
 			
@@ -824,7 +831,6 @@
 		var lat = document.getElementById('lat').value;
 		
 		var lng = document.getElementById('lng').value;
-		var address = document.getElementById('address').value;
 		var transporter_first=document.getElementById('transporter_first_'+store_id+'_'+warehouse_id);
 		transporter_store.forEach((element,index)=>{
 			
@@ -887,30 +893,20 @@
 					})
 					}
 					if(element.id == 2){ 
-					
 						$.ajax({
 							type : 'GET',
 							url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghtk',
 							dataType: "json",
 							data:{weight: Number(total_weight),
-								length : Number(total_length),
-								width : Number(total_width),
-								height : Number(total_height),
 								province_id : province_id,
 								district_id : district_id,
+								ward_id : ward_id,
+								address: address,
 								shops_id : store_id, 
 								warehouse_id : warehouse_id, 
-								total : Number(total_warehouse),
-								transporters_id : element.id,
-								lat : lat, 
-								lng : lng
+								//transporters_id: element.id, sau này nếu chọn thêm hình thức của GHTK sẽ truyển thêm
 							},
-							beforeSend: function() { 
-								
-							},	
-							complete: function() {
-								
-							},
+							
 							success : function(res){
 								//console.log(res);
 								if(Number(res)==-1){
@@ -926,7 +922,6 @@
 									$('#method_transfer_'+store_id+'_'+warehouse_id).html(element.name_transporters);
 									$('#method_time_'+store_id+'_'+warehouse_id).html(element.description);
 									transporter_first.setAttribute("value",element.id);
-									
 									if(Number(res)==0){
 										$('#shipping_price_'+store_id+'_'+warehouse_id).html('0');
 										tongphivanchuyen = tongphivanchuyen + 0;
@@ -938,7 +933,6 @@
 									}
 								}
 							}
-							
 						})
 					}
 					else if(element.id  == 3 ){
