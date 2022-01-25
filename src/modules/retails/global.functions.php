@@ -7,7 +7,6 @@
 	define('NV_TABLE_WARD', $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_location_ward');
 	define('NV_TABLE_WALLET', $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_wallet');
 	
-	
 	// trạng thái order
 	$sql = "SELECT * FROM " . TABLE . "_status_order ORDER BY weight ASC";
 	$global_status_order = $nv_Cache->db($sql, 'status_id', $module_name);

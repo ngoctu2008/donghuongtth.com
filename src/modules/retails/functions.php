@@ -207,6 +207,7 @@ function add_order($list_transporters,$info_customer){
 	$list_order=array();
 	$list_order_code=array();
 	$data=array();
+	$time_add = NV_CURRENTTIME;
 	foreach ( $list_transporters as $value_transporters ) {
 				
 		if($value_transporters['transporters_id'] == 4 || $value_transporters['transporters_id'] == 5){
@@ -246,7 +247,7 @@ function add_order($list_transporters,$info_customer){
 		
 		$data_insert['total'] = $value_transporters['total_product'] + $value_transporters['fee'] - $value_transporters['discount_price'];
 		$data_insert['note'] = $value_transporters['note_product'];
-		$data_insert['time_add'] = NV_CURRENTTIME;
+		$data_insert['time_add'] = $time_add;
 		$data_insert['total_weight'] = $value_transporters['total_weight'];
 		$data_insert['total_height'] =  $value_transporters['total_height'];
 		$data_insert['total_width'] = $value_transporters['total_width'];
@@ -269,7 +270,7 @@ function add_order($list_transporters,$info_customer){
 			$data_insert['order_id'] = $order_id ;
 			$data_insert['userid'] = $userid;
 			$data_insert['discount_price'] = $value_transporters['discount_price'];
-			$data_insert['time_add'] = NV_CURRENTTIME;
+			$data_insert['time_add'] = $time_add;
 			$data_insert['status'] = 0;
 			
 			$voucher_id = $db->insert_id( $sql, 'voucherid', $data_insert );
