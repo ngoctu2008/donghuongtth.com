@@ -11,9 +11,7 @@
 		
 		foreach($list_payment as $value)
 		{
-			// tạo link
-			
-			$arr_temp[$value['id']] = $value;
+			$arr_temp[$value['payment']] = $value;
 		}
 		
 		return $arr_temp;
@@ -65,11 +63,10 @@
 	if(!$redis->exists('catalogy_main'))
 	{
 		$payport = get_payment_all();
-		$redis->set('payport', json_encode($catalogys));	
+		$redis->set('payport', json_encode($payport));	
 	}
 	$global_payport = json_decode($redis->get('payport'),true);
 	//$redis->delete('catalogy_main');
-	
 	if(!$redis->exists('catalogy_main'))
 	{
 		$catalogys = get_categories_all();
