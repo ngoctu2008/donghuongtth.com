@@ -15,7 +15,7 @@
 <!-- BEGIN: thanhcong -->
  <div class="container bg_white">
         <div class="text-center fs_24 p-4">Chi tiết giao dịch</div>
-        <div class="row border m-3 p-3 rounded-lg ">
+        <div class="row border p-3 rounded-lg ">
             <div class="col-3 text-center">
                 <img src="{LOGO_SRC}" class="width_80" alt="">
             </div>
@@ -45,7 +45,7 @@
 
         </div>
         <div class="my-4 fs_18 text-center">THÔNG TIN KHÁCH HÀNG</div>
-        <div class="border m-3 p-3 rounded-lg ">
+        <div class="border p-3 rounded-lg ">
             <table class="table table-borderless">
                 <tbody>
                     <tr>
@@ -67,9 +67,9 @@
                 </tbody>
             </table>
         </div>
-        <div class="row my-4 pb-3">
-            <div class="col-6 text-right"><a href="{HISTORY}" class="btn_ecng_outline py-2">Lịch sử mua hàng</a></div>
-            <div class="col-6 text-left"><a  href="{NV_BASE_SITEURL}" class="btn_ecng py-2">Trang chủ</a></div>
+        <div class="row justify-content-center my-4 pb-3">
+            <div class="text-center p-2"><a href="{HISTORY}" class="btn_ecng_outline py-2">Lịch sử mua hàng</a></div>
+            <div class="text-center p-2"><a  href="{NV_BASE_SITEURL}" class="btn_ecng py-2">Trang chủ</a></div>
         </div>
     </div>
 
