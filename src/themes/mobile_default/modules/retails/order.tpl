@@ -126,12 +126,12 @@
         <a href="{LINK_ADDRESS}" class="btn_ecng botton_add_address {show_address}">+ Thêm địa chỉ mới</a>
         <!--  Thêm địa chỉ mua hàng không cần đăng nhập -->
         <!-- BEGIN: address_no_login -->
-        <div class="row mt-2">
+        <div class="row">
             <div class="col-12">
-                <p class="fs_16 d-flex flex-column">
+                <p class="fs_14 d-flex flex-column">
                     <span class="text-break">{FULL_NAME}</span>
                     <span class="text-break">{FULL_ADDRESS}</span>
-                    <span class="ml-2 mr-3">{FULL_PHONE}</span>
+                    <span class="">{FULL_PHONE}</span>
                     <span class="text-break">{FULL_EMAIL}</span>
                 </p>
             </div>

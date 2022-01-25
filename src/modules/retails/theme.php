@@ -147,7 +147,6 @@
 		$info_order['voucher_price']=number_format($info_order['voucher_price']);
 		$info_order['total']=number_format($info_order['total']);
 		$xtpl->assign('info_order', $info_order);
-		
 		$shop_name = $db->query('SELECT company_name FROM ' . TABLE . '_seller_management WHERE id = ' . $info_order['store_id'])->fetchColumn();
 		
 		$xtpl->assign('SHOP_NAME', $shop_name);
@@ -401,7 +400,7 @@
 	
 	function email_new_order_payment_khach($data_order, $data_pro,$info_order)
 	{ 
-		global $module_info, $lang_module, $module_file, $pro_config, $global_config, $money_config;
+		global $module_info, $lang_module, $module_file, $pro_config, $global_config, $money_config, $config_setting;
 		
 		$xtpl = new XTemplate("email_new_order_payment_khach.tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file);
 		
@@ -412,6 +411,7 @@
 		$info_order['voucher_price']=number_format($info_order['voucher_price']);
 		$info_order['total']=number_format($info_order['total']);
 		$xtpl->assign('info_order', $info_order);
+		$xtpl->assign('children_fund', $config_setting['children_fund'] . '%');
 		//xem thông tin đơn hàng
 		$view_order ='https://chonhagiau.com/vieworder/?id=' . $info_order['id'];
 		$xtpl->assign('VIEW_ORDER', $view_order);
