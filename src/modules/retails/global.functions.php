@@ -1,4 +1,29 @@
 <?php
+	// lấy tất cả category đưa vào redis
+	function get_payment_all()
+	{
+		global $db, $module_name, $module_upload;
+		
+		$list_payment = $db->query('SELECT * FROM ' . TABLE .'_payment WHERE active = 1 ORDER BY weight ASC')->fetchAll();
+		
+		
+		$arr_temp = array();
+		
+		foreach($list_payment as $value)
+		{
+			// tạo link
+			
+			$arr_temp[$value['id']] = $value;
+		}
+		
+		return $arr_temp;
+	}
+	
+	
+
+
+
+
 	define('NV_TABLE_USER', $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_users');
 	define('IDSITE', $global_config['idsite']);
 	define('TABLE', $db_config['dbsystem'] . '.' . NV_PREFIXLANG . '_' . $module_name);
@@ -35,7 +60,14 @@
 	
 	// lấy tất cả xã phường
 	$global_ward = json_decode($redis->get('location_ward'),true);
-	
+
+	// lấy tất cả cổng thanh toán
+	if(!$redis->exists('catalogy_main'))
+	{
+		$payport = get_payment_all();
+		$redis->set('payport', json_encode($catalogys));	
+	}
+	$global_payport = json_decode($redis->get('payport'),true);
 	//$redis->delete('catalogy_main');
 	
 	if(!$redis->exists('catalogy_main'))
