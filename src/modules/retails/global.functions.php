@@ -521,7 +521,7 @@
 	// xử lý thanh toán vnpay thành công
 	function xulythanhtoanthanhcong($order_text, $inputData)
 	{
-		global $db, $db_config, $user_info, $module_name, $lang_module;
+		global $db, $db_config, $user_info, $module_name, $lang_module,$global_payport;
 		
 		$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
 		
@@ -597,6 +597,7 @@
 			// Gui mail thong bao den khach hang
 			$data_order['id'] = $order['id'];
 			$info_order = $order;
+			$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
 			$data_order['order_code'] = $order['order_code'];
 			
 			$email_title = $lang_module['order_email_title'];
@@ -4661,7 +4662,7 @@
 	}
 	function xulythanhtoanthanhcong_recieve($order_text, $inputData)
 	{
-		global $db, $db_config, $user_info, $module_name, $lang_module;
+		global $db, $db_config, $user_info, $module_name, $lang_module, $global_payport;
 		
 		$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
 		
@@ -4732,6 +4733,7 @@
 			// Gui mail thong bao den khach hang
 			$data_order['id'] = $order['id'];
 			$info_order = $order;
+			$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
 			$data_order['order_code'] = $order['order_code'];
 			
 			$email_title = $lang_module['order_email_title'];
