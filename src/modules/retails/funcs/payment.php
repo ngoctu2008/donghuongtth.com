@@ -12,12 +12,17 @@
 		$i = 0;
 		$max_i = count($orders);
 		$flag = false;
-		foreach($orders as $key=>$order){
-			if($i<$max_i && $orders[$i+1]['time_add'] == $orders[$i]['time_add'] && $orders[$i+1]['payment_method'] == $orders[$i]['payment_method']){
-				$flag = true;
+		if($max_i > 1){
+			foreach($orders as $key=>$order){
+				if($i<$max_i && $orders[$i+1]['time_add'] == $orders[$i]['time_add'] && $orders[$i+1]['payment_method'] == $orders[$i]['payment_method']){
+					$flag = true;
+				}
+				$i++;
 			}
-			$i++;
+		}else{
+			$flag = true;
 		}
+		
 		if($flag == false){
 			nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name );
 		}
