@@ -29,7 +29,7 @@
 		}elseif(count($order) > 1 && $max_i == 1) {
 			$flag = true;
 		}
-		
+		print_r($flag);die;
 		if($flag == false){
 			nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name );
 		}
