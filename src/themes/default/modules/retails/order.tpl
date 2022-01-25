@@ -306,6 +306,9 @@
 		
 		
 		<script>
+			$('.close').click(function () {
+				$('.modal').modal('hide');
+			});
 			$(document).click(function () {
 				$('.modal').modal('hide');
 			});

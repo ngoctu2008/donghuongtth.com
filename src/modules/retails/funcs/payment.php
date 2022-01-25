@@ -9,30 +9,30 @@
 		$order = explode(",",$order_code);
 
 		$orders = $db->query('SELECT * FROM ' . TABLE . '_order where id IN (' . $order_code . ' )')->fetchAll(); 
-		$i = 0;
+		
 		$max_i = count($orders);
 		$flag = false;
 		if(count($order) > 1 && $max_i > 1){
 			$flags = array();
-			foreach($orders as $key=>$order){
-				if($i<$max_i && $orders[$i+1]['time_add'] == $orders[$i]['time_add'] && $orders[$i+1]['payment_method'] == $orders[$i]['payment_method']){
-					$flags[] = 1;
-				}else{
-					$flags[] = 0;
+			for($i = 0;$i<($max_i-1);$i++){
+				$flags[$i] = 0;
+				if(  $orders[$i+1]['time_add'] == $orders[$i]['time_add'] && $orders[$i+1]['payment_method'] == $orders[$i]['payment_method']){
+					$flags[$i] = 1;
+					
 				}
-				$i++;
+				
 			}
-
 			if(in_array(0,$flags) == 0 ){
 				$flag = true;
 			}
-		}elseif(count($order) > 1 && $max_i == 1) {
+
+		}elseif(count($order) == 1 && $max_i == 1) {
 			$flag = true;
 		}
-		print_r($flag);die;
 		if($flag == false){
 			nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name );
 		}
+		$payment_method = $orders[0]['payment_method'];
 		if($payment_method == 'vnpay'){
 
 			
@@ -186,6 +186,9 @@
 
 				// ket thuc xu ly chuan
 		}elseif($payment_method == 'recieve'){
+			$xtpl->assign('HISTORY', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=ordercustomer',true));
+			
+			$xtpl->assign('RE_PAYMENT', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=re-payment',true));
 			
 			$thanhtoan = true;
 			$inputData = array();

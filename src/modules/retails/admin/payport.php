@@ -201,7 +201,8 @@ if (NV_LANG_DATA == 'vi') {
 
 $xtpl->parse('main');
 $contents = $xtpl->text('main');
-
+// xóa cache redis danh mục payment
+$redis->delete('payport');
 include NV_ROOTDIR . '/includes/header.php';
 echo nv_admin_theme($contents);
 include NV_ROOTDIR . '/includes/footer.php';

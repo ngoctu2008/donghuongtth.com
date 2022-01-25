@@ -2802,14 +2802,15 @@ if ( $mod == 'add_order' ) {
 			
 			$list_order = $data['list_order'];
 			$list_order_code = $data['list_order_code'];
-			
+			$info_order = get_info_order($list_order[0]);
+			$info_order['payment_method_name'] = $global_payport[$info_order['payment_method_name']]['paymentname'];
 			$list_order=implode(',',$list_order);
 			$list_order_code=implode(',',$list_order_code);
 			
 			xulythanhtoanthanhcong_recieve($list_order, $info_order);
 			$contents1 = array(
 				'status' => 'OK_RECIEVE',
-				'link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&amp;order_code='.$list_order , true )
+				'link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&amp;order_code=' , true ).$list_order
 				);
 				print_r( json_encode($contents1));die;
 		}elseif($payment_method == 'momo'){
