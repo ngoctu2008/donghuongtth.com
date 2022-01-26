@@ -280,10 +280,9 @@ function add_order($list_transporters,$info_customer){
 			foreach ($_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] as $key_product => $value_product ) {
 				if ( $value_product['status_check'] == 1 ) {
 					$arr_product_id_voucher = $_SESSION['voucher_shop'][$value_transporters['store_id']]['product_id'];
+					$price_voucher = 0;
 					if(in_array($value_product['product_id'], $arr_product_id_voucher)){
 						$price_voucher = $_SESSION['voucher_shop'][$value_transporters['store_id']]['price'];
-						}else{
-						$price_voucher = 0;
 					}
 					$total_weight = $value_product['weight_product'] * $value_product['num'];
 					$total_length = $value_product['length_product'] * $value_product['num'];

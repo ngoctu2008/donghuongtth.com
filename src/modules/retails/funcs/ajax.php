@@ -1772,16 +1772,15 @@ if($mod=='load_order_customer'){
 		$base_url .= '&q=' . $q;
 	}
 	
-	
+
 	$per_page = 10;
 	$page = $nv_Request->get_int('page', 'post,get', 1);
 	$db->sqlreset()
 	->select('COUNT(*)')
 	->from('' . TABLE . '_order')
-	->where('payment != 0 AND userid = '.$user_info['userid'] . $where);
+	->where('( payment != 0 OR payment_method = "recieve" )  AND userid = '.$user_info['userid'] . $where);
 	
 	$sth = $db->prepare($db->sql());
-	
 	$sth->execute();
 	$num_items = $sth->fetchColumn();
 	
@@ -2117,7 +2116,7 @@ if($mod=='load_order_customer_no_payment'){
 
 
 // xử lý thanh toán lại đơn hàng vnpay 
-if($mod=='vnpay_repayment'){
+if($mod=='repayment'){
 	$data['id_order'] = $nv_Request->get_title( 'id_order', 'post,get','');
 	
 	
@@ -2803,7 +2802,7 @@ if ( $mod == 'add_order' ) {
 			$list_order = $data['list_order'];
 			$list_order_code = $data['list_order_code'];
 			$info_order = get_info_order($list_order[0]);
-			$info_order['payment_method_name'] = $global_payport[$info_order['payment_method_name']]['paymentname'];
+			$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
 			$list_order=implode(',',$list_order);
 			$list_order_code=implode(',',$list_order_code);
 			
@@ -3794,11 +3793,11 @@ if ( $mod == 'tonkho' ) {
 
 if($mod == 'testtt')
 {
-	// send_mail_payment_fail(714);
+	// send_mail_payment_fail(770);
 	
 	// $order = get_info_order(714);
 	// send_email_order_cancel($order);
-	// xulythanhtoanthanhcong(714, '');
+	// xulythanhtoanthanhcong(767, '');
 	//send_mail_order_delivered($order);
 	
 	//update_time_add_order(647);

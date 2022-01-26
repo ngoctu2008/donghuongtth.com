@@ -71,7 +71,7 @@
 	//mail gửi khách thanh toán thất bại
 	function email_payment_fail($data_order, $data_pro, $info_order)
 	{ 
-		global $module_info, $lang_module, $module_file, $pro_config, $global_config, $money_config;
+		global $module_info, $lang_module, $module_file, $pro_config, $global_config, $money_config, $config_setting;
 		
 		$xtpl = new XTemplate("email_payment_fail.tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file);
 		
@@ -84,6 +84,7 @@
 		$info_order['voucher_price']=number_format($info_order['voucher_price']);
 		$info_order['total']=number_format($info_order['total']);
 		$xtpl->assign('info_order', $info_order);
+		$xtpl->assign('children_fund', $config_setting['children_fund'] . '%');
 		$i=0;
 		
 		if($info_order['voucherid'])
@@ -400,7 +401,7 @@
 	
 	function email_new_order_payment_khach($data_order, $data_pro,$info_order)
 	{ 
-		global $module_info, $lang_module, $module_file, $pro_config, $global_config, $money_config, $config_setting;
+		global $module_info, $lang_module, $module_file, $pro_config, $global_config, $money_config, $config_setting, $user_info;
 		
 		$xtpl = new XTemplate("email_new_order_payment_khach.tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file);
 		
@@ -413,7 +414,12 @@
 		$xtpl->assign('info_order', $info_order);
 		$xtpl->assign('children_fund', $config_setting['children_fund'] . '%');
 		//xem thông tin đơn hàng
-		$view_order ='https://chonhagiau.com/vieworder/?id=' . $info_order['id'];
+		if($user_info['userid']){
+			$view_order = 'https://chonhagiau.com/vieworder/?id=' . $info_order['id'];
+		}
+		else{
+			$view_order = 'https://chonhagiau.com/check-order/?id=' . $info_order['id'];
+		}
 		$xtpl->assign('VIEW_ORDER', $view_order);
 		// lấy xã + huyện + tỉnh
 		$address = get_full_address($info_order['ward_id'], $info_order['district_id'], $info_order['province_id']);
@@ -598,8 +604,7 @@
 		$xtpl->parse('main');
 		return $xtpl->text( 'main' );
 	}
-	
-	
+
 	function nv_theme_retailshops_list_order_customer($ngay_tu,$ngay_den,$status_ft,$sea_flast,$q){
 		global $module_info, $lang_module, $lang_global, $op, $module_upload, $module_name,$db,$db_config,$module_data,$user_info ;
 		
