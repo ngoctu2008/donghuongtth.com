@@ -1,3 +1,8 @@
+26/01/2022
+INSERT INTO `tms_vi_retails_config` (`id`, `config_name`, `config_value`) VALUES (NULL, 'name_ecng', '');
+INSERT INTO `tms_vi_retails_config` (`id`, `config_name`, `config_value`) VALUES (NULL, 'phone_ecng', '');
+INSERT INTO `tms_vi_retails_config` (`id`, `config_name`, `config_value`) VALUES (NULL, 'email_ecng', '');
+
 25/01/2022
 ALTER TABLE `tms_vi_retails_order_item` ADD `voucher_price` DOUBLE NULL DEFAULT '0' COMMENT 'giá giảm của voucher ' AFTER `discount`; 
 24/01/2022

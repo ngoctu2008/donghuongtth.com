@@ -3500,6 +3500,11 @@ if ( $mod == 'get_transport_fee_ghtk' ) {
 	$address = $nv_Request->get_string( 'address', 'get,post', 0 );
 	$warehouse_id = $nv_Request->get_int( 'warehouse_id', 'get,post', 0 );
 	$info_warehouse = get_info_warehouse( $warehouse_id );
+	if($weight_product == 0  ){
+		$_SESSION['tranposter_fee'][$shops_id_session][2] = 0;
+		print_r( json_encode( 0 ) );
+		die;
+	}
 	//format thông tin
 	$pick_province = $global_province[$info_warehouse['province_id']]['title'];
 	$pick_district = $global_district[$info_warehouse['district_id']]['title'];
@@ -3518,6 +3523,7 @@ if ( $mod == 'get_transport_fee_ghtk' ) {
 		// cộng thêm phí vận chuyển hệ thống sàn thương mại
 		$tranposter_fee = $tranposter_fee + (($tranposter_fee * $config_setting['percent_of_ship'])/100);
 		$tranposter_fee = rounding($tranposter_fee);
+		$_SESSION['tranposter_fee'][$shops_id_session][2] = $tranposter_fee;
 		} else {
 			$tranposter_fee = -1;
 	}
