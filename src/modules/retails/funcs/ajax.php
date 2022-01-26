@@ -1772,16 +1772,15 @@ if($mod=='load_order_customer'){
 		$base_url .= '&q=' . $q;
 	}
 	
-	
+
 	$per_page = 10;
 	$page = $nv_Request->get_int('page', 'post,get', 1);
 	$db->sqlreset()
 	->select('COUNT(*)')
 	->from('' . TABLE . '_order')
-	->where('payment != 0 AND userid = '.$user_info['userid'] . $where);
+	->where('( payment != 0 OR payment_method = "recieve" )  AND userid = '.$user_info['userid'] . $where);
 	
 	$sth = $db->prepare($db->sql());
-	
 	$sth->execute();
 	$num_items = $sth->fetchColumn();
 	
@@ -3792,7 +3791,7 @@ if($mod == 'testtt')
 	
 	// $order = get_info_order(714);
 	// send_email_order_cancel($order);
-	// xulythanhtoanthanhcong(714, '');
+	xulythanhtoanthanhcong(767, '');
 	//send_mail_order_delivered($order);
 	
 	//update_time_add_order(647);
