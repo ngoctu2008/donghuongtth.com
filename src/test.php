@@ -1,3 +1,5 @@
 <?php
-print_r(is_mod_rewrite_enabled());
+ if (function_exists('apache_get_modules')) {
+    print_r(apache_get_modules());
+ }
 ?>
