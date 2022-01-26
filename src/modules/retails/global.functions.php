@@ -11,9 +11,7 @@
 		
 		foreach($list_payment as $value)
 		{
-			// tạo link
-			
-			$arr_temp[$value['id']] = $value;
+			$arr_temp[$value['payment']] = $value;
 		}
 		
 		return $arr_temp;
@@ -65,11 +63,10 @@
 	if(!$redis->exists('catalogy_main'))
 	{
 		$payport = get_payment_all();
-		$redis->set('payport', json_encode($catalogys));	
+		$redis->set('payport', json_encode($payport));	
 	}
 	$global_payport = json_decode($redis->get('payport'),true);
 	//$redis->delete('catalogy_main');
-	
 	if(!$redis->exists('catalogy_main'))
 	{
 		$catalogys = get_categories_all();
@@ -525,7 +522,7 @@
 	// xử lý thanh toán vnpay thành công
 	function xulythanhtoanthanhcong($order_text, $inputData)
 	{
-		global $db, $db_config, $user_info, $module_name, $lang_module;
+		global $db, $db_config, $user_info, $module_name, $lang_module,$global_payport;
 		
 		$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
 		
@@ -601,6 +598,7 @@
 			// Gui mail thong bao den khach hang
 			$data_order['id'] = $order['id'];
 			$info_order = $order;
+			$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
 			$data_order['order_code'] = $order['order_code'];
 			
 			$email_title = $lang_module['order_email_title'];
@@ -4665,7 +4663,7 @@
 	}
 	function xulythanhtoanthanhcong_recieve($order_text, $inputData)
 	{
-		global $db, $db_config, $user_info, $module_name, $lang_module;
+		global $db, $db_config, $user_info, $module_name, $lang_module, $global_payport;
 		
 		$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
 		
@@ -4736,6 +4734,7 @@
 			// Gui mail thong bao den khach hang
 			$data_order['id'] = $order['id'];
 			$info_order = $order;
+			$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
 			$data_order['order_code'] = $order['order_code'];
 			
 			$email_title = $lang_module['order_email_title'];

@@ -8,3 +8,4 @@ src/data/logs/ip_logs/*.log
 *.cache
 src/data/config/config_global.*
 src/data/logs/ref_logs/*.log
+src/data/config/config_ini.localhost.php
