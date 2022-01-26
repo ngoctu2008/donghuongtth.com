@@ -72,7 +72,7 @@
 			}
 			else{
 				echo '<script language="javascript">';
-				echo 'alert("Thanh toán thất bại!")';
+				echo 'alert("Thanh toán thất bại!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL ,true).'"';
 				echo '</script>';
 			}
 		}elseif(isset($_SESSION[$module_name . '_recieve']) and !$_SESSION[$module_name . '_recieve'])
@@ -85,7 +85,7 @@
 			}
 			else{
 				echo '<script language="javascript">';
-				echo 'alert("Đơn hàng đã được tạo");';
+				echo 'alert("Đơn hàng đã được tạo");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL ,true).'"';
 				echo '</script>';
 			}
 		}
