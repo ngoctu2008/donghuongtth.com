@@ -186,7 +186,7 @@
 
 				// ket thuc xu ly chuan
 		}elseif($payment_method == 'recieve'){
-
+			$db->query('UPDATE ' . TABLE . '_order SET status = 1  WHERE id IN (' . $order_code . ')');
 			$xtpl->assign('HISTORY', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=ordercustomer',true));
 			
 			$xtpl->assign('RE_PAYMENT', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=re-payment',true));
