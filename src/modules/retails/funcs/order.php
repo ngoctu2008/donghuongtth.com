@@ -19,7 +19,6 @@
 		}
 	}
 	
-	
 	//kiểm tra đơn hàng đã thanh toán chưa nếu chưa thanh toán -> re-payment
 	if($_SESSION['payment'] == false){
 		echo '<script language="javascript">';
@@ -34,7 +33,6 @@
 		$form_address = form_address();
 		die($form_address);
 	}
-	
 	
 	
 	if($mod=="set_default"){
@@ -74,7 +72,7 @@
 			}
 			else{
 				echo '<script language="javascript">';
-				echo 'alert("Thanh toán thất bại!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=tracking-order',true).'"';
+				echo 'alert("Thanh toán thất bại!")';
 				echo '</script>';
 			}
 		}elseif(isset($_SESSION[$module_name . '_recieve']) and !$_SESSION[$module_name . '_recieve'])
@@ -87,7 +85,7 @@
 			}
 			else{
 				echo '<script language="javascript">';
-				echo 'alert("Đơn hàng đã được tạo");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=tracking-order',true).'"';
+				echo 'alert("Đơn hàng đã được tạo");';
 				echo '</script>';
 			}
 		}

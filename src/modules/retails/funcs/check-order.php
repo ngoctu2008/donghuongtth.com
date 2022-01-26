@@ -127,9 +127,9 @@
 	
 	$id = $nv_Request->get_title( 'id', 'post,get' );
 	if (!defined('NV_IS_USER')) {
-		echo '<script language="javascript">';
-		echo 'alert("Vui lòng đăng nhập trước để thực hiện chức năng này.");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true).'"';
-		echo '</script>';
+		// echo '<script language="javascript">';
+		// echo 'alert("Vui lòng đăng nhập trước để thực hiện chức năng này.");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true).'"';
+		// echo '</script>';
 		}else{  
 		if($id==0){
 			echo '<script language="javascript">';
@@ -140,7 +140,7 @@
 	
 	
 	check_store_order_id($id);
-	// print_r($id);die;
+	
 	$info_order = get_info_order($id);
 
 	
@@ -218,10 +218,6 @@
 	$xtpl->assign( 'LANG', $lang_module );
 	$xtpl->assign( 'GLANG', $lang_global );
 	
-	
-	
-	
-	
 	$xtpl->assign( 'LANG', $lang_module );
 	$xtpl->assign( 'NV_LANG_VARIABLE', NV_LANG_VARIABLE );
 	$xtpl->assign( 'NV_LANG_DATA', NV_LANG_DATA );
@@ -236,7 +232,6 @@
 	$xtpl->assign( 'info_warehouse', $info_warehouse );
 	$xtpl->assign( 'back_link', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=ordercustomer',true));
 	$xtpl->assign('children_fund', $config_setting['children_fund'] . '%');
-	
 
 	if($user_info['userid']){
 		$info_order['check_rate'] = $db->query('SELECT count(*) FROM ' . TABLE . '_order t1 INNER JOIN ' . TABLE . '_order_item t2 ON t1.id = t2.order_id WHERE t2.product_id = ' . $info_order['id'] . ' AND t1.status = 3')->fetchColumn();
@@ -457,7 +452,7 @@
 	$page_title = $lang_module['vieworder'].' '.$info_order['order_code'];
 	$array_mod_title[] = array(
 	'catid' => 0,
-	'title' => 'Lịch sử mua hàng',
+	'title' => 'Kiểm tra đơn hàng',
 	'link' => NV_MY_DOMAIN .'/'. $module_name .'/ordercustomer/'
 	);
 	$array_mod_title[] = array(

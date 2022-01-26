@@ -447,10 +447,10 @@
 			$flag = $db->query("SELECT id FROM " . TABLE . "_order where userid = ". $user_info['userid'] ." AND id=" . $order_id)->fetchColumn();
 		}
 		
-		if(!$flag)
-		{
-			// nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=ordercustomer');
-		}
+		// if(!$flag)
+		// {
+		// 	// nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=ordercustomer');
+		// }
 		
 		return $flag;
 	}
@@ -2392,9 +2392,7 @@
 	function get_info_store($store_id)
 	{
 		global $db;
-		
 		$list = $db->query("SELECT * FROM " . TABLE . "_seller_management where id=" . $store_id)->fetch();
-		
 		return $list;
 	}
 	function get_info_store_userid($userid)

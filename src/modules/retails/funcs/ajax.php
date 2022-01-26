@@ -2116,7 +2116,7 @@ if($mod=='load_order_customer_no_payment'){
 
 
 // xử lý thanh toán lại đơn hàng vnpay 
-if($mod=='vnpay_repayment'){
+if($mod=='repayment'){
 	$data['id_order'] = $nv_Request->get_title( 'id_order', 'post,get','');
 	
 	
@@ -3787,11 +3787,11 @@ if ( $mod == 'tonkho' ) {
 
 if($mod == 'testtt')
 {
-	// send_mail_payment_fail(714);
+	// send_mail_payment_fail(770);
 	
 	// $order = get_info_order(714);
 	// send_email_order_cancel($order);
-	xulythanhtoanthanhcong(767, '');
+	// xulythanhtoanthanhcong(767, '');
 	//send_mail_order_delivered($order);
 	
 	//update_time_add_order(647);
