@@ -127,10 +127,12 @@
 	
 	$id = $nv_Request->get_title( 'id', 'post,get' );
 	if (!defined('NV_IS_USER')) {
-		echo '<script language="javascript">';
-		echo 'alert("Vui lòng đăng nhập trước để thực hiện chức năng này.");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true).'"';
-		echo '</script>';
+		// echo '<script language="javascript">';
+		// echo 'alert("Vui lòng đăng nhập trước để thực hiện chức năng này.");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true).'"';
+		// echo '</script>';
+		$user_info['userid'] = 0;
 		}else{  
+			$user_info['userid'] = 0;	
 		if($id==0){
 			echo '<script language="javascript">';
 			echo 'alert("Chưa tìm thấy đơn hàng nào");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=listorder',true).'"';
