@@ -1,2 +1,3 @@
 <?php
-print_r(apache_get_modules());
+print_r(is_mod_rewrite_enabled());
+?>
