@@ -186,10 +186,13 @@
 
 				// ket thuc xu ly chuan
 		}elseif($payment_method == 'recieve'){
+
 			$xtpl->assign('HISTORY', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=ordercustomer',true));
 			
 			$xtpl->assign('RE_PAYMENT', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=re-payment',true));
-			
+			// tính tổng tiền thanh toán
+				$tongtien_thanhtoan = $db->query('SELECT sum(total) FROM ' . TABLE . '_order WHERE id IN('. $order_code .')')->fetchColumn(); 
+
 			$thanhtoan = true;
 			$inputData = array();
 			$inputData['order_code'] = $nv_Request->get_title('order_code', 'get', '', 1);
@@ -253,7 +256,7 @@
 			
 			$inputData['date_create'] = date("d/m/Y H:i",$info_order['time_add']);//$ngay . '/' . $thang . '/' . $nam . ' - ' . $gio . ':' . $phut;
 			
-			$inputData['format_Amount'] = number_format($info_order['total'],0,",",",");
+			$inputData['format_Amount'] = number_format($tongtien_thanhtoan,0,",",",");
 			$xtpl->assign('thanhtoan', $inputData);
 		}elseif($payment_method == 'momo'){
 			require_once(NV_ROOTDIR.'modules/retails/payment/momo.complete.php');
