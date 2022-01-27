@@ -2155,15 +2155,17 @@ if($mod=='repayment'){
 	
 	$order_full = $data['id_order'];
 	$list_order_code = implode(',',$list_order_code);
+
+	//Payment_port($order_full,$list_order_code,);
 	$vnp_TransactionNo = $order_full;
 	$vnp_OrderInfo = 'Thanh toan giao dich '.$list_order_code.' vao thoi gian '.date('d-m-Y H:i',NV_CURRENTTIME);
 	
 	$vnp_ReturnUrl= 'https://chonhagiau.com/retails/payment/';
 
-	$check_vnpay = send_vnpay($total_full,$vnp_OrderInfo,$config_setting['website_code_vnpay'],$vnp_TransactionNo,$config_setting['checksum_vnpay'],$vnp_ReturnUrl,'171.226.0.17');
+	$check_payport = send_vnpay($total_full,$vnp_OrderInfo,$config_setting['website_code_vnpay'],$vnp_TransactionNo,$config_setting['checksum_vnpay'],$vnp_ReturnUrl,'171.226.0.17');
 	$result = array(
 	'status' => 'OK',
-	'link' => $check_vnpay
+	'link' => $check_payport
 	);
 	print_r( json_encode($result));die;
 	die();
@@ -2770,7 +2772,7 @@ if ( $mod == 'add_order' ) {
 		);
 		// add order
 		$data = add_order($list_transporters,$info_customer);
-		unset( $_SESSION[$module_data . '_cart'] );
+		//unset( $_SESSION[$module_data . '_cart'] );
 
 		// thanh toán vnpay
 		if($payment_method == 'vnpay'){
@@ -3440,7 +3442,7 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	$transporters_id = $nv_Request->get_int( 'transporters_id', 'get,post', 0 );
 	$code_transporters = get_info_transporters( $transporters_id )['code_transporters'];
 	$shop_id = $info_warehouse['shops_id_ghn'];
-	
+
 	$service = get_service_ghn($shop_id,$district_id_ghn_send,$district_id_ghn_receive);
 	
 	$service['code_message_value'];
