@@ -1089,8 +1089,7 @@ function nv_chang_pays(payid, object, url_change, url_back) {
         url: url_change,
         data: 'oid=' + payid + '&w=' + value,
         success: function(data) {
-            console.log(data);
-            //window.location = url_back;
+            window.location = url_back;
         }
     });
     return;
