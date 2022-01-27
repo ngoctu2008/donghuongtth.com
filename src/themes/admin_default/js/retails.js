@@ -1094,7 +1094,18 @@ function nv_chang_pays(payid, object, url_change, url_back) {
     });
     return;
 }
-
+function ChangeDefault(payid, object, url_setdefault, url_back) {
+    var value = $(object).val();
+    $.ajax({
+        type: 'POST',
+        url: url_setdefault,
+        data: 'oid=' + payid + '&w=' + value,
+        success: function(data) {
+            window.location = url_back;
+        }
+    });
+    return;
+}
 
 function ChangeActive(idobject, url_active) {
     var id = $(idobject).attr('id');

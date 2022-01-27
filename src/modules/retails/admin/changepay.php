@@ -35,7 +35,7 @@ if (! empty($payment)) {
     $stmt->bindParam(':payment', $payment_swap, PDO::PARAM_STR);
     $stmt->execute();
 
-    $content = "OK_" . $payment."_". $new_weight;
+    $content = "OK_" . $payment;
     $nv_Cache->delMod($payment);
 }
 
