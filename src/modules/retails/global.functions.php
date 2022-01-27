@@ -4761,4 +4761,191 @@
 		
 		return true;
 	}
+function GetInfoOrderByID($order_code)
+{
+	global $db;
+	$list = array();
+	$sth = $db->query("SELECT * FROM " . TABLE . "_order where id IN (" . $order_code .")");
+	while($row = $sth->fetch()){
+		$list[$row['id']] = $row;
+	}
 	
+	
+	return $list;
+}	
+function PaymentMethod(){
+
+}
+function GetPaymentMethodOrder($order_code){
+	global $db;
+	$order = explode(",",$order_code);
+
+	$orders = $db->query('SELECT * FROM ' . TABLE . '_order where id IN (' . $order_code . ' )')->fetchAll(); 
+	
+	$max_i = count($orders);
+	$flag = false;
+	if(count($order) > 1 && $max_i > 1){
+		$flags = array();
+		for($i = 0;$i<($max_i-1);$i++){
+			$flags[$i] = 0;
+			if(  $orders[$i+1]['time_add'] == $orders[$i]['time_add'] && $orders[$i+1]['payment_method'] == $orders[$i]['payment_method']){
+				$flags[$i] = 1;
+				
+			}
+			
+		}
+		if(in_array(0,$flags) == 0 ){
+			$flag = true;
+		}
+
+	}elseif(count($order) == 1 && $max_i == 1) {
+		$flag = true;
+	}
+	if($flag == false){
+		nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name );
+	}
+	$payment_method = $orders[0]['payment_method'];
+	return $payment_method;
+}
+
+function CheckPaymentOrder($payment_method,$order_code,$inputData){
+	$error = array();
+	if($payment_method == 'vnpay'){
+		if ($inputData['vnp_ResponseCode'] == '02')
+		{
+			$error[] = 'Đơn hàng đã được xác nhận!';
+		}
+		elseif ($inputData['vnp_ResponseCode'] == '04')
+		{
+			$error[] = 'Số tiền không hợp lệ!';
+		}
+		elseif ($inputData['vnp_ResponseCode'] == '01')
+		{
+			$error[] = 'Không tìm thấy giao dịch xác nhận!';
+		}
+		elseif ($inputData['vnp_ResponseCode'] == '97')
+		{
+			$error[] = 'Chữ ký không hợp lệ!';
+		}
+		elseif ($inputData['vnp_ResponseCode'] == '99')
+		{
+			$error[] = 'Lỗi hệ thống khác!';
+		}
+		elseif ($inputData['vnp_ResponseCode'] == '24')
+		{
+			$error[] = 'Giao dịch không thành công!';
+		}
+	}
+	
+	return $error;
+}
+function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
+	global $db;
+	$status = false;
+
+	if(empty($errors)){
+		//$_SESSION[$module_name . '_' . $payment_method] = true;
+		if($payment_method == 'vnpay'){
+				$vnp_SecureHash = $inputData['vnp_SecureHash'];
+				unset($inputData['vnp_SecureHashType']);
+				unset($inputData['vnp_SecureHash']);
+				ksort($inputData);
+				$i = 0;
+				$hashData = "";
+				foreach ($inputData as $key => $value)
+				{
+					if ($i == 1)
+					{
+						$hashData = $hashData . '&' . $key . "=" . $value;
+					}
+					else
+					{
+						$hashData = $hashData . $key . "=" . $value;
+						$i = 1;
+					}
+				}
+				$vnp_HashSecret = $config_setting['checksum_vnpay'];
+
+				$order_text = $inputData['vnp_TxnRef'];
+				
+				if(!$order_text)
+				{
+					$returnData['RspCode'] = '01';
+					$returnData['Message'] = 'Order not found!';
+				}
+				
+
+				// tính tổng tiền thanh toán
+				$sum_total_payment = $db->query('SELECT sum(total) FROM ' . TABLE . '_order WHERE id IN('. $order_text .')')->fetchColumn(); 
+
+				//print_r($tongtien_thanhtoan);die;
+
+				$check_orderid = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .')')->fetchColumn(); 
+
+				$check_payment = $db->query('SELECT id FROM ' . TABLE . '_order WHERE status_payment_vnpay = 1 AND id IN('. $order_text .')')->fetchColumn(); 
+
+			
+				$secureHash = hash('sha256', $vnp_HashSecret . $hashData);
+				//print_r($id_order);die;
+			
+				$vnp_Amount = $inputData['vnp_Amount'];
+				$vnp_Amount = (int)$vnp_Amount / 100;
+
+				// checksum
+				//print_r($vnp_SecureHash);die;
+				if ($secureHash == $vnp_SecureHash)
+				{
+					// check OrderId
+					if ($check_orderid)
+					{
+						if($tongtien_thanhtoan && $tongtien_thanhtoan == $vnp_Amount ){
+							// check Status
+							if ($check_payment) {
+								
+									if ($inputData['vnp_ResponseCode'] == '00')
+									{
+										$status = true;
+									
+									}
+									
+								
+							} else {
+								$error[] = 'Thanh toán thất bại!';
+							}
+						}
+						else
+						{
+							$error[] = 'Số tiền không hợp lệ!';
+						}
+						
+
+					}
+					else
+					{
+						$error[] = 'Đơn hàng không tìm thấy!';
+					}
+				}
+				else
+				{
+					$error[] = 'Chữ ký không hợp lệ!';
+				}
+
+				// ket thuc xu ly chuan
+		}elseif($payment_method == 'recieve'){
+			$db->query('UPDATE ' . TABLE . '_order SET status = 1  WHERE id IN (' . $order_code . ')');
+			// tính tổng tiền thanh toán
+				$sum_total_payment = $db->query('SELECT sum(total) FROM ' . TABLE . '_order WHERE id IN('. $order_code .')')->fetchColumn(); 
+
+			$status = true;
+			//$inputData = array();
+			//$inputData['order_code'] = $nv_Request->get_title('order_code', 'get', '', 1);
+
+		}
+		
+	}
+	$data=array();
+	$data['status'] = $status;
+	$data['sum_total_payment'] = $sum_total_payment;
+	return $data;
+	
+}
