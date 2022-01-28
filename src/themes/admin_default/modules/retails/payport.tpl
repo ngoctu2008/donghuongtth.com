@@ -63,7 +63,7 @@
 			<td>{DATA_PM.paymentname}</td>
 			<td>{DATA_PM.domain}</td>
 			<td class="text-center"><input type="checkbox" name="{DATA_PM.payment}" id="{DATA_PM.payment}" {DATA_PM.active} onclick="ChangeActive(this,url_active)"/></td>
-			<td class="text-center"><input type="checkbox" name="default" id="{DATA_PM.payment}" {DATA_PM.dactive} value = "{DATA_PM.is_default}" onclick="ChangeDefault(this,url_setdefault)"/></td>
+			<td class="text-center"><input type="radio" name="default" id="{DATA_PM.payment}" {DATA_PM.dactive} value = "{DATA_PM.is_default}" onclick="ChangeDefault(this,url_setdefault)"/></td>
 			<td class="text-center"><i class="fa fa-edit">&nbsp;</i><a href="{DATA_PM.link_edit}#edit">{LANG.edit}</a></td>
 		</tr>
 		<!-- END: paymentloop -->
