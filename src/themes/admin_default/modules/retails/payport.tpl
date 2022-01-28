@@ -42,6 +42,7 @@
 	var url_back = '{url_back}';
 	var url_change_weight = '{url_change}';
 	var url_active = '{url_active}';
+	var url_setdefault = '{url_setdefault}';
 </script>
 <table id="edit" class="table table-striped table-bordered table-hover">
 	<caption>{LANG.paymentcaption}</caption>
@@ -51,6 +52,7 @@
 			<td><strong>{LANG.paymentname}</strong></td>
 			<td><strong>{LANG.domain}</strong></td>
 			<td class="text-center"><strong>{LANG.active}</strong></td>
+			<td class="text-center"><strong>{LANG.default}</strong></td>
 			<td class="text-center"><strong>{LANG.function}</strong></td>
 		</tr>
 	</thead>
@@ -61,6 +63,7 @@
 			<td>{DATA_PM.paymentname}</td>
 			<td>{DATA_PM.domain}</td>
 			<td class="text-center"><input type="checkbox" name="{DATA_PM.payment}" id="{DATA_PM.payment}" {DATA_PM.active} onclick="ChangeActive(this,url_active)"/></td>
+			<td class="text-center"><input type="checkbox" name="default" id="{DATA_PM.payment}" {DATA_PM.dactive} value = "{DATA_PM.is_default}" onclick="ChangeDefault(this,url_setdefault)"/></td>
 			<td class="text-center"><i class="fa fa-edit">&nbsp;</i><a href="{DATA_PM.link_edit}#edit">{LANG.edit}</a></td>
 		</tr>
 		<!-- END: paymentloop -->
