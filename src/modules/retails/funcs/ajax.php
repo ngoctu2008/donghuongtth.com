@@ -3425,10 +3425,10 @@ if ( $mod == 'get_transport_fee_viettelpost' ) {
 }
 
 if ( $mod == 'get_transport_fee_ghn' ) {
-	$weight_product = $nv_Request->get_int( 'weight', 'get,post', 0 );
-	$length_product = $nv_Request->get_int( 'length', 'get,post', 0 );
-	$width_product = $nv_Request->get_int( 'width', 'get,post', 0 );
-	$height_product = $nv_Request->get_int( 'height', 'get,post', 0 );
+	$weight_product = $nv_Request->get_float( 'weight', 'get,post', 0 );
+	$length_product = $nv_Request->get_float( 'length', 'get,post', 0 );
+	$width_product = $nv_Request->get_float( 'width', 'get,post', 0 );
+	$height_product = $nv_Request->get_float( 'height', 'get,post', 0 );
 	$total = $nv_Request->get_int( 'total', 'get,post', 0 );
 	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
 	$ward_id_ghn_receive = get_info_ward( $ward_id )['ghnid'];
@@ -3442,7 +3442,7 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	$transporters_id = $nv_Request->get_int( 'transporters_id', 'get,post', 0 );
 	$code_transporters = get_info_transporters( $transporters_id )['code_transporters'];
 	$shop_id = $info_warehouse['shops_id_ghn'];
-
+	
 	$service = get_service_ghn($shop_id,$district_id_ghn_send,$district_id_ghn_receive);
 	
 	$service['code_message_value'];
@@ -3461,9 +3461,6 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	
 	
 	$fee = get_price_ghn( $service_id, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
-	
-	
-	
 	if($fee['code']==400){
 		$fee = get_price_ghn_2( $code_transporters, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
 	}
@@ -3795,55 +3792,34 @@ if ( $mod == 'tonkho' ) {
 
 if($mod == 'testtt')
 {
-	// send_mail_payment_fail(770);
+	$a =Array
+	(
+		'success' => '1',
+		'message' => 'Các đơn hàng đã được add vào hệ thống GHTK thành công. Thông tin đơn hàng thành công được trả về trong trường success_orders.',
+		'order' => Array
+			(
+				'partner_id' => 'ECNG0000643 - 09:19 27/01/2022',
+				'label' => 'S20966001.SG30.M2.300071869',
+				'area' => '2',
+				'fee' => '27000',
+				'insurance_fee' => '5000',
+				'estimated_pick_time' => 'Sáng 2022-01-27',
+				'estimated_deliver_time' => 'Chiều 2022-01-27',
+				'products' => Array
+					(
+					),
 	
-	// $order = get_info_order(714);
-	// send_email_order_cancel($order);
-	// xulythanhtoanthanhcong(767, '');
-	//send_mail_order_delivered($order);
+				'status_id' => '2',
+				'tracking_id' => '300071869',
+				'sorting_code' => 'SG30.M2',
+				'is_xfast' => '0',
+				),
 	
-	//update_time_add_order(647);
+		'warning_message' => 'Việc vận chuyển hiện tại đang gặp khó khăn do tình hình dịch bệnh phức tạp, vì vậy thời gian giao hàng tới khách sẽ chậm hơn dự kiến.
+	Mong Shop thông cảm và cân nhắc kỹ trước khi gửi hàng. GHTK xin lỗi vì sự bất tiện này.'
+			);
+	print_r($a['order']['label']);die;
 	
-	//print_r(NV_CURRENTTIME);die;
-	
-	//insert_history_admin(220, 'Lam gi do');
-	 //$a = get_name_store(2);
-	//$a = create_warehouse_viettelpost('0374600090', 'shop test', '99A Cộng hòa', 493);
-	//$a['data'][0]['cusId'];
-	// $b =  Array
-	// (
-	// 	'status' => 200,
-	// 	'error' => '',
-	// 	'message' =>'OK'
-	
-	// );
-	// $b['data'] = Array();
-	// $b['data'][] =  Array(
-	// 			'groupaddressId' => '10436450',
-	// 			'cusId'=> '10486964',
-	// 			'name' => 'shop test',
-	// 			'phone'=> '0374600090',
-	// 			'address' => '99A Cộng hòa',
-	// 			'provinceId' => '1',
-	// 			'districtId' => '25',
-	// 			'wardsId' => '493',
-	// 			'postId' => '',
-	// 			'merchant' =>'' ,
-	// 		);
-
-	// 		$b['data'][] =   Array(
-	// 			'groupaddressId' => '10432627',
-	// 			'cusId' => '10486964',
-	// 			'name' => 'Luân Test 2',
-	// 			'phone' => '0968625207',
-	// 			'address' => '61 K2 Cầu Diễn',
-	// 			'provinceId' => '1',
-	// 			'districtId' => '25',
-	// 			'wardsId' => '493',
-	// 			'postId' => '',
-	// 			'merchant' => '',
-	// 		);
-	// print_r($b['data'][0]['cusId']);die;
 }
 
 die();

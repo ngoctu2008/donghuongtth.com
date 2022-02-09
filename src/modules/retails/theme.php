@@ -938,12 +938,10 @@
 							$get_province_self_transport = $db->query('SELECT json_self_transport FROM ' . TABLE . '_product_detail WHERE product_id = ' . $value['product_id'])->fetchColumn();
 							
 							$arr = json_decode($get_province_self_transport,true);
-							//lấy id khu vực có tỉnh giao
-							$get_id_area = $db->query('SELECT id_area FROM '. $db_config['prefix'] .'_location_area_province WHERE FIND_IN_SET('. $address_df['province_id'] .', districtid)')->fetchColumn();
 							
 							foreach($arr as $row)
 							{
-								if(($get_id_area == $row['area']) and (in_array($address_df['province_id'], $row['province']) or in_array(0, $row['province'])))
+								if(in_array($address_df['province_id'], $row['province'] ) or in_array(0, $row['province'] ))
 								{
 									$tu_giao = true;
 									$self_transport_price = $row['price_ship'];
@@ -1066,7 +1064,6 @@
 				
 				if($array_voucher_shop)
 				{
-					
 					//danh sach voucher shop
 					//sắp xếp giá tối ưu giảm dần
 					array_multisort(array_column($array_voucher_shop, 'price'), SORT_DESC, $array_voucher_shop);

@@ -7,7 +7,12 @@
 		* @License GNU/GPL version 2 or any later version
 		* @Createdate Mon, 21 Dec 2020 09:48:26 GMT
 	*/
-	// tool đồng bộ thêm đơn vị vận chuyển GHN cho tất cả cửa hàng tự động bật
+
+
+	
+	/*
+
+// tool đồng bộ thêm đơn vị vận chuyển GHTK cho tất cả cửa hàng tự động bật
 	$list_store = $db->query('SELECT id FROM ' . TABLE .'_seller_management')->fetchAll();
 	
 	$arr = array();
@@ -29,9 +34,7 @@
 	}
 	
 	print_r($arr);die;
-	
-	
-	/*
+
 	// xử lý xã phường, bỏ text số
 	$list_ward = $db->query('SELECT wardid, title, type, alias FROM tms_location_ward WHERE alias like"%so-%"')->fetchAll();
 	foreach($list_ward as $ward)

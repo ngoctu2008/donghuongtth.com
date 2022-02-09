@@ -221,9 +221,9 @@
 	function voucher_price_optimal($product_id, $total_price_shop, $shop_id, $array_voucher_use){
 		global $db, $user_info;
 		$today = NV_CURRENTTIME;
-		//lay danh sach voucher cua shop còn sài đc và từ ví
+		//lay danh sach voucher cua shop còn sài đc, từ ví và 1 user chỉ sài được 1 voucher 1 lần
 
-		$list_voucher = $db->query('SELECT id, voucher_name, type_discount, discount_price, maximum_discount, minimum_price, time_to, list_product FROM ' . TABLE . '_voucher_shop WHERE status = 1 AND usage_limit_quantity > 0 AND store_id = ' . $shop_id . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND time_from < ' . $today . ' AND time_to > ' . $today . ' AND minimum_price <= ' . $total_price_shop . '  UNION SELECT t2.id, t2.voucher_name, t2.type_discount, t2.discount_price, t2.maximum_discount, t2.minimum_price, t2.time_to, t2.list_product FROM ' . TABLE . '_voucher_wallet t1 INNER JOIN ' . TABLE . '_voucher_shop t2 ON t2.id = t1.voucherid WHERE t1.userid = ' . $user_info['userid'] . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND t2.time_from < ' . $today . ' AND t2.time_to > ' . $today . ' AND t1.status = 1  AND minimum_price <= ' . $total_price_shop . ' AND t2.store_id = ' . $shop_id)->fetchAll();
+		$list_voucher = $db->query('SELECT t1.id, t1.voucher_name, t1.type_discount, t1.discount_price, t1.maximum_discount, t1.minimum_price, t1.time_to, t1.list_product FROM ' . TABLE . '_voucher_shop t1 WHERE status = 1 AND usage_limit_quantity > 0 AND store_id = ' . $shop_id . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND time_from < ' . $today . ' AND time_to > ' . $today . ' AND minimum_price <= ' . $total_price_shop . ' AND NOT EXISTS (SELECT id FROM ' . TABLE . '_order_voucher t2 WHERE t2.voucherid = t1.id and t2.status = 1 and t2.userid = ' . $user_info['userid'] . ') UNION SELECT t2.id, t2.voucher_name, t2.type_discount, t2.discount_price, t2.maximum_discount, t2.minimum_price, t2.time_to, t2.list_product FROM ' . TABLE . '_voucher_wallet t1 INNER JOIN ' . TABLE . '_voucher_shop t2 ON t2.id = t1.voucherid WHERE t1.userid = ' . $user_info['userid'] . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND t2.time_from < ' . $today . ' AND t2.time_to > ' . $today . ' AND t1.status = 1  AND minimum_price <= ' . $total_price_shop . ' AND t2.store_id = ' . $shop_id . ' AND NOT EXISTS (SELECT id FROM ' . TABLE . '_order_voucher t3 WHERE t3.voucherid = t1.voucherid and t3.status = 1 and t3.userid = ' . $user_info['userid'] . ') ')->fetchAll();
 		
 		foreach($list_voucher as $voucher){
 			$price = 0;
@@ -532,10 +532,9 @@
 		foreach ($list_order as $order)
 		{
 			//update voucher 
+			$db->query('UPDATE ' . TABLE . '_voucher_shop SET usage_limit_quantity = usage_limit_quantity - 1 WHERE id = ' . $order['voucherid']);
 			
-			// $update_voucher = $db->query('UPDATE ' . TABLE . '_voucher SET usage_limit_quantity = usage_limit_quantity - 1 WHERE id = ' . $order['voucherid']);
-			
-			$update_order_voucher = $db->query('UPDATE ' . TABLE . '_order_voucher SET status =  1 WHERE order_id = ' . $order['id']);
+			$db->query('UPDATE ' . TABLE . '_order_voucher SET status =  1 WHERE order_id = ' . $order['id']);
 			
 			// lấy danh sách sản phẩm của đơn hàng
 			$list_product = $db->query('SELECT product_id, quantity, classify_value_product_id, quantity, price FROM ' . TABLE . '_order_item WHERE order_id =' . $order['id'])->fetchAll();

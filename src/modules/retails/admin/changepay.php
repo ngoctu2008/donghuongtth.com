@@ -32,7 +32,7 @@ if (! empty($payment)) {
     $stmt->execute();
 
     $stmt = $db->prepare("UPDATE " . $table . " SET weight=" . $weight_old . " WHERE payment= :payment");
-    $stmt->bindParam(':payment', $payment, PDO::PARAM_STR);
+    $stmt->bindParam(':payment', $payment_swap, PDO::PARAM_STR);
     $stmt->execute();
 
     $content = "OK_" . $payment;
