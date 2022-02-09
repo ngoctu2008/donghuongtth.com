@@ -1,6 +1,5 @@
 <?php
 
-
 	sleep(2);
 	$order_code = $nv_Request->get_title('order_code', 'get', '', 1);
 	if($order_code == '' ){
