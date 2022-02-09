@@ -941,7 +941,7 @@
 							
 							foreach($arr as $row)
 							{
-								if(in_array($address_df['province_id'], $row['province']) or in_array(0, $row['province']))
+								if(in_array($address_df['province_id'], $row['province'] ) or in_array(0, $row['province'] ))
 								{
 									$tu_giao = true;
 									$self_transport_price = $row['price_ship'];
@@ -1064,7 +1064,6 @@
 				
 				if($array_voucher_shop)
 				{
-					
 					//danh sach voucher shop
 					//sắp xếp giá tối ưu giảm dần
 					array_multisort(array_column($array_voucher_shop, 'price'), SORT_DESC, $array_voucher_shop);

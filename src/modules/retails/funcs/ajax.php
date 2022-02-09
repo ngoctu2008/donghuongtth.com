@@ -3425,10 +3425,10 @@ if ( $mod == 'get_transport_fee_viettelpost' ) {
 }
 
 if ( $mod == 'get_transport_fee_ghn' ) {
-	$weight_product = $nv_Request->get_int( 'weight', 'get,post', 0 );
-	$length_product = $nv_Request->get_int( 'length', 'get,post', 0 );
-	$width_product = $nv_Request->get_int( 'width', 'get,post', 0 );
-	$height_product = $nv_Request->get_int( 'height', 'get,post', 0 );
+	$weight_product = $nv_Request->get_float( 'weight', 'get,post', 0 );
+	$length_product = $nv_Request->get_float( 'length', 'get,post', 0 );
+	$width_product = $nv_Request->get_float( 'width', 'get,post', 0 );
+	$height_product = $nv_Request->get_float( 'height', 'get,post', 0 );
 	$total = $nv_Request->get_int( 'total', 'get,post', 0 );
 	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
 	$ward_id_ghn_receive = get_info_ward( $ward_id )['ghnid'];
@@ -3442,7 +3442,7 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	$transporters_id = $nv_Request->get_int( 'transporters_id', 'get,post', 0 );
 	$code_transporters = get_info_transporters( $transporters_id )['code_transporters'];
 	$shop_id = $info_warehouse['shops_id_ghn'];
-
+	
 	$service = get_service_ghn($shop_id,$district_id_ghn_send,$district_id_ghn_receive);
 	
 	$service['code_message_value'];
@@ -3461,9 +3461,6 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	
 	
 	$fee = get_price_ghn( $service_id, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
-	
-	
-	
 	if($fee['code']==400){
 		$fee = get_price_ghn_2( $code_transporters, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
 	}
