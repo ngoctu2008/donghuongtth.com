@@ -267,7 +267,6 @@
 		return $array_voucher_use;
 	
 	}
-	
 	//check voucher
 	function check_voucher ($voucher_code, $voucher_id, $shop_id){
 		
