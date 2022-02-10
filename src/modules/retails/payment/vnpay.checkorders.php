@@ -11,7 +11,7 @@
 if (! defined('NV_IS_MOD_SHOPS')) {
     die('Stop!!!');
 }
-die('dsf');
+
 foreach ($array_order as $order_code => $order_data) {
     $payment_data = unserialize(nv_base64_decode($order_data['payment_data']));
     $vpc_MerchTxnRef = $payment_data['vpc_MerchTxnRef'];
