@@ -75,6 +75,8 @@
 	}
 	
 	$global_catalogys = json_decode($redis->get('catalogy_main'),true);	
+
+	//print_r($global_catalogys);die;
 	
 	// danh mục đa cấp đưa hết vào redis lev theo cấp
 	
@@ -265,7 +267,6 @@
 		return $array_voucher_use;
 	
 	}
-	
 	//check voucher
 	function check_voucher ($voucher_code, $voucher_id, $shop_id){
 		
