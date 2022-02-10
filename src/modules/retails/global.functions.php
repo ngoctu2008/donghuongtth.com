@@ -4019,10 +4019,8 @@
 		'extraData' => $extraData,
 		'requestType' => $requestType,
 		'signature' => $signature);
-		print_r($data);
 		$result = execPostRequest($endpoint, json_encode($data));
 		$jsonResult = json_decode($result, true);  // decode json
-		print_r($jsonResult);
 		return $jsonResult['payUrl'];
 	}
 	function print_ghtk($order_code)
