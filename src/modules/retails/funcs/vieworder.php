@@ -235,7 +235,7 @@
 	$xtpl->assign( 'info_store', $info_store );
 	$xtpl->assign( 'info_warehouse', $info_warehouse );
 	$xtpl->assign( 'back_link', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=ordercustomer',true));
-	$xtpl->assign('children_fund', $config_setting['children_fund'] . '%');
+	$xtpl->assign('children_fund', $config_setting['children_fund'] . 'đ');
 	
 
 	if($user_info['userid']){

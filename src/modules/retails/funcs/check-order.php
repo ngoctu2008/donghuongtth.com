@@ -231,7 +231,7 @@
 	$xtpl->assign( 'info_store', $info_store );
 	$xtpl->assign( 'info_warehouse', $info_warehouse );
 	$xtpl->assign( 'back_link', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=ordercustomer',true));
-	$xtpl->assign('children_fund', $config_setting['children_fund'] . '%');
+	$xtpl->assign('children_fund', $config_setting['children_fund'] . 'đ');
 
 	if($user_info['userid']){
 		$info_order['check_rate'] = $db->query('SELECT count(*) FROM ' . TABLE . '_order t1 INNER JOIN ' . TABLE . '_order_item t2 ON t1.id = t2.order_id WHERE t2.product_id = ' . $info_order['id'] . ' AND t1.status = 3')->fetchColumn();
