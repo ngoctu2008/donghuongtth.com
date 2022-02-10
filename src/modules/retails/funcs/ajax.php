@@ -2803,7 +2803,6 @@ if ( $mod == 'add_order' ) {
 			
 			$list_order = $data['list_order'];
 			$list_order_code = $data['list_order_code'];
-			print_r($list_order);
 			$info_order = get_info_order($list_order[0]);
 			$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
 			$list_order=implode(',',$list_order);
