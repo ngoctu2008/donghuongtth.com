@@ -618,7 +618,6 @@
 			// Gui mail thong bao den nhà bán hàng
 			$email_contents = call_user_func('email_new_order_payment', $data_order, $list_product, $info_order);
 			$email_title = $lang_module['order_email_title'];
-			
 			nv_sendmail(array(
             $global_config['site_name'],
             $global_config['site_email']
@@ -4854,6 +4853,7 @@
 			$email_contents = call_user_func('email_new_order_payment', $data_order, $list_product, $info_order);
 			$email_title = $lang_module['order_email_title'];
 			
+			print_r($email_contents);die;
 			nv_sendmail(array(
             $global_config['site_name'],
             $global_config['site_email']
