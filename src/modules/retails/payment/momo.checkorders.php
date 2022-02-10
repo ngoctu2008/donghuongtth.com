@@ -10,6 +10,34 @@
 
 if (!defined('NV_IS_MOD_RETAILSHOPS'))
 die('Stop!!!');
+//$data = add_order($list_transporters,$info_customer);
+$list_order = $data['list_order'];
+$list_order_code = $data['list_order_code'];
+$order_full=implode(',',$list_order);
+$list_order_code=implode(',',$list_order_code);
+$vnp_TransactionNo=$order_full;
+$vnp_OrderInfo='Thanh toan giao dich '.$list_order_code.' vao thoi gian '.date('d-m-Y H:i',NV_CURRENTTIME);
+
+
+$vnp_ReturnUrl= nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment' , true );
+
+// lấy thông tin ip server
+$vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+
+$check_momo = send_momo($total_full,$vnp_OrderInfo,$config_setting['website_code_vnpay'],$vnp_TransactionNo,$config_setting['checksum_vnpay'],$vnp_ReturnUrl,$vnp_IpAddr);
+$contents1 = array(
+'status' => 'OK_MOMO',
+'link' => $check_momo
+);
+
+print_r( json_encode($contents1));die;
+die();
+
+
+
+
+
+
 
 foreach ($array_order as $order_code => $order_data) {
     $payment_data = unserialize(nv_base64_decode($order_data['payment_data']));
