@@ -327,8 +327,8 @@
 		return json_encode($json);
 		
 	}
-	//check voucher
-	//check voucher
+	
+	
 	function check_voucher_shop ($voucher_id, $shop_id, $userid){
 		
 		global $db, $db_config, $module_name, $user_info;
@@ -372,8 +372,6 @@
 				
 			}
 		}
-		
-		
 		return json_encode($json);
 		
 	}

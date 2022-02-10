@@ -144,7 +144,8 @@ function delivered(id) {
     });
 }
 
-function popup_vanchuyen(id, store_id, transporters_id) {
+function popup_vanchuyen(id, store_id, transporters_id, insurance_fee) {
+
     $.ajax({
         type: 'GET',
         url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=listorder&popup_vanchuyen=1',
@@ -158,9 +159,21 @@ function popup_vanchuyen(id, store_id, transporters_id) {
                 backdrop: "static"
             });
             if (transporters_id == 4 || transporters_id == 5) {
-                check_khaigia(id);
+                //check_khaigia(id);
             } else if (transporters_id == 3) {
-                check_khaigia_ghn(id, store_id);
+                //check_khaigia_ghn(id, store_id);
+            } else if (transporters_id == 2) {
+
+                if (insurance_fee <= 1000000) {
+                    $('#insurance_fee_text').html('Miễn phí');
+                } else {
+                    if (insurance_fee > 20000000) {
+                        insurance_fee = 20000000;
+                    }
+                    var total_insurance_fee = insurance_fee * 0.005;
+                    $('#insurance_fee_text').html(format_number(total_insurance_fee) + 'đ');
+                }
+
             }
 
         },
@@ -1094,6 +1107,7 @@ function nv_chang_pays(payid, object, url_change, url_back) {
     });
     return;
 }
+
 function ChangeDefault(payid, object, url_setdefault, url_back) {
     var value = $(object).val();
     $.ajax({
