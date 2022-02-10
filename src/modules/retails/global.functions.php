@@ -3937,7 +3937,7 @@
 		//execute post
 		$result = curl_exec($ch);
 		//close connection
-		curl_close($ch);print_r($result);die;
+		curl_close($ch);
 		return $result;
 	}
 	function send_momo($mm_amount, $mm_OrderInfo, $mm_TmnCode, $mm_TransactionNo, $mm_HashSecret, $mm_ReturnUrl, $mm_IpAddr)
@@ -4019,8 +4019,10 @@
 		'extraData' => $extraData,
 		'requestType' => $requestType,
 		'signature' => $signature);
+		print_r($data);
 		$result = execPostRequest($endpoint, json_encode($data));
 		$jsonResult = json_decode($result, true);  // decode json
+		print_r($jsonResult);
 		return $jsonResult['payUrl'];
 	}
 	function print_ghtk($order_code)
