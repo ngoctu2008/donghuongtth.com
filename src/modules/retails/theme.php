@@ -82,7 +82,7 @@ function email_payment_fail($data_order, $data_pro, $info_order)
 	$info_order['voucher_price'] = number_format($info_order['voucher_price']);
 	$info_order['total'] = number_format($info_order['total']);
 	$xtpl->assign('info_order', $info_order);
-	$xtpl->assign('children_fund', $config_setting['children_fund'] . '%');
+	$xtpl->assign('children_fund', $config_setting['children_fund'] . 'đ');
 	$i = 0;
 
 	if ($info_order['voucherid']) {
@@ -402,7 +402,7 @@ function email_new_order_payment_khach($data_order, $data_pro, $info_order)
 	$info_order['voucher_price'] = number_format($info_order['voucher_price']);
 	$info_order['total'] = number_format($info_order['total']);
 	$xtpl->assign('info_order', $info_order);
-	$xtpl->assign('children_fund', $config_setting['children_fund'] . '%');
+	$xtpl->assign('children_fund', $config_setting['children_fund'] . 'đ');
 	//xem thông tin đơn hàng
 	if ($user_info['userid']) {
 		$view_order = 'https://chonhagiau.com/vieworder/?id=' . $info_order['id'];
@@ -797,7 +797,7 @@ function nv_theme_retailshops_order($array_data, $list_address, $address_df, $ar
 	} else {
 		$xtpl->assign('EMAIL_USER', $_SESSION['address_no_login']['email']);
 	}
-	$xtpl->assign('children_fund', $config_setting['children_fund'] . '%');
+	$xtpl->assign('children_fund', $config_setting['children_fund'] . 'đ');
 
 	$xtpl->assign('ADDRESS_DF', $address_df);
 	$xtpl->assign('NV_ASSETS_DIR', NV_ASSETS_DIR);
