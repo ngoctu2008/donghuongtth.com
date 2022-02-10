@@ -1172,6 +1172,7 @@
 		while ($view = $sth->fetch()) {
 			
 			$view['number'] = $number++;
+			$view['insurance_fee'] = $view['total_product'];
 			$view['store_name']=get_info_store($view['store_id'])['company_name'];
 			$view['warehouse_name']=get_info_warehouse($view['warehouse_id'])['name_warehouse'];
 			$view['phone_warehouse']=get_info_warehouse($view['warehouse_id'])['phone_send'];
@@ -1182,19 +1183,14 @@
 			$view['total_product2']=$view['total_product'];
 			$view['total_product']=number_format($view['total_product']);
 			$view['fee_transport']=number_format($view['fee_transport']);
+			
 			$view['total']=number_format($view['total']);
 			
 			$view['payment_tam'] = $view['payment'];
 			$view['payment']=number_format($view['payment']);
 			
 			$view['time_add']=date('d-m-Y H:i',$view['time_add']);
-			if($view['payment_method']==0){
-				$view['payment_method']='Thanh toán khi nhận hàng';
-				}elseif($view['payment_method']==1){
-				$view['payment_method']='Thanh toán qua ví tiền';
-				}elseif($view['payment_method']==2) {
-				$view['payment_method']='Thanh toán qua VNPAY';
-			}
+			
 			$view['link_view'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=view_order&amp;id=' . $view['id'];
 			
 			$view['link_phat'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=order_punish&amp;order_id=' . $view['id'];
@@ -1218,7 +1214,9 @@
 					$xtpl->parse('main.loop.tu_giao_xac_nhan_dang_giao');
 					}elseif($view['transporters_id'] == 3){
 					$xtpl->parse('main.loop.ghn');
-				}
+					}elseif($view['transporters_id'] == 2){
+						$xtpl->parse('main.loop.GHTK');
+					}
 				
 				}else if($view['status']==2){
 				// trạng thái đơn hàng đang giao. cho phép admin hủy đơn hàng

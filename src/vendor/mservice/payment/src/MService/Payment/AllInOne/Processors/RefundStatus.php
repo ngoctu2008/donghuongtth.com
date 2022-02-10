@@ -86,7 +86,7 @@ class RefundStatus extends Process
         } catch (MoMoException $exception) {
             $this->logger->error($exception->getErrorMessage());
         }
-        return null;
+        return array();
     }
 
     public function checkResponse(RefundStatusResponse $refundStatusResponse)

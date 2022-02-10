@@ -10,8 +10,10 @@ return array(
     'Symfony\\Component\\OptionsResolver\\' => array($vendorDir . '/symfony/options-resolver'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
+    'phpseclib\\' => array($vendorDir . '/phpseclib/phpseclib'),
     'PhpOffice\\PhpSpreadsheet\\' => array($vendorDir . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
+    'ParagonIE\\ConstantTime\\' => array($vendorDir . '/constant_time_encoding/src'),
     'OAuth\\' => array($vendorDir . '/and/oauth/src'),
     'NukeViet\\' => array($vendorDir . '/vinades/nukeviet'),
     'MService\\' => array($vendorDir . '/mservice/payment/src/MService'),
@@ -20,4 +22,6 @@ return array(
     'League\\Url\\' => array($vendorDir . '/league/url/src'),
     'Endroid\\QrCode\\' => array($vendorDir . '/endroid/qrcode/src'),
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
+    'Bramus\\Monolog\\' => array($vendorDir . '/bramus/monolog-colored-line-formatter/src'),
+    'Bramus\\Ansi\\' => array($vendorDir . '/bramus/ansi-php/src'),
 );

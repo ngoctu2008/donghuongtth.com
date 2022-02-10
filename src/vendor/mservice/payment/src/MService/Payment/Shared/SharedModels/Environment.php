@@ -3,7 +3,7 @@
 
 namespace MService\Payment\Shared\SharedModels;
 
-use MService\Payment\Shared\SharedModels\MoMoLogger MoMoLogger;
+use MService\Payment\Shared\SharedModels\MoMoLogger;
 
 class Environment
 {

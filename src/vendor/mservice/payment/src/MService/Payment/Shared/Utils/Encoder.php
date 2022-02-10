@@ -3,7 +3,7 @@
 
 namespace MService\Payment\Shared\Utils;
 
-use phpseclib\Crypt\RSA;
+use Phpseclib3\Crypt\RSA;
 
 class Encoder
 {

@@ -1,4 +1,5 @@
 <?php
+
 	// lấy tất cả category đưa vào redis
 	function get_payment_all()
 	{
@@ -74,6 +75,8 @@
 	}
 	
 	$global_catalogys = json_decode($redis->get('catalogy_main'),true);	
+
+	//print_r($global_catalogys);die;
 	
 	// danh mục đa cấp đưa hết vào redis lev theo cấp
 	
@@ -221,9 +224,9 @@
 	function voucher_price_optimal($product_id, $total_price_shop, $shop_id, $array_voucher_use){
 		global $db, $user_info;
 		$today = NV_CURRENTTIME;
-		//lay danh sach voucher cua shop còn sài đc và từ ví
+		//lay danh sach voucher cua shop còn sài đc, từ ví và 1 user chỉ sài được 1 voucher 1 lần
 
-		$list_voucher = $db->query('SELECT id, voucher_name, type_discount, discount_price, maximum_discount, minimum_price, time_to, list_product FROM ' . TABLE . '_voucher_shop WHERE status = 1 AND usage_limit_quantity > 0 AND store_id = ' . $shop_id . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND time_from < ' . $today . ' AND time_to > ' . $today . ' AND minimum_price <= ' . $total_price_shop . '  UNION SELECT t2.id, t2.voucher_name, t2.type_discount, t2.discount_price, t2.maximum_discount, t2.minimum_price, t2.time_to, t2.list_product FROM ' . TABLE . '_voucher_wallet t1 INNER JOIN ' . TABLE . '_voucher_shop t2 ON t2.id = t1.voucherid WHERE t1.userid = ' . $user_info['userid'] . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND t2.time_from < ' . $today . ' AND t2.time_to > ' . $today . ' AND t1.status = 1  AND minimum_price <= ' . $total_price_shop . ' AND t2.store_id = ' . $shop_id)->fetchAll();
+		$list_voucher = $db->query('SELECT t1.id, t1.voucher_name, t1.type_discount, t1.discount_price, t1.maximum_discount, t1.minimum_price, t1.time_to, t1.list_product FROM ' . TABLE . '_voucher_shop t1 WHERE status = 1 AND usage_limit_quantity > 0 AND store_id = ' . $shop_id . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND time_from < ' . $today . ' AND time_to > ' . $today . ' AND minimum_price <= ' . $total_price_shop . ' AND NOT EXISTS (SELECT id FROM ' . TABLE . '_order_voucher t2 WHERE t2.voucherid = t1.id and t2.status = 1 and t2.userid = ' . $user_info['userid'] . ') UNION SELECT t2.id, t2.voucher_name, t2.type_discount, t2.discount_price, t2.maximum_discount, t2.minimum_price, t2.time_to, t2.list_product FROM ' . TABLE . '_voucher_wallet t1 INNER JOIN ' . TABLE . '_voucher_shop t2 ON t2.id = t1.voucherid WHERE t1.userid = ' . $user_info['userid'] . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND t2.time_from < ' . $today . ' AND t2.time_to > ' . $today . ' AND t1.status = 1  AND minimum_price <= ' . $total_price_shop . ' AND t2.store_id = ' . $shop_id . ' AND NOT EXISTS (SELECT id FROM ' . TABLE . '_order_voucher t3 WHERE t3.voucherid = t1.voucherid and t3.status = 1 and t3.userid = ' . $user_info['userid'] . ') ')->fetchAll();
 		
 		foreach($list_voucher as $voucher){
 			$price = 0;
@@ -264,7 +267,6 @@
 		return $array_voucher_use;
 	
 	}
-	
 	//check voucher
 	function check_voucher ($voucher_code, $voucher_id, $shop_id){
 		
@@ -325,8 +327,8 @@
 		return json_encode($json);
 		
 	}
-	//check voucher
-	//check voucher
+	
+	
 	function check_voucher_shop ($voucher_id, $shop_id, $userid){
 		
 		global $db, $db_config, $module_name, $user_info;
@@ -370,8 +372,6 @@
 				
 			}
 		}
-		
-		
 		return json_encode($json);
 		
 	}
@@ -532,10 +532,9 @@
 		foreach ($list_order as $order)
 		{
 			//update voucher 
+			$db->query('UPDATE ' . TABLE . '_voucher_shop SET usage_limit_quantity = usage_limit_quantity - 1 WHERE id = ' . $order['voucherid']);
 			
-			// $update_voucher = $db->query('UPDATE ' . TABLE . '_voucher SET usage_limit_quantity = usage_limit_quantity - 1 WHERE id = ' . $order['voucherid']);
-			
-			$update_order_voucher = $db->query('UPDATE ' . TABLE . '_order_voucher SET status =  1 WHERE order_id = ' . $order['id']);
+			$db->query('UPDATE ' . TABLE . '_order_voucher SET status =  1 WHERE order_id = ' . $order['id']);
 			
 			// lấy danh sách sản phẩm của đơn hàng
 			$list_product = $db->query('SELECT product_id, quantity, classify_value_product_id, quantity, price FROM ' . TABLE . '_order_item WHERE order_id =' . $order['id'])->fetchAll();
@@ -3920,6 +3919,107 @@
 		}
 		$url = 'https://pay.vnpay.vn/vpcpay.html' . $vnp_Url;
 		return $url;
+	}
+	function execPostRequest($url, $data)
+	{
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+		'Content-Type: application/json',
+		'Content-Length: ' . strlen($data))
+		);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+		//execute post
+		$result = curl_exec($ch);
+		//close connection
+		curl_close($ch);
+		return $result;
+	}
+	function send_momo($mm_amount, $mm_OrderInfo, $mm_TmnCode, $mm_TransactionNo, $mm_HashSecret, $mm_ReturnUrl, $mm_IpAddr)
+	{
+		/* global $config_setting;
+		$inputData = array(
+        "mm_Version" => "2.0.0",
+        "mm_TmnCode" => $mm_TmnCode,
+        "mm_Amount" => (int)$mm_amount * 100,
+        "mm_Command" => "pay",
+        "mm_CreateDate" => date('YmdHis') ,
+        "mm_CurrCode" => "VND",
+        "mm_IpAddr" => $mm_IpAddr,
+        "mm_Locale" => 'vn',
+        "mm_OrderInfo" => $mm_OrderInfo,
+        "mm_ReturnUrl" => $mm_ReturnUrl,
+        "mm_TxnRef" => $mm_TransactionNo,
+		);
+		ksort($inputData);
+		$hashdata = "";
+		$i = 0;
+		foreach ($inputData as $key => $value)
+		{
+			if ($i == 1)
+			{
+				$hashdata .= '&' . $key . "=" . $value;
+			}
+			else
+			{
+				$hashdata .= $key . "=" . $value;
+				$i = 1;
+			}
+			$query .= urlencode($key) . "=" . urlencode($value) . '&';
+		}
+		$mm_Url = $mm_Url . "?" . $query;
+		if (isset($mm_HashSecret))
+		{
+			$mmSecureHash = hash('sha256', $mm_HashSecret . $hashdata);
+			$mm_Url .= 'mm_SecureHashType=SHA256&mm_SecureHash=' . $mmSecureHash;
+		}
+		$url = 'https://test-payment.momo.vn/v2/gateway/api/create' . $mm_Url;
+		return $url; */
+		
+
+
+
+		$endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+		
+		
+		$partnerCode = 'MOMOGQQA20220110';
+		$accessKey = 'eZBxUT4fUAG4WC7E';
+		$orderInfo = $mm_OrderInfo;
+		$amount = $mm_amount;
+		$orderId = time() ."";
+		$redirectUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
+		$ipnUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
+		$extraData = "";
+		
+		
+		
+		
+		$serectkey = 'K1W2fjpbQr4ZBZzgj4snNVfvSqUkQePE';
+		$requestId = time() . "";
+		$requestType = "captureWallet";
+		$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+		//before sign HMAC SHA256 signature
+		$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+		$signature = hash_hmac("sha256", $rawHash, $serectkey);
+		$data = array('partnerCode' => $partnerCode,
+		'partnerName' => "Test",
+		"storeId" => "MomoTestStore",
+		'requestId' => $requestId,
+		'amount' => $amount,
+		'orderId' => $orderId,
+		'orderInfo' => $orderInfo,
+		'redirectUrl' => $redirectUrl,
+		'ipnUrl' => $ipnUrl,
+		'lang' => 'vi',
+		'extraData' => $extraData,
+		'requestType' => $requestType,
+		'signature' => $signature);
+		$result = execPostRequest($endpoint, json_encode($data));
+		$jsonResult = json_decode($result, true);  // decode json
+		return $jsonResult['payUrl'];
 	}
 	function print_ghtk($order_code)
 	{

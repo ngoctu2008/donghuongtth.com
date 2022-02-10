@@ -20,11 +20,11 @@
 	</div>
 	
 	<div class="row m-0 rounded">
-		<div class="col-2 py-3 text-center font-weight-bold tab_active" style="cursor:pointer" status_id="0" onclick="list(0)">
-			Chợ Nhà Giàu
-		</div>
-		<div class="col-2 py-3 font-weight-bold text-center" style="cursor:pointer" status_id="1"  onclick="list(1)" >
+		<div class="col-2 py-3 font-weight-bold text-center tab_active" style="cursor:pointer" status_id="1"  onclick="list(1)" >
 			Shop
+		</div>
+		<div class="col-2 py-3 text-center font-weight-bold" style="cursor:pointer" status_id="0" onclick="list(0)">
+			Chợ Nhà Giàu
 		</div>
 	</div>
 	
@@ -32,14 +32,9 @@
 	<div id="tab_voucher"></div>
 
 </div>
-
-
-
 <script type="text/javascript">
-	list(0);
-	
+	list(1);
 	function list(status) {
-		<!-- alert(123); -->
 		$.ajax({               
 			type: "GET", 
 			url: nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=voucher-wallet&mod=load_voucher',

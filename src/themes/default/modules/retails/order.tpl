@@ -416,7 +416,7 @@
 			function apply_voucher_{info_store.id}(value, store_id, chiso){
 				//đổi thông tin session voucherid
 				$.ajax({
-					type : 'GET',
+					type : 'POST',
 					url : nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=apply_voucher_shop',
 					dataType: "json",
 					data:{
@@ -478,7 +478,7 @@
 			function remove_choose_voucher_{info_store.id}(voucherid, store_id){
 				
 				$.ajax({
-					type : 'GET',
+					type : 'POST',
 					url : nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=remove_voucher_shop',
 					dataType: "json",
 					data:{
@@ -610,7 +610,7 @@
 			<!-- BEGIN: transporters_loop_js -->
 			transporter_{info_store.id}.push({"id":{CARRIER.id},"name_transporters":"{CARRIER.name_transporters}","description":"{CARRIER.description}"});
 			<!-- END: transporters_loop_js -->
-			console.log(transporter_{info_store.id});
+			
 		</script>
 		<!-- END: warehouse -->
 	</div>
@@ -668,7 +668,7 @@
 		<div class="row p-4 align-items-center">
 			<div class="col-md-9">
 				<div class="primary_text">Khi nhấn hoàn tất đồng nghĩa bạn đã kiểm tra kỹ đơn hàng và đồng ý với <a class="secondary_text" title="Các điều khoản của ECNG" href="https://chonhagiau.com/ecng/quy-dinh-va-hinh-thuc-thanh-toan.html" target="_blank" >các điều khoản của ECNG</a></div>
-				<div class="fw_500 primary_text pt-2">Khi bạn thanh toán đơn hàng là bạn đã ủng hộ <span style="color:#1358B9">{children_fund}</span> tổng giá trị đơn hàng này vào quỹ  “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</div>
+				<div class="fw_500 primary_text pt-2">Khi bạn thanh toán đơn hàng là bạn đã ủng hộ <span style="color:#1358B9">{children_fund}</span> vào quỹ  “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</div>
 			</div>
 			<div class="col-md-3 text-right">
 				<button id="button-payment-method" class="btn_ecng_lg" onclick="order_product_check_out()"  >Hoàn tất đơn hàng</button>
@@ -682,6 +682,7 @@
 	function change_payment(){
 		var input_checked =  $(".payment_methods input[type='radio']:checked").val();
 		$('#payment_method').val(input_checked);
+		
 	};
 	change_payment();
 	function nv_carrier_change(store_id,warehouse_id,a)
@@ -765,7 +766,7 @@
 				}
 				else if(element.id == 2){
 					$.ajax({
-						type : 'GET',
+						type : 'POST',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghtk',
 						dataType: "json",
 						data:{weight: Number(total_weight),
@@ -789,7 +790,7 @@
 				}
 				else if(element.id  == 3){
 					$.ajax({
-						type : 'GET',
+						type : 'POST',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
 						dataType: "json",
 						data:{weight: Number(total_weight),
@@ -895,9 +896,9 @@
 						
 					})
 					}
-					if(element.id == 2){ 
+					else if(element.id == 2){ 
 						$.ajax({
-							type : 'GET',
+							type : 'POST',
 							url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghtk',
 							dataType: "json",
 							data:{weight: Number(total_weight),
@@ -941,7 +942,7 @@
 					else if(element.id  == 3 ){
 					
 					$.ajax({
-						type : 'GET',
+						type : 'POST',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
 						dataType: "json",
 						data:{weight: Number(total_weight),
@@ -1146,6 +1147,8 @@
 								location.href = res.link
 								}else if(res.status=='OK_RECIEVE'){
 								location.href = res.link.replace("&amp;", "&");
+								}else if(res.status=='OK_MOMO'){
+								location.href = res.link
 								}else if(res.status=='error_password_money'){
 								$("#button-payment-method").attr("disabled", false);
 								$("#button-payment-method").html("Đặt hàng");
