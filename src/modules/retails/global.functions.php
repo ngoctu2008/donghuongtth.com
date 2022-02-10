@@ -4020,8 +4020,7 @@
 		'signature' => $signature);
 		$result = execPostRequest($endpoint, json_encode($data));
 		$jsonResult = json_decode($result, true);  // decode json
-		print_r($result);
-		die();
+		return $jsonResult->payUrl;
 	}
 	function print_ghtk($order_code)
 	{

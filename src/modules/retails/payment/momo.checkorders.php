@@ -24,7 +24,7 @@ $vnp_ReturnUrl= nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE
 // lấy thông tin ip server
 $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
 
-$check_momo = send_momo($total_full,$vnp_OrderInfo,$config_setting['website_code_vnpay'],$vnp_TransactionNo,$config_setting['checksum_vnpay'],$vnp_ReturnUrl,$vnp_IpAddr);
+$check_momo = send_momo($total_full,$mm_OrderInfo,$config_setting['website_code_vnpay'],$mm_TransactionNo,$config_setting['checksum_vnpay'],$vnp_ReturnUrl,$mm_IpAddr);
 $contents1 = array(
 'status' => 'OK_MOMO',
 'link' => $check_momo
