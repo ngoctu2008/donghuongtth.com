@@ -203,11 +203,12 @@
 	//print_r($op);
 	//die($op);
 function add_order($list_transporters,$info_customer){
-	global $db,$config_setting,$_SESSION;
+	global $db,$config_setting,$_SESSION,$module_data;
 	$list_order=array();
 	$list_order_code=array();
 	$data=array();
 	$time_add = NV_CURRENTTIME;
+	
 	foreach ( $list_transporters as $value_transporters ) {
 				
 		if($value_transporters['transporters_id'] == 4 || $value_transporters['transporters_id'] == 5){
@@ -275,29 +276,34 @@ function add_order($list_transporters,$info_customer){
 			
 			$voucher_id = $db->insert_id( $sql, 'voucherid', $data_insert );
 		}
-		if ( $order_id > 0 ) {
-			foreach ( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] as $key_product=>$value_product ) {
+		if ( $order_id > 0 ) {	
+			foreach ($_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] as $key_product => $value_product ) {
 				if ( $value_product['status_check'] == 1 ) {
-					$total_weight = $value_product['weight_product']*get_info_unit_weight( $value_product['weight_unit'] )['exchange']*$value_product['num'];
-					$total_length = $value_product['length_product']*get_info_unit_length( $value_product['unit_length'] )['exchange']*$value_product['num'];
-					$total_width = $value_product['width_product']*get_info_unit_length( $value_product['unit_width'] )['exchange']*$value_product['num'];
-					$total_height = $value_product['height_product']*get_info_unit_length( $value_product['unit_height'] )['exchange']*$value_product['num'];
-					$total_length = $value_product['length_product']*get_info_unit_length( $value_product['unit_length'] )['exchange']*$value_product['num'];
-					$total = $value_product['price']*$value_product['num'];
+					$arr_product_id_voucher = $_SESSION['voucher_shop'][$value_transporters['store_id']]['product_id'];
+					$price_voucher = 0;
+					if(in_array($value_product['product_id'], $arr_product_id_voucher)){
+						$price_voucher = $_SESSION['voucher_shop'][$value_transporters['store_id']]['price'];
+					}
+					$total_weight = $value_product['weight_product'] * $value_product['num'];
+					$total_length = $value_product['length_product'] * $value_product['num'];
+					$total_width = $value_product['width_product'] * $value_product['num'];
+					$total_height = $value_product['height_product'] * $value_product['num'];
+					$total_length = $value_product['length_product'] * $value_product['num'];
+					$total = $value_product['price'] * $value_product['num'];
 					
-					
-					$db->query( 'INSERT INTO ' . TABLE . '_order_item(order_id,product_id,weight,length,height,width,price,classify_value_product_id,quantity,total) VALUES('.$order_id.','.$value_product['product_id'].','.$total_weight.','.$total_length.','.$total_height.','.$total_width.','.$value_product['price'].','.$value_product['classify_value_product_id'].','.$value_product['num'].','.$total.')' );
-					
-					
-					
-					unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']][$key_product] );
+					$db->query( 'INSERT INTO ' . TABLE . '_order_item(order_id, product_id, weight, length, height, width, price, classify_value_product_id, quantity, total, voucher_price) VALUES('. $order_id . ',' . $value_product['product_id'] .',' . $total_weight . ',' . $total_length . ',' . $total_height . ',' . $total_width . ',' . $value_product['price'] .',' . $value_product['classify_value_product_id'] . ',' . $value_product['num'] . ',' . $total . ',' . $price_voucher . ')' );
+					//xóa sp trong Cart
+					//unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']][$key_product] );
 					if ( count( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] ) == 0 ) {
-						unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] );
+						//unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] );
 					}
 					if ( count( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] ) == 0 ) {
-						unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] );
+						//unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] );
 					}
-					$$data['list_product'][]=$value_product;
+					//xóa voucher
+					//unset( $_SESSION['voucher_shop'][$value_transporters['store_id']] );
+					
+					$data['list_product'][]=$value_product;
 				}
 			}
 		}

@@ -1,4 +1,28 @@
 <?php
+
+	// lấy tất cả category đưa vào redis
+	function get_payment_all()
+	{
+		global $db, $module_name, $module_upload;
+		
+		$list_payment = $db->query('SELECT * FROM ' . TABLE .'_payment WHERE active = 1 ORDER BY weight ASC')->fetchAll();
+		
+		
+		$arr_temp = array();
+		
+		foreach($list_payment as $value)
+		{
+			$arr_temp[$value['payment']] = $value;
+		}
+		
+		return $arr_temp;
+	}
+	
+	
+
+
+
+
 	define('NV_TABLE_USER', $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_users');
 	define('IDSITE', $global_config['idsite']);
 	define('TABLE', $db_config['dbsystem'] . '.' . NV_PREFIXLANG . '_' . $module_name);
@@ -35,9 +59,15 @@
 	
 	// lấy tất cả xã phường
 	$global_ward = json_decode($redis->get('location_ward'),true);
-	
+
+	// lấy tất cả cổng thanh toán
+	if(!$redis->exists('catalogy_main'))
+	{
+		$payport = get_payment_all();
+		$redis->set('payport', json_encode($payport));	
+	}
+	$global_payport = json_decode($redis->get('payport'),true);
 	//$redis->delete('catalogy_main');
-	
 	if(!$redis->exists('catalogy_main'))
 	{
 		$catalogys = get_categories_all();
@@ -194,11 +224,9 @@
 	function voucher_price_optimal($product_id, $total_price_shop, $shop_id, $array_voucher_use){
 		global $db, $user_info;
 		$today = NV_CURRENTTIME;
-		//lay danh sach voucher cua shop còn sài đc và từ ví
-		//print_r('SELECT id, voucher_name, type_discount, discount_price, maximum_discount, minimum_price, time_to, list_product FROM ' . TABLE . '_voucher_shop WHERE status = 1 AND usage_limit_quantity > 0 AND store_id = ' . $shop_id . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND time_from < ' . $today . ' AND time_to > ' . $today . ' AND minimum_price <= ' . $total_price_shop . '  UNION SELECT t2.id, t2.voucher_name, t2.type_discount, t2.discount_price, t2.maximum_discount, t2.minimum_price, t2.time_to, t2.list_product FROM ' . TABLE . '_voucher_wallet t1 INNER JOIN ' . TABLE . '_voucher_shop t2 ON t2.id = t1.voucherid WHERE t1.userid = ' . $user_info['userid'] . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND t2.time_from < ' . $today . ' AND t2.time_to > ' . $today . ' AND t1.status = 1  AND minimum_price <= ' . $total_price_shop . ' AND t2.store_id = ' . $shop_id);die;
+		//lay danh sach voucher cua shop còn sài đc, từ ví và 1 user chỉ sài được 1 voucher 1 lần
 
-
-		$list_voucher = $db->query('SELECT id, voucher_name, type_discount, discount_price, maximum_discount, minimum_price, time_to, list_product FROM ' . TABLE . '_voucher_shop WHERE status = 1 AND usage_limit_quantity > 0 AND store_id = ' . $shop_id . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND time_from < ' . $today . ' AND time_to > ' . $today . ' AND minimum_price <= ' . $total_price_shop . '  UNION SELECT t2.id, t2.voucher_name, t2.type_discount, t2.discount_price, t2.maximum_discount, t2.minimum_price, t2.time_to, t2.list_product FROM ' . TABLE . '_voucher_wallet t1 INNER JOIN ' . TABLE . '_voucher_shop t2 ON t2.id = t1.voucherid WHERE t1.userid = ' . $user_info['userid'] . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND t2.time_from < ' . $today . ' AND t2.time_to > ' . $today . ' AND t1.status = 1  AND minimum_price <= ' . $total_price_shop . ' AND t2.store_id = ' . $shop_id)->fetchAll();
+		$list_voucher = $db->query('SELECT t1.id, t1.voucher_name, t1.type_discount, t1.discount_price, t1.maximum_discount, t1.minimum_price, t1.time_to, t1.list_product FROM ' . TABLE . '_voucher_shop t1 WHERE status = 1 AND usage_limit_quantity > 0 AND store_id = ' . $shop_id . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND time_from < ' . $today . ' AND time_to > ' . $today . ' AND minimum_price <= ' . $total_price_shop . ' AND NOT EXISTS (SELECT id FROM ' . TABLE . '_order_voucher t2 WHERE t2.voucherid = t1.id and t2.status = 1 and t2.userid = ' . $user_info['userid'] . ') UNION SELECT t2.id, t2.voucher_name, t2.type_discount, t2.discount_price, t2.maximum_discount, t2.minimum_price, t2.time_to, t2.list_product FROM ' . TABLE . '_voucher_wallet t1 INNER JOIN ' . TABLE . '_voucher_shop t2 ON t2.id = t1.voucherid WHERE t1.userid = ' . $user_info['userid'] . ' AND (FIND_IN_SET(' . $product_id . ', list_product) OR FIND_IN_SET(0, list_product)) AND t2.time_from < ' . $today . ' AND t2.time_to > ' . $today . ' AND t1.status = 1  AND minimum_price <= ' . $total_price_shop . ' AND t2.store_id = ' . $shop_id . ' AND NOT EXISTS (SELECT id FROM ' . TABLE . '_order_voucher t3 WHERE t3.voucherid = t1.voucherid and t3.status = 1 and t3.userid = ' . $user_info['userid'] . ') ')->fetchAll();
 		
 		foreach($list_voucher as $voucher){
 			$price = 0;
@@ -216,6 +244,10 @@
 			else
 			{	
 				$price = $voucher['discount_price'];
+			}
+
+			if($price > $total_price_shop){
+				$price = $total_price_shop;
 			}
 			
 			$array_product = array();
@@ -260,7 +292,7 @@
 		
 		$today = NV_CURRENTTIME;
 		
-		$check_voucher = $db->query('SELECT * FROM ' . TABLE . '_voucher WHERE userid = ' . $shop_id . ' AND status = 1 ' . $where )->fetch();
+		// $check_voucher = $db->query('SELECT * FROM ' . TABLE . '_voucher WHERE userid = ' . $shop_id . ' AND status = 1 ' . $where )->fetch();
 		
 		if(!$check_voucher['id'])
 		{
@@ -411,7 +443,8 @@
 		$flag = false;
 		
 		if (!defined('NV_IS_USER')) {
-			nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users');
+			// nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users');
+			$user_info['userid'] = 0;
 		}
 		
 		if($order_id)
@@ -419,10 +452,10 @@
 			$flag = $db->query("SELECT id FROM " . TABLE . "_order where userid = ". $user_info['userid'] ." AND id=" . $order_id)->fetchColumn();
 		}
 		
-		if(!$flag)
-		{
-			nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=ordercustomer');
-		}
+		// if(!$flag)
+		// {
+		// 	// nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=ordercustomer');
+		// }
 		
 		return $flag;
 	}
@@ -494,7 +527,7 @@
 	// xử lý thanh toán vnpay thành công
 	function xulythanhtoanthanhcong($order_text, $inputData)
 	{
-		global $db, $db_config, $user_info, $module_name, $lang_module;
+		global $db, $db_config, $user_info, $module_name, $lang_module,$global_payport;
 		
 		$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
 		
@@ -502,10 +535,9 @@
 		foreach ($list_order as $order)
 		{
 			//update voucher 
+			$db->query('UPDATE ' . TABLE . '_voucher_shop SET usage_limit_quantity = usage_limit_quantity - 1 WHERE id = ' . $order['voucherid']);
 			
-			$update_voucher = $db->query('UPDATE ' . TABLE . '_voucher SET usage_limit_quantity = usage_limit_quantity - 1 WHERE id = ' . $order['voucherid']);
-			
-			$update_order_voucher = $db->query('UPDATE ' . TABLE . '_order_voucher SET status =  1 WHERE order_id = ' . $order['id']);
+			$db->query('UPDATE ' . TABLE . '_order_voucher SET status =  1 WHERE order_id = ' . $order['id']);
 			
 			// lấy danh sách sản phẩm của đơn hàng
 			$list_product = $db->query('SELECT product_id, quantity, classify_value_product_id, quantity, price FROM ' . TABLE . '_order_item WHERE order_id =' . $order['id'])->fetchAll();
@@ -570,6 +602,7 @@
 			// Gui mail thong bao den khach hang
 			$data_order['id'] = $order['id'];
 			$info_order = $order;
+			$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
 			$data_order['order_code'] = $order['order_code'];
 			
 			$email_title = $lang_module['order_email_title'];
@@ -2363,9 +2396,7 @@
 	function get_info_store($store_id)
 	{
 		global $db;
-		
 		$list = $db->query("SELECT * FROM " . TABLE . "_seller_management where id=" . $store_id)->fetch();
-		
 		return $list;
 	}
 	function get_info_store_userid($userid)
@@ -2984,7 +3015,6 @@
 	function post_data($url, $param_array, $token)
 	{
 		$json = json_encode($param_array);
-
 		// URL có chứa hai thông tin name và diachi
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
@@ -3328,44 +3358,24 @@
 		
 		return $data;
 	}
-	function get_price_ghtk($pick_address, $pick_province, $pick_district, $pick_ward, $address, $province, $district, $ward, $weight, $insurance_value, $transport, $deliver_option)
+	function get_price_ghtk($pick_address, $pick_province, $pick_district, $province, $district, $address, $weight, $transport, $deliver_option)
 	{
 		global $config_setting;
 		$url = $config_setting['url_ghtk'] . '/services/shipment/fee';
-		if ($transport == '')
-		{
-			$param = array(
-            "pick_address" => $pick_address,
-            "pick_province" => $pick_province,
-            "pick_district" => $pick_district,
-            "pick_ward" => $pick_ward,
-            "address" => $address,
-            "province" => $province,
-            "district" => $district,
-            "ward" => $ward,
-            "weight" => $weight,
-            "value" => $insurance_value,
-            "deliver_option" => $deliver_option
-			);
-		}
-		else
-		{
-			$param = array(
-            "pick_address" => $pick_address,
-            "pick_province" => $pick_province,
-            "pick_district" => $pick_district,
-            "pick_ward" => $pick_ward,
-            "address" => $address,
-            "province" => $province,
-            "district" => $district,
-            "ward" => $ward,
-            "weight" => $weight,
-            "value" => $insurance_value,
-            "transport" => $transport,
-            "deliver_option" => $deliver_option
-			);
-		}
+		
+		$param = array(
+		"pick_address" => $pick_address,
+		"pick_province" => $pick_province,
+		"pick_district" => $pick_district,
+		"address" => $address,
+		"province" => $province,
+		"district" => $district,
+		"weight" => $weight,
+		"transport" => $transport,
+		"deliver_option" => $deliver_option
+		);
 		$data = post_data($url, $param, $config_setting['token_ghtk']);
+		
 		return $data;
 	}
 	function get_token_ahamove()
@@ -3912,6 +3922,107 @@
 		}
 		$url = 'https://pay.vnpay.vn/vpcpay.html' . $vnp_Url;
 		return $url;
+	}
+	function execPostRequest($url, $data)
+	{
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+		'Content-Type: application/json',
+		'Content-Length: ' . strlen($data))
+		);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+		//execute post
+		$result = curl_exec($ch);
+		//close connection
+		curl_close($ch);print_r($result);die;
+		return $result;
+	}
+	function send_momo($mm_amount, $mm_OrderInfo, $mm_TmnCode, $mm_TransactionNo, $mm_HashSecret, $mm_ReturnUrl, $mm_IpAddr)
+	{
+		/* global $config_setting;
+		$inputData = array(
+        "mm_Version" => "2.0.0",
+        "mm_TmnCode" => $mm_TmnCode,
+        "mm_Amount" => (int)$mm_amount * 100,
+        "mm_Command" => "pay",
+        "mm_CreateDate" => date('YmdHis') ,
+        "mm_CurrCode" => "VND",
+        "mm_IpAddr" => $mm_IpAddr,
+        "mm_Locale" => 'vn',
+        "mm_OrderInfo" => $mm_OrderInfo,
+        "mm_ReturnUrl" => $mm_ReturnUrl,
+        "mm_TxnRef" => $mm_TransactionNo,
+		);
+		ksort($inputData);
+		$hashdata = "";
+		$i = 0;
+		foreach ($inputData as $key => $value)
+		{
+			if ($i == 1)
+			{
+				$hashdata .= '&' . $key . "=" . $value;
+			}
+			else
+			{
+				$hashdata .= $key . "=" . $value;
+				$i = 1;
+			}
+			$query .= urlencode($key) . "=" . urlencode($value) . '&';
+		}
+		$mm_Url = $mm_Url . "?" . $query;
+		if (isset($mm_HashSecret))
+		{
+			$mmSecureHash = hash('sha256', $mm_HashSecret . $hashdata);
+			$mm_Url .= 'mm_SecureHashType=SHA256&mm_SecureHash=' . $mmSecureHash;
+		}
+		$url = 'https://test-payment.momo.vn/v2/gateway/api/create' . $mm_Url;
+		return $url; */
+		
+
+
+
+		$endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+		
+		
+		$partnerCode = 'MOMOGQQA20220110';
+		$accessKey = 'eZBxUT4fUAG4WC7E';
+		$orderInfo = $mm_OrderInfo;
+		$amount = $mm_amount;
+		$orderId = time() ."";
+		$redirectUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
+		$ipnUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
+		$extraData = "";
+		
+		
+		
+		
+		$serectkey = 'K1W2fjpbQr4ZBZzgj4snNVfvSqUkQePE';
+		$requestId = time() . "";
+		$requestType = "captureWallet";
+		$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+		//before sign HMAC SHA256 signature
+		$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+		$signature = hash_hmac("sha256", $rawHash, $serectkey);
+		$data = array('partnerCode' => $partnerCode,
+		'partnerName' => "Test",
+		"storeId" => "MomoTestStore",
+		'requestId' => $requestId,
+		'amount' => $amount,
+		'orderId' => $orderId,
+		'orderInfo' => $orderInfo,
+		'redirectUrl' => $redirectUrl,
+		'ipnUrl' => $ipnUrl,
+		'lang' => 'vi',
+		'extraData' => $extraData,
+		'requestType' => $requestType,
+		'signature' => $signature);
+		$result = execPostRequest($endpoint, json_encode($data));
+		$jsonResult = json_decode($result, true);  // decode json
+		return $jsonResult['payUrl'];
 	}
 	function print_ghtk($order_code)
 	{
@@ -4655,7 +4766,7 @@
 	}
 	function xulythanhtoanthanhcong_recieve($order_text, $inputData)
 	{
-		global $db, $db_config, $user_info, $module_name, $lang_module;
+		global $db, $db_config, $user_info, $module_name, $lang_module, $global_payport;
 		
 		$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
 		
@@ -4726,6 +4837,7 @@
 			// Gui mail thong bao den khach hang
 			$data_order['id'] = $order['id'];
 			$info_order = $order;
+			$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
 			$data_order['order_code'] = $order['order_code'];
 			
 			$email_title = $lang_module['order_email_title'];
@@ -4752,4 +4864,191 @@
 		
 		return true;
 	}
+function GetInfoOrderByID($order_code)
+{
+	global $db;
+	$list = array();
+	$sth = $db->query("SELECT * FROM " . TABLE . "_order where id IN (" . $order_code .")");
+	while($row = $sth->fetch()){
+		$list[$row['id']] = $row;
+	}
 	
+	
+	return $list;
+}	
+function PaymentMethod(){
+
+}
+function GetPaymentMethodOrder($order_code){
+	global $db;
+	$order = explode(",",$order_code);
+
+	$orders = $db->query('SELECT * FROM ' . TABLE . '_order where id IN (' . $order_code . ' )')->fetchAll(); 
+	
+	$max_i = count($orders);
+	$flag = false;
+	if(count($order) > 1 && $max_i > 1){
+		$flags = array();
+		for($i = 0;$i<($max_i-1);$i++){
+			$flags[$i] = 0;
+			if(  $orders[$i+1]['time_add'] == $orders[$i]['time_add'] && $orders[$i+1]['payment_method'] == $orders[$i]['payment_method']){
+				$flags[$i] = 1;
+				
+			}
+			
+		}
+		if(in_array(0,$flags) == 0 ){
+			$flag = true;
+		}
+
+	}elseif(count($order) == 1 && $max_i == 1) {
+		$flag = true;
+	}
+	if($flag == false){
+		nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name );
+	}
+	$payment_method = $orders[0]['payment_method'];
+	return $payment_method;
+}
+
+function CheckPaymentOrder($payment_method,$order_code,$inputData){
+	$error = array();
+	if($payment_method == 'vnpay'){
+		if ($inputData['vnp_ResponseCode'] == '02')
+		{
+			$error[] = 'Đơn hàng đã được xác nhận!';
+		}
+		elseif ($inputData['vnp_ResponseCode'] == '04')
+		{
+			$error[] = 'Số tiền không hợp lệ!';
+		}
+		elseif ($inputData['vnp_ResponseCode'] == '01')
+		{
+			$error[] = 'Không tìm thấy giao dịch xác nhận!';
+		}
+		elseif ($inputData['vnp_ResponseCode'] == '97')
+		{
+			$error[] = 'Chữ ký không hợp lệ!';
+		}
+		elseif ($inputData['vnp_ResponseCode'] == '99')
+		{
+			$error[] = 'Lỗi hệ thống khác!';
+		}
+		elseif ($inputData['vnp_ResponseCode'] == '24')
+		{
+			$error[] = 'Giao dịch không thành công!';
+		}
+	}
+	
+	return $error;
+}
+function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
+	global $db;
+	$status = false;
+
+	if(empty($errors)){
+		//$_SESSION[$module_name . '_' . $payment_method] = true;
+		if($payment_method == 'vnpay'){
+				$vnp_SecureHash = $inputData['vnp_SecureHash'];
+				unset($inputData['vnp_SecureHashType']);
+				unset($inputData['vnp_SecureHash']);
+				ksort($inputData);
+				$i = 0;
+				$hashData = "";
+				foreach ($inputData as $key => $value)
+				{
+					if ($i == 1)
+					{
+						$hashData = $hashData . '&' . $key . "=" . $value;
+					}
+					else
+					{
+						$hashData = $hashData . $key . "=" . $value;
+						$i = 1;
+					}
+				}
+				$vnp_HashSecret = $config_setting['checksum_vnpay'];
+
+				$order_text = $inputData['vnp_TxnRef'];
+				
+				if(!$order_text)
+				{
+					$returnData['RspCode'] = '01';
+					$returnData['Message'] = 'Order not found!';
+				}
+				
+
+				// tính tổng tiền thanh toán
+				$sum_total_payment = $db->query('SELECT sum(total) FROM ' . TABLE . '_order WHERE id IN('. $order_text .')')->fetchColumn(); 
+
+				//print_r($tongtien_thanhtoan);die;
+
+				$check_orderid = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .')')->fetchColumn(); 
+
+				$check_payment = $db->query('SELECT id FROM ' . TABLE . '_order WHERE status_payment_vnpay = 1 AND id IN('. $order_text .')')->fetchColumn(); 
+
+			
+				$secureHash = hash('sha256', $vnp_HashSecret . $hashData);
+				//print_r($id_order);die;
+			
+				$vnp_Amount = $inputData['vnp_Amount'];
+				$vnp_Amount = (int)$vnp_Amount / 100;
+
+				// checksum
+				//print_r($vnp_SecureHash);die;
+				if ($secureHash == $vnp_SecureHash)
+				{
+					// check OrderId
+					if ($check_orderid)
+					{
+						if($tongtien_thanhtoan && $tongtien_thanhtoan == $vnp_Amount ){
+							// check Status
+							if ($check_payment) {
+								
+									if ($inputData['vnp_ResponseCode'] == '00')
+									{
+										$status = true;
+									
+									}
+									
+								
+							} else {
+								$error[] = 'Thanh toán thất bại!';
+							}
+						}
+						else
+						{
+							$error[] = 'Số tiền không hợp lệ!';
+						}
+						
+
+					}
+					else
+					{
+						$error[] = 'Đơn hàng không tìm thấy!';
+					}
+				}
+				else
+				{
+					$error[] = 'Chữ ký không hợp lệ!';
+				}
+
+				// ket thuc xu ly chuan
+		}elseif($payment_method == 'recieve'){
+			$db->query('UPDATE ' . TABLE . '_order SET status = 1  WHERE id IN (' . $order_code . ')');
+			// tính tổng tiền thanh toán
+				$sum_total_payment = $db->query('SELECT sum(total) FROM ' . TABLE . '_order WHERE id IN('. $order_code .')')->fetchColumn(); 
+
+			$status = true;
+			//$inputData = array();
+			//$inputData['order_code'] = $nv_Request->get_title('order_code', 'get', '', 1);
+
+		}
+		
+	}
+	$data=array();
+	$data['status'] = $status;
+	$data['sum_total_payment'] = $sum_total_payment;
+	return $data;
+	
+}

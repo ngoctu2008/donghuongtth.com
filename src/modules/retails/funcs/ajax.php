@@ -1772,16 +1772,15 @@ if($mod=='load_order_customer'){
 		$base_url .= '&q=' . $q;
 	}
 	
-	
+
 	$per_page = 10;
 	$page = $nv_Request->get_int('page', 'post,get', 1);
 	$db->sqlreset()
 	->select('COUNT(*)')
 	->from('' . TABLE . '_order')
-	->where('payment != 0 AND userid = '.$user_info['userid'] . $where);
+	->where('( payment != 0 OR payment_method = "recieve" )  AND userid = '.$user_info['userid'] . $where);
 	
 	$sth = $db->prepare($db->sql());
-	
 	$sth->execute();
 	$num_items = $sth->fetchColumn();
 	
@@ -2117,7 +2116,7 @@ if($mod=='load_order_customer_no_payment'){
 
 
 // xử lý thanh toán lại đơn hàng vnpay 
-if($mod=='vnpay_repayment'){
+if($mod=='repayment'){
 	$data['id_order'] = $nv_Request->get_title( 'id_order', 'post,get','');
 	
 	
@@ -2156,15 +2155,17 @@ if($mod=='vnpay_repayment'){
 	
 	$order_full = $data['id_order'];
 	$list_order_code = implode(',',$list_order_code);
+
+	//Payment_port($order_full,$list_order_code,);
 	$vnp_TransactionNo = $order_full;
 	$vnp_OrderInfo = 'Thanh toan giao dich '.$list_order_code.' vao thoi gian '.date('d-m-Y H:i',NV_CURRENTTIME);
 	
 	$vnp_ReturnUrl= 'https://chonhagiau.com/retails/payment/';
 
-	$check_vnpay = send_vnpay($total_full,$vnp_OrderInfo,$config_setting['website_code_vnpay'],$vnp_TransactionNo,$config_setting['checksum_vnpay'],$vnp_ReturnUrl,'171.226.0.17');
+	$check_payport = send_vnpay($total_full,$vnp_OrderInfo,$config_setting['website_code_vnpay'],$vnp_TransactionNo,$config_setting['checksum_vnpay'],$vnp_ReturnUrl,'171.226.0.17');
 	$result = array(
 	'status' => 'OK',
-	'link' => $check_vnpay
+	'link' => $check_payport
 	);
 	print_r( json_encode($result));die;
 	die();
@@ -2771,7 +2772,7 @@ if ( $mod == 'add_order' ) {
 		);
 		// add order
 		$data = add_order($list_transporters,$info_customer);
-		unset( $_SESSION[$module_data . '_cart'] );
+		//unset( $_SESSION[$module_data . '_cart'] );
 
 		// thanh toán vnpay
 		if($payment_method == 'vnpay'){
@@ -2802,14 +2803,15 @@ if ( $mod == 'add_order' ) {
 			
 			$list_order = $data['list_order'];
 			$list_order_code = $data['list_order_code'];
-			
+			$info_order = get_info_order($list_order[0]);
+			$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
 			$list_order=implode(',',$list_order);
 			$list_order_code=implode(',',$list_order_code);
 			
 			xulythanhtoanthanhcong_recieve($list_order, $info_order);
 			$contents1 = array(
 				'status' => 'OK_RECIEVE',
-				'link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&amp;order_code='.$list_order , true )
+				'link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&amp;order_code=' , true ).$list_order
 				);
 				print_r( json_encode($contents1));die;
 		}elseif($payment_method == 'momo'){
@@ -3423,10 +3425,10 @@ if ( $mod == 'get_transport_fee_viettelpost' ) {
 }
 
 if ( $mod == 'get_transport_fee_ghn' ) {
-	$weight_product = $nv_Request->get_int( 'weight', 'get,post', 0 );
-	$length_product = $nv_Request->get_int( 'length', 'get,post', 0 );
-	$width_product = $nv_Request->get_int( 'width', 'get,post', 0 );
-	$height_product = $nv_Request->get_int( 'height', 'get,post', 0 );
+	$weight_product = $nv_Request->get_float( 'weight', 'get,post', 0 );
+	$length_product = $nv_Request->get_float( 'length', 'get,post', 0 );
+	$width_product = $nv_Request->get_float( 'width', 'get,post', 0 );
+	$height_product = $nv_Request->get_float( 'height', 'get,post', 0 );
 	$total = $nv_Request->get_int( 'total', 'get,post', 0 );
 	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
 	$ward_id_ghn_receive = get_info_ward( $ward_id )['ghnid'];
@@ -3459,9 +3461,6 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	
 	
 	$fee = get_price_ghn( $service_id, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
-	
-	
-	
 	if($fee['code']==400){
 		$fee = get_price_ghn_2( $code_transporters, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
 	}
@@ -3493,82 +3492,38 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 }
 if ( $mod == 'get_transport_fee_ghtk' ) {
 	$weight_product = $nv_Request->get_int( 'weight', 'get,post', 0 );
-	$length_product = $nv_Request->get_int( 'length', 'get,post', 0 );
-	$width_product = $nv_Request->get_int( 'width', 'get,post', 0 );
-	$height_product = $nv_Request->get_int( 'height', 'get,post', 0 );
-	$total = $nv_Request->get_int( 'total', 'get,post', 0 );
 	$province_id = $nv_Request->get_int( 'province_id', 'get,post', 0 );
-	$address = $nv_Request->get_string( 'address', 'get,post', 0 );
-	$province_id_ghtk_receive = get_info_province( $province_id )['title'];
-	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
-	if ( $ward_id>0 ) {
-		$ward_id_ghtk_receive = get_info_ward( $ward_id )['title'];
-	}
 	$district_id = $nv_Request->get_int( 'district_id', 'get,post', 0 );
-	$district_id_ghtk_receive = get_info_district( $district_id )['title'];
-	$warehouse_id = $nv_Request->get_int( 'shops_id', 'get,post', 0 );
+	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
+	$address = $nv_Request->get_string( 'address', 'get,post', 0 );
+	$warehouse_id = $nv_Request->get_int( 'warehouse_id', 'get,post', 0 );
 	$info_warehouse = get_info_warehouse( $warehouse_id );
-	$province_id_ghtk_send = get_info_province( $info_warehouse['province_id'] )['title'];
-	$district_id_ghtk_send = get_info_district( $info_warehouse['district_id'] )['title'];
-	$ward_id_ghtk_send = get_info_ward( $info_warehouse['ward_id'] )['title'];
-	$transporters_id = $nv_Request->get_int( 'transporters_id', 'get,post', 0 );
-	$code_transporters = get_info_transporters( $transporters_id )['code_transporters'];
-	$shop_id = $info_warehouse['shops_id_ghn'];
-	if ( $ward_id>0 ) {
-		if($code_transporters==1){
-			$fee = get_price_ghtk( $info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, $ward_id_ghtk_receive, $weight_product, $total ,'road','none');
-			}else if($code_transporters==2){
-			$fee_road = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send, $address, $province_id_ghtk_receive, $district_id_ghtk_receive, $ward_id_ghtk_receive, $weight_product, $total ,'road','none');
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send, $address, $province_id_ghtk_receive, $district_id_ghtk_receive, $ward_id_ghtk_receive, $weight_product, $total ,'fly','none');
-			}else if($code_transporters==3){
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send, $address, $province_id_ghtk_receive, $district_id_ghtk_receive, $ward_id_ghtk_receive, $weight_product, $total ,'','xteam');
-		}
-		} else {
-		if($code_transporters==1){
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, '', $weight_product, $total,'road','none' );
-			}else if($code_transporters==2){
-			$fee_road = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, '', $weight_product, $total,'road','none' );
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, '', $weight_product, $total,'fly','none' ); 
-			}else if($code_transporters==3){
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, '', $weight_product, $total,'','xteam' );
-		}
+	if($weight_product == 0  ){
+		$_SESSION['tranposter_fee'][$shops_id_session][2] = 0;
+		print_r( json_encode( 0 ) );
+		die;
 	}
-	if ( empty( $fee ) ) {
-		$tranposter_fee = -1;
+	//format thông tin
+	$pick_province = $global_province[$info_warehouse['province_id']]['title'];
+	$pick_district = $global_district[$info_warehouse['district_id']]['title'];
+	$address_shop = explode(',', $info_warehouse['address']);
+	$pick_address = $address_shop[0];
+	//nhận
+	$province = $global_province[$province_id]['title'];
+	$district = $global_district[$district_id]['title'];
+	$address = explode(',', $address);
+	$address = $address[0];
+	
+	$fee = get_price_ghtk($pick_address, $pick_province, $pick_district, $province, $district, $address, $weight_product,'road','none');
+	
+	if ($fee['fee']['delivery']) {
+		$tranposter_fee = $fee['fee']['fee'];
+		// cộng thêm phí vận chuyển hệ thống sàn thương mại
+		$tranposter_fee = $tranposter_fee + (($tranposter_fee * $config_setting['percent_of_ship'])/100);
+		$tranposter_fee = rounding($tranposter_fee);
+		$_SESSION['tranposter_fee'][$shops_id_session][2] = $tranposter_fee;
 		} else {
-		if($code_transporters!=2){
-			if ( get_info_transporters( $transporters_id )['type'] == 0 ) {
-				$tranposter_fee = $fee['fee']['fee']+get_info_transporters( $transporters_id )['money'];
-				} else {
-				$tranposter_fee = $fee['fee']['fee']-get_info_transporters( $transporters_id )['money'];
-				if ( $tranposter_fee<0 ) {
-					$tranposter_fee = 0;
-				}
-			}
-			$mod = $tranposter_fee%1000;
-			if($mod>0){
-				$thuong = ceil($tranposter_fee / 1000);
-				$tranposter_fee=$thuong*1000;
-			}
-			}else{
-			if($fee != $fee_road){
-				if ( get_info_transporters( $transporters_id )['type'] == 0 ) {
-					$tranposter_fee = $fee['fee']['fee']+get_info_transporters( $transporters_id )['money'];
-					} else {
-					$tranposter_fee = $fee['fee']['fee']-get_info_transporters( $transporters_id )['money'];
-					if ( $tranposter_fee<0 ) {
-						$tranposter_fee = 0;
-					}
-				}
-				$mod = $tranposter_fee%1000;
-				if($mod>0){
-					$thuong = ceil($tranposter_fee / 1000);
-					$tranposter_fee=$thuong*1000;
-				}
-				}else{
-				$tranposter_fee = -1;
-			}
-		}
+			$tranposter_fee = -1;
 	}
 	print_r( json_encode( $tranposter_fee ) );
 	die;
@@ -3837,55 +3792,34 @@ if ( $mod == 'tonkho' ) {
 
 if($mod == 'testtt')
 {
-	//send_mail_payment_fail(626);
-	
-	//$order = get_info_order(641);
-	//send_email_order_cancel($order);
-	
-	//send_mail_order_delivered($order);
-	
-	//update_time_add_order(647);
-	
-	//print_r(NV_CURRENTTIME);die;
-	
-	//insert_history_admin(220, 'Lam gi do');
-	 //$a = get_name_store(2);
-	//$a = create_warehouse_viettelpost('0374600090', 'shop test', '99A Cộng hòa', 493);
-	//$a['data'][0]['cusId'];
-	$b =  Array
+	$a =Array
 	(
-		'status' => 200,
-		'error' => '',
-		'message' =>'OK'
+		'success' => '1',
+		'message' => 'Các đơn hàng đã được add vào hệ thống GHTK thành công. Thông tin đơn hàng thành công được trả về trong trường success_orders.',
+		'order' => Array
+			(
+				'partner_id' => 'ECNG0000643 - 09:19 27/01/2022',
+				'label' => 'S20966001.SG30.M2.300071869',
+				'area' => '2',
+				'fee' => '27000',
+				'insurance_fee' => '5000',
+				'estimated_pick_time' => 'Sáng 2022-01-27',
+				'estimated_deliver_time' => 'Chiều 2022-01-27',
+				'products' => Array
+					(
+					),
 	
-	);
-	$b['data'] = Array();
-	$b['data'][] =  Array(
-				'groupaddressId' => '10436450',
-				'cusId'=> '10486964',
-				'name' => 'shop test',
-				'phone'=> '0374600090',
-				'address' => '99A Cộng hòa',
-				'provinceId' => '1',
-				'districtId' => '25',
-				'wardsId' => '493',
-				'postId' => '',
-				'merchant' =>'' ,
+				'status_id' => '2',
+				'tracking_id' => '300071869',
+				'sorting_code' => 'SG30.M2',
+				'is_xfast' => '0',
+				),
+	
+		'warning_message' => 'Việc vận chuyển hiện tại đang gặp khó khăn do tình hình dịch bệnh phức tạp, vì vậy thời gian giao hàng tới khách sẽ chậm hơn dự kiến.
+	Mong Shop thông cảm và cân nhắc kỹ trước khi gửi hàng. GHTK xin lỗi vì sự bất tiện này.'
 			);
-
-			$b['data'][] =   Array(
-				'groupaddressId' => '10432627',
-				'cusId' => '10486964',
-				'name' => 'Luân Test 2',
-				'phone' => '0968625207',
-				'address' => '61 K2 Cầu Diễn',
-				'provinceId' => '1',
-				'districtId' => '25',
-				'wardsId' => '493',
-				'postId' => '',
-				'merchant' => '',
-			);
-	print_r($b['data'][0]['cusId']);die;
+	print_r($a['order']['label']);die;
+	
 }
 
 die();

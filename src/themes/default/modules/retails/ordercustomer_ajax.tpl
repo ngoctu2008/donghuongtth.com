@@ -138,7 +138,7 @@
 	<!-- BEGIN: repayment -->
 	<div class="total_repayment text-right fs_18">
 		<div class="total_price_repayment secondary_text mb-1">{total_payment} đ</div>
-		<div class="vnpay_repayment"><span class="btn btn_ecng " onclick="vnpay_repayment('{id_order}');">Thanh toán lại</span></div>
+		<div class="vnpay_repayment"><span class="btn btn_ecng " onclick="repayment('{id_order}');">Thanh toán lại</span></div>
 	</div>
 	</br>
 	</br>

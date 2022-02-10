@@ -70,8 +70,37 @@ $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lan
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_admin_ecng";
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_voucher_wallet";
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_warehouse_transport";
+$sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghtk";
+$sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghtk_detail";
 
 $sql_create_module = $sql_drop_module;
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghtk_detail(
+  id int(11) NOT NULL AUTO_INCREMENT,
+  order_id int(11) DEFAULT '0',
+  label varchar(100) DEFAULT '0' NOT NULL COMMENT ' Mã đơn hàng',
+  status_id tinyint(2) COMMENT 'Trạng thái đơn',
+  reason_code varchar(100) DEFAULT '0' COMMENT 'Mã lý do cập nhật',
+  reason varchar(100) DEFAULT '0' COMMENT 'Lý do chi tiết cập nhật',
+  time_add int(11) COMMENT 'Ngày tạo',
+  PRIMARY KEY (id)
+) ENGINE=MyISAM";
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghtk(
+  id int(11) NOT NULL AUTO_INCREMENT,
+  order_id int(11) DEFAULT '0',
+  label varchar(100) DEFAULT '0' NOT NULL COMMENT ' Mã đơn hàng',
+  fee double DEFAULT '0' NOT NULL COMMENT 'Phí dịch vụ cuối cùng',
+  insurance_fee double DEFAULT '0' COMMENT 'Phí bảo hiểm',
+  status_id tinyint(2) COMMENT 'Trạng thái đơn',
+  weight double DEFAULT '0' COMMENT 'khối lượng đơn hàng tính theo kilogram',
+  fee_update double DEFAULT '0' COMMENT 'Phí dịch vụ được GHTK cập nhật',
+  pick_money double DEFAULT '0' COMMENT 'Phí thu hộ',
+  time_add int(11) COMMENT 'Ngày tạo',
+  time_edit int(11) DEFAULT '0' COMMENT 'Ngày sửa',
+  doisoat tinyint(2) DEFAULT '0' COMMENT 'Đối soát 0 chưa đối soát, 1 đã đối soát	',
+  PRIMARY KEY (id)
+) ENGINE=MyISAM";
 
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_warehouse_transport(
   id mediumint(8) NOT NULL AUTO_INCREMENT,

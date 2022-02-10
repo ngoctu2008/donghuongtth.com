@@ -7,71 +7,79 @@
  * @License GNU/GPL version 2 or any later version
  * @Createdate 04/18/2017 09:47
  */
-use MService\Payment\Pay\Processors\AppPay;
-use MService\Payment\Pay\Processors\PaymentConfirmation;
-use MService\Payment\Pay\Processors\POSPay;
-use MService\Payment\Pay\Processors\QRNotify;
-use MService\Payment\Pay\Processors\TransactionQuery;
-use MService\Payment\Pay\Processors\TransactionRefund;
-use MService\Payment\Shared\SharedModels\Environment;
-use MService\Payment\Shared\SharedModels\PartnerInfo;
 
-if (! defined('NV_IS_MOD_RETAILSHOPS')) {
-    die('Stop!!!');
+if (!defined('NV_IS_MOD_RETAILSHOPS'))
+die('Stop!!!');
+//$data = add_order($list_transporters,$info_customer);
+$list_order = $data['list_order'];
+$list_order_code = $data['list_order_code'];
+$order_full=implode(',',$list_order);
+$list_order_code=implode(',',$list_order_code);
+$vnp_TransactionNo=$order_full;
+$vnp_OrderInfo='Thanh toan giao dich '.$list_order_code.' vao thoi gian '.date('d-m-Y H:i',NV_CURRENTTIME);
+
+
+$vnp_ReturnUrl= nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment' , true );
+
+// lấy thông tin ip server
+$vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+
+$check_momo = send_momo($total_full,$mm_OrderInfo,$config_setting['website_code_vnpay'],$mm_TransactionNo,$config_setting['checksum_vnpay'],$vnp_ReturnUrl,$mm_IpAddr);
+$contents1 = array(
+'status' => 'OK_MOMO',
+'link' => $check_momo
+);
+
+print_r( json_encode($contents1));die;
+die();
+
+
+
+
+
+
+
+foreach ($array_order as $order_code => $order_data) {
+    $payment_data = unserialize(nv_base64_decode($order_data['payment_data']));
+    $vpc_MerchTxnRef = $payment_data['vpc_MerchTxnRef'];
+
+    $url = $payment_config['QueryDR_url'] . "?vpc_Version=" . $payment_config['vpc_Version'] . "&vpc_Command=queryDR&vpc_Merchant=" . $payment_config['vpc_Merchant'] . "&vpc_AccessCode=" . $payment_config['vpc_AccessCode'] . "&vpc_MerchTxnRef=" . $vpc_MerchTxnRef . "&vpc_User=" . $payment_config['vpc_User'] . "&vpc_Password=" . $payment_config['vpc_Password'];
+
+    $return = file_get_contents($url);
+    $data = explode("&", urldecode($return));
+    $array = array();
+    foreach ($data as $data_i) {
+        $data_i = array_map("trim", explode("=", $data_i));
+        $array[$data_i[0]] = $data_i[1];
+    }
+
+    if ($array['vpc_DRExists'] == "Y") {
+        if ($array['vpc_TxnResponseCode'] == '0') {
+            $nv_transaction_status = 4; // Giao dich thanh cong
+        } else {
+            $nv_transaction_status = 3; // Giao dich bi huy
+        }
+        
+        $transaction_i = array();
+        $transaction_i['nv_transaction_status'] = $nv_transaction_status;
+        $transaction_i['amount'] = round(( int )$array['vpc_Amount'] / 100);
+        $transaction_i['created_time'] = $payment_data['created_time'];
+        $transaction_i['vpc_MerchTxnRef'] = $array['vpc_MerchTxnRef'];
+
+        $payment_data_new = nv_base64_encode(serialize($transaction_i));
+        $payment_data_old = $order_data['payment_data'];
+        
+        if ($payment_data_new != $payment_data_old) {
+            $payment_amount = $transaction_i['amount'];
+            $payment_time = $payment_data['created_time'];
+            $order_id = $array_order[$order_code]['order_id'];
+            $payment_id = intval($array['vpc_TransactionNo']);
+                        
+            $transaction_id = $db->insert_id("INSERT INTO " . $db_config['prefix'] . "_" . $module_data . "_transaction (transaction_id, transaction_time, transaction_status, order_id, userid, payment, payment_id, payment_time, payment_amount, payment_data) VALUES (NULL, " . NV_CURRENTTIME . ", '" . $nv_transaction_status . "', '" . $order_id . "', '0', '" . $payment . "', '" . $payment_id . "', '" . $payment_time . "', '" . $payment_amount . "', '" . $payment_data_new. "')");
+            if ($transaction_id > 0) {
+                $db->query("UPDATE " . $db_config['prefix'] . "_" . $module_data . "_orders SET transaction_status=" . $nv_transaction_status . " , transaction_id = " . $transaction_id . " , transaction_count = transaction_count+1 WHERE order_id=" . $order_id);
+                $array_update_order[] = $order_code;
+            }
+        }
+    }
 }
-
-
-$env = new MService\Payment\Shared\SharedModels\Environment("https://test-payment.momo.vn/pay/pos", new MService\Payment\Shared\SharedModels\PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development');
-print_r($env);
-$publicKey = "-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkpa+qMXS6O11x7jBGo9W3yxeHEsAdyDE
-40UoXhoQf9K6attSIclTZMEGfq6gmJm2BogVJtPkjvri5/j9mBntA8qKMzzanSQaBEbr8FyByHnf
-226dsLt1RbJSMLjCd3UC1n0Yq8KKvfHhvmvVbGcWfpgfo7iQTVmL0r1eQxzgnSq31EL1yYNMuaZj
-pHmQuT24Hmxl9W9enRtJyVTUhwKhtjOSOsR03sMnsckpFT9pn1/V9BE2Kf3rFGqc6JukXkqK6ZW9
-mtmGLSq3K+JRRq2w8PVmcbcvTr/adW4EL2yc1qk9Ec4HtiDhtSYd6/ov8xLVkKAQjLVt7Ex3/agR
-PfPrNwIDAQAB
------END PUBLIC KEY-----";
-$requestId = time() . "";
-$partnerRefId = time() . "";
-
-/** Pay Processes:
- * App-In-App
- * POS
- * QR Code
- * Payment Confirmation
- * Transaction Query
- * Transaction Refund
- */
-
-//get new Token from MoMoApp and put in appData
-//uncomment to use AppPay function
-//$appData = '' ;
-//$customerNumber = '0917003000';
-//$pKey = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkpa+qMXS6O11x7jBGo9W3yxeHEsAdyDE40UoXhoQf9K6attSIclTZMEGfq6gmJm2BogVJtPkjvri5/j9mBntA8qKMzzanSQaBEbr8FyByHnf226dsLt1RbJSMLjCd3UC1n0Yq8KKvfHhvmvVbGcWfpgfo7iQTVmL0r1eQxzgnSq31EL1yYNMuaZjpHmQuT24Hmxl9W9enRtJyVTUhwKhtjOSOsR03sMnsckpFT9pn1/V9BE2Kf3rFGqc6JukXkqK6ZW9mtmGLSq3K+JRRq2w8PVmcbcvTr/adW4EL2yc1qk9Ec4HtiDhtSYd6/ov8xLVkKAQjLVt7Ex3/agRPfPrNwIDAQAB';
-//AppPay::process(new Environment("https://test-payment.momo.vn/pay/app", new PartnerInfo("IICsyHpuwP8IzVvE", 'CGV01', 'vLujzooXM8ySdHJOBFuwmWB3T4ZBYLJ'), 'development'), 10000, $appData, $pKey, $customerNumber, $partnerRefId);
-
-//POSPay::process($env, 'MM587977818202493946', 50000, $publicKey, $partnerRefId, '', '', '');
-
-$qrRawData = '{
-  "partnerCode": "MOMOIQA420180417",
-  "accessKey": "mTCKt9W3eU1m39TW",
-  "amount": 10000,
-  "partnerRefId": "B001221",
-  "partnerTransId": "",
-  "transType": "momo_wallet",
-  "momoTransId": "43121679",
-  "status": 0,
-  "message": "Thành Công",
-  "responseTime": 1555472829549,
-  "signature": "e33dcd33ea016023a1ca49877241fa35609163e967e86716f9fc974e91a23164",
-  "storeId": "store001"
-}';
-//QRNotify::process($env, $qrRawData);
-
-//PaymentConfirmation::process(new Environment("https://test-payment.momo.vn/pay/confirm", new PartnerInfo("IICsyHpuwP8IzVvE", 'CGV01', 'vLujzooXM8ySdHJOBFuwmWB3T4ZBYLJ'), 'development'), 'e671ffb0-af61-11e9-ba3c-4b08721e3699', "capture", "2305581638", $requestId);
-
-//TransactionQuery::process(new Environment("https://test-payment.momo.vn/pay/query-status", new PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development'), '1562138468', $publicKey, '1562138427');
-
-//TransactionRefund::process(new Environment("https://test-payment.momo.vn/pay/refund", new PartnerInfo("mTCKt9W3eU1m39TW", 'MOMOIQA420180417', 'PPuDXq1KowPT1ftR8DvlQTHhC03aul17'), 'development'), $requestId, 10000, $publicKey, '1562138427', '2305016460');
-
-die(oke);

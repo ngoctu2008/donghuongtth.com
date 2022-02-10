@@ -1679,6 +1679,7 @@ span.price_special_detail span{
 ul.timeline {
     list-style-type: none;
     position: relative;
+	z-index: 1;
 }
 ul.timeline:before {
     content: ' ';
@@ -1689,6 +1690,7 @@ ul.timeline:before {
     width: 2px;
     height: 100%;
     z-index: 400;
+	z-index: 1;
 }
 ul.timeline > li {
     margin: 20px 0;

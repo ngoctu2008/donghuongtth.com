@@ -1005,7 +1005,7 @@ function maxLengthCheck(object) {
 }	
 
 
-function vnpay_repayment(id_order, tongtien)
+function repayment(id_order, tongtien)
 {
 	
 	if(id_order == '' || tongtien <= 0)
@@ -1018,7 +1018,7 @@ function vnpay_repayment(id_order, tongtien)
 		type: "POST",      
 		dataType: 'json',  
 		url: nv_base_siteurl + 'index.php' + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable +
-		'=ajax&mod=vnpay_repayment',
+		'=ajax&mod=repayment',
 		data: {
 			id_order : id_order,
 			tongtien : tongtien

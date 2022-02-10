@@ -1,5 +1,10 @@
 <!-- BEGIN: main -->
-<div class="content_detail_order">
+<style>
+.breadcrumb{
+    display: none;
+}
+</style>
+<div class="content_detail_order mt-3">
     <div class="info_order bg_white p-3">
         <div class=" d-flex justify-content-between">
             <p class="fs_18 "><span class="text_gray_color">Chi tiết đơn hàng {info_order.order_code}</span> -
