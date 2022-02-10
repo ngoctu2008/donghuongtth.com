@@ -2664,7 +2664,7 @@ if ( $mod == 'add_order' ) {
 				// kết thúc xử lý lại
 				
 				
-				$number_inventory_max=get_info_invetory_group($value_product['product_id'],$value_product['classify_value_product_id'])['sl_tonkho'];	
+				$number_inventory_max = get_info_invetory_group($value_product['product_id'],$value_product['classify_value_product_id'])['sl_tonkho'];	
 				
 				if($value_product['num']>$number_inventory_max){
 					if($value_product['classify_value_product_id']>0){
@@ -2682,7 +2682,7 @@ if ( $mod == 'add_order' ) {
 						}else{
 						$name_product=$get_info_product['name_product'];
 					}
-					$error[]='Sản phẩm '.$name_product.' hiện chỉ còn '.number_format($number_inventory_max).' sản phẩm. Vui lòng quay lại giỏ hàng để thay đổi.';
+					$error[]='Sản phẩm '.$name_product.' hiện chỉ còn ' . number_format($number_inventory_max) . ' sản phẩm. Vui lòng quay lại giỏ hàng để thay đổi.';
 				}		
 			}
 		}
@@ -2713,10 +2713,13 @@ if ( $mod == 'add_order' ) {
 				);
 				print_r( json_encode($contents1));die;
 			}
+			
 			if($value_transporters['transporters_id'] == 4 || $value_transporters['transporters_id'] == 5){
 				$free_ship = get_free_ship_vnpost($value_transporters['warehouse_id'], $total_weight_ship, $total_length_ship, $total_width_ship, $total_height_ship, $total_product, $province_id, $district_id, $value_transporters['transporters_id'] );
 				}elseif($value_transporters['transporters_id'] == 3){
-				$free_ship = $_SESSION['tranposter_fee'][$value_transporters['store_id']][3];
+				$free_ship = $_SESSION['transporter_fee'][$value_transporters['store_id']][3];
+			}elseif($value_transporters['transporters_id'] == 2){
+				$free_ship = $_SESSION['transporter_fee'][$value_transporters['store_id']][2];
 			}
 			
 		}
@@ -2742,7 +2745,6 @@ if ( $mod == 'add_order' ) {
 			$list_transporters[$index]['discount_price'] = 0;
 		}
 		
-		// phí ship khách hàng chịu
 		$list_transporters[$index]['fee'] = $free_ship;
 		if(!$_SESSION['voucher_shop'][$value_transporters['store_id']]['price']){
 			$_SESSION['voucher_shop'][$value_transporters['store_id']]['price'] = 0;
@@ -3448,7 +3450,7 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	$service['code_message_value'];
 	
 	if($weight_product == 0 and $length_product == 0 and $width_product == 0 and $height_product == 0  ){
-		$_SESSION['tranposter_fee'][$shops_id_session][3] = 0;
+		$_SESSION['transporter_fee'][$shops_id_session][3] = 0;
 		print_r( json_encode( array('fee'=>0, 'mess'=>$service['code_message_value']) ) );
 		die;
 	}
@@ -3483,7 +3485,7 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 		}
 	}
 	//print_r( json_encode( $tranposter_fee ) );
-	$_SESSION['tranposter_fee'][$shops_id_session][3] = $tranposter_fee;
+	$_SESSION['transporter_fee'][$shops_id_session][3] = $tranposter_fee;
 	
 	print_r( json_encode( array('fee'=>$tranposter_fee, 'mess'=>$service['code_message_value']) ) );
 	die;
@@ -3498,8 +3500,10 @@ if ( $mod == 'get_transport_fee_ghtk' ) {
 	$address = $nv_Request->get_string( 'address', 'get,post', 0 );
 	$warehouse_id = $nv_Request->get_int( 'warehouse_id', 'get,post', 0 );
 	$info_warehouse = get_info_warehouse( $warehouse_id );
+	$shops_id_session = $nv_Request->get_int( 'shops_id', 'get,post', 0 );
+	
 	if($weight_product == 0  ){
-		$_SESSION['tranposter_fee'][$shops_id_session][2] = 0;
+		$_SESSION['transporter_fee'][$shops_id_session][2] = 0;
 		print_r( json_encode( 0 ) );
 		die;
 	}
@@ -3521,10 +3525,11 @@ if ( $mod == 'get_transport_fee_ghtk' ) {
 		// cộng thêm phí vận chuyển hệ thống sàn thương mại
 		$tranposter_fee = $tranposter_fee + (($tranposter_fee * $config_setting['percent_of_ship'])/100);
 		$tranposter_fee = rounding($tranposter_fee);
-		$_SESSION['tranposter_fee'][$shops_id_session][2] = $tranposter_fee;
+		$_SESSION['transporter_fee'][$shops_id_session][2] = $tranposter_fee;
 		} else {
 			$tranposter_fee = -1;
 	}
+	
 	print_r( json_encode( $tranposter_fee ) );
 	die;
 }

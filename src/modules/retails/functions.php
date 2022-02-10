@@ -241,8 +241,8 @@ function add_order($list_transporters,$info_customer){
 		$data_insert['district_id'] = $info_customer['district_id'];
 		$data_insert['ward_id'] = $info_customer['ward_id'];
 		$data_insert['address'] = $info_customer['address'];
-		//$data_insert['transporters_id'] = $value_transporters['transporters_id'];
-		$data_insert['transporters_id'] = 0;
+		$data_insert['transporters_id'] = $value_transporters['transporters_id'];
+		//$data_insert['transporters_id'] = 0;
 		$data_insert['total_product'] = $value_transporters['total_product'];
 		$data_insert['fee_transport'] = $value_transporters['fee'];
 		

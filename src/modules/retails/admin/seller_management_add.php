@@ -433,13 +433,13 @@ if ($nv_Request->isset_request('submit', 'post')) {
 							$db->query('UPDATE ' . TABLE . '_warehouse SET name_warehouse = ' . $db->quote($row['name_warehouse']) . ',name_send = ' . $db->quote($row['name_send']) . ', phone_send = ' . $db->quote($row['phone_send']) . ', address = ' . $db->quote($row['address']) . ', shops_id_ghn = ' . $shops_id_ghn . ',province_id = ' . $db->quote($row['province_id']) . ',district_id = ' . $db->quote($row['district_id']) . ',ward_id = ' . $db->quote($row['ward_id']) . ', user_edit = ' . $admin_info['userid'] . ',time_edit = ' . NV_CURRENTTIME . ', status = 1, lat = ' . $db->quote($row['lat']) . ', lng = ' . $db->quote($row['lng']) . ',cusId = ' . $cusId . ' , groupaddressId = ' . $groupaddressId . ',centerlat = ' . $db->quote($row['centerlat']) . ',centerlng = ' . $db->quote($row['centerlng']) . ',maps_mapzoom = ' . $db->quote($row['maps_mapzoom']) . ' where id = ' . $row['warehouse_id']);
 
 							//viettel post
-							$shops_id_vtp_data = create_warehouse_viettelpost($row['phone_send'], $row['name_send'], $row['address'], get_info_ward($row['ward_id'])['vtpid']);
-							if ($shops_id_vtp_data['status'] == 200) {
-								$shop_id_vtp = $shops_id_vtp_data['data'][0]['groupaddressId'];
-								$db->query('UPDATE ' . TABLE . '_warehouse_transport SET storeid_transport = ' . $shop_id_vtp . ' WHERE warehouse_id = ' . $row['warehouse_id'] . ' AND FIND_IN_SET(1, transportid_ecng)');
-							} else {
-								$error[] = 'Lỗi API Viettel Post';die('Lỗi API Viettel Post');
-							}
+							// $shops_id_vtp_data = create_warehouse_viettelpost($row['phone_send'], $row['name_send'], $row['address'], get_info_ward($row['ward_id'])['vtpid']);
+							// if ($shops_id_vtp_data['status'] == 200) {
+							// 	$shop_id_vtp = $shops_id_vtp_data['data'][0]['groupaddressId'];
+							// 	$db->query('UPDATE ' . TABLE . '_warehouse_transport SET storeid_transport = ' . $shop_id_vtp . ' WHERE warehouse_id = ' . $row['warehouse_id'] . ' AND FIND_IN_SET(1, transportid_ecng)');
+							// } else {
+							// 	$error[] = 'Lỗi API Viettel Post';die('Lỗi API Viettel Post');
+							// }
 							//viettel post
 						}
 					}

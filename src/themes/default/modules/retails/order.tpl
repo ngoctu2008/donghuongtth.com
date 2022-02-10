@@ -416,7 +416,7 @@
 			function apply_voucher_{info_store.id}(value, store_id, chiso){
 				//đổi thông tin session voucherid
 				$.ajax({
-					type : 'GET',
+					type : 'POST',
 					url : nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=apply_voucher_shop',
 					dataType: "json",
 					data:{
@@ -478,7 +478,7 @@
 			function remove_choose_voucher_{info_store.id}(voucherid, store_id){
 				
 				$.ajax({
-					type : 'GET',
+					type : 'POST',
 					url : nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=remove_voucher_shop',
 					dataType: "json",
 					data:{
@@ -610,7 +610,7 @@
 			<!-- BEGIN: transporters_loop_js -->
 			transporter_{info_store.id}.push({"id":{CARRIER.id},"name_transporters":"{CARRIER.name_transporters}","description":"{CARRIER.description}"});
 			<!-- END: transporters_loop_js -->
-			console.log(transporter_{info_store.id});
+			
 		</script>
 		<!-- END: warehouse -->
 	</div>
@@ -682,6 +682,7 @@
 	function change_payment(){
 		var input_checked =  $(".payment_methods input[type='radio']:checked").val();
 		$('#payment_method').val(input_checked);
+		
 	};
 	change_payment();
 	function nv_carrier_change(store_id,warehouse_id,a)
@@ -765,7 +766,7 @@
 				}
 				else if(element.id == 2){
 					$.ajax({
-						type : 'GET',
+						type : 'POST',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghtk',
 						dataType: "json",
 						data:{weight: Number(total_weight),
@@ -789,7 +790,7 @@
 				}
 				else if(element.id  == 3){
 					$.ajax({
-						type : 'GET',
+						type : 'POST',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
 						dataType: "json",
 						data:{weight: Number(total_weight),
@@ -895,9 +896,9 @@
 						
 					})
 					}
-					if(element.id == 2){ 
+					else if(element.id == 2){ 
 						$.ajax({
-							type : 'GET',
+							type : 'POST',
 							url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghtk',
 							dataType: "json",
 							data:{weight: Number(total_weight),
@@ -941,7 +942,7 @@
 					else if(element.id  == 3 ){
 					
 					$.ajax({
-						type : 'GET',
+						type : 'POST',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
 						dataType: "json",
 						data:{weight: Number(total_weight),
