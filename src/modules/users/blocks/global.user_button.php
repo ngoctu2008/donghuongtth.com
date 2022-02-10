@@ -94,6 +94,10 @@ if ($global_config['allowuserlogin']) {
 			{
 				$xtpl->assign('active_ordercustomer', 'secondary_text');
 			}
+			elseif($op =='voucher-wallet')
+			{
+				$xtpl->assign('active_voucher_wallet', 'secondary_text');
+			}
 			elseif($op =='re-payment')
 			{
 				$xtpl->assign('active_repayment', 'secondary_text');
@@ -128,6 +132,8 @@ if ($global_config['allowuserlogin']) {
 		$xtpl->assign('FOLLOW', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=retails&amp;' . NV_OP_VARIABLE . '=follow', true));
 		
         $xtpl->assign('HISTORY', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=retails&amp;' . NV_OP_VARIABLE . '=ordercustomer', true));
+        
+        $xtpl->assign('VOUCHER_WALLET', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=retails&amp;' . NV_OP_VARIABLE . '=voucher-wallet', true));
 		
         $xtpl->assign('REPAYMENT', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=retails&amp;' . NV_OP_VARIABLE . '=re-payment', true));
 		
