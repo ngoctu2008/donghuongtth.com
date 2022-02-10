@@ -45,6 +45,8 @@
 	}
 	
 	$global_catalogys = json_decode($redis->get('catalogy_main'),true);	
+
+	//print_r($global_catalogys);die;
 	
 	// danh mục đa cấp đưa hết vào redis lev theo cấp
 	
