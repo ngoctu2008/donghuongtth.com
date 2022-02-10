@@ -11,8 +11,7 @@
                 <span>{info_order.status}</span></p>
             <p>Ngày mua: {info_order.time_add}</p>
         </div>
-        <div class="primary_text">Bạn vừa ủng hộ <span style="color:#1358B9">{children_fund}</span> tổng giá trị đơn
-            hàng này vào quỹ “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</div>
+        <div class="primary_text">Bạn vừa ủng hộ <span style="color:#1358B9">{children_fund}</span> vào quỹ “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</div>
 
         <div class="row">
             <div class="col-md-12">

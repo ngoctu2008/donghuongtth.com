@@ -674,7 +674,7 @@
         toán" đồng nghĩa bạn đã kiểm tra kỹ đơn hàng và đồng ý với <span class="secondary_text">các điều khoản của ECNG
         </span>
     </a>
-    <div class="fw_500 primary_text pt-2">Khi bạn thanh toán đơn hàng là bạn đã ủng hộ <span style="color:#1358B9">{children_fund}</span> tổng giá trị đơn hàng này vào quỹ  “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</div>
+    <div class="fw_500 primary_text pt-2">Khi bạn thanh toán đơn hàng là bạn đã ủng hộ <span style="color:#1358B9">{children_fund}</span> vào quỹ  “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</div>
 </div>
 
 <div style="height:65px">

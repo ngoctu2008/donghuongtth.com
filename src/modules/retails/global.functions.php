@@ -1,4 +1,5 @@
 <?php
+
 	// lấy tất cả category đưa vào redis
 	function get_payment_all()
 	{
@@ -74,6 +75,8 @@
 	}
 	
 	$global_catalogys = json_decode($redis->get('catalogy_main'),true);	
+
+	//print_r($global_catalogys);die;
 	
 	// danh mục đa cấp đưa hết vào redis lev theo cấp
 	
@@ -264,7 +267,6 @@
 		return $array_voucher_use;
 	
 	}
-	
 	//check voucher
 	function check_voucher ($voucher_code, $voucher_id, $shop_id){
 		
@@ -3919,6 +3921,107 @@
 		}
 		$url = 'https://pay.vnpay.vn/vpcpay.html' . $vnp_Url;
 		return $url;
+	}
+	function execPostRequest($url, $data)
+	{
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+		'Content-Type: application/json',
+		'Content-Length: ' . strlen($data))
+		);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+		//execute post
+		$result = curl_exec($ch);
+		//close connection
+		curl_close($ch);
+		return $result;
+	}
+	function send_momo($mm_amount, $mm_OrderInfo, $mm_TmnCode, $mm_TransactionNo, $mm_HashSecret, $mm_ReturnUrl, $mm_IpAddr)
+	{
+		/* global $config_setting;
+		$inputData = array(
+        "mm_Version" => "2.0.0",
+        "mm_TmnCode" => $mm_TmnCode,
+        "mm_Amount" => (int)$mm_amount * 100,
+        "mm_Command" => "pay",
+        "mm_CreateDate" => date('YmdHis') ,
+        "mm_CurrCode" => "VND",
+        "mm_IpAddr" => $mm_IpAddr,
+        "mm_Locale" => 'vn',
+        "mm_OrderInfo" => $mm_OrderInfo,
+        "mm_ReturnUrl" => $mm_ReturnUrl,
+        "mm_TxnRef" => $mm_TransactionNo,
+		);
+		ksort($inputData);
+		$hashdata = "";
+		$i = 0;
+		foreach ($inputData as $key => $value)
+		{
+			if ($i == 1)
+			{
+				$hashdata .= '&' . $key . "=" . $value;
+			}
+			else
+			{
+				$hashdata .= $key . "=" . $value;
+				$i = 1;
+			}
+			$query .= urlencode($key) . "=" . urlencode($value) . '&';
+		}
+		$mm_Url = $mm_Url . "?" . $query;
+		if (isset($mm_HashSecret))
+		{
+			$mmSecureHash = hash('sha256', $mm_HashSecret . $hashdata);
+			$mm_Url .= 'mm_SecureHashType=SHA256&mm_SecureHash=' . $mmSecureHash;
+		}
+		$url = 'https://test-payment.momo.vn/v2/gateway/api/create' . $mm_Url;
+		return $url; */
+		
+
+
+
+		$endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+		
+		
+		$partnerCode = 'MOMOGQQA20220110';
+		$accessKey = 'eZBxUT4fUAG4WC7E';
+		$orderInfo = $mm_OrderInfo;
+		$amount = $mm_amount;
+		$orderId = time() ."";
+		$redirectUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
+		$ipnUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
+		$extraData = "";
+		
+		
+		
+		
+		$serectkey = 'K1W2fjpbQr4ZBZzgj4snNVfvSqUkQePE';
+		$requestId = time() . "";
+		$requestType = "captureWallet";
+		$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+		//before sign HMAC SHA256 signature
+		$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+		$signature = hash_hmac("sha256", $rawHash, $serectkey);
+		$data = array('partnerCode' => $partnerCode,
+		'partnerName' => "Test",
+		"storeId" => "MomoTestStore",
+		'requestId' => $requestId,
+		'amount' => $amount,
+		'orderId' => $orderId,
+		'orderInfo' => $orderInfo,
+		'redirectUrl' => $redirectUrl,
+		'ipnUrl' => $ipnUrl,
+		'lang' => 'vi',
+		'extraData' => $extraData,
+		'requestType' => $requestType,
+		'signature' => $signature);
+		$result = execPostRequest($endpoint, json_encode($data));
+		$jsonResult = json_decode($result, true);  // decode json
+		return $jsonResult['payUrl'];
 	}
 	function print_ghtk($order_code)
 	{

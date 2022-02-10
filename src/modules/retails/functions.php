@@ -261,7 +261,7 @@ function add_order($list_transporters,$info_customer){
 		$data_insert['voucher_price'] = $value_transporters['discount_price'];
 		// print_r($db);
 		$order_id = $db->insert_id( $sql, 'id', $data_insert );
-		
+		print_r($order_id);
 		if($value_transporters['discount_price'] > 0){
 			
 			$sql = 'INSERT INTO ' . TABLE . '_order_voucher ( voucherid, order_id, userid, discount_price, time_add, status) VALUES (:voucherid, :order_id, :userid, :discount_price, :time_add, :status)';

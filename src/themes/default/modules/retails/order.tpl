@@ -668,7 +668,7 @@
 		<div class="row p-4 align-items-center">
 			<div class="col-md-9">
 				<div class="primary_text">Khi nhấn hoàn tất đồng nghĩa bạn đã kiểm tra kỹ đơn hàng và đồng ý với <a class="secondary_text" title="Các điều khoản của ECNG" href="https://chonhagiau.com/ecng/quy-dinh-va-hinh-thuc-thanh-toan.html" target="_blank" >các điều khoản của ECNG</a></div>
-				<div class="fw_500 primary_text pt-2">Khi bạn thanh toán đơn hàng là bạn đã ủng hộ <span style="color:#1358B9">{children_fund}</span> tổng giá trị đơn hàng này vào quỹ  “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</div>
+				<div class="fw_500 primary_text pt-2">Khi bạn thanh toán đơn hàng là bạn đã ủng hộ <span style="color:#1358B9">{children_fund}</span> vào quỹ  “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</div>
 			</div>
 			<div class="col-md-3 text-right">
 				<button id="button-payment-method" class="btn_ecng_lg" onclick="order_product_check_out()"  >Hoàn tất đơn hàng</button>
