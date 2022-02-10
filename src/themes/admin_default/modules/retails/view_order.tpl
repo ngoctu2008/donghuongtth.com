@@ -191,7 +191,7 @@
 									</button>
 								</td>
 								<td>
-									{DIACHI}
+								{info_order.address}
 								</td>
 							</tr>
 						</tbody>
