@@ -3988,8 +3988,8 @@
 		
 		$partnerCode = 'MOMOGQQA20220110';
 		$accessKey = 'eZBxUT4fUAG4WC7E';
-		$orderInfo = "Thanh toán qua MoMo";
-		$amount = "10000";
+		$orderInfo = $mm_OrderInfo;
+		$amount = $mm_amount;
 		$orderId = time() ."";
 		$redirectUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
 		$ipnUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
@@ -4020,7 +4020,7 @@
 		'signature' => $signature);
 		$result = execPostRequest($endpoint, json_encode($data));
 		$jsonResult = json_decode($result, true);  // decode json
-		return $jsonResult->payUrl;
+		return $jsonResult['payUrl'];
 	}
 	function print_ghtk($order_code)
 	{
