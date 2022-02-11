@@ -4630,8 +4630,7 @@
 				
 				$db->query('INSERT INTO ' . TABLE . '_logs_order(order_id,status_id_old,content,time_add,user_add) VALUES(' . $order['id'] . ',1,' . $db->quote($content) . ',' . NV_CURRENTTIME . ',' . $user_info['userid'] . ')');
 			}
-			else
-			{	
+			else{	
 				$db->query('INSERT INTO ' . TABLE . '_logs_order(order_id,status_id_old,content,time_add,user_add) VALUES(' . $order['id'] . ',1,' . $db->quote($content) . ',' . NV_CURRENTTIME . ',1)');
 			}
 			
