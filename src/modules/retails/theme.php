@@ -1083,7 +1083,12 @@ function nv_theme_retailshops_order($array_data, $list_address, $address_df, $ar
 				}
 				//voucher giá tối ưu 
 			} else {
-				$xtpl->parse('main.store.warehouse.voucher_shop_not');
+				if($user_info['userid']){
+					$xtpl->parse('main.store.warehouse.voucher_shop_not');
+				}
+				else{
+					$xtpl->parse('main.store.warehouse.voucher_login_not');
+				}
 			}
 
 			if ($count_product_warehouse == 1) {
@@ -3331,11 +3336,11 @@ function shops_info($array_data, $per_page, $page, $num_items, $cat_info, $base_
 
 			$xtpl->assign('VOUCHER', $voucher);
 
-
+			
 			if ($voucher['maximum_discount']) {
-				$xtpl->parse('main.voucher.voucher_loop.maximum_discount');
 				$voucher['maximum_discount'] = number_format($voucher['maximum_discount']) . 'đ';
 				$xtpl->assign('maximum_discount', $voucher['maximum_discount']);
+				$xtpl->parse('main.voucher.voucher_loop.maximum_discount');
 			}
 			if ($user_info['userid']) {
 				//check voucher khach da luu
