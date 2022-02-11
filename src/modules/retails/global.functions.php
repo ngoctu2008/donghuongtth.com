@@ -4658,54 +4658,24 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 						$i = 1;
 					}
 				}
-			}
+			
 			$vnp_HashSecret = $config_setting['checksum_vnpay'];
 
 			$order_text = $inputData['vnp_TxnRef'];
 
-			if (!$order_text) {
-				$returnData['RspCode'] = '01';
-				$returnData['Message'] = 'Order not found!';
-			}
+				if (!$order_text) {
+					$returnData['RspCode'] = '01';
+					$returnData['Message'] = 'Order not found!';
+				}
 
-<<<<<<< HEAD
-
-			// tính tổng tiền thanh toán
-			$sum_total_payment = $db->query('SELECT sum(total) FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchColumn();
-=======
 				
 				if (!defined('NV_IS_USER') or !$global_config['allowuserlogin']) {
 						$user_info['userid'] = 0;
 				}
 				$check_orderid = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .')')->fetchColumn(); 
->>>>>>> 02a2c155021ca6bb103726c9f54c7a39eecc7bc0
 
-			//print_r($tongtien_thanhtoan);die;
+				//print_r($tongtien_thanhtoan);die;
 
-<<<<<<< HEAD
-			$check_orderid = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid =' . $user_info['userid'] . ' AND id IN(' . $order_text . ')')->fetchColumn();
-
-			$check_payment = $db->query('SELECT id FROM ' . TABLE . '_order WHERE status_payment_vnpay = 1 AND id IN(' . $order_text . ')')->fetchColumn();
-
-
-			$secureHash = hash('sha256', $vnp_HashSecret . $hashData);
-			//print_r($id_order);die;
-
-			$vnp_Amount = $inputData['vnp_Amount'];
-			$vnp_Amount = (int)$vnp_Amount / 100;
-
-			// checksum
-			//print_r($vnp_SecureHash);die;
-			if ($secureHash == $vnp_SecureHash) {
-				// check OrderId
-				if ($check_orderid) {
-					if ($tongtien_thanhtoan && $tongtien_thanhtoan == $vnp_Amount) {
-						// check Status
-						if ($check_payment) {
-
-							if ($inputData['vnp_ResponseCode'] == '00') {
-								$status = true;
-=======
 			
 				$secureHash = hash('sha256', $vnp_HashSecret . $hashData);
 				//print_r($id_order);die;
@@ -4730,10 +4700,7 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 									}
 									
 								
-							} else {
-								$error[] = 'Thanh toán thất bại!';
->>>>>>> 02a2c155021ca6bb103726c9f54c7a39eecc7bc0
-							}
+							
 						} else {
 							$error[] = 'Thanh toán thất bại!';
 						}
@@ -4743,7 +4710,7 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 				} else {
 					$error[] = 'Đơn hàng không tìm thấy!';
 				}
-			} else {
+			}else{
 				$error[] = 'Chữ ký không hợp lệ!';
 			}
 
@@ -4758,14 +4725,9 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 			//$inputData['order_code'] = $nv_Request->get_title('order_code', 'get', '', 1);
 
 		}
-<<<<<<< HEAD
-	}
-	$data = array();
-=======
 		
 	
 	$data=array();
->>>>>>> 02a2c155021ca6bb103726c9f54c7a39eecc7bc0
 	$data['status'] = $status;
 	$data['error'] = $error;
 	$data['sum_total_payment'] = $sum_total_payment;

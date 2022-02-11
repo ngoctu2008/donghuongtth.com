@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-stages:
-  - Build
-
-before_script:
-  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-  - eval $(ssh-agent -s)
-  - mkdir -p ~/.ssh
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-  - chmod 700 ~/.ssh/id_rsa
-  - eval "$(ssh-agent -s)"
-  - ssh-add ~/.ssh/id_rsa
-  - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
-
-Deploy Changed to Server:
-  stage: Build 
-  script:
-    - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $SSH_USER@$DEV_HOST "whoami"
-    - bash ./deploy.sh
-  rules:
-    - if: "$CI_COMMIT_BRANCH == 'dev'"
-=======
 # You can override the included template(s) by including variable overrides
 # SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
 # Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
@@ -56,4 +34,3 @@ sast:
   stage: test
 include:
 - template: Security/SAST.gitlab-ci.yml
->>>>>>> 856697f4118d0c0ab785c194b279574617c220f5
