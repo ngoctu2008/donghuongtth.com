@@ -2881,6 +2881,16 @@ if ( $mod == 'address_no_login' ) {
 	if(!email_validation($row['email'])) {
 		print_r( json_encode(array('status'=>'ERROR','mess'=>'Email không đúng định dạng!')));die();
 	}
+	if($row['phone']!=''){
+		$check = preg_match('/^[0]{1}[0-9]{9}+$/',$row['phone']);
+		if(empty($check)){
+			print_r( json_encode(array('status'=>'ERROR','mess'=>'Số điện thoại không hợp lệ!')));die();
+		}
+	}
+	if(strlen($row['address']) < 4){
+		print_r( json_encode(array('status'=>'ERROR','mess'=>'Số nhà, tên đường phải ít nhất 4 ký tự!')));die();
+	}
+
 
 
 	$_SESSION['address_no_login'] = array(
