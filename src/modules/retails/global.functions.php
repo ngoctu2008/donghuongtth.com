@@ -4631,28 +4631,6 @@ function CheckPaymentOrder($payment_method, $order_code, $inputData)
 
 	return $error;
 }
-<<<<<<< HEAD
-function GetPaymentStatus($payment_method, $order_code, $errors, $inputData)
-{
-	global $db;
-	$status = false;
-
-	if (empty($errors)) {
-		//$_SESSION[$module_name . '_' . $payment_method] = true;
-		if ($payment_method == 'vnpay') {
-			$vnp_SecureHash = $inputData['vnp_SecureHash'];
-			unset($inputData['vnp_SecureHashType']);
-			unset($inputData['vnp_SecureHash']);
-			ksort($inputData);
-			$i = 0;
-			$hashData = "";
-			foreach ($inputData as $key => $value) {
-				if ($i == 1) {
-					$hashData = $hashData . '&' . $key . "=" . $value;
-				} else {
-					$hashData = $hashData . $key . "=" . $value;
-					$i = 1;
-=======
 function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 	global $db,$global_config,$config_setting,$user_info;
 	$status = false;
@@ -4679,7 +4657,6 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 						$hashData = $hashData . $key . "=" . $value;
 						$i = 1;
 					}
->>>>>>> 02a2c155021ca6bb103726c9f54c7a39eecc7bc0
 				}
 			}
 			$vnp_HashSecret = $config_setting['checksum_vnpay'];
