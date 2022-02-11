@@ -385,69 +385,109 @@
 	}
 	
 	
-	if($mod=='send_ghtk'){
+	if ($mod == 'send_ghtk') {
 		$order_id = $nv_Request->get_int('order_id', 'get,post', 0);
-		$info_order=get_info_order($order_id);
-		$info_warehouse=get_info_warehouse($info_order['warehouse_id']);
-		$list_order=$db->query('SELECT t1.*, t2.name_product FROM '.TABLE.'_order_item t1 INNER JOIN '.TABLE.'_product t2 ON t1.product_id=t2.id where order_id='.$order_id)->fetchAll(); 
-		$list_item=array();
-		foreach($list_order as $value){
-			if($value['classify_value_product_id']>0){
-				$classify_value_product_id=get_info_classify_value_product($value['classify_value_product_id']);
-				$classify_id_value1=get_info_classify_value($classify_value_product_id['classify_id_value1']);
-				$name_classify_id_value1=get_info_classify($classify_id_value1['classify_id'])['name_classify'].' '.$classify_id_value1['name'];
-				if($classify_value_product_id['classify_id_value2']>0){
-					$classify_id_value2=get_info_classify_value($classify_value_product_id['classify_id_value2']);
-					$name_classify_id_value2=get_info_classify($classify_id_value2['classify_id'])['name_classify'].' '.$classify_id_value2['name'];
-					$name_group=$name_classify_id_value1.', '.$name_classify_id_value2;
-					}else{
-					$name_group=$name_classify_id_value1;
+		$pick_option = $nv_Request->get_title('pick_option', 'get,post', 'cod');
+		$insurance_fee = $nv_Request->get_int('insurance_fee', 'get,post', 0);
+	
+		if ($pick_option != 'cod' and $pick_option != 'post') {
+			print_r(json_encode(array('status' => 'ERROR')));
+			die();
+		}
+		
+		$info_order = get_info_order($order_id);
+		
+		$info_warehouse = get_info_warehouse($info_order['warehouse_id']);
+		$list_order = $db->query('SELECT t1.*, t2.name_product FROM ' . TABLE . '_order_item t1 INNER JOIN ' . TABLE . '_product t2 ON t1.product_id=t2.id where order_id=' . $order_id)->fetchAll();
+		$list_item = array();
+		foreach ($list_order as $value) {
+			
+			if ($value['classify_value_product_id'] > 0) {
+				$classify_value_product_id = get_info_classify_value_product($value['classify_value_product_id']);
+				$classify_id_value1 = get_info_classify_value($classify_value_product_id['classify_id_value1']);
+				$name_classify_id_value1 = get_info_classify($classify_id_value1['classify_id'])['name_classify'] . ' ' . $classify_id_value1['name'];
+				if ($classify_value_product_id['classify_id_value2'] > 0) {
+					$classify_id_value2 = get_info_classify_value($classify_value_product_id['classify_id_value2']);
+					$name_classify_id_value2 = get_info_classify($classify_id_value2['classify_id'])['name_classify'] . ' ' . $classify_id_value2['name'];
+					$name_group = $name_classify_id_value1 . ', ' . $name_classify_id_value2;
+				} else {
+					$name_group = $name_classify_id_value1;
 				}
-				$value['name_product']=$value['name_product'].'('.$name_group.')';
+				$value['name_product'] = $value['name_product'] . '(' . $name_group . ')';
 			}
-			$check=get_info_product_ghtk($value['name_product']);
-			if(count($check['data'])>0){
-				$list_item[]=array(
-				"name" =>$value['name_product'],
+			$value['weight'] = $value['weight'] / 1000;
+			if($value['weight'] < 0.1){
+				$value['weight'] = 0.1;
+			}
+			
+			$list_item[] = array(
+				"name" => $value['name_product'],
 				"price" => $value['price'],
-				"weight" => $value['weight']/1000,
-				"quantity" => $value['quantity'],
-				"product_code" => $check['data'][0]['product_code']
-				);
-				}else{
-				$list_item[]=array(
-				"name" =>$value['name_product'],
-				"price" => $value['price'],
-				"weight" => $value['weight']/1000,
+				"weight" => $value['weight'] ,
 				"quantity" => $value['quantity'],
 				"product_code" => ""
-				);
+			);
+			
+		}
+		
+		$pick_province = $global_province[$info_warehouse['province_id']]['type'] . ' ' . $global_province[$info_warehouse['province_id']]['title'];
+		$pick_district = $global_district[$info_warehouse['district_id']]['type'] . ' ' . $global_district[$info_warehouse['district_id']]['title'];
+		$pick_ward = $global_ward[$info_warehouse['ward_id']]['type'] . ' ' . $global_ward[$info_warehouse['ward_id']]['title'];
+		$address_short = explode(',',$info_warehouse['address']);
+		$info_warehouse['address'] = $address_short[0];
+		$shop_name = $db->query('SELECT company_name FROM ' . TABLE . '_seller_management WHERE id = ' . $info_order['store_id'])->fetchColumn();
+	
+		$province = $global_province[$info_order['province_id']]['type'] . ' ' . $global_province[$info_order['province_id']]['title'];
+		$district = $global_district[$info_order['district_id']]['type'] . ' ' . $global_district[$info_order['district_id']]['title'];
+		$ward = $global_ward[$info_order['ward_id']]['type'] . ' ' . $global_ward[$info_order['ward_id']]['title'];
+		$address_short = explode(',',$info_order['address']);
+		$info_order['address'] = $address_short[0];
+	
+		$return_name = $config_setting['name_ecng'];
+		$return_address = $config_setting['address_ecng'];
+		$return_province = $global_province[$config_setting['province_ecng']]['type'] . ' ' . $global_province[$config_setting['province_ecng']]['title'];
+		$return_district = $global_district[$config_setting['district_ecng']]['type'] . ' ' . $global_district[$config_setting['district_ecng']]['title'];
+		$return_ward = $global_ward[$config_setting['ward_ecng']]['type'] . ' ' . $global_ward[$config_setting['ward_ecng']]['title'];
+		$return_address = explode(',',$config_setting['address_ecng']);
+		$return_address = $return_address[0];
+		
+		$return_tel = $config_setting['phone_ecng'];
+		$return_email = $config_setting['email_ecng'];
+		//khai bảo hiểm
+		$value = $info_order['total_product'];
+		if($insurance_fee){
+			if($value > 20000000){
+				$value = 20000000;
 			}
-		} 
-		$payment_method = $info_order['payment_method'];
-		$ServiceName=get_info_transporters($info_order['transporters_id'])['code_transporters'];
-		if($payment_method>0){
-			if($ServiceName==1){
-				$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],0,$info_order['total'],'road','');
-				}else if($ServiceName==2){
-				$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],0,$info_order['total'],'fly','');
-				}else if($ServiceName==3){
-				$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],0,$info_order['total'],'','xteam');
-			}
-			}else{
-			if($ServiceName==1){
-				$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],$info_order['total'],$info_order['total'],'road','');
-				}else if($ServiceName==2){
-				$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],$info_order['total'],$info_order['total'],'fly','');
-				}else if($ServiceName==3){
-				$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],$info_order['total'],$info_order['total'],'','xteam');
+			else{
+				$value = $info_order['total_product'];
 			}
 		}
-		$db->query('UPDATE '.TABLE.'_order SET status=2, shipping_code='.$db->quote($order_ghtk['order']['label']).' where id='.$order_id);
-		$content='Chuyển sang đơn vị vận chuyển GHTK Thành Công';
-		$db->query('INSERT INTO '.TABLE.'_logs_order(order_id,status_id_old,content,time_add,user_add) VALUES('.$order_id.',1,'.$db->quote($content).','.NV_CURRENTTIME.','.$admin_info['userid'].')');
-		print_r( json_encode( array('status'=>'OK' ) ));
-		die();
+		elseif($value > 1000000){
+			$value = 999000;
+		}
+	
+		// thu hộ
+		$pick_money = 0;
+		//phí ship 1 shop trả || 0 khách trả
+		$is_freeship = 1;
+		if ($info_order['payment_method'] == 'recieve') {
+			$pick_money = $info_order['total_product'];
+			$is_freeship = 0;
+		}
+		
+		$info_order['order_code'] = $info_order['order_code'] . ' - ' . nv_date("H:i d/m/Y", NV_CURRENTTIME);
+		$order_ghtk = send_ghtk($list_item, $info_order['order_code'], $shop_name, $info_warehouse['address'], $pick_province, $pick_district, $pick_ward, $info_warehouse['phone_send'], $info_order['phone'], $info_order['order_name'], $info_order['address'], $province, $district, $ward, $pick_money, $value, 'road', '', $return_name, $return_address, $return_province, $return_district, $return_ward, $return_tel, $return_email, $pick_option, $is_freeship);
+		
+		if ($order_ghtk['success']) {
+			update_ghtk_admin($info_order, $order_ghtk);
+			print_r(json_encode(array('status' => 'OK')));
+			die();
+		}else{
+			print_r(json_encode(array('status' => 'ERROR')));
+			die();
+		}
+	
 	}
 	if($mod=='send_viettelpost'){
 		$order_id = $nv_Request->get_int('order_id', 'get,post', 0);

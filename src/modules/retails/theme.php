@@ -1104,10 +1104,11 @@ function nv_theme_retailshops_order($array_data, $list_address, $address_df, $ar
 						$list_tranposter_new[] = $value;
 					}
 				}
+				print_r($list_tranposter);die;
 				$transporter_first = true;
 				if (count($list_tranposter_new) > 0) {
 					foreach ($list_tranposter_new as $key => $value) {
-
+						
 						$xtpl->assign('CARRIER', $value);
 
 						if ($transporter_first) {

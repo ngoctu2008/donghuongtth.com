@@ -147,7 +147,7 @@
     </div>
     <div class="mt-4 text-center">
         <button class="btn_gray mr-3" class="close" data-dismiss="modal">Hủy</button>
-        <button onclick="send_ghtk({VIEW.id},{VIEW.store_id})" class="btn_ecng">Gửi</button>
+        <button onclick="send_ghtk({VIEW.id})" class="btn_ecng">Gửi</button>
     </div>
     <!-- END: GHTK -->
 

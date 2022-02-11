@@ -183,6 +183,46 @@ function popup_vanchuyen(id, store_id, transporters_id, insurance_fee) {
     });
 }
 
+function send_ghtk(id) {
+
+    var pick_option = $("input[name='pick_option']:checked").val();
+    var insurance_fee = $("input[name='insurance_fee']").is(':checked');
+    if (insurance_fee == true) {
+        insurance_fee = 1;
+    } else {
+        insurance_fee = 0;
+    }
+
+    $.ajax({
+        type: 'GET',
+        url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=send_ghtk',
+        dataType: 'json',
+        data: {
+            order_id: id,
+            pick_option: pick_option,
+            insurance_fee: insurance_fee
+        },
+        beforeSend: function() {
+            $('button.btn_ecng').prop('disabled', true);
+        },
+        complete: function() {
+            $('button.btn_ecng').prop('disabled', false);
+        },
+        success: function(res) {
+            if (res.status == 'OK') {
+                alert('Gửi hàng thành công!');
+            } else {
+                alert('Gửi hàng thất bại!');
+            }
+
+            //location.reload();
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+}
+
 function check_khaigia_ghn(id, store_id) {
     $.ajax({
         type: 'GET',
@@ -365,23 +405,7 @@ function sendahamomve(id, module) {
     });
 }
 
-function sendghtk(id, module) {
-    $.ajax({
-        type: 'POST',
-        url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=' + module + '&mod=send_ghtk',
-        data: {
-            'order_id': id
-        },
-        success: function(res) {
-            res2 = JSON.parse(res);
-            alert('Gửi hàng thành công')
-            location.reload();
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-        }
-    });
-}
+
 
 function sendviettelpost(id, module) {
     $.ajax({
