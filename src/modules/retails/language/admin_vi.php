@@ -471,8 +471,6 @@ $lang_module['complain_deadline'] = 'Thời hạn khiếu nại';
 
 //Lang for function order_not_received_seller
 $lang_module['order_seller_delivery_failed'] = 'Đơn hàng Seller giao không thành công';
-<<<<<<< HEAD
-=======
 
 
 //lang payport
@@ -488,4 +486,3 @@ $lang_module['paymentname'] = 'Tên cổng thanh toán';
 $lang_module['browse_image'] = 'Chọn hình ảnh';
 $lang_module['images_button'] = 'Ảnh nút thanh toán tại giỏ hàng';
 $lang_module['domain'] = 'Domain';
->>>>>>> dev

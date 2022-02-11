@@ -7,13 +7,6 @@
 		* @License GNU/GPL version 2 or any later version
 		* @Createdate Mon, 21 Dec 2020 09:48:26 GMT
 	*/
-<<<<<<< HEAD
-	
-	
-	 
-	
-	/*
-=======
 
 
 	
@@ -54,7 +47,6 @@
 	} 
 	print_r(ok);die;
 	
->>>>>>> dev
 	
 	// tạo ECNG 
 	$list_product = $db->query('SELECT id, name_product, keyword FROM '. TABLE .'_product ORDER BY id ASC')->fetchAll();

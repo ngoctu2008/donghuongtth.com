@@ -202,8 +202,6 @@
 	
 	//print_r($op);
 	//die($op);
-<<<<<<< HEAD
-=======
 function add_order($list_transporters,$info_customer){
 	global $db,$config_setting,$_SESSION,$module_data;
 	$list_order=array();
@@ -317,4 +315,3 @@ function add_order($list_transporters,$info_customer){
 	//$data['list_order_code'] = $list_order_code;
 	return $data;
 }
->>>>>>> dev

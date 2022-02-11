@@ -231,16 +231,6 @@
 		if($view['status']==0){
 			$xtpl->parse('main.status0');
 			}else if($view['status']==1 or $view['status']==6){
-<<<<<<< HEAD
-			if($view['transporters_id']==4 || $view['transporters_id']==5){
-				$xtpl->assign('send_vanchuyen', 'sendvnpost');
-				$xtpl->assign('VANCHUYEN', 'VNPOST');
-			}elseif($view['transporters_id'] == 3){
-				$xtpl->assign('send_ghn', 'sendghn');
-				$xtpl->assign('VANCHUYEN', 'GHN');
-				$xtpl->parse('main.khaigia_ghn');
-			}
-=======
 				if($view['transporters_id']==4 || $view['transporters_id']==5){
 					$xtpl->assign('send_vanchuyen', 'sendvnpost');
 					$xtpl->assign('VANCHUYEN', 'VNPOST');
@@ -252,7 +242,6 @@
 					$xtpl->assign('VANCHUYEN', 'Giao hàng tiết kiệm');
 					$xtpl->parse('main.GHTK');
 				}
->>>>>>> dev
 		}
 		
 		$xtpl->parse('main');

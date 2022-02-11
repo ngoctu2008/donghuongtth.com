@@ -385,71 +385,6 @@
 	}
 	
 	
-<<<<<<< HEAD
-	if($mod=='send_ghtk'){
-		$order_id = $nv_Request->get_int('order_id', 'get,post', 0);
-		$info_order=get_info_order($order_id);
-		$info_warehouse=get_info_warehouse($info_order['warehouse_id']);
-		$list_order=$db->query('SELECT t1.*, t2.name_product FROM '.TABLE.'_order_item t1 INNER JOIN '.TABLE.'_product t2 ON t1.product_id=t2.id where order_id='.$order_id)->fetchAll(); 
-		$list_item=array();
-		foreach($list_order as $value){
-			if($value['classify_value_product_id']>0){
-				$classify_value_product_id=get_info_classify_value_product($value['classify_value_product_id']);
-				$classify_id_value1=get_info_classify_value($classify_value_product_id['classify_id_value1']);
-				$name_classify_id_value1=get_info_classify($classify_id_value1['classify_id'])['name_classify'].' '.$classify_id_value1['name'];
-				if($classify_value_product_id['classify_id_value2']>0){
-					$classify_id_value2=get_info_classify_value($classify_value_product_id['classify_id_value2']);
-					$name_classify_id_value2=get_info_classify($classify_id_value2['classify_id'])['name_classify'].' '.$classify_id_value2['name'];
-					$name_group=$name_classify_id_value1.', '.$name_classify_id_value2;
-					}else{
-					$name_group=$name_classify_id_value1;
-				}
-				$value['name_product']=$value['name_product'].'('.$name_group.')';
-			}
-			$check=get_info_product_ghtk($value['name_product']);
-			if(count($check['data'])>0){
-				$list_item[]=array(
-				"name" =>$value['name_product'],
-				"price" => $value['price'],
-				"weight" => $value['weight']/1000,
-				"quantity" => $value['quantity'],
-				"product_code" => $check['data'][0]['product_code']
-				);
-				}else{
-				$list_item[]=array(
-				"name" =>$value['name_product'],
-				"price" => $value['price'],
-				"weight" => $value['weight']/1000,
-				"quantity" => $value['quantity'],
-				"product_code" => ""
-				);
-			}
-		} 
-		$payment_method = $info_order['payment_method'];
-		$ServiceName=get_info_transporters($info_order['transporters_id'])['code_transporters'];
-		if($payment_method>0){
-			if($ServiceName==1){
-				$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],0,$info_order['total'],'road','');
-				}else if($ServiceName==2){
-				$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],0,$info_order['total'],'fly','');
-				}else if($ServiceName==3){
-				$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],0,$info_order['total'],'','xteam');
-			}
-			}else{
-			if($ServiceName==1){
-				$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],$info_order['total'],$info_order['total'],'road','');
-				}else if($ServiceName==2){
-				$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],$info_order['total'],$info_order['total'],'fly','');
-				}else if($ServiceName==3){
-				$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],$info_order['total'],$info_order['total'],'','xteam');
-			}
-		}
-		$db->query('UPDATE '.TABLE.'_order SET status=2, shipping_code='.$db->quote($order_ghtk['order']['label']).' where id='.$order_id);
-		$content='Chuyển sang đơn vị vận chuyển GHTK Thành Công';
-		$db->query('INSERT INTO '.TABLE.'_logs_order(order_id,status_id_old,content,time_add,user_add) VALUES('.$order_id.',1,'.$db->quote($content).','.NV_CURRENTTIME.','.$admin_info['userid'].')');
-		print_r( json_encode( array('status'=>'OK' ) ));
-		die();
-=======
 	if ($mod == 'send_ghtk') {
 		$order_id = $nv_Request->get_int('order_id', 'get,post', 0);
 		$pick_option = $nv_Request->get_title('pick_option', 'get,post', 'cod');
@@ -553,7 +488,6 @@
 			die();
 		}
 	
->>>>>>> dev
 	}
 	if($mod=='send_viettelpost'){
 		$order_id = $nv_Request->get_int('order_id', 'get,post', 0);
@@ -1278,10 +1212,7 @@
 		while ($view = $sth->fetch()) {
 			
 			$view['number'] = $number++;
-<<<<<<< HEAD
-=======
 			$view['insurance_fee'] = $view['total_product'];
->>>>>>> dev
 			$view['store_name']=get_info_store($view['store_id'])['company_name'];
 			$view['warehouse_name']=get_info_warehouse($view['warehouse_id'])['name_warehouse'];
 			$view['phone_warehouse']=get_info_warehouse($view['warehouse_id'])['phone_send'];
@@ -1292,27 +1223,14 @@
 			$view['total_product2']=$view['total_product'];
 			$view['total_product']=number_format($view['total_product']);
 			$view['fee_transport']=number_format($view['fee_transport']);
-<<<<<<< HEAD
-=======
 			
->>>>>>> dev
 			$view['total']=number_format($view['total']);
 			
 			$view['payment_tam'] = $view['payment'];
 			$view['payment']=number_format($view['payment']);
 			
 			$view['time_add']=date('d-m-Y H:i',$view['time_add']);
-<<<<<<< HEAD
-			if($view['payment_method']==0){
-				$view['payment_method']='Thanh toán khi nhận hàng';
-				}elseif($view['payment_method']==1){
-				$view['payment_method']='Thanh toán qua ví tiền';
-				}elseif($view['payment_method']==2) {
-				$view['payment_method']='Thanh toán qua VNPAY';
-			}
-=======
 			
->>>>>>> dev
 			$view['link_view'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=view_order&amp;id=' . $view['id'];
 			
 			$view['link_phat'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=order_punish&amp;order_id=' . $view['id'];
@@ -1336,13 +1254,9 @@
 					$xtpl->parse('main.loop.tu_giao_xac_nhan_dang_giao');
 					}elseif($view['transporters_id'] == 3){
 					$xtpl->parse('main.loop.ghn');
-<<<<<<< HEAD
-				}
-=======
 					}elseif($view['transporters_id'] == 2){
 						$xtpl->parse('main.loop.GHTK');
 					}
->>>>>>> dev
 				
 				}else if($view['status']==2){
 				// trạng thái đơn hàng đang giao. cho phép admin hủy đơn hàng

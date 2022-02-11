@@ -8,10 +8,6 @@
  * @Createdate Mon, 04 Jan 2021 09:28:10 GMT
  */
 
-<<<<<<< HEAD
-		
-=======
->>>>>>> dev
 if (!defined('NV_IS_MOD_RETAILSHOPS'))
     die('Stop!!!');
 if (!defined('NV_IS_USER')) {
@@ -32,10 +28,7 @@ if ($nv_Request->isset_request('delete_id', 'get') and $nv_Request->isset_reques
     }
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> dev
 $q = $nv_Request->get_title( 'q', 'post,get' );
 $sea_flast = $nv_Request->get_int( 'sea_flast', 'post,get' );
 $ngay_den = $nv_Request->get_title( 'ngay_den', 'post,get' ,0);

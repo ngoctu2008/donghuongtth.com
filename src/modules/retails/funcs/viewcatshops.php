@@ -226,13 +226,8 @@
 		$data = $sth->fetchAll();
 		
 		//danh sách voucher 
-<<<<<<< HEAD
-		
-		$list_voucher = $db->query('SELECT * FROM ' . TABLE . '_voucher_shop WHERE store_id = ' . $shop_id . ' AND status = 1 ORDER BY time_to ASC' )->fetchAll();
-=======
 		$today = NV_CURRENTTIME;
 		$list_voucher = $db->query('SELECT * FROM ' . TABLE . '_voucher_shop WHERE store_id = ' . $shop_id . ' AND status = 1 AND time_to > ' . $today . ' ORDER BY time_to ASC' )->fetchAll();
->>>>>>> dev
 		
 		$contents = shops_info($data,$per_page,$page_new,$num_items,$cat_info,$base_url,$list_category_parrent,$getbrand_all,$page,$info_shop,$list_voucher);
 		

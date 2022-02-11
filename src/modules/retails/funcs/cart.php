@@ -1,13 +1,5 @@
 <?php
-<<<<<<< HEAD
-if (!defined('NV_IS_USER')) {
-	echo '<script language="javascript">';
-	echo 'window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true).'"';
-	echo '</script>';
-}else{
-=======
 if (defined('NV_IS_USER')) {
->>>>>>> dev
 	$check_seller=$db->query('SELECT count(*) FROM '.TABLE.'_seller_management where userid='.$user_info['userid'])->fetchColumn();
 	if($check_seller>0){
 		echo '<script language="javascript">';

@@ -7,10 +7,7 @@ if ($nv_Request->isset_request('load_product_new', 'post')) {
 	$page = $nv_Request->get_int( 'page_loading', 'post', 0 );
 	$limit = $nv_Request->get_int( 'limit_loading', 'post', 0 );
 	$content = '';
-<<<<<<< HEAD
-=======
 
->>>>>>> dev
 	
 	// lấy danh sách sản phẩm mới ra 
 	$db->select( 'id,image,alias,name_product,star,price,price_special,number_order,free_ship' )
@@ -206,11 +203,7 @@ if($mod=='pay_vnpay_customer'){
 	$vnp_TransactionNo=$order_code;
 	$vnp_OrderInfo='Thanh toán giao dịch '.$vnp_TransactionNo.' vào thời gian '.date('d-m-Y H:i',NV_CURRENTTIME);
 	$info_order=get_info_order($id);
-<<<<<<< HEAD
-	$vnp_ReturnUrl= 'https://'.$_SERVER['HTTP_HOST'].nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op.'&mod=update_order_vnpay&list_order='.$id);
-=======
 	$vnp_ReturnUrl= 'https://'.$_SERVER['HTTP_HOST'].nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op.'&mod=order_code&list_order='.$id);
->>>>>>> dev
 	$check_vnpay=send_vnpay($info_order['total'],$vnp_OrderInfo,$config_setting['website_code_vnpay'],$vnp_TransactionNo,$config_setting['checksum_vnpay'],$vnp_ReturnUrl,'171.226.0.17');
 	$contents1 = array(
 	'status' => 'OK_VNPAY',
@@ -1501,11 +1494,7 @@ if($mod=='send_ghtk'){
 	} 
 	$payment_method = $info_order['payment_method'];
 	$ServiceName=get_info_transporters($info_order['transporters_id'])['code_transporters'];
-<<<<<<< HEAD
-	if($payment_method>0){
-=======
 	if($payment_method!=''){
->>>>>>> dev
 		if($ServiceName==1){
 			$order_ghtk=send_ghtk($list_item,$info_order['order_code'],$info_warehouse['name_send'],$info_warehouse['address'],get_info_province( $info_warehouse['province_id'] )['title'],get_info_district( $info_warehouse['district_id'] )['title'],get_info_ward( $info_warehouse['ward_id'] )['title'],$info_warehouse['phone_send'],$info_order['phone'],$info_order['order_name'],$info_order['address'],get_info_province( $info_order['province_id'] )['title'],get_info_district( $info_order['district_id'] )['title'],get_info_ward( $info_order['ward_id'] )['title'],0,$info_order['total'],'road','');
 			}else if($ServiceName==2){
@@ -1783,26 +1772,15 @@ if($mod=='load_order_customer'){
 		$base_url .= '&q=' . $q;
 	}
 	
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> dev
 	$per_page = 10;
 	$page = $nv_Request->get_int('page', 'post,get', 1);
 	$db->sqlreset()
 	->select('COUNT(*)')
 	->from('' . TABLE . '_order')
-<<<<<<< HEAD
-	->where('payment != 0 AND userid = '.$user_info['userid'] . $where);
-	
-	$sth = $db->prepare($db->sql());
-	
-=======
 	->where('( payment != 0 OR payment_method = "recieve" )  AND userid = '.$user_info['userid'] . $where);
 	
 	$sth = $db->prepare($db->sql());
->>>>>>> dev
 	$sth->execute();
 	$num_items = $sth->fetchColumn();
 	
@@ -2138,15 +2116,9 @@ if($mod=='load_order_customer_no_payment'){
 
 
 // xử lý thanh toán lại đơn hàng vnpay 
-<<<<<<< HEAD
-if($mod=='vnpay_repayment'){
-	$data['id_order'] = $nv_Request->get_title( 'id_order', 'post,get','');
-	
-=======
 if($mod=='repayment'){
 	$data['id_order'] = $nv_Request->get_title( 'id_order', 'post,get','');
 	$payment_method = GetPaymentMethodOrder($data['id_order']);
->>>>>>> dev
 	
 	if(!$data['id_order'])
 	{
@@ -2183,20 +2155,6 @@ if($mod=='repayment'){
 	
 	$order_full = $data['id_order'];
 	$list_order_code = implode(',',$list_order_code);
-<<<<<<< HEAD
-	$vnp_TransactionNo = $order_full;
-	$vnp_OrderInfo = 'Thanh toan giao dich '.$list_order_code.' vao thoi gian '.date('d-m-Y H:i',NV_CURRENTTIME);
-	
-	$vnp_ReturnUrl= 'https://chonhagiau.com/retails/payment/';
-
-	$check_vnpay = send_vnpay($total_full,$vnp_OrderInfo,$config_setting['website_code_vnpay'],$vnp_TransactionNo,$config_setting['checksum_vnpay'],$vnp_ReturnUrl,'171.226.0.17');
-	$result = array(
-	'status' => 'OK',
-	'link' => $check_vnpay
-	);
-	print_r( json_encode($result));die;
-	die();
-=======
 	//Hoang thanh toan lai	
 	if($payment_method == 'vnpay'){
 			
@@ -2247,7 +2205,6 @@ if($mod=='repayment'){
 	}
 
 
->>>>>>> dev
 	
 	
 }
@@ -2467,11 +2424,7 @@ if($mod=='load_order'){
 		$view['fee_transport']=number_format($view['fee_transport']);
 		$view['total']=number_format($view['total']);
 		$view['time_add']=date('d-m-Y H:i',$view['time_add']);
-<<<<<<< HEAD
-		if($view['payment_method']==0){
-=======
 		if($view['payment_method']=='recieve'){
->>>>>>> dev
 			$view['payment_method']='Thanh toán khi nhận hàng';
 			}else{
 			$view['payment_method']='Thanh toán qua ví tiền';
@@ -2662,56 +2615,26 @@ if($mod == 'apply_voucher_shop'){
 
 
 if ( $mod == 'add_order' ) {
-<<<<<<< HEAD
-	
-	$order_name = $nv_Request->get_string( 'order_name', 'get,post', '' );
-	$order_email = $nv_Request->get_string( 'order_email', 'get,post', '' );
-	$order_phone = $nv_Request->get_string( 'order_phone', 'get,post', '' );
-=======
 	$order_name = $nv_Request->get_string( 'order_name', 'get,post', '' );
 	$order_email = $nv_Request->get_string( 'order_email', 'get,post', '' );
 	$order_phone = $nv_Request->get_string( 'order_phone', 'get,post', '' );
 	$payment_method = $nv_Request->get_string( 'payment_method', 'get,post', '' );
->>>>>>> dev
 	$address = $nv_Request->get_string( 'address', 'get,post', '' );
 	$province_id = $nv_Request->get_int( 'province_id', 'get,post', 0 );
 	$district_id = $nv_Request->get_int( 'district_id', 'get,post', 0 );
 	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
-<<<<<<< HEAD
-	$payment_method = 2;
-=======
 	//$payment_method = 2;
->>>>>>> dev
 	$total_full = 0;
 	$lat = $nv_Request->get_string( 'lat', 'get,post', '' );
 	$lng = $nv_Request->get_string( 'lng', 'get,post', '' );
 	$list_transporters = $nv_Request->get_array( 'list_transporters', 'get,post', '' ) ;
-<<<<<<< HEAD
-	if (!defined('NV_IS_USER')) {
-		
-		$contents1 = array(
-		'status' => 'error',
-		'mess' => 'Vui lòng đăng nhập hệ thống'
-		);
-		print_r( json_encode($contents1));die;
-		
-		}else{
-		$userid=$user_info['userid'];
-	}
-	
-=======
 	if (defined('NV_IS_USER')) {	
 		$userid=$user_info['userid'];
 	}	
->>>>>>> dev
 	
 	$error=array();
 	$total_full_total = 0;
 	$fee_transport_total = 0;
-<<<<<<< HEAD
-	//print_r($list_transporters);die;	
-=======
->>>>>>> dev
 	foreach ( $list_transporters as $index => $value_transporters ) {
 		//print_r($value_transporters);die;
 		$total_product = 0;
@@ -2777,11 +2700,7 @@ if ( $mod == 'add_order' ) {
 				// kết thúc xử lý lại
 				
 				
-<<<<<<< HEAD
-				$number_inventory_max=get_info_invetory_group($value_product['product_id'],$value_product['classify_value_product_id'])['sl_tonkho'];	
-=======
 				$number_inventory_max = get_info_invetory_group($value_product['product_id'],$value_product['classify_value_product_id'])['sl_tonkho'];	
->>>>>>> dev
 				
 				if($value_product['num']>$number_inventory_max){
 					if($value_product['classify_value_product_id']>0){
@@ -2799,11 +2718,7 @@ if ( $mod == 'add_order' ) {
 						}else{
 						$name_product=$get_info_product['name_product'];
 					}
-<<<<<<< HEAD
-					$error[]='Sản phẩm '.$name_product.' hiện chỉ còn '.number_format($number_inventory_max).' sản phẩm. Vui lòng quay lại giỏ hàng để thay đổi.';
-=======
 					$error[]='Sản phẩm '.$name_product.' hiện chỉ còn ' . number_format($number_inventory_max) . ' sản phẩm. Vui lòng quay lại giỏ hàng để thay đổi.';
->>>>>>> dev
 				}		
 			}
 		}
@@ -2826,11 +2741,7 @@ if ( $mod == 'add_order' ) {
 		if(!$tu_giao)
 		{
 			// có đơn vị vận chuyển
-<<<<<<< HEAD
-			$check_vc = $db->query('SELECT COUNT(t1.id) FROM ' . TABLE . '_transporters t1 INNER JOIN ' . TABLE . '_transporters_shop t2 ON t1.id = t2.transporters_id WHERE t1.status = 1 AND t2.status = 1 AND t2.sell_id = ' . $value_transporters['store_id'] . ' AND t1.id = ' . $value_transporters['transporters_id']  )->fetchColumn();
-=======
 			$check_vc = $db->query('SELECT COUNT(t1.id) FROM ' . TABLE . '_transporters t1 INNER JOIN ' . TABLE . '_transporters_shop t2 ON t1.id = t2.transporters_id WHERE t1.status = 1 AND t2.status = 1 AND t2.sell_id = ' . $value_transporters['store_id'] . ' AND t1.id = ' . $value_transporters['transporters_id'])->fetchColumn();
->>>>>>> dev
 			if($check_vc < 1){
 				$contents1 = array(
 				'status' => 'error',
@@ -2838,13 +2749,6 @@ if ( $mod == 'add_order' ) {
 				);
 				print_r( json_encode($contents1));die;
 			}
-<<<<<<< HEAD
-			if($value_transporters['transporters_id'] == 4 || $value_transporters['transporters_id'] == 5){
-				$free_ship = get_free_ship_vnpost($value_transporters['warehouse_id'], $total_weight_ship, $total_length_ship, $total_width_ship, $total_height_ship, $total_product, $province_id, $district_id, $value_transporters['transporters_id'] );
-				}elseif($value_transporters['transporters_id'] == 3){
-				$free_ship = get_free_ship_ghn(2, $total_weight_ship, $total_length_ship, $total_width_ship, $total_height_ship, $total_product, $province_id, $district_id , $ward_id, $value_transporters['transporters_id'], $value_transporters['store_id'] );
-			}
-=======
 			
 			if($value_transporters['transporters_id'] == 4 || $value_transporters['transporters_id'] == 5){
 				$free_ship = get_free_ship_vnpost($value_transporters['warehouse_id'], $total_weight_ship, $total_length_ship, $total_width_ship, $total_height_ship, $total_product, $province_id, $district_id, $value_transporters['transporters_id'] );
@@ -2854,54 +2758,10 @@ if ( $mod == 'add_order' ) {
 				$free_ship = $_SESSION['transporter_fee'][$value_transporters['store_id']][2];
 			}
 			
->>>>>>> dev
 		}
 		else
 		{
 			// miễn phí vận chuyển
-<<<<<<< HEAD
-			$free_ship = 0;
-		}
-		
-		//tính số tiền giảm voucher
-		$today = NV_CURRENTTIME;
-		
-		$value_transporters['voucher_code'] = $_SESSION['shop'][$value_transporters['store_userid']];
-
-		if($check_voucher_used > 0){
-			$voucher['id'] = 0;
-			$voucher['discount_price'] = 0;
-		}
-		if(!$voucher){
-			$voucher['id'] = 0;
-			$voucher['discount_price'] = 0;
-			}else{
-			if( $today <= $voucher['time_from'] || $today > $voucher['time_to'] ){
-				$voucher['id'] = 0;
-				$voucher['discount_price'] = 0;
-				}elseif($voucher['usage_limit_quantity'] < 1){
-				$voucher['id'] = 0;
-				$voucher['discount_price'] = 0;
-				}elseif($check_voucher['minimum_price'] > $total_full){
-				$voucher['id'] = 0;
-				$voucher['discount_price'] = 0;
-				}else{
-				$check_voucher = 1;
-				
-			}
-		}	
-		
-		
-		$list_transporters[$index]['voucherid'] = $voucher['id'];
-		$list_transporters[$index]['discount_price'] = $voucher['discount_price'];
-		
-		// phí ship khách hàng chịu
-		$list_transporters[$index]['fee'] = $free_ship;
-		
-		
-		$total_full = $total_full + $free_ship - $voucher['discount_price'];
-		
-=======
 			$free_ship = $_SESSION['self_transport_price_shop'][$value_transporters['store_id']];
 		}
 		
@@ -2926,7 +2786,6 @@ if ( $mod == 'add_order' ) {
 			$_SESSION['voucher_shop'][$value_transporters['store_id']]['price'] = 0;
 		}
 		$total_full = $total_full + $free_ship - $_SESSION['voucher_shop'][$value_transporters['store_id']]['price'];
->>>>>>> dev
 	}
 	
 	if(!$total_full)
@@ -2936,104 +2795,6 @@ if ( $mod == 'add_order' ) {
 	//print_r($total_full);die;
 	
 	if(count($error)==0){
-<<<<<<< HEAD
-		
-		// thanh toán vnpay
-		if($payment_method==2){
-			$list_order=array();
-			$list_order_code=array();
-			foreach ( $list_transporters as $value_transporters ) {
-				
-				if($value_transporters['transporters_id'] == 4 || $value_transporters['transporters_id'] == 5){
-					$value_transporters['transporters_id'] = 0;
-				}
-				//print_r($value_transporters['transporters_id']);die;
-				$check = $db->query( 'SELECT max(id) FROM '. TABLE .'_order' )->fetchColumn();
-				if ( $check == 0 ) {
-					$order_code = $config_setting['raw_order_prefix'].'00001';
-					} else {
-					$order_code = $config_setting['raw_order_prefix'].'0000'.( $check+1 );
-				}
-				$sql = 'INSERT INTO ' . TABLE . '_order ( userid,order_code,store_id,warehouse_id,order_name,email,phone,province_id,district_id,ward_id,address,transporters_id,total_product,fee_transport,total,note,time_add,status,payment,total_weight,total_height,total_width,total_length,payment_method,lat,lng, voucherid, voucher_price ) VALUES (:userid,:order_code,:store_id,:warehouse_id,:order_name,:email,:phone,:province_id,:district_id,:ward_id,:address,:transporters_id,:total_product,:fee_transport,:total,:note,:time_add,-1,:payment,:total_weight,:total_height,:total_width,:total_length,:payment_method,:lat,:lng, :voucherid, :voucher_price)';
-				
-				$data_insert = array();
-				$data_insert['order_code'] = $order_code;
-				$data_insert['userid']=$userid;
-				$data_insert['store_id'] = $value_transporters['store_id'];
-				$data_insert['warehouse_id'] = $value_transporters['warehouse_id'];
-				$data_insert['order_name'] = $order_name;
-				$data_insert['email'] = $order_email;
-				$data_insert['phone'] = $order_phone;
-				$data_insert['province_id'] = $province_id;
-				$data_insert['district_id'] = $district_id;
-				$data_insert['ward_id'] = $ward_id;
-				$data_insert['address'] = $address;
-				//$data_insert['transporters_id'] = $value_transporters['transporters_id'];
-				$data_insert['transporters_id'] = 0;
-				$data_insert['total_product'] = $value_transporters['total_product'];
-				$data_insert['fee_transport'] = $value_transporters['fee'];
-				
-				$data_insert['total'] = $value_transporters['total_product'] + $value_transporters['fee'] - $value_transporters['discount_price'];
-				$data_insert['note'] = $value_transporters['note_product'];
-				$data_insert['time_add'] = NV_CURRENTTIME;
-				$data_insert['total_weight'] = $value_transporters['total_weight'];
-				$data_insert['total_height'] =  $value_transporters['total_height'];
-				$data_insert['total_width'] = $value_transporters['total_width'];
-				$data_insert['total_length'] = $value_transporters['total_length'];
-				$data_insert['payment_method'] = $payment_method;
-				$data_insert['lat'] = $lat;
-				$data_insert['lng'] = $lng;
-				$data_insert['payment'] = 0;
-				$data_insert['voucherid'] = $value_transporters['voucherid'];
-				$data_insert['voucher_price'] = $value_transporters['discount_price'];
-				
-				$order_id = $db->insert_id( $sql, 'id', $data_insert );
-				
-				if($value_transporters['discount_price'] > 0){
-					
-					$sql = 'INSERT INTO ' . TABLE . '_order_voucher ( voucherid, order_id, userid, discount_price, time_add, status) VALUES (:voucherid, :order_id, :userid, :discount_price, :time_add, :status)';
-					
-					$data_insert = array();
-					$data_insert['voucherid'] = $value_transporters['voucherid'];
-					$data_insert['order_id'] = $order_id ;
-					$data_insert['userid'] = $userid;
-					$data_insert['discount_price'] = $value_transporters['discount_price'];
-					$data_insert['time_add'] = NV_CURRENTTIME;
-					$data_insert['status'] = 0;
-					
-					$voucher_id = $db->insert_id( $sql, 'voucherid', $data_insert );
-				}
-				if ( $order_id > 0 ) {
-					foreach ( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] as $key_product=>$value_product ) {
-						if ( $value_product['status_check'] == 1 ) {
-							$total_weight = $value_product['weight_product']*get_info_unit_weight( $value_product['weight_unit'] )['exchange']*$value_product['num'];
-							$total_length = $value_product['length_product']*get_info_unit_length( $value_product['unit_length'] )['exchange']*$value_product['num'];
-							$total_width = $value_product['width_product']*get_info_unit_length( $value_product['unit_width'] )['exchange']*$value_product['num'];
-							$total_height = $value_product['height_product']*get_info_unit_length( $value_product['unit_height'] )['exchange']*$value_product['num'];
-							$total_length = $value_product['length_product']*get_info_unit_length( $value_product['unit_length'] )['exchange']*$value_product['num'];
-							$total = $value_product['price']*$value_product['num'];
-							
-							
-							$db->query( 'INSERT INTO ' . TABLE . '_order_item(order_id,product_id,weight,length,height,width,price,classify_value_product_id,quantity,total) VALUES('.$order_id.','.$value_product['product_id'].','.$total_weight.','.$total_length.','.$total_height.','.$total_width.','.$value_product['price'].','.$value_product['classify_value_product_id'].','.$value_product['num'].','.$total.')' );
-							
-							
-							
-							unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']][$key_product] );
-							if ( count( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] ) == 0 ) {
-								unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] );
-							}
-							if ( count( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] ) == 0 ) {
-								unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] );
-							}
-							$list_product[]=$value_product;
-						}
-					}
-				}
-				
-				$list_order[]=$order_id;
-				$list_order_code[]=$order_code;
-			}
-=======
 		$info_customer=array(
 			'userid' => $userid,
 			'order_name' => $order_name,
@@ -3057,18 +2818,13 @@ if ( $mod == 'add_order' ) {
 			//$data = add_order($list_transporters,$info_customer);
 			$list_order = $data['list_order'];
 			$list_order_code = $data['list_order_code'];
->>>>>>> dev
 			$order_full=implode(',',$list_order);
 			$list_order_code=implode(',',$list_order_code);
 			$vnp_TransactionNo=$order_full;
 			$vnp_OrderInfo='Thanh toan giao dich '.$list_order_code.' vao thoi gian '.date('d-m-Y H:i',NV_CURRENTTIME);
 			
 			
-<<<<<<< HEAD
-			$vnp_ReturnUrl= 'https://chonhagiau.com/retails/payment/';
-=======
 			$vnp_ReturnUrl= nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&order_code='.$order_full , true );
->>>>>>> dev
 			
 			// lấy thông tin ip server
 			$vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -3078,12 +2834,6 @@ if ( $mod == 'add_order' ) {
 			'status' => 'OK_VNPAY',
 			'link' => $check_vnpay
 			);
-<<<<<<< HEAD
-			print_r( json_encode($contents1));die;
-			die();
-		}
-		}else{
-=======
 			
 			print_r( json_encode($contents1));die;
 			die();
@@ -3120,7 +2870,6 @@ if ( $mod == 'add_order' ) {
 		}
 	}else{
 			
->>>>>>> dev
 		$contents1 = array(
 		'status' => 'error',
 		'mess' => $error
@@ -3130,8 +2879,6 @@ if ( $mod == 'add_order' ) {
 	
 }
 
-<<<<<<< HEAD
-=======
 if ( $mod == 'address_no_login' ) {
 	$row['address'] = $nv_Request->get_title('maps_address', 'get', '');
 	$row['ward_id'] = $nv_Request->get_int('ward_id', 'get', 0);
@@ -3196,7 +2943,6 @@ if ( $mod == 'address_no_login' ) {
 	die();
 }
 
->>>>>>> dev
 if ( $mod == 'remove_cart' ) {
 	$key_store = $nv_Request->get_int( 'key_store', 'get,post', 0 );
 	$key_product = $nv_Request->get_int( 'key_product', 'get,post', 0 );
@@ -3250,11 +2996,7 @@ if ( $mod == 'update_status_check' ) {
 }
 
 if ( $mod == 'add_cart' ) {
-<<<<<<< HEAD
-	
-=======
 		
->>>>>>> dev
 	$product_id = $nv_Request->get_int( 'product_id', 'get,post', 0 );
 	$warehouse_id = $nv_Request->get_int( 'warehouse_id', 'get,post', 0 );
 	
@@ -3271,12 +3013,6 @@ if ( $mod == 'add_cart' ) {
 		
 		// lấy thông tin link chi tiết sản phẩm lưu vào SESSION
 		
-<<<<<<< HEAD
-		$_SESSION['back_link'] = $get_info_product['link'];
-		
-		print_r( json_encode( array( 'status'=>'ERROR_LOGIN','link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true) ) ) );
-		die();
-=======
 		// $_SESSION['back_link'] = $get_info_product['link'];
 		
 		//print_r( json_encode( array( 'status'=>'ERROR_LOGIN','link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true) ) ) );
@@ -3374,7 +3110,6 @@ if ( $mod == 'add_cart' ) {
 			die();
 		}
 		
->>>>>>> dev
 		}else{
 		$check_seller=$db->query('SELECT count(*) FROM '.TABLE.'_seller_management where userid='.$user_info['userid'])->fetchColumn();
 		if($check_seller>0){
@@ -3456,14 +3191,11 @@ if ( $mod == 'add_cart' ) {
 				'unit_width' => $get_info_product['unit_width'],
 				'height_product' => $get_info_product['height_product'],
 				'unit_height' => $get_info_product['unit_height'],
-<<<<<<< HEAD
-=======
 				'name_product' => $get_info_product['name_product'],
 				'alias' => $get_info_product['alias'],
 				'image' => $get_info_product['image'],
 				'free_ship' => $get_info_product['free_ship'],
 				'self_transport' => $get_info_product['self_transport'],
->>>>>>> dev
 				'status_check'=>1
 				);
 			}
@@ -3741,17 +3473,10 @@ if ( $mod == 'get_transport_fee_viettelpost' ) {
 }
 
 if ( $mod == 'get_transport_fee_ghn' ) {
-<<<<<<< HEAD
-	$weight_product = $nv_Request->get_int( 'weight', 'get,post', 0 );
-	$length_product = $nv_Request->get_int( 'length', 'get,post', 0 );
-	$width_product = $nv_Request->get_int( 'width', 'get,post', 0 );
-	$height_product = $nv_Request->get_int( 'height', 'get,post', 0 );
-=======
 	$weight_product = $nv_Request->get_float( 'weight', 'get,post', 0 );
 	$length_product = $nv_Request->get_float( 'length', 'get,post', 0 );
 	$width_product = $nv_Request->get_float( 'width', 'get,post', 0 );
 	$height_product = $nv_Request->get_float( 'height', 'get,post', 0 );
->>>>>>> dev
 	$total = $nv_Request->get_int( 'total', 'get,post', 0 );
 	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
 	$ward_id_ghn_receive = get_info_ward( $ward_id )['ghnid'];
@@ -3771,11 +3496,7 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	$service['code_message_value'];
 	
 	if($weight_product == 0 and $length_product == 0 and $width_product == 0 and $height_product == 0  ){
-<<<<<<< HEAD
-		$_SESSION['tranposter_fee'][$shops_id_session][3] = 0;
-=======
 		$_SESSION['transporter_fee'][$shops_id_session][3] = 0;
->>>>>>> dev
 		print_r( json_encode( array('fee'=>0, 'mess'=>$service['code_message_value']) ) );
 		die;
 	}
@@ -3788,12 +3509,6 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	
 	
 	$fee = get_price_ghn( $service_id, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
-<<<<<<< HEAD
-	
-	
-	
-=======
->>>>>>> dev
 	if($fee['code']==400){
 		$fee = get_price_ghn_2( $code_transporters, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
 	}
@@ -3816,11 +3531,7 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 		}
 	}
 	//print_r( json_encode( $tranposter_fee ) );
-<<<<<<< HEAD
-	$_SESSION['tranposter_fee'][$shops_id_session][3] = $tranposter_fee;
-=======
 	$_SESSION['transporter_fee'][$shops_id_session][3] = $tranposter_fee;
->>>>>>> dev
 	
 	print_r( json_encode( array('fee'=>$tranposter_fee, 'mess'=>$service['code_message_value']) ) );
 	die;
@@ -3829,85 +3540,6 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 }
 if ( $mod == 'get_transport_fee_ghtk' ) {
 	$weight_product = $nv_Request->get_int( 'weight', 'get,post', 0 );
-<<<<<<< HEAD
-	$length_product = $nv_Request->get_int( 'length', 'get,post', 0 );
-	$width_product = $nv_Request->get_int( 'width', 'get,post', 0 );
-	$height_product = $nv_Request->get_int( 'height', 'get,post', 0 );
-	$total = $nv_Request->get_int( 'total', 'get,post', 0 );
-	$province_id = $nv_Request->get_int( 'province_id', 'get,post', 0 );
-	$address = $nv_Request->get_string( 'address', 'get,post', 0 );
-	$province_id_ghtk_receive = get_info_province( $province_id )['title'];
-	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
-	if ( $ward_id>0 ) {
-		$ward_id_ghtk_receive = get_info_ward( $ward_id )['title'];
-	}
-	$district_id = $nv_Request->get_int( 'district_id', 'get,post', 0 );
-	$district_id_ghtk_receive = get_info_district( $district_id )['title'];
-	$warehouse_id = $nv_Request->get_int( 'shops_id', 'get,post', 0 );
-	$info_warehouse = get_info_warehouse( $warehouse_id );
-	$province_id_ghtk_send = get_info_province( $info_warehouse['province_id'] )['title'];
-	$district_id_ghtk_send = get_info_district( $info_warehouse['district_id'] )['title'];
-	$ward_id_ghtk_send = get_info_ward( $info_warehouse['ward_id'] )['title'];
-	$transporters_id = $nv_Request->get_int( 'transporters_id', 'get,post', 0 );
-	$code_transporters = get_info_transporters( $transporters_id )['code_transporters'];
-	$shop_id = $info_warehouse['shops_id_ghn'];
-	if ( $ward_id>0 ) {
-		if($code_transporters==1){
-			$fee = get_price_ghtk( $info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, $ward_id_ghtk_receive, $weight_product, $total ,'road','none');
-			}else if($code_transporters==2){
-			$fee_road = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send, $address, $province_id_ghtk_receive, $district_id_ghtk_receive, $ward_id_ghtk_receive, $weight_product, $total ,'road','none');
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send, $address, $province_id_ghtk_receive, $district_id_ghtk_receive, $ward_id_ghtk_receive, $weight_product, $total ,'fly','none');
-			}else if($code_transporters==3){
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send, $address, $province_id_ghtk_receive, $district_id_ghtk_receive, $ward_id_ghtk_receive, $weight_product, $total ,'','xteam');
-		}
-		} else {
-		if($code_transporters==1){
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, '', $weight_product, $total,'road','none' );
-			}else if($code_transporters==2){
-			$fee_road = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, '', $weight_product, $total,'road','none' );
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, '', $weight_product, $total,'fly','none' ); 
-			}else if($code_transporters==3){
-			$fee = get_price_ghtk($info_warehouse['address'], $province_id_ghtk_send, $district_id_ghtk_send, $ward_id_ghtk_send,$address, $province_id_ghtk_receive, $district_id_ghtk_receive, '', $weight_product, $total,'','xteam' );
-		}
-	}
-	if ( empty( $fee ) ) {
-		$tranposter_fee = -1;
-		} else {
-		if($code_transporters!=2){
-			if ( get_info_transporters( $transporters_id )['type'] == 0 ) {
-				$tranposter_fee = $fee['fee']['fee']+get_info_transporters( $transporters_id )['money'];
-				} else {
-				$tranposter_fee = $fee['fee']['fee']-get_info_transporters( $transporters_id )['money'];
-				if ( $tranposter_fee<0 ) {
-					$tranposter_fee = 0;
-				}
-			}
-			$mod = $tranposter_fee%1000;
-			if($mod>0){
-				$thuong = ceil($tranposter_fee / 1000);
-				$tranposter_fee=$thuong*1000;
-			}
-			}else{
-			if($fee != $fee_road){
-				if ( get_info_transporters( $transporters_id )['type'] == 0 ) {
-					$tranposter_fee = $fee['fee']['fee']+get_info_transporters( $transporters_id )['money'];
-					} else {
-					$tranposter_fee = $fee['fee']['fee']-get_info_transporters( $transporters_id )['money'];
-					if ( $tranposter_fee<0 ) {
-						$tranposter_fee = 0;
-					}
-				}
-				$mod = $tranposter_fee%1000;
-				if($mod>0){
-					$thuong = ceil($tranposter_fee / 1000);
-					$tranposter_fee=$thuong*1000;
-				}
-				}else{
-				$tranposter_fee = -1;
-			}
-		}
-	}
-=======
 	$province_id = $nv_Request->get_int( 'province_id', 'get,post', 0 );
 	$district_id = $nv_Request->get_int( 'district_id', 'get,post', 0 );
 	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
@@ -3944,7 +3576,6 @@ if ( $mod == 'get_transport_fee_ghtk' ) {
 			$tranposter_fee = -1;
 	}
 	
->>>>>>> dev
 	print_r( json_encode( $tranposter_fee ) );
 	die;
 }
@@ -4212,22 +3843,6 @@ if ( $mod == 'tonkho' ) {
 
 if($mod == 'testtt')
 {
-<<<<<<< HEAD
-	//send_mail_payment_fail(626);
-	
-	//$order = get_info_order(641);
-	//send_email_order_cancel($order);
-	
-	//send_mail_order_delivered($order);
-	
-	//update_time_add_order(647);
-	
-	//print_r(NV_CURRENTTIME);die;
-	
-	//insert_history_admin(220, 'Lam gi do');
-	 //$a = get_name_store(2);
-	print_r(date("d-m-Y H:i:s", 1641747600));die;
-=======
 	$a =Array
 	(
 		'success' => '1',
@@ -4255,7 +3870,6 @@ if($mod == 'testtt')
 	Mong Shop thông cảm và cân nhắc kỹ trước khi gửi hàng. GHTK xin lỗi vì sự bất tiện này.'
 			);
 	print_r($a['order']['label']);die;
->>>>>>> dev
 	
 }
 

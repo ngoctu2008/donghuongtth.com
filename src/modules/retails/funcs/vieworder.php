@@ -138,13 +138,6 @@
 		}
 	}
 	
-<<<<<<< HEAD
-	check_store_order_id($id);
-	
-	$info_order = get_info_order($id);
-	
-	$info_store = get_info_store( $info_order['store_id'] );
-=======
 	
 	check_store_order_id($id);
 	// print_r($id);die;
@@ -153,7 +146,6 @@
 	
 	$info_store = get_info_store( $info_order['store_id'] );
 	// print_r(ok);die;
->>>>>>> dev
 	$info_store['alias_shop'] = NV_MY_DOMAIN .'/'.get_info_user($info_store['userid'])['username'].'/';
 	
 	if($info_order['payment_method']==0){
@@ -243,15 +235,9 @@
 	$xtpl->assign( 'info_store', $info_store );
 	$xtpl->assign( 'info_warehouse', $info_warehouse );
 	$xtpl->assign( 'back_link', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=ordercustomer',true));
-<<<<<<< HEAD
-	
-	
-	
-=======
 	$xtpl->assign('children_fund', $config_setting['children_fund'] . 'đ');
 	
 
->>>>>>> dev
 	if($user_info['userid']){
 		$info_order['check_rate'] = $db->query('SELECT count(*) FROM ' . TABLE . '_order t1 INNER JOIN ' . TABLE . '_order_item t2 ON t1.id = t2.order_id WHERE t2.product_id = ' . $info_order['id'] . ' AND t1.status = 3')->fetchColumn();
 		$info_order['check_rate_st1'] = $db->query('SELECT count(*) FROM ' . TABLE . '_product t1 INNER JOIN ' . TABLE . '_rate t2 ON t1.id = t2.product_id WHERE t2.product_id = ' . $info_order['id'] . ' AND t2.userid = ' .$user_info['userid'] . ' AND t2.status = 1')->fetchColumn();
@@ -271,11 +257,7 @@
 	{
 		$info_order['status_payment_vnpay_title'] = 'Chưa thanh toán';
 	}
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> dev
 	$info_order['time_add']=date('d-m-Y H:i',$info_order['time_add']);
 	$xtpl->assign( 'info_order', $info_order );
 	
@@ -465,10 +447,6 @@
 	
 	if($info_order['voucherid']){
 		$xtpl->parse( 'main.view.voucher' );
-<<<<<<< HEAD
-		
-=======
->>>>>>> dev
 	}
 	
 	
