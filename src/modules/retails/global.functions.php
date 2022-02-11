@@ -4765,7 +4765,7 @@
 		global $db, $db_config, $user_info, $module_name, $lang_module, $global_payport;
 		
 		$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
-		
+		print_r($list_order);die;
 		// cập nhật kho hàng sau khi thanh toán thành công
 		foreach ($list_order as $order)
 		{
