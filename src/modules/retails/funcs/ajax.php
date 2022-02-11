@@ -2118,7 +2118,7 @@ if($mod=='load_order_customer_no_payment'){
 // xử lý thanh toán lại đơn hàng vnpay 
 if($mod=='repayment'){
 	$data['id_order'] = $nv_Request->get_title( 'id_order', 'post,get','');
-	
+	$payment_method = GetPaymentMethodOrder($data['id_order']);
 	
 	if(!$data['id_order'])
 	{
@@ -2155,20 +2155,56 @@ if($mod=='repayment'){
 	
 	$order_full = $data['id_order'];
 	$list_order_code = implode(',',$list_order_code);
+	//Hoang thanh toan lai	
+	if($payment_method == 'vnpay'){
+			
+		
+		//Payment_port($order_full,$list_order_code,);
+		$vnp_TransactionNo = $order_full;
+		$vnp_OrderInfo = 'Thanh toan giao dich '.$list_order_code.' vao thoi gian '.date('d-m-Y H:i',NV_CURRENTTIME);
+		
+		$vnp_ReturnUrl= 'https://chonhagiau.com/retails/payment/';
 
-	//Payment_port($order_full,$list_order_code,);
-	$vnp_TransactionNo = $order_full;
-	$vnp_OrderInfo = 'Thanh toan giao dich '.$list_order_code.' vao thoi gian '.date('d-m-Y H:i',NV_CURRENTTIME);
-	
-	$vnp_ReturnUrl= 'https://chonhagiau.com/retails/payment/';
+		$check_payport = send_vnpay($total_full,$vnp_OrderInfo,$config_setting['website_code_vnpay'],$vnp_TransactionNo,$config_setting['checksum_vnpay'],$vnp_ReturnUrl,'171.226.0.17');
+		$result = array(
+		'status' => 'OK',
+		'link' => $check_payport
+		);
+		print_r( json_encode($result));die;
+		die();
+	}elseif($payment_method == 'recieve'){
+		
+		$list_order = $data['list_order'];
+		$list_order_code = $data['list_order_code'];
+		$info_order = get_info_order($list_order[0]);
+		$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
+		$list_order=implode(',',$list_order);
+		$list_order_code=implode(',',$list_order_code);
+		
+		xulythanhtoanthanhcong_recieve($list_order, $info_order);
+		$contents1 = array(
+			'status' => 'OK_RECIEVE',
+			'link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&amp;order_code=' , true ).$list_order
+			);
+			print_r( json_encode($contents1));die;
+	}elseif($payment_method == 'momo'){
+		require_once(NV_ROOTDIR.'/modules/retails/payment/momo.checkorders.php');
+		/* $list_order = $data['list_order'];
+		$list_order_code = $data['list_order_code'];
+		
+		$list_order=implode(',',$list_order);
+		$list_order_code=implode(',',$list_order_code);
+		unset( $_SESSION[$module_data . '_cart'] );
+		
+		//xulythanhtoanthanhcong_momo($list_order, $info_order);
+		$contents1 = array(
+			'status' => 'OK_MOMO',
+			'link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&amp;payment_method=recieve&amp;order_code='.$list_order , true )
+			);
+			print_r( json_encode($contents1));die; */
+	}
 
-	$check_payport = send_vnpay($total_full,$vnp_OrderInfo,$config_setting['website_code_vnpay'],$vnp_TransactionNo,$config_setting['checksum_vnpay'],$vnp_ReturnUrl,'171.226.0.17');
-	$result = array(
-	'status' => 'OK',
-	'link' => $check_payport
-	);
-	print_r( json_encode($result));die;
-	die();
+
 	
 	
 }
