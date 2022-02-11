@@ -1083,7 +1083,12 @@ function nv_theme_retailshops_order($array_data, $list_address, $address_df, $ar
 				}
 				//voucher giá tối ưu 
 			} else {
-				$xtpl->parse('main.store.warehouse.voucher_shop_not');
+				if($user_info['userid']){
+					$xtpl->parse('main.store.warehouse.voucher_shop_not');
+				}
+				else{
+					$xtpl->parse('main.store.warehouse.voucher_login_not');
+				}
 			}
 
 			if ($count_product_warehouse == 1) {

@@ -297,6 +297,9 @@
 								<!-- BEGIN: voucher_shop_not -->
 								Không có voucher
 								<!-- END: voucher_shop_not -->
+								<!-- BEGIN: voucher_login_not -->
+								Vui lòng đăng nhập để nhận thêm ưu đãi!
+								<!-- END: voucher_login_not -->
 							</div>
 						</div>
 					</div>
