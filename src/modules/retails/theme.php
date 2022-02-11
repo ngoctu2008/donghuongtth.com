@@ -143,6 +143,7 @@ function email_new_order_payment($data_order, $data_pro, $info_order)
 	$info_order['voucher_price'] = number_format($info_order['voucher_price']);
 	$info_order['total'] = number_format($info_order['total']);
 	$xtpl->assign('info_order', $info_order);
+	//print_r($info_order);die;
 	$shop_name = $db->query('SELECT company_name FROM ' . TABLE . '_seller_management WHERE id = ' . $info_order['store_id'])->fetchColumn();
 
 	$xtpl->assign('SHOP_NAME', $shop_name);
