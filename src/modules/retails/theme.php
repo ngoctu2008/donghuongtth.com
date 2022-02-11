@@ -3331,11 +3331,11 @@ function shops_info($array_data, $per_page, $page, $num_items, $cat_info, $base_
 
 			$xtpl->assign('VOUCHER', $voucher);
 
-
+			
 			if ($voucher['maximum_discount']) {
-				$xtpl->parse('main.voucher.voucher_loop.maximum_discount');
 				$voucher['maximum_discount'] = number_format($voucher['maximum_discount']) . 'đ';
 				$xtpl->assign('maximum_discount', $voucher['maximum_discount']);
+				$xtpl->parse('main.voucher.voucher_loop.maximum_discount');
 			}
 			if ($user_info['userid']) {
 				//check voucher khach da luu
