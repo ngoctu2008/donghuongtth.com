@@ -61,7 +61,7 @@
 	$global_ward = json_decode($redis->get('location_ward'),true);
 
 	// lấy tất cả cổng thanh toán
-	if(!$redis->exists('catalogy_main'))
+	if(!$redis->exists('payport'))
 	{
 		$payport = get_payment_all();
 		$redis->set('payport', json_encode($payport));	
@@ -4851,6 +4851,7 @@
 			$email_contents = call_user_func('email_new_order_payment', $data_order, $list_product, $info_order);
 			$email_title = $lang_module['order_email_title'];
 			print_r($info_order);
+			print_r($global_payport);
 			print_r($email_contents);die;
 			nv_sendmail(array(
             $global_config['site_name'],
