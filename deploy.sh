@@ -21,6 +21,5 @@ ssh -o StrictHostKeyChecking=no $SSH_USER@$DEV_HOST << 'ENDSSH'
   find ./ -type f -exec chmod 644 {} +;
   chmod 777 /home/chonhagiau/chonhagiau.com/src/.htaccess
 
-
   exec "$@"
 ENDSSH
