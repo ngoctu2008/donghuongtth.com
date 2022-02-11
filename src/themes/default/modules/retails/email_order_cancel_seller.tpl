@@ -33,11 +33,7 @@
                     <div style="width: 50%;text-align: end;">
                         <p>{info_order.time_add}</p>
                         <p>{info_order.name_transporters}</p>
-<<<<<<< HEAD
-                        <p>VNPAY</p>
-=======
                         <p>{info_order.payment_method_name}</p>
->>>>>>> dev
                         <p>{info_order.order_name}</p>
                         <p>{info_order.phone}</p>
                         <span>{info_order.address}</span>

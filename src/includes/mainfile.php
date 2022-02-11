@@ -463,8 +463,5 @@ if (isset($nv_plugin_area[2])) {
         include NV_ROOTDIR . '/includes/plugin/' . $_fplugin;
     }
 }
-<<<<<<< HEAD
-=======
 
 $_SERVER["SERVER_NAME"] = 'chonhagiau.com';
->>>>>>> dev

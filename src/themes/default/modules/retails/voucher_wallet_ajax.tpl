@@ -8,11 +8,7 @@
 		<div class="bg_gray coupons_voucher_wallet rounded d-flex">
 			<div class="coupons_left w-25 bg_gray">
 				<div class="p-2">
-<<<<<<< HEAD
-					<img class="img-fluid rounded" src="https://banhang.chonhagiau.com/uploads/retails/shops/purelac/617ba48e722b31635493006.png" alt=""/>
-=======
 					<img class="img-fluid rounded" src="https://{LOGO_SRC}" alt=""/>
->>>>>>> dev
 				</div>
 				<div class="coupons_left-border">
 				</div>
@@ -33,11 +29,7 @@
 				<span class="text_gray_color fs_12">{VOUCHER_APPLY}</span>
 				<div class="d-flex justify-content-between w-100 position-absolute align-items-center" style="bottom:10px">
 					<span>HSD: {VOUCHER.time_to}</span>
-<<<<<<< HEAD
-					<button class="btn_ecng mr-5">Dùng ngay</button>
-=======
 					<!--<button class="btn_ecng mr-5">Dùng ngay</button> -->
->>>>>>> dev
 				</div>
 			</div>
 		</div>

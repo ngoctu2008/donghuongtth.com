@@ -1,19 +1,11 @@
 <!-- BEGIN: main -->
 
  <div class="bg_white" style="min-height: 378px">
-<<<<<<< HEAD
-                
-				
-<!-- BEGIN: view -->
-	<div class="d-flex justify-content-between p-4">
-		<div class=" fs_20">Thông Tin Địa Chỉ</div>
-=======
  
 				
 <!-- BEGIN: view -->
 	<div class="d-flex justify-content-between p-4">
 		<div class=" fs_20">Địa Chỉ Nhận Hàng</div>
->>>>>>> dev
 	   <a href="{address}" class="btn_ecng_outline" onclick="newDoc()">+ Thêm địa chỉ</a>
 	</div>
 	 <!-- BEGIN: loop --> 
@@ -44,14 +36,6 @@
 				<!-- BEGIN: set_default -->
 				<button onclick="set_default({VIEW.id})" class="btn_ecng_outline">Đặt làm địa chỉ mặc định</button>
 				<!-- END: set_default -->
-<<<<<<< HEAD
-				
-				
-				
-				
-				
-=======
->>>>>>> dev
 			</div>
 		</div>
 	</div>
@@ -61,11 +45,7 @@
 
 <!-- BEGIN: edit -->
 	<div class="d-flex justify-content-between p-4">
-<<<<<<< HEAD
-		<div class=" fs_20">Thông Tin Địa Chỉ</div>
-=======
 		<div class=" fs_20">Địa Chỉ Nhận Hàng</div>
->>>>>>> dev
                    
 	</div>
 
@@ -81,11 +61,6 @@
     <div class="panel-body">
         <form class="form-horizontal" action="{NV_BASE_SITEURL}index.php?{NV_LANG_VARIABLE}={NV_LANG_DATA}&amp;{NV_NAME_VARIABLE}={MODULE_NAME}&amp;{NV_OP_VARIABLE}={OP}" method="post" id="form_add_address">
             <input type="hidden" name="id" value="{ROW.id}" />
-<<<<<<< HEAD
-			
-			
-=======
->>>>>>> dev
 			<div class="row">			  
 			  <div class="col-9 p-4">
 				<div class="form-group row">
@@ -98,8 +73,6 @@
 						</div>
 					</div>
 				</div>
-<<<<<<< HEAD
-=======
 
 				<div class="form-group row {show_email} ">
 					<label for="staticEmail" class="col-3 col-form-label">Email(<span class="text_red">*</span>) </label>
@@ -111,7 +84,6 @@
 						</div>
 					</div>
 				</div>
->>>>>>> dev
 				
 				<div class="form-group row">
 					<label for="staticEmail" class="col-3 col-form-label">Số điện thoại(<span class="text_red">*</span>) </label>
@@ -129,17 +101,10 @@
 						<div class="input-group mb-4 rounded-lg  input_ecng">
 							<div class="input_error_noIcon w-100">
 								<select id="province_id" name="province_id" required="required" class="form-control">
-<<<<<<< HEAD
-								 <!-- BEGIN: province_id -->
-								 <option value="{STATUS.provinceid}" {STATUS.selected}>
-									{STATUS.title}
-								</option>
-=======
 								<!-- BEGIN: province_id -->
 									<option value="{STATUS.provinceid}" {STATUS.selected}>
 									{STATUS.title}
 									</option>
->>>>>>> dev
 								<!-- END: province_id -->
 								</select>
 							</div>
@@ -189,16 +154,9 @@
 								<input type="text" name="maps_address" id="maps_address" placeholder="Nhập địa chỉ" value="{AD}" class="form-control bg-none border-0 " required="required"  maxlength="150">
 							</div>
 						</div>
-<<<<<<< HEAD
-						
-					</div>
-				</div>
-				<div class="form-group row">
-=======
 					</div>
 				</div>
 				<div class="form-group row {show_submit1}">
->>>>>>> dev
 					<div class="col-3">
 					</div>
 					<div class="col-9 d-flex">
@@ -228,13 +186,9 @@
 
 
 <div class="form-group pb-4" style="text-align: center">
-<<<<<<< HEAD
-    <input class="btn_ecng" name="submit" type="submit" value="{LANG.save}" />
-=======
     <input class="btn_ecng {show_submit1}" name="submit" type="submit" value="{LANG.save}" />
     <!-- Lưu địa chỉ không cần login -->
     <input id="submit_no_login" class="btn_ecng {show_submit}" name="submit" type="submit" value="{LANG.save}" />
->>>>>>> dev
 </div>
 </form>
 </div>
@@ -249,13 +203,10 @@
                     required: true,
                     minlength: 4,
                 },
-<<<<<<< HEAD
-=======
                 email: {
                     required: true,
                     email: true,
                 },
->>>>>>> dev
 
                 phone: {
                     required: true,
@@ -281,13 +232,10 @@
                     required: "Vui lòng nhập tên",
                     minlength: "Vui lòng nhập ít nhất 4 ký tự "
                 },
-<<<<<<< HEAD
-=======
                 email: {
                     required: "Vui lòng nhập email",
                     email:"Email chưa nhập đúng định dạng"
                 },
->>>>>>> dev
 
                 phone: {
                     required: "Vui lòng nhập số điện thoại",
@@ -501,9 +449,6 @@ initializeMap();
             }
         });
     }
-<<<<<<< HEAD
-	//test
-=======
     $("#submit_no_login").click(function(e) {
 			e.preventDefault();
 			$.ajax({               
@@ -533,7 +478,6 @@ initializeMap();
 		    }); 
 	});
 	
->>>>>>> dev
 </script>
        
 <!-- END: main -->
