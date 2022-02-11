@@ -21,6 +21,9 @@
                     <li class="nav-item">
                         <a class="nav-link {active_ordercustomer}" href="{HISTORY}"><i class="fa fa-list-alt mr-2" aria-hidden="true"></i>Lịch sử mua hàng</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {active_wallet_voucher}" href="{WALLET_VOUCHER}"><i class="fa fa-list-alt mr-2" aria-hidden="true"></i>Ví voucher</a>
+                    </li>
 					<li class="nav-item">
                         <a class="nav-link {active_repayment}" href="{REPAYMENT}"><i class="fa fa-credit-card mr-2" aria-hidden="true"></i>Thanh toán thất bại</a>
                     </li>

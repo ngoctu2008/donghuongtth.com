@@ -10,11 +10,11 @@
 
 if (!defined('NV_IS_MOD_RETAILSHOPS'))
     die('Stop!!!');
-// if (!defined('NV_IS_USER')) {
-// 	echo '<script language="javascript">';
-// 	echo 'alert("Vui lòng đăng nhập trước để thực hiện chức năng này.");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true).'"';
-// 	echo '</script>';
-// }
+if (!defined('NV_IS_USER')) {
+	echo '<script language="javascript">';
+	echo 'alert("Vui lòng đăng nhập trước để thực hiện chức năng này.");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=users' . '&' . NV_OP_VARIABLE . '=login',true).'"';
+	echo '</script>';
+}
 $mod = $nv_Request->get_string( 'mod', 'get,post', '' );
 
 if ($nv_Request->isset_request('delete_id', 'get') and $nv_Request->isset_request('delete_checkss', 'get')) {

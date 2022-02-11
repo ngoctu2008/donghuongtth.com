@@ -4940,18 +4940,20 @@ function CheckPaymentOrder($payment_method,$order_code,$inputData){
 	return $error;
 }
 function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
-	global $db;
+	global $db,$global_config,$config_setting,$user_info;
 	$status = false;
 
-	if(empty($errors)){
+	
 		//$_SESSION[$module_name . '_' . $payment_method] = true;
 		if($payment_method == 'vnpay'){
 				$vnp_SecureHash = $inputData['vnp_SecureHash'];
 				unset($inputData['vnp_SecureHashType']);
 				unset($inputData['vnp_SecureHash']);
+				unset($inputData['order_code']);
 				ksort($inputData);
 				$i = 0;
 				$hashData = "";
+				
 				foreach ($inputData as $key => $value)
 				{
 					if ($i == 1)
@@ -4978,8 +4980,10 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 				// tính tổng tiền thanh toán
 				$sum_total_payment = $db->query('SELECT sum(total) FROM ' . TABLE . '_order WHERE id IN('. $order_text .')')->fetchColumn(); 
 
-				//print_r($tongtien_thanhtoan);die;
-
+				
+				if (!defined('NV_IS_USER') or !$global_config['allowuserlogin']) {
+						$user_info['userid'] = 0;
+				}
 				$check_orderid = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .')')->fetchColumn(); 
 
 				$check_payment = $db->query('SELECT id FROM ' . TABLE . '_order WHERE status_payment_vnpay = 1 AND id IN('. $order_text .')')->fetchColumn(); 
@@ -4990,7 +4994,6 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 			
 				$vnp_Amount = $inputData['vnp_Amount'];
 				$vnp_Amount = (int)$vnp_Amount / 100;
-
 				// checksum
 				//print_r($vnp_SecureHash);die;
 				if ($secureHash == $vnp_SecureHash)
@@ -4998,7 +5001,7 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 					// check OrderId
 					if ($check_orderid)
 					{
-						if($tongtien_thanhtoan && $tongtien_thanhtoan == $vnp_Amount ){
+						if($sum_total_payment && $sum_total_payment == $vnp_Amount ){
 							// check Status
 							if ($check_payment) {
 								
@@ -5042,9 +5045,10 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 
 		}
 		
-	}
+	
 	$data=array();
 	$data['status'] = $status;
+	$data['error'] = $error;
 	$data['sum_total_payment'] = $sum_total_payment;
 	return $data;
 	
