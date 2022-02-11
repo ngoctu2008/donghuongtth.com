@@ -11,6 +11,11 @@ ssh -o StrictHostKeyChecking=no $SSH_USER@$DEV_HOST << 'ENDSSH'
   chmod -Rf 755 ./*
   find ./ -type f -exec chmod 644 {} +;
   chmod 777 /home/chonhagiau/ch-nha-giau/src/.htaccess
-
+  cd /home/chonhagiau/public_html
+  git pull origin master
+  git checkout master
+  chown chonhagiau:chonhagiau /home/chonhagiau/public_html/src
+  chmod -R 777 /home/chonhagiau/public_html/src
+  chown chonhagiau:chonhagiau -Rf /home/chonhagiau/public_html/src/*
   exec "$@"
 ENDSSH
