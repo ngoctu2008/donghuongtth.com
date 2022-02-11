@@ -1,7 +1,9 @@
 <?php
 
 	sleep(2);
+
 	$order_code = $nv_Request->get_title('order_code', 'get', '', 1);
+
 	if($order_code == '' ){
 		nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name );
 	}else{
@@ -16,6 +18,7 @@
 		$xtpl->assign('MODULE_NAME', $module_name);
 		$xtpl->assign('MODULE_UPLOAD', $module_upload);
 		$xtpl->assign('NV_ASSETS_DIR', NV_ASSETS_DIR);
+		$xtpl->assign('children_fund', $config_setting['children_fund'] . 'đ');
 		$xtpl->assign('OP', $op);
 		$xtpl->assign('HISTORY', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=ordercustomer',true));	
 		$xtpl->assign('LOGO_SRC', NV_BASE_SITEURL . $global_config['site_logo']);
@@ -45,7 +48,10 @@
 			}
 		}
 		$error = CheckPaymentOrder($payment_method,$order_code,$inputData);	
-
+		$data = GetPaymentStatus($payment_method,$order_code,$error,$inputData);
+		 if($data['status']==0){
+			$error = $data['error'];
+		} 
 		if (!empty($error))
 		{	
 			
@@ -58,7 +64,7 @@
 			}*/
 		}
 			
-		$data = GetPaymentStatus($payment_method,$order_code,$error,$inputData);
+		
 
 		if ($data['status'])
 		{

@@ -36,7 +36,7 @@
 		$xtpl->assign('NV_ASSETS_DIR', NV_ASSETS_DIR);
 		$xtpl->assign('OP', $op);
 		$xtpl->assign('ROW', $row);
-		
+		$xtpl->assign('LOGO_SRC', $_SERVER["SERVER_NAME"] . '/' . $global_config['site_logo']);
 		
 		if($status == 0){
 			$where .= $status;

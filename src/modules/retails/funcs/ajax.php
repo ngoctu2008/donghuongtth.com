@@ -203,7 +203,7 @@ if($mod=='pay_vnpay_customer'){
 	$vnp_TransactionNo=$order_code;
 	$vnp_OrderInfo='Thanh toán giao dịch '.$vnp_TransactionNo.' vào thời gian '.date('d-m-Y H:i',NV_CURRENTTIME);
 	$info_order=get_info_order($id);
-	$vnp_ReturnUrl= 'https://'.$_SERVER['HTTP_HOST'].nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op.'&mod=update_order_vnpay&list_order='.$id);
+	$vnp_ReturnUrl= 'https://'.$_SERVER['HTTP_HOST'].nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op.'&mod=order_code&list_order='.$id);
 	$check_vnpay=send_vnpay($info_order['total'],$vnp_OrderInfo,$config_setting['website_code_vnpay'],$vnp_TransactionNo,$config_setting['checksum_vnpay'],$vnp_ReturnUrl,'171.226.0.17');
 	$contents1 = array(
 	'status' => 'OK_VNPAY',
@@ -2788,7 +2788,7 @@ if ( $mod == 'add_order' ) {
 			$vnp_OrderInfo='Thanh toan giao dich '.$list_order_code.' vao thoi gian '.date('d-m-Y H:i',NV_CURRENTTIME);
 			
 			
-			$vnp_ReturnUrl= nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment' , true );
+			$vnp_ReturnUrl= nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&order_code='.$order_full , true );
 			
 			// lấy thông tin ip server
 			$vnp_IpAddr = $_SERVER['REMOTE_ADDR'];

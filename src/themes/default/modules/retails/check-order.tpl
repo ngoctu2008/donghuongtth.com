@@ -45,7 +45,6 @@
                 <p class="">Phương Thức Thanh Toán: {info_order.payment_method_name}</p>
                 <p>Giao Hàng: {info_order.transporters_name} {info_order.shipping_code}</p>
                 <p>Phí vận chuyển: {info_order.fee_transport}đ</p>
-
             </div>
         </div>
     </div>

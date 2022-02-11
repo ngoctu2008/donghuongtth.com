@@ -37,7 +37,6 @@ function content_product_ajax($data)
 
 		$value_product['alias'] = nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $value_product['alias'] . '-' . $value_product['id'], true);
 
-
 		if (!empty($value_product['image']) and is_file(NV_UPLOADS_REAL_DIR . '/' . $module_upload . '/' . $value_product['image'])) {
 			$value_product['image']  = NV_BASE_SITEURL . NV_FILES_DIR . '/' . $module_upload . '/' . $value_product['image'];
 		} else {
@@ -56,7 +55,6 @@ function content_product_ajax($data)
 		if ($value_product['free_ship']) {
 			$xtpl->parse('main.product.free_ship');
 		}
-
 
 		$xtpl->parse('main.product');
 	}
@@ -3253,9 +3251,6 @@ function shops_info($array_data, $per_page, $page, $num_items, $cat_info, $base_
 
 		$xtpl->parse('main.category_check');
 	}
-
-
-
 
 	$xtpl->assign('count_product', $num_items);
 	if (!count($array_data)) {
