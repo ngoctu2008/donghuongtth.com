@@ -42,10 +42,9 @@
                 <p class="mb-0"><span class="pr-2">Điện thoại: </span> {info_order.phone}</p>
             </div>
             <div class="col-md-5 p-4 border">
-                <p class="">Phương Thức Thanh Toán: {info_order.status_payment_vnpay_title}</p>
+                <p class="">Phương Thức Thanh Toán: {info_order.payment_method_name}</p>
                 <p>Giao Hàng: {info_order.transporters_name} {info_order.shipping_code}</p>
                 <p>Phí vận chuyển: {info_order.fee_transport}đ</p>
-
             </div>
         </div>
     </div>

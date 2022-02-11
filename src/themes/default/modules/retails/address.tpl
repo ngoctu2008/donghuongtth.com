@@ -449,7 +449,6 @@ initializeMap();
             }
         });
     }
-
     $("#submit_no_login").click(function(e) {
 			e.preventDefault();
 			$.ajax({               

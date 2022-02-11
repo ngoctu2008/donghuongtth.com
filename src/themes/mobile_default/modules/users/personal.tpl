@@ -220,6 +220,20 @@
 		</div>
 	</a>
 	
+	<a href="{WALLET_VOUCHER}">
+        <div class="row mt-2 bg_white py-3 px-3">
+            <div class="col-1 text_gray_color d-flex justify-content-center pr-3 align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 18" fill="none">
+					<path d="M13.8333 2.49998H10.35C10 1.53331 9.08333 0.833313 8 0.833313C6.91667 0.833313 6 1.53331 5.65 2.49998H2.16667C1.25 2.49998 0.5 3.24998 0.5 4.16665V15.8333C0.5 16.75 1.25 17.5 2.16667 17.5H13.8333C14.75 17.5 15.5 16.75 15.5 15.8333V4.16665C15.5 3.24998 14.75 2.49998 13.8333 2.49998ZM8 2.49998C8.45833 2.49998 8.83333 2.87498 8.83333 3.33331C8.83333 3.79165 8.45833 4.16665 8 4.16665C7.54167 4.16665 7.16667 3.79165 7.16667 3.33331C7.16667 2.87498 7.54167 2.49998 8 2.49998ZM9.66667 14.1666H3.83333V12.5H9.66667V14.1666ZM12.1667 10.8333H3.83333V9.16665H12.1667V10.8333ZM12.1667 7.49998H3.83333V5.83331H12.1667V7.49998Z" fill="#B0B0B0"/>
+				</svg>
+			</div>
+            <div class="col-10 fs_14 text_gray_color2 pt-1">Ví voucher</div>
+            <div class="col-1">
+                <i class="fa fa-chevron-right pt-1 text_gray_color2" aria-hidden="true"></i>
+			</div>
+		</div>
+	</a>
+
 	<a href="{RE_PAYMENT}">
         <div class="row mt-2 bg_white py-3 px-3">
             <div class="col-1 text_gray_color d-flex justify-content-center pr-3 align-items-center">

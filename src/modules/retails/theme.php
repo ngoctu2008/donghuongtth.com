@@ -37,7 +37,6 @@ function content_product_ajax($data)
 
 		$value_product['alias'] = nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $value_product['alias'] . '-' . $value_product['id'], true);
 
-
 		if (!empty($value_product['image']) and is_file(NV_UPLOADS_REAL_DIR . '/' . $module_upload . '/' . $value_product['image'])) {
 			$value_product['image']  = NV_BASE_SITEURL . NV_FILES_DIR . '/' . $module_upload . '/' . $value_product['image'];
 		} else {
@@ -56,7 +55,6 @@ function content_product_ajax($data)
 		if ($value_product['free_ship']) {
 			$xtpl->parse('main.product.free_ship');
 		}
-
 
 		$xtpl->parse('main.product');
 	}
@@ -145,6 +143,7 @@ function email_new_order_payment($data_order, $data_pro, $info_order)
 	$info_order['voucher_price'] = number_format($info_order['voucher_price']);
 	$info_order['total'] = number_format($info_order['total']);
 	$xtpl->assign('info_order', $info_order);
+	//print_r($info_order);die;
 	$shop_name = $db->query('SELECT company_name FROM ' . TABLE . '_seller_management WHERE id = ' . $info_order['store_id'])->fetchColumn();
 
 	$xtpl->assign('SHOP_NAME', $shop_name);
@@ -1084,7 +1083,12 @@ function nv_theme_retailshops_order($array_data, $list_address, $address_df, $ar
 				}
 				//voucher giá tối ưu 
 			} else {
-				$xtpl->parse('main.store.warehouse.voucher_shop_not');
+				if($user_info['userid']){
+					$xtpl->parse('main.store.warehouse.voucher_shop_not');
+				}
+				else{
+					$xtpl->parse('main.store.warehouse.voucher_login_not');
+				}
 			}
 
 			if ($count_product_warehouse == 1) {
@@ -3255,9 +3259,6 @@ function shops_info($array_data, $per_page, $page, $num_items, $cat_info, $base_
 		$xtpl->parse('main.category_check');
 	}
 
-
-
-
 	$xtpl->assign('count_product', $num_items);
 	if (!count($array_data)) {
 		$xtpl->parse('main.no_product');
@@ -3336,11 +3337,11 @@ function shops_info($array_data, $per_page, $page, $num_items, $cat_info, $base_
 
 			$xtpl->assign('VOUCHER', $voucher);
 
-
+			
 			if ($voucher['maximum_discount']) {
-				$xtpl->parse('main.voucher.voucher_loop.maximum_discount');
 				$voucher['maximum_discount'] = number_format($voucher['maximum_discount']) . 'đ';
 				$xtpl->assign('maximum_discount', $voucher['maximum_discount']);
+				$xtpl->parse('main.voucher.voucher_loop.maximum_discount');
 			}
 			if ($user_info['userid']) {
 				//check voucher khach da luu
