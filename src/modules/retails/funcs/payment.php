@@ -114,7 +114,10 @@
 				require_once(NV_ROOTDIR.'modules/retails/payment/momo.complete.php');
 				
 			}
-				
+			
+			if($user_info['userid']){
+				$xtpl->parse('main.thanhcong.history');
+			}
 			
 			$xtpl->parse('main.thanhcong');
 		}

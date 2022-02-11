@@ -67,9 +67,11 @@
                 </tbody>
             </table>
         </div>
-        <div class="row my-4 pb-3">
-            <div class="col-6 text-right"><a href="{HISTORY}" class="btn_ecng_outline py-2">Lịch sử mua hàng</a></div>
-            <div class="col-6 text-left"><a  href="{NV_BASE_SITEURL}" class="btn_ecng py-2">Trang chủ</a></div>
+        <div class="row my-4 pb-3 justify-content-center">
+            <!-- BEGIN: history -->
+            <div class="pr-3"><a href="{HISTORY}" class="btn_ecng_outline py-2">Lịch sử mua hàng</a></div>
+            <!-- END: history -->
+            <div class=""><a  href="{NV_BASE_SITEURL}" class="btn_ecng py-2">Trang chủ</a></div>
         </div>
     </div>
 
