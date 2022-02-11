@@ -10,8 +10,11 @@
 	if (!defined('NV_IS_MOD_RETAILSHOPS'))
     die('Stop!!!');
 
+<<<<<<< HEAD
 	if (!defined('NV_IS_ADMIN'))
     die('Stop!!!');
+=======
+>>>>>>> dev
 
 	$page_title = 'Ưu Đãi Giáng Sinh- Ngập Tràn Quà Tặng';
 	

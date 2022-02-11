@@ -50,7 +50,11 @@
 		<div class="mb-3 pt-3 border-top">
 			<div class="total_repayment d-flex justify-content-end fs_18 bg_white pb-3">
 				<div class="total_price_repayment secondary_text my-2 mr-3">{total_payment}đ</div>
+<<<<<<< HEAD
 				<div class="vnpay_repayment"><span class="btn btn_ecng " onclick="vnpay_repayment('{id_order}',{tongtien});">Thanh toán lại</span></div>
+=======
+				<div class="vnpay_repayment"><span class="btn btn_ecng " onclick="repayment('{id_order}',{tongtien});">Thanh toán lại</span></div>
+>>>>>>> dev
 			</div>				
 		</div>
 	<!-- END: repayment -->

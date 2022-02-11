@@ -39,6 +39,12 @@
         "and/oauth": "^0.7-dev",
         "endroid/qrcode": "^1.9.1",
         "true/punycode": "^2.1",
+<<<<<<< HEAD
         "phpmailer/phpmailer": "^6.1"
+=======
+        "phpmailer/phpmailer": "^6.1",
+        "phpseclib/phpseclib": "1.0.20"
+        
+>>>>>>> dev
     }
 }

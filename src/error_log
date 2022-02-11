@@ -1,0 +1,43 @@
+[21-Jan-2022 07:25:31 UTC] PHP Warning:  Use of undefined constant ok - assumed 'ok' (this will throw an Error in a future version of PHP) in /home/chonhagiau/ch-nha-giau/src/index.php on line 17
+[21-Jan-2022 07:25:35 UTC] PHP Warning:  Use of undefined constant ok - assumed 'ok' (this will throw an Error in a future version of PHP) in /home/chonhagiau/ch-nha-giau/src/index.php on line 22
+[21-Jan-2022 07:26:43 UTC] PHP Warning:  Use of undefined constant ok - assumed 'ok' (this will throw an Error in a future version of PHP) in /home/chonhagiau/ch-nha-giau/src/includes/mainfile.php on line 10
+[26-Jan-2022 02:13:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function apache_get_modules() in /home/chonhagiau/ch-nha-giau/src/test.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/chonhagiau/ch-nha-giau/src/test.php on line 2
+[26-Jan-2022 02:45:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function apache_get_modules() in /home/chonhagiau/ch-nha-giau/src/test.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/chonhagiau/ch-nha-giau/src/test.php on line 2
+[26-Jan-2022 02:47:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function apache_get_modules() in /home/chonhagiau/ch-nha-giau/src/test.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/chonhagiau/ch-nha-giau/src/test.php on line 2
+[26-Jan-2022 02:47:03 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function apache_get_modules() in /home/chonhagiau/ch-nha-giau/src/test.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/chonhagiau/ch-nha-giau/src/test.php on line 2
+[26-Jan-2022 02:47:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function apache_get_modules() in /home/chonhagiau/ch-nha-giau/src/test.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/chonhagiau/ch-nha-giau/src/test.php on line 2
+[26-Jan-2022 02:47:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_mod_rewrite_enabled() in /home/chonhagiau/ch-nha-giau/src/test.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/chonhagiau/ch-nha-giau/src/test.php on line 2
+[26-Jan-2022 02:47:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_mod_rewrite_enabled() in /home/chonhagiau/ch-nha-giau/src/test.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/chonhagiau/ch-nha-giau/src/test.php on line 2
+[26-Jan-2022 02:47:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_mod_rewrite_enabled() in /home/chonhagiau/ch-nha-giau/src/test.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/chonhagiau/ch-nha-giau/src/test.php on line 2
+[26-Jan-2022 02:47:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_mod_rewrite_enabled() in /home/chonhagiau/ch-nha-giau/src/test.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/chonhagiau/ch-nha-giau/src/test.php on line 2
+[26-Jan-2022 03:50:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function is_mod_rewrite_enabled() in /home/chonhagiau/ch-nha-giau/src/test.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/chonhagiau/ch-nha-giau/src/test.php on line 2

@@ -7,11 +7,54 @@
 		* @License GNU/GPL version 2 or any later version
 		* @Createdate Mon, 21 Dec 2020 09:48:26 GMT
 	*/
+<<<<<<< HEAD
 	
 	
 	 
 	
 	/*
+=======
+
+
+	
+	/*
+
+// tool đồng bộ thêm đơn vị vận chuyển GHTK cho tất cả cửa hàng tự động bật
+	$list_store = $db->query('SELECT id FROM ' . TABLE .'_seller_management')->fetchAll();
+	
+	$arr = array();
+	
+	foreach($list_store as $store)
+	{
+	// kiểm tra ghn có trong cấu hình cửa hàng này không
+	$check_ghn = $db->query('SELECT id, sell_id FROM ' . TABLE .'_transporters_shop WHERE sell_id = '. $store['id'] .' AND transporters_id = 2' )->fetch();
+	
+	
+	if(!$check_ghn)
+	{
+	$arr[] = $store;
+	
+	// thêm vào
+	$db->query('INSERT INTO ' . TABLE . '_transporters_shop(sell_id,transporters_id,status) VALUES('. $store['id'] .',2,1)');
+	
+	}
+	}
+	
+	print_r($arr);die;
+
+	// xử lý xã phường, bỏ text số
+	$list_ward = $db->query('SELECT wardid, title, type, alias FROM tms_location_ward WHERE alias like"%so-%"')->fetchAll();
+	foreach($list_ward as $ward)
+	{
+		// xử lý lại title
+		$ward['title_new'] = str_replace("Số ","",$ward['title']);
+		// cập nhật
+		$db->query('UPDATE tms_location_ward SET title ="'. $ward['title_new'] .'" WHERE wardid =' . $ward['wardid']);
+		
+	} 
+	print_r(ok);die;
+	
+>>>>>>> dev
 	
 	// tạo ECNG 
 	$list_product = $db->query('SELECT id, name_product, keyword FROM '. TABLE .'_product ORDER BY id ASC')->fetchAll();

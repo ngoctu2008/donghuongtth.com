@@ -38,7 +38,11 @@
 	}
 	
 	$global_province = json_decode($redis->get('location_province'),true);	
+<<<<<<< HEAD
 	
+=======
+	//print_r($global_province);die;
+>>>>>>> dev
 	
 	// redis quận huyện
 	if(!$redis->exists('location_district'))
@@ -213,6 +217,10 @@
 		
 		foreach($list as $row)
 		{
+<<<<<<< HEAD
+=======
+			$row['full_title'] = $row['type'] . ' ' . $row['title'];
+>>>>>>> dev
 			$data[$row['wardid']] = $row;
 		}
 		

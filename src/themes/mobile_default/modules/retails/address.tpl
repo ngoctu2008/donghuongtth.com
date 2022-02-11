@@ -3,7 +3,11 @@
 	<!-- BEGIN: view -->
 	<header class="bd_b_1 bg_white">
         <div class="login text-center">
+<<<<<<< HEAD
             <p class="fs_18 py-3 mb-0">Địa chỉ</p>
+=======
+            <p class="fs_18 py-3 mb-0">Địa Chỉ Nhận Hàng</p>
+>>>>>>> dev
         </div>
     </header>
 	<section>
@@ -62,7 +66,11 @@
 	<!-- END: error -->
 	<header class=" pb-2 bd_b_1 bg_white">
         <div class="login pt-2 text-center">
+<<<<<<< HEAD
             <p class="fs_18 mt-2">Địa chỉ</p>
+=======
+            <p class="fs_18 mt-2">Địa Chỉ Nhận Hàng</p>
+>>>>>>> dev
         </div>
     </header>
     <div class="bg_white" id="">
@@ -77,7 +85,16 @@
 						<input type="text" name="name" value="{ROW.name}" class="form-control form-control-underlined" placeholder="Nhập họ tên" required="required">
 					</div>
 			</div>
+<<<<<<< HEAD
 			
+=======
+			<div class="input-group mb-4 p-1 input_ecng {show_email}" >
+				<div >Email</div>
+					<div class="input_error_noIcon">
+						<input type="text" name="email" value="{ROW.email}" class="form-control form-control-underlined" placeholder="Nhập email" required="required">
+					</div>
+			</div>
+>>>>>>> dev
 			<div class="input-group mb-4 p-1 input_ecng" >
 				<div>Số điện thoại</div>
 					<div class="input_error_noIcon">
@@ -154,7 +171,13 @@
 
 
 <div class="form-group" style="text-align: center">
+<<<<<<< HEAD
     <input class="btn_ecng w-100 p-3 fs_16" name="submit" type="submit" value="{LANG.save}" />
+=======
+    <input class="btn_ecng w-100 p-3 fs_16 {show_submit1}" name="submit" type="submit" value="{LANG.save}" />
+    <!-- Lưu địa chỉ không cần login -->
+    <input id="submit_no_login" class="btn_ecng w-100 p-3 fs_16 {show_submit}" name="submit" type="submit" value="{LANG.save}" />
+>>>>>>> dev
 </div>
 </form>
 
@@ -172,6 +195,13 @@
                     required: true,
                     sdt: true,
                 },
+<<<<<<< HEAD
+=======
+                email: {
+                    required: true,
+                    email: true,
+                },
+>>>>>>> dev
                 maps_address: {
                     required: true,
                     minlength: 4,
@@ -192,7 +222,14 @@
                     required: "Vui lòng nhập tên",
                     minlength: "Vui lòng nhập ít nhất 4 ký tự ",
                 },
+<<<<<<< HEAD
 
+=======
+                email: {
+                    required: "Vui lòng nhập email",
+                    email:"Email chưa nhập đúng định dạng"
+                },
+>>>>>>> dev
                 phone: {
                     required: "Chưa nhập số điện thoại",
                     // sdt: true,
@@ -401,6 +438,38 @@ initializeMap();
             }
         });
     }
+<<<<<<< HEAD
+=======
+
+    $("#submit_no_login").click(function(e) {
+			e.preventDefault();
+			$.ajax({               
+                type: "GET", 
+                dataType:'JSON',
+                url: nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=address_no_login',
+                data: $('#form_add_address').serialize(),
+                beforeSend: function() {
+                    
+                },	               
+                complete: function() {
+                    
+                },                 
+                success: function(res) {
+                    if(res.status == 'OK'){
+                        window.location = res.link;
+                    }else{
+                        alert(res.mess);
+                    }
+                    //window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=order',true).'";
+                    // window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=address&id=0',true).'";
+                },                 
+                error: function(xhr, ajaxOptions, thrownError) {
+                    
+                    console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }                  
+		    }); 
+	});
+>>>>>>> dev
 	
 </script>
        

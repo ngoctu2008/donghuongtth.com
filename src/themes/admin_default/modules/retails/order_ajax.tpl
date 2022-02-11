@@ -110,6 +110,13 @@
 						<!-- BEGIN: tu_giao_xac_nhan_da_giao -->
 						<button onclick="delivered({VIEW.id})" type="button" class="btn_ecng" style="padding: 5px 10px;">Giao hàng thành công</button>
 						<!-- END: tu_giao_xac_nhan_da_giao -->
+<<<<<<< HEAD
+=======
+
+						<!-- BEGIN: GHTK -->
+						<button onclick="popup_vanchuyen({VIEW.id}, {VIEW.store_id}, {VIEW.transporters_id}, {VIEW.insurance_fee})" type="button" class="btn_ecng">Gởi hàng GHTK</button>
+						<!-- END: GHTK -->
+>>>>>>> dev
 						<p>
 							<span class="wrap_admin_button ">
 								<button type="button" style="margin: 3px;padding: 3px" id="button-invoice_{VIEW.id}" data-loading-text="Đang nạp..." data-toggle="tooltip" title="In phiếu bán hàng" class="admin_button btn btn-primary">

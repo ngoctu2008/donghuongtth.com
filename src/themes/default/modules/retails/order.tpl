@@ -111,7 +111,28 @@
 		</div>
 		<!-- END: address_list1 -->
 		<div class="payment_addressChange_save mt-3">
+<<<<<<< HEAD
 			<a href="{LINK_ADDRESS}" class="btn_ecng botton_add_address">+ Thêm địa chỉ mới</a>
+=======
+			<a href="{LINK_ADDRESS}" class="btn_ecng botton_add_address {show_address}">+ Thêm địa chỉ mới</a>
+			<!--  Thêm địa chỉ mua hàng không cần đăng nhập -->
+
+			<!-- BEGIN: address_no_login -->
+
+				<div class="row mt-4">
+					<div class="col-11">
+						<p class="fs_16 d-flex justify-content-between">
+							<span class="text-break">{FULL_NAME}</span>
+							<span class="text-break">{FULL_ADDRESS}</span>
+							<span class="ml-2 mr-3">{FULL_PHONE}</span>
+							<span class="text-break">{FULL_EMAIL}</span>
+						</p>
+					</div>
+					<a href="{LINK_ADDRESS}" class="col-1 text-center secondary_text">Thay đổi</a>
+				</div>
+
+			<!-- END: address_no_login -->
+>>>>>>> dev
 		</div>   
 	</div>
 	
@@ -175,7 +196,11 @@
 			<p>
 				Email <sup>(*)</sup>
 			</p>
+<<<<<<< HEAD
 			<input id="b_email" type="email" name="order_email1" onchange="check_email_error(this)" value="{USER_INFO.email}" class="form-control">
+=======
+			<input id="b_email" type="email" name="order_email1" onchange="check_email_error(this)" value="{EMAIL_USER}" class="form-control">
+>>>>>>> dev
 		</span>
 		<span>
 			<p>
@@ -280,6 +305,12 @@
 								<!-- BEGIN: voucher_shop_not -->
 								Không có voucher
 								<!-- END: voucher_shop_not -->
+<<<<<<< HEAD
+=======
+								<!-- BEGIN: voucher_login_not -->
+								Vui lòng đăng nhập để nhận thêm ưu đãi!
+								<!-- END: voucher_login_not -->
+>>>>>>> dev
 							</div>
 						</div>
 					</div>
@@ -289,6 +320,12 @@
 		
 		
 		<script>
+<<<<<<< HEAD
+=======
+			$('.close').click(function () {
+				$('.modal').modal('hide');
+			});
+>>>>>>> dev
 			$(document).click(function () {
 				$('.modal').modal('hide');
 			});
@@ -396,7 +433,11 @@
 			function apply_voucher_{info_store.id}(value, store_id, chiso){
 				//đổi thông tin session voucherid
 				$.ajax({
+<<<<<<< HEAD
 					type : 'GET',
+=======
+					type : 'POST',
+>>>>>>> dev
 					url : nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=apply_voucher_shop',
 					dataType: "json",
 					data:{
@@ -458,7 +499,11 @@
 			function remove_choose_voucher_{info_store.id}(voucherid, store_id){
 				
 				$.ajax({
+<<<<<<< HEAD
 					type : 'GET',
+=======
+					type : 'POST',
+>>>>>>> dev
 					url : nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=remove_voucher_shop',
 					dataType: "json",
 					data:{
@@ -590,11 +635,16 @@
 			<!-- BEGIN: transporters_loop_js -->
 			transporter_{info_store.id}.push({"id":{CARRIER.id},"name_transporters":"{CARRIER.name_transporters}","description":"{CARRIER.description}"});
 			<!-- END: transporters_loop_js -->
+<<<<<<< HEAD
 			console.log(transporter_{info_store.id});
+=======
+			
+>>>>>>> dev
 		</script>
 		<!-- END: warehouse -->
 	</div>
 	<!-- END: store -->
+<<<<<<< HEAD
 	
 	<div class="payment_methods bg_white my-2 p-4">
 		<div class="fs_18"><span class="secondary_text">Phương thưc thanh toán</span>
@@ -602,6 +652,27 @@
 			<button class="btn_ecng_outline ml-4"><i class="fa fa-id-card-o" aria-hidden="true"></i> VNPAY</button>
 		</div>
 	</div>
+=======
+	<input type="hidden" checked name="payment_method" id="payment_method" value="">
+	<div class="payment_methods bg_white my-2 p-4">
+		<div class="fs_18">
+			<span class="mb-3">Phương thưc thanh toán</span>
+			<div class="mt-4">
+				<!-- BEGIN: payment -->
+				<div class="d-flex mr-5">
+					<label class="ecng_label_radio m-0" onclick="change_payment_method('{PAYMENT.payment}')">
+						<input value="{PAYMENT.payment}" type="radio" name="gender" {checked}>
+						<span class="checkmark mt-2"></span>
+						<p class="fs_16 pl-2"><img src="{PAYMENT.images_button}" ><span class="d-inline-block" style="padding-top: 0.1rem;padding-left: 0.5rem;">{PAYMENT.paymentname}</span></p>
+					</label>
+				</div>
+			<!-- END: payment -->
+			</div>
+
+		</div>
+	</div>
+	
+>>>>>>> dev
 	<div class="payment_total bg_white my-2">
 		<div class="row border-bottom">
 			<div class="col-6">
@@ -634,10 +705,18 @@
 			</div>
 		</div>
 		<div class="row p-4 align-items-center">
+<<<<<<< HEAD
 			<div class="col-md-8">
 				Khi nhấn hoàn tất đồng nghĩa bạn đã kiểm tra kỹ đơn hàng và đồng ý với <a class="secondary_text" title="Các điều khoản của ECNG" href="https://chonhagiau.com/ecng/quy-dinh-va-hinh-thuc-thanh-toan.html" target="_blank" >các điều khoản của ECNG</a>
 			</div>
 			<div class="col-md-4 text-right">
+=======
+			<div class="col-md-9">
+				<div class="primary_text">Khi nhấn hoàn tất đồng nghĩa bạn đã kiểm tra kỹ đơn hàng và đồng ý với <a class="secondary_text" title="Các điều khoản của ECNG" href="https://chonhagiau.com/ecng/quy-dinh-va-hinh-thuc-thanh-toan.html" target="_blank" >các điều khoản của ECNG</a></div>
+				<div class="fw_500 primary_text pt-2">Khi bạn thanh toán đơn hàng là bạn đã ủng hộ <span style="color:#1358B9">{children_fund}</span> vào quỹ  “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</div>
+			</div>
+			<div class="col-md-3 text-right">
+>>>>>>> dev
 				<button id="button-payment-method" class="btn_ecng_lg" onclick="order_product_check_out()"  >Hoàn tất đơn hàng</button>
 			</div>
 		</div>
@@ -646,7 +725,16 @@
 </div>
 
 <script>
+<<<<<<< HEAD
 	
+=======
+	function change_payment(){
+		var input_checked =  $(".payment_methods input[type='radio']:checked").val();
+		$('#payment_method').val(input_checked);
+		
+	};
+	change_payment();
+>>>>>>> dev
 	function nv_carrier_change(store_id,warehouse_id,a)
 	{ 
 		
@@ -692,7 +780,11 @@
 		var province_id = $('input[name=province_id]').val();
 		var district_id = $('input[name=district_id]').val();
 		var ward_id = $('input[name=ward_id]').val();
+<<<<<<< HEAD
 		var lat = document.getElementById('lat').value;
+=======
+		var lat = document.getElementById('lat').value;address
+>>>>>>> dev
 		var lng = document.getElementById('lng').value;
 		var address = document.getElementById('address').value;
 		if(isEmpty("#tranposter_next_"+store_id+"_"+warehouse_id)==true){
@@ -700,7 +792,10 @@
 			transporter_store.forEach((element,index)=>{
 				
 				if(element.id == 5 || element.id  == 4){
+<<<<<<< HEAD
 					
+=======
+>>>>>>> dev
 					$.ajax({
 						type : 'POST',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_vnpost',
@@ -717,6 +812,7 @@
 							lat : lat, 
 							lng : lng
 						},
+<<<<<<< HEAD
 						beforeSend: function() { 
 							//
 						},	
@@ -725,11 +821,15 @@
 						},
 						success : function(res){
 							//
+=======
+						success : function(res){
+>>>>>>> dev
 							//console.log(res);
 							if(Number(res)==-1){
 								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,'Miến phí vận chuyển');
 								}else{
 								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,format_number(Number(res)));
+<<<<<<< HEAD
 								
 							}
 						}
@@ -739,6 +839,39 @@
 					
 					$.ajax({
 						type : 'GET',
+=======
+							}
+						}
+					})
+				}
+				else if(element.id == 2){
+					$.ajax({
+						type : 'POST',
+						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghtk',
+						dataType: "json",
+						data:{weight: Number(total_weight),
+							province_id : province_id,
+							district_id : district_id,
+							ward_id : ward_id,
+							address: address,
+							shops_id : store_id, 
+							warehouse_id : warehouse_id, 
+							//transporters_id: element.id, sau này nếu chọn thêm hình thức của GHTK sẽ truyển thêm
+						},
+						success : function(res){
+							//console.log(res);
+							if(Number(res)==-1){
+								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,'Miến phí vận chuyển');
+								}else{
+								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,format_number(Number(res)));
+							}
+						}
+					})
+				}
+				else if(element.id  == 3){
+					$.ajax({
+						type : 'POST',
+>>>>>>> dev
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
 						dataType: "json",
 						data:{weight: Number(total_weight),
@@ -755,12 +888,15 @@
 							lat : lat, 
 							lng : lng
 						},
+<<<<<<< HEAD
 						beforeSend: function() { 
 							
 						},	
 						complete: function() {
 							
 						},
+=======
+>>>>>>> dev
 						success : function(res){
 							//console.log(res);
 							if(Number(res.fee)==-1){
@@ -773,9 +909,14 @@
 								}
 							}
 						}
+<<<<<<< HEAD
 						
 					})
 					
+=======
+					
+					})
+>>>>>>> dev
 				}
 			})
 			
@@ -786,10 +927,17 @@
 		var province_id = $('input[name=province_id]').val();
 		var district_id = $('input[name=district_id]').val();
 		var ward_id = $('input[name=ward_id]').val();
+<<<<<<< HEAD
 		var lat = document.getElementById('lat').value;
 		
 		var lng = document.getElementById('lng').value;
 		var address = document.getElementById('address').value;
+=======
+		var address = $('input[name=address]').val();
+		var lat = document.getElementById('lat').value;
+		
+		var lng = document.getElementById('lng').value;
+>>>>>>> dev
 		var transporter_first=document.getElementById('transporter_first_'+store_id+'_'+warehouse_id);
 		transporter_store.forEach((element,index)=>{
 			
@@ -806,6 +954,11 @@
 							height : Number(total_height),
 							province_id : province_id,
 							district_id : district_id,
+<<<<<<< HEAD
+=======
+							ward_id : ward_id,
+							address : address,
+>>>>>>> dev
 							shops_id : warehouse_id, 
 							warehouse_id : warehouse_id, 
 							total : Number(total_warehouse),
@@ -848,10 +1001,61 @@
 						}
 						
 					})
+<<<<<<< HEAD
 					}else if(element.id  == 3 ){
 					
 					$.ajax({
 						type : 'GET',
+=======
+					}
+					else if(element.id == 2){ 
+						$.ajax({
+							type : 'GET',
+							url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghtk',
+							dataType: "json",
+							data:{weight: Number(total_weight),
+								province_id : province_id,
+								district_id : district_id,
+								ward_id : ward_id,
+								address: address,
+								shops_id : store_id, 
+								warehouse_id : warehouse_id, 
+								//transporters_id: element.id, sau này nếu chọn thêm hình thức của GHTK sẽ truyển thêm
+							},
+							
+							success : function(res){
+								//console.log(res);
+								if(Number(res)==-1){
+									if(vitri+1==transporter.length){
+										$('#shipping_price_'+store_id+'_'+warehouse_id).html('Đơn hàng của bạn hiện không có nhà vận chuyển nào đáp ứng được. Vui lòng tách đơn');
+										$('#text_phivanchuyen_'+store_id+'_'+warehouse_id).addClass('hidden');
+										$('#button_change_method_tranfer').addClass('hidden');
+										}else{
+										get_transport_fee(index+1,warehouse_id,store_id,total_weight,total_width,total_length,total_height,total_warehouse,transporter_store);
+									}
+									}else{
+									$('#shipping_price_'+store_id+'_'+warehouse_id).html('Đang cập nhật cước phí tạm tính, vui lòng đợi chút');
+									$('#method_transfer_'+store_id+'_'+warehouse_id).html(element.name_transporters);
+									$('#method_time_'+store_id+'_'+warehouse_id).html(element.description);
+									transporter_first.setAttribute("value",element.id);
+									if(Number(res)==0){
+										$('#shipping_price_'+store_id+'_'+warehouse_id).html('0');
+										tongphivanchuyen = tongphivanchuyen + 0;
+										sum_phivanchuyen();
+										}else{
+										$('#shipping_price_'+store_id+'_'+warehouse_id).html(format_number(Number(res)));
+										tongphivanchuyen = tongphivanchuyen + Number(res);
+										sum_phivanchuyen();
+									}
+								}
+							}
+						})
+					}
+					else if(element.id  == 3 ){
+					
+					$.ajax({
+						type : 'POST',
+>>>>>>> dev
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
 						dataType: "json",
 						data:{weight: Number(total_weight),
@@ -954,6 +1158,7 @@
 		var province_name = $('input[name=province_id]').val();
 		var district_name = $('input[name=district_id]').val();
 		var ward_name = $('input[name=ward_id]').val();
+<<<<<<< HEAD
 		var payment_method = document.getElementsByName('payment_method');
 		var total_merchandise = document.getElementById('total_merchandise').value;
 		var total_full = Number(total_merchandise) + Number(tongphivanchuyen);
@@ -963,6 +1168,19 @@
 				break;
 			}
 		};
+=======
+		var payment_method = $('#payment_method').val();
+		// var payment_method = document.getElementsByName('payment_method');
+		//var total_merchandise = document.getElementById('total_merchandise').value;
+		//var total_full = Number(total_merchandise) + Number(tongphivanchuyen);
+		//for (var i = 0, length = payment_method.length; i < length; i++) {
+			//if (payment_method[i].checked) {
+				//payment_method = payment_method[i].value;
+				//break;
+			//}
+		//};
+		
+>>>>>>> dev
 		
 		if(order_name==''){
 			alert('Vui lòng nhập họ và tên')
@@ -1032,6 +1250,10 @@
 						ward_id : ward_name,
 						district_id : district_name,
 						list_transporters : list_transporters, 
+<<<<<<< HEAD
+=======
+						payment_method : payment_method, 
+>>>>>>> dev
 						lat : lat, 
 						lng : lng
 					},
@@ -1051,6 +1273,13 @@
 								alert(res.mess);
 								}else if(res.status=='OK_VNPAY'){
 								location.href = res.link
+<<<<<<< HEAD
+=======
+								}else if(res.status=='OK_RECIEVE'){
+								location.href = res.link.replace("&amp;", "&");
+								}else if(res.status=='OK_MOMO'){
+								location.href = res.link
+>>>>>>> dev
 								}else if(res.status=='error_password_money'){
 								$("#button-payment-method").attr("disabled", false);
 								$("#button-payment-method").html("Đặt hàng");
@@ -1098,7 +1327,13 @@
 		}else{
 		$(".row_voucher").hide();
 	};
+<<<<<<< HEAD
 	
+=======
+	function change_payment_method(payment_method){
+		$('#payment_method').val(payment_method);
+	};
+>>>>>>> dev
 </script>
 
 

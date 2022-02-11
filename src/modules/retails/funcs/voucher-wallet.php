@@ -36,7 +36,11 @@
 		$xtpl->assign('NV_ASSETS_DIR', NV_ASSETS_DIR);
 		$xtpl->assign('OP', $op);
 		$xtpl->assign('ROW', $row);
+<<<<<<< HEAD
 		
+=======
+		$xtpl->assign('LOGO_SRC', $_SERVER["SERVER_NAME"] . '/' . $global_config['site_logo']);
+>>>>>>> dev
 		
 		if($status == 0){
 			$where .= $status;
@@ -84,8 +88,13 @@
 		}
 		else{
 			$where .= $status;
+<<<<<<< HEAD
 			
 			$list_voucher_shop = $db->query('SELECT t1.*,t2.voucherid as voucherid FROM ' . TABLE . '_voucher_shop t1 INNER JOIN '. TABLE .'_voucher_wallet t2 ON t1.id = t2.voucherid WHERE t2.type_voucher = ' . $where . ' AND userid = ' . $user_info[userid])->fetchAll();
+=======
+			$today = NV_CURRENTTIME;
+			$list_voucher_shop = $db->query('SELECT t1.*,t2.voucherid as voucherid FROM ' . TABLE . '_voucher_shop t1 INNER JOIN '. TABLE .'_voucher_wallet t2 ON t1.id = t2.voucherid WHERE t2.type_voucher = ' . $where . ' AND t1.time_to > ' . $today . ' AND userid = ' . $user_info[userid])->fetchAll();
+>>>>>>> dev
 			
 			if(!empty($list_voucher_shop))
 			{

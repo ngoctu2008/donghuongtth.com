@@ -137,6 +137,7 @@
 				</label>
 				<div class="col-sm-19 col-md-20">
 					<div class="col-md-6">
+<<<<<<< HEAD
 						<select class="form-control province_id" required oninvalid="setCustomValidity('{LANG.validate_province_id}')" oninput="setCustomValidity('')"  name="province_id">
 						</select>
 					</div>
@@ -150,6 +151,22 @@
 					</div>
 					<div class="col-md-6">
 						<input class="form-control" type="text" name="address" id="address" value="{ROW.address}" placeholder="Địa chỉ ngắn gọn" required="required" pattern=".+" oninvalid="setCustomValidity('{LANG.validate_address}')" oninput="setCustomValidity('')" />
+=======
+						<select class="form-control province_id_shop" required oninvalid="setCustomValidity('{LANG.validate_province_id}')" oninput="setCustomValidity('')"  name="province_id_shop">
+						</select>
+					</div>
+					
+					<div class="col-md-6">
+						<select class="form-control district_id_shop" required oninvalid="setCustomValidity('{LANG.validate_district_id}')" oninput="setCustomValidity('')"  name="district_id_shop">
+						</select>
+					</div>
+					<div class="col-md-6">
+						<select class="form-control ward_id_shop" required oninvalid="setCustomValidity('{LANG.validate_ward_id}')" oninput="setCustomValidity('')"  name="ward_id_shop">
+						</select>
+					</div>
+					<div class="col-md-6">
+						<input class="form-control" type="text" name="address_shop" value="{ROW.address}" placeholder="Địa chỉ ngắn gọn" required="required" pattern=".+" oninvalid="setCustomValidity('{LANG.validate_address}')" oninput="setCustomValidity('')" />
+>>>>>>> dev
 					</div>
 				</div>
 			</div>
@@ -306,7 +323,11 @@
 							var file_dir = '{NV_UPLOADS_DIR}/{MODULE_NAME}';
 							var currentpath = '{UPLOAD_CURRENT_CAT}';
 							var file_items_slider = '{TMS_STT}';
+<<<<<<< HEAD
 							//Number items other images :))
+=======
+							//Number items other images
+>>>>>>> dev
 							function add_slider() {
 								var newitem = "<tr id=\"delslider_" + file_items_slider + "\">";
 								newitem += "<td><span style=\"height:60px;width: 80px;float: left; margin-right:10px;\"/></span><input class=\"form-control\" value=\"\" name=\"img[]\" id=\"img_" + file_items_slider + "\" style=\"width :72%; margin-bottom:3px;\" maxlength=\"255\" />&nbsp;<input type=\"button\" class=\"btn btn-info\" value=\"" + file_selectfile + "\" name=\"selectfile\" onclick=\"nv_open_browse( '" + nv_base_adminurl + "index.php?" + nv_name_variable + "=upload&popup=1&area=img_" + file_items_slider + "&path=" + currentpath + "&type=file&currentpath=" + currentpath + "', 'NVImg', 850, 400, 'resizable=no,scrollbars=no,toolbar=no,location=no,status=no' ); return false; \" /> <input type=\"button\" class=\"btn btn-info\" value=\"Xóa\" onclick=\"nv_remove_slider(" + file_items_slider + ");\"/></td></tr>";
@@ -371,6 +392,7 @@
 							</tr>
 						</thead>
 						<tbody class="ui-sortable warehouse">
+<<<<<<< HEAD
 							<!-- BEGIN: noedit -->
 							<tr id="warehouse_list_1">
 								<td>
@@ -593,6 +615,82 @@
 							<script>
 								warehouse.push({"id":{key}})
 								$('.province_id_{key}').select2({
+=======
+							<!-- BEGIN: add_warehouse -->
+							<tr id="warehouse_list">
+								<td>
+									<input class="form-control hidden" type="text" name="warehouse_id" value="{ROW1.warehouse_id}"  />
+									<input class="form-control" type="text" name="name_warehouse" value="{ROW1.name_warehouse}" required="required" placeholder="Tên kho hàng" pattern=".+" oninvalid="setCustomValidity('{LANG.validate_name_warehouse}')" oninput="setCustomValidity('')" />
+								</td>
+								<td>
+									<input class="form-control" type="text" name="name_send" placeholder="Tên người gởi" value="{ROW1.name_send}" required="required" pattern=".+" oninvalid="setCustomValidity('{LANG.validate_name_send}')" oninput="setCustomValidity('')" />
+								</td>
+								<td>
+									<input class="form-control" type="tel"  maxlength="11" onkeyup="this.value=this.value.replace(/[^\d]/,'')" name="phone_send" placeholder="Số điện thoại người gởi" value="{ROW1.phone_send}" required="required"  oninput="this.setCustomValidity('')" oninvalid="setCustomValidity('{LANG.validate_phone}')" />
+								</td>
+								<td>
+									<div class="col-md-6">
+										<select class="form-control province_id" required oninvalid="setCustomValidity('{LANG.validate_province_id}')" oninput="setCustomValidity('')"  name="province_id" >
+										</select>
+									</div>
+									<div class="col-md-6">
+										<select class="form-control district_id" required oninvalid="setCustomValidity('{LANG.validate_district_id}')" oninput="setCustomValidity('')"  name="district_id">
+										</select>
+									</div>
+									<div class="col-md-6">
+										<select class="form-control ward_id" required oninvalid="setCustomValidity('{LANG.validate_ward_id}')" oninput="setCustomValidity('')"  name="ward_id"> 
+										</select>
+									</div>
+									<div class="col-md-6">
+										<input class="form-control address" type="text" name="address" value="{ROW1.address}"  placeholder="Địa chỉ ngắn gọn" required="required" pattern=".+" oninvalid="setCustomValidity('{LANG.validate_address}')" oninput="setCustomValidity('')" />
+
+									</div>
+									
+								</td>
+							</tr>
+							<!-- END: add_warehouse -->
+							
+							<!-- BEGIN: edit_warehouse -->
+							<script>
+								var warehouse=[]
+							</script>
+							
+
+							<tr id="warehouse_list">
+								<td>
+									<input class="form-control hidden" type="text" name="warehouse_id" value="{ROW1.warehouse_id}"  />
+									<input class="form-control" type="text" name="name_warehouse" value="{ROW1.name_warehouse}" required="required" placeholder="Tên kho hàng" pattern=".+" oninvalid="setCustomValidity('{LANG.validate_name_warehouse}')" oninput="setCustomValidity('')" />
+								</td>
+								<td>
+									<input class="form-control" type="text" name="name_send" placeholder="Tên người gởi" value="{ROW1.name_send}" required="required" pattern=".+" oninvalid="setCustomValidity('{LANG.validate_name_send}')" oninput="setCustomValidity('')" />
+								</td>
+								<td>
+									<input class="form-control" type="tel"  maxlength="11" onkeyup="this.value=this.value.replace(/[^\d]/,'')" name="phone_send" placeholder="Số điện thoại người gởi" value="{ROW1.phone_send}" required="required"  oninput="this.setCustomValidity('')" oninvalid="setCustomValidity('{LANG.validate_phone}')" />
+								</td>
+								<td>
+									<div class="col-md-6">
+										<select class="form-control province_id" required oninvalid="setCustomValidity('{LANG.validate_province_id}')" oninput="setCustomValidity('')"  name="province_id" >
+										</select>
+									</div>
+									<div class="col-md-6">
+										<select class="form-control district_id" required oninvalid="setCustomValidity('{LANG.validate_district_id}')" oninput="setCustomValidity('')"  name="district_id">
+										</select>
+									</div>
+									<div class="col-md-6">
+										<select class="form-control ward_id" required oninvalid="setCustomValidity('{LANG.validate_ward_id}')" oninput="setCustomValidity('')"  name="ward_id"> 
+										</select>
+									</div>
+									<div class="col-md-6">
+										<input class="form-control address" type="text" name="address" value="{ROW1.address}"  placeholder="Địa chỉ ngắn gọn" required="required" pattern=".+" oninvalid="setCustomValidity('{LANG.validate_address}')" oninput="setCustomValidity('')" />
+
+									</div>
+									
+								</td>
+							</tr>
+							<script>
+								//warehouse.push({"id":{key}})
+								$('.province_id').select2({
+>>>>>>> dev
 									placeholder: "Mời bạn chọn thành phố",
 									ajax: {
 										url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable +
@@ -614,6 +712,7 @@
 										cache: true
 									}
 								})
+<<<<<<< HEAD
 								$(".province_id_{key}").select2("trigger", "select", {
 									data: { id: {ROW1.province_id}, text: '{ROW1.province_name}'}
 								});
@@ -627,6 +726,44 @@
 							<!-- END: loop -->
 
 							<!-- END: edit2 -->
+=======
+								$(".province_id").select2("trigger", "select", {
+									data: { id: {ROW1.province_id}, text: '{ROW1.province_name}'}
+								});
+								$(".district_id").select2("trigger", "select", {
+									data: { id: {ROW1.district_id}, text: '{ROW1.district_name}'}
+								});
+								$(".ward_id").select2("trigger", "select", {
+									data: { id: {ROW1.ward_id}, text: '{ROW1.ward_name}'}
+								});
+
+								$('.province_id').select2({
+									placeholder: "Mời bạn chọn thành phố",
+									ajax: {
+										url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable +
+										'=ajax&mod=get_province',
+										dataType: 'json',
+										delay: 250,
+										data: function(params) {
+											var query = {
+												q: params.term
+											}
+											return query;
+										},
+										method: 'post',
+										processResults: function(data) {
+											return {
+												results: data
+											};
+										},
+										cache: true
+									}
+								})
+							</script>
+							
+
+							<!-- END: edit_warehouse -->
+>>>>>>> dev
 						</tbody>
 
 					</table>
@@ -636,9 +773,14 @@
 		</div></div>
 
 		<script type="text/javascript">
+<<<<<<< HEAD
 			<!-- BEGIN: noeditjs -->
 			var warehouse=[{"id":1}]
 			$('.province_id_1').select2({
+=======
+			<!-- BEGIN: add_warehouse_js -->
+			$('.province_id').select2({
+>>>>>>> dev
 				placeholder: "Mời bạn chọn thành phố",
 				ajax: {
 					url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable +
@@ -661,6 +803,7 @@
 				}
 			})
 
+<<<<<<< HEAD
 			$('.district_id_1').select2({
 				placeholder: "Mời bạn chọn quận"
 			})
@@ -669,6 +812,47 @@
 				placeholder: "Mời bạn chọn phường xã"
 			})
 			<!-- END: noeditjs -->
+=======
+			$('.district_id').select2({
+				placeholder: "Mời bạn chọn quận"
+			})
+
+			$('.ward_id').select2({
+				placeholder: "Mời bạn chọn phường xã"
+			})
+			//
+			$('.province_id_shop').select2({
+				placeholder: "Mời bạn chọn thành phố",
+				ajax: {
+					url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable +
+					'=ajax&mod=get_province',
+					dataType: 'json',
+					delay: 250,
+					data: function(params) {
+						var query = {
+							q: params.term
+						}
+						return query;
+					},
+					method: 'post',
+					processResults: function(data) {
+						return {
+							results: data
+						};
+					},
+					cache: true
+				}
+			})
+
+			$('.district_id_shop').select2({
+				placeholder: "Mời bạn chọn quận _shop"
+			})
+
+			$('.ward_id_shop').select2({
+				placeholder: "Mời bạn chọn phường xã _shop"
+			})
+			<!-- END: add_warehouse_js -->
+>>>>>>> dev
 
 			$('.bank_id').select2({
 				placeholder: "Mời bạn chọn ngân hàng"
@@ -740,6 +924,7 @@ function nv_change_status(id) {
 	return;
 }
 <!-- BEGIN: editjs -->
+<<<<<<< HEAD
 $(".province_id").select2("trigger", "select", {
 	data: { id: {ROW.province_id}, text: '{ROW.province_name}'}
 });
@@ -747,6 +932,15 @@ $(".district_id").select2("trigger", "select", {
 	data: { id: {ROW.district_id}, text: '{ROW.district_name}'}
 });
 $(".ward_id").select2("trigger", "select", {
+=======
+$(".province_id_shop").select2("trigger", "select", {
+	data: { id: {ROW.province_id}, text: '{ROW.province_name}'}
+});
+$(".district_id_shop").select2("trigger", "select", {
+	data: { id: {ROW.district_id}, text: '{ROW.district_name}'}
+});
+$(".ward_id_shop").select2("trigger", "select", {
+>>>>>>> dev
 	data: { id: {ROW.ward_id}, text: '{ROW.ward_name}'}
 });
 $('html,body').animate({

@@ -45,6 +45,7 @@ if($info_order['payment_method']==0){
 	$info_order['payment_method']='Thanh toán qua ví tiền';
 }
 
+<<<<<<< HEAD
 $info_order['shop_id']=get_info_store($info_order['store_id'])['userid'];
 //check voucher
 if(!$info_order['status_payment_vnpay']){
@@ -58,6 +59,9 @@ if(!$info_order['status_payment_vnpay']){
 		$info_order['voucher_price'] = 0;
 	}
 }
+=======
+$info_order['shop_id'] = get_info_store($info_order['store_id'])['userid'];
+>>>>>>> dev
 
 if($info_order['transporters_id']){
 	$info_order['transporters_name']=get_info_transporters($info_order['transporters_id'])['name_transporters'];
@@ -131,7 +135,11 @@ while ( $view = $sth->fetch() ) {
 			}else{
 			$name_group=$name_classify_id_value1;
 		}
+<<<<<<< HEAD
 		$view['name_product']=$view['name_product'].'( '.$name_group.' )';
+=======
+		$view['name_product'] = $view['name_product'].'( '.$name_group.' )';
+>>>>>>> dev
 	}
 	$view['total']=number_format($view['total']);
 	$view['discount']=number_format($view['discount']);
@@ -142,10 +150,14 @@ while ( $view = $sth->fetch() ) {
 	$xtpl->parse( 'main.view.loop' );
 	
 }
+<<<<<<< HEAD
 $address = get_full_address($info_order['ward_id'], $info_order['district_id'], $info_order['province_id']);	
 $address_full = $info_order['address'] . $address;
 
 $xtpl->assign('DIACHI', $address_full);
+=======
+
+>>>>>>> dev
 $stt_logs=1;
 foreach($list_logs_order as $value_logs){
 	if($value_logs['status_id_old']==-1){

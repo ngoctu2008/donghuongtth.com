@@ -13,7 +13,11 @@
 	
 	define('NV_IS_FILE_ADMIN', true);
 	
+<<<<<<< HEAD
 	$allow_func = array('main','bank','seller_management','ajax','seller_management_add','category','category_add','block','config','group','block_add','unit','unit_weight','unit_currency','tabs','transporters','product','product_add','unit_length','product_import_warehouse','warehouse_import','warehouse_import_view','location_ghn','location_viettelpost','block_list_product','listorder','view_order', 'brand','origin','images','order_print_noqr','order_print','static','categoryshop','customer','customer_add','registercontact','history_vnpay','history_vnpos','status_vnpos','history_vnpos_view','tool','product_disable','productadd_new','voucher','voucher_add','complain_list','complain','complain_status','penalize','auditing','order_punish','order_punish_list','order_punish_complain','status_ghn','vnpay_refund','auditing_detail', 'status_error_ghn', 'order_not_received', 'order_seller_delivery_failed'); 
+=======
+	$allow_func = array('main','bank','seller_management','ajax','seller_management_add','category','category_add','block','config','group','block_add','unit','unit_weight','unit_currency','tabs','transporters','product','product_add','unit_length','product_import_warehouse','warehouse_import','warehouse_import_view','location_ghn','location_viettelpost','block_list_product','listorder','view_order', 'brand','origin','images','order_print_noqr','order_print','static','categoryshop','customer','customer_add','registercontact','history_vnpay','history_vnpos','status_vnpos','history_vnpos_view','tool','product_disable','productadd_new','voucher','voucher_add','complain_list','complain','complain_status','penalize','auditing','order_punish','order_punish_list','order_punish_complain','status_ghn','vnpay_refund','auditing_detail', 'status_error_ghn', 'order_not_received', 'order_seller_delivery_failed', 'payport', 'actpay', 'changepay','defaultpay'); 
+>>>>>>> dev
 	
 	require_once NV_ROOTDIR . '/modules/' . $module_file . '/global.functions.php';
 	
@@ -666,3 +670,27 @@
 		
 	}
 	
+<<<<<<< HEAD
+=======
+
+/**
+ * drawselect_number()
+ *
+ * @param string $select_name
+ * @param integer $number_start
+ * @param integer $number_end
+ * @param integer $number_curent
+ * @param string $func_onchange
+ * @return
+ */
+function drawselect_number($select_name = "", $number_start = 0, $number_end = 1, $number_curent = 0, $func_onchange = "")
+{
+    $html = "<select class=\"form-control\" name=\"" . $select_name . "\" onchange=\"" . $func_onchange . "\">";
+    for ($i = $number_start; $i < $number_end; $i++) {
+        $select = ($i == $number_curent) ? "selected=\"selected\"" : "";
+        $html .= "<option value=\"" . $i . "\"" . $select . ">" . $i . "</option>";
+    }
+    $html .= "</select>";
+    return $html;
+}
+>>>>>>> dev

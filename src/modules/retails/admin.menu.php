@@ -53,6 +53,10 @@ $submenu['history_vnpos']=$lang_module['history_vnpos'];
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
 $config=array();
 $config['unit']=$lang_module['unit'];
 $config['brand']=$lang_module['brand'];
@@ -68,5 +72,9 @@ $config['status_ghn']=$lang_module['status_ghn'];
 $config['status_error_ghn']=$lang_module['status_error_ghn'];
 $config['complain_status']=$lang_module['complain_status'];
 $config['penalize']=$lang_module['penalize'];
+<<<<<<< HEAD
 
+=======
+$config['payport']=$lang_module['setup_payment'];
+>>>>>>> dev
 $submenu['config']= array( 'title' => $lang_module['config'], 'submenu' => $config );

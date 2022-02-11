@@ -21,6 +21,10 @@
 				<h1
                 style="font-family: Roboto;font-style: normal;font-weight: bold;font-size: 24px;line-height: 28px;text-align: center;text-transform: uppercase;color: #E1A208;">
 				Đặt hàng thành công</h1>
+<<<<<<< HEAD
+=======
+				<p style="text-align: center;font-weight: 500;">Bạn vừa ủng hộ <span style="color: #1358B9;">{children_fund}</span> vào “ <span style="color: #E1A208;">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</p>
+>>>>>>> dev
 				<div>
 					<p>Chào <span style="font-weight: 700;">{info_order.order_name},</span> </p>
 					<p style="margin: 0;">Cảm ơn bạn đã đặt hàng trên sàn thương mại điện tử Chợ Nhà Giàu. </p>
@@ -77,7 +81,11 @@
 					<!-- END: voucher -->
                         <p>{info_order.total}đ</p>
                         <p>{info_order.name_transporters}</p>
+<<<<<<< HEAD
                         <p>VNPay</p>
+=======
+                        <p>{info_order.payment_method_name}</p>
+>>>>>>> dev
 					</div>
 				</div>
 			</div>

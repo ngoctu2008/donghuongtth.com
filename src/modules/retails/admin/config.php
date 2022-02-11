@@ -97,6 +97,12 @@ if( ! empty( $saveconfig ) )
 	$config_setting['district_ecng'] = $nv_Request->get_int('district_ecng', 'post', '');
 	$config_setting['ward_ecng'] = $nv_Request->get_int('ward_ecng', 'post', '');
 	$config_setting['address_ecng'] = $nv_Request->get_string('address_ecng', 'post', '');
+<<<<<<< HEAD
+=======
+	$config_setting['name_ecng'] = $nv_Request->get_string('name_ecng', 'post', '');
+	$config_setting['phone_ecng'] = $nv_Request->get_string('phone_ecng', 'post', '');
+	$config_setting['email_ecng'] = $nv_Request->get_string('email_ecng', 'post', '');
+>>>>>>> dev
 
 	$config_setting['form_email_khach'] = $nv_Request->get_string('form_khach', 'post', '');
 	$config_setting['form_email_nha_ban'] = $nv_Request->get_string('form_nha_ban', 'post', '');

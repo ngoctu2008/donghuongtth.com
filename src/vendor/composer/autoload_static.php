@@ -23,8 +23,16 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         'P' => 
         array (
 			'Psr\\SimpleCache\\' => 16,
+<<<<<<< HEAD
             'PhpOffice\\PhpSpreadsheet\\' => 25,
             'PHPMailer\\PHPMailer\\' => 20,
+=======
+			'Psr\\Log\\' => 8,
+            'PhpOffice\\PhpSpreadsheet\\' => 25,
+			'Phpseclib3\\' => 11,
+            'PHPMailer\\PHPMailer\\' => 20,
+            'ParagonIE\\ConstantTime\\' => 21,
+>>>>>>> dev
         ),
         'O' => 
         array (
@@ -34,6 +42,14 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         array (
             'NukeViet\\' => 9,
         ),
+<<<<<<< HEAD
+=======
+        'M' => 
+        array (
+            'MService\\' => 9,
+            'Monolog\\' => 8,
+        ),
+>>>>>>> dev
         'L' => 
         array (
             'League\\Url\\' => 11,
@@ -42,6 +58,14 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         array (
             'Endroid\\QrCode\\' => 15,
         ),
+<<<<<<< HEAD
+=======
+        'B' => 
+        array (
+            'Bramus\\Monolog\\' => 15,
+            'Bramus\\Ansi\\' => 12,
+        ),
+>>>>>>> dev
     );
 
     public static $prefixDirsPsr4 = array (
@@ -61,14 +85,36 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
+<<<<<<< HEAD
+=======
+		'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
+        ),
+        
+>>>>>>> dev
         'PhpOffice\\PhpSpreadsheet\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
         ),
+<<<<<<< HEAD
+=======
+        'Phpseclib3\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpseclib/phpseclib/',
+        ),
+>>>>>>> dev
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
+<<<<<<< HEAD
+=======
+        'ParagonIE\\ConstantTime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/constant_time_encoding/src',
+        ),
+>>>>>>> dev
         'OAuth\\' => 
         array (
             0 => __DIR__ . '/..' . '/and/oauth/src',
@@ -77,6 +123,17 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         array (
             0 => __DIR__ . '/..' . '/vinades/nukeviet',
         ),
+<<<<<<< HEAD
+=======
+        'MService\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mservice/payment/src/MService',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/src/Monolog',
+        ),
+>>>>>>> dev
         'League\\Url\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/url/src',
@@ -85,6 +142,21 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
         array (
             0 => __DIR__ . '/..' . '/endroid/qrcode/src',
         ),
+<<<<<<< HEAD
+=======
+        'Bramus\\Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bramus/monolog-colored-line-formatter/src',
+        ),
+        'Bramus\\Ansi\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bramus/ansi-php/src',
+        ),
+        'phpseclib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpseclib/phpseclib/',
+        ),
+>>>>>>> dev
     );
 
     public static $prefixesPsr0 = array (
@@ -105,11 +177,19 @@ class ComposerStaticInit8c9f50366561a5497ebe188ba93ba4da
             array (
                 0 => __DIR__ . '/..' . '/kriswallsmith/buzz/lib',
             ),
+<<<<<<< HEAD
+=======
+            
+>>>>>>> dev
         ),
     );
 
     public static $classMap = array (
         'PclZip' => __DIR__ . '/..' . '/vinades/pclzip/pclzip.lib.php',
+<<<<<<< HEAD
+=======
+        'phpseclib' => __DIR__ . '/..' . '/phpseclib/phpseclib/bootstrap.php',
+>>>>>>> dev
     );
 
     public static function getInitializer(ClassLoader $loader)

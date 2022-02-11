@@ -191,7 +191,11 @@
 									</button>
 								</td>
 								<td>
+<<<<<<< HEAD
 									{DIACHI}
+=======
+								{info_order.address}
+>>>>>>> dev
 								</td>
 							</tr>
 						</tbody>

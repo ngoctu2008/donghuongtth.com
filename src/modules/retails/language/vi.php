@@ -239,3 +239,10 @@ $lang_module['error_required_complain_status'] = 'Lỗi: bạn cần nhập dữ
 $lang_module['seller_or_customer'] = 'Đối tượng';
 $lang_module['complain_vandon'] = 'Lên đơn vận chuyển';
 $lang_module['tranposter_tugiao'] = 'Cửa hàng tự giao';
+<<<<<<< HEAD
+=======
+
+
+//lang for payment port
+$lang_module['recieve'] = 'Thanh toán khi sau nhận hàng';
+>>>>>>> dev

@@ -285,7 +285,11 @@ background: #fff !important; }
 background-color: #EFEFEF; }
 
 .primary_text {
+<<<<<<< HEAD
 color: #000; }
+=======
+color: #444444; }
+>>>>>>> dev
 .primary_text:hover {
 color: #000; }
 
@@ -302,7 +306,10 @@ color: #fff; }
 
 .text_black {
 color: #000; }
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
 .text_red {
 color: #FF0000; }
 
@@ -1680,6 +1687,10 @@ span.price_special_detail span{
 ul.timeline {
     list-style-type: none;
     position: relative;
+<<<<<<< HEAD
+=======
+	z-index: 1;
+>>>>>>> dev
 }
 ul.timeline:before {
     content: ' ';
@@ -1690,6 +1701,10 @@ ul.timeline:before {
     width: 2px;
     height: 100%;
     z-index: 400;
+<<<<<<< HEAD
+=======
+	z-index: 1;
+>>>>>>> dev
 }
 ul.timeline > li {
     margin: 20px 0;
