@@ -4765,7 +4765,7 @@
 		global $db, $db_config, $user_info, $module_name, $lang_module, $global_payport;
 		
 		$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
-		print_r($list_order);
+
 		// cập nhật kho hàng sau khi thanh toán thành công
 		foreach ($list_order as $order)
 		{
@@ -4850,9 +4850,7 @@
 			// Gui mail thong bao den nhà bán hàng
 			$email_contents = call_user_func('email_new_order_payment', $data_order, $list_product, $info_order);
 			$email_title = $lang_module['order_email_title'];
-			print_r($info_order);
-			print_r($global_payport);
-			print_r($email_contents);die;
+
 			nv_sendmail(array(
             $global_config['site_name'],
             $global_config['site_email']
