@@ -220,8 +220,6 @@
 		</div>
 	</a>
 	
-<<<<<<< HEAD
-=======
 	<a href="{WALLET_VOUCHER}">
         <div class="row mt-2 bg_white py-3 px-3">
             <div class="col-1 text_gray_color d-flex justify-content-center pr-3 align-items-center">
@@ -236,7 +234,6 @@
 		</div>
 	</a>
 
->>>>>>> dev
 	<a href="{RE_PAYMENT}">
         <div class="row mt-2 bg_white py-3 px-3">
             <div class="col-1 text_gray_color d-flex justify-content-center pr-3 align-items-center">

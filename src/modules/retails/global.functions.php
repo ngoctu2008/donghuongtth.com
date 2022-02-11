@@ -4351,12 +4351,10 @@ function vnpay_refund($info_order)
 		$query .= urlencode($key) . "=" . urlencode($value) . '&';
 	}
 
-
 	$vnp_apiUrl = 'https://merchant.vnpay.vn/merchant_webapi/merchant.html' . "?" . $query;
 	if (isset($config_setting['checksum_vnpay'])) {
 		$vnpSecureHash = hash('sha256', $config_setting['checksum_vnpay'] . $hashdata);
 		$vnp_apiUrl .= 'vnp_SecureHash=' . $vnpSecureHash;
-
 	}
 
 	$ch = curl_init($vnp_apiUrl);

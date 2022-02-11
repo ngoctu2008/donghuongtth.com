@@ -9,8 +9,5 @@ return array(
     'Gregwar\\Image' => array($vendorDir . '/gregwar/image'),
     'Gregwar\\Cache' => array($vendorDir . '/gregwar/cache'),
     'Buzz' => array($vendorDir . '/kriswallsmith/buzz/lib'),
-<<<<<<< HEAD
-=======
     'Phpseclib3' => array($vendorDir . '/phpseclib/phpseclib'),
->>>>>>> dev
 );

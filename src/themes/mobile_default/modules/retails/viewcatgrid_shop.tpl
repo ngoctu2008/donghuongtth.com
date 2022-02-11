@@ -152,26 +152,6 @@
 </section>
 
 <script>
-<<<<<<< HEAD
-	function save_voucher(voucher_id) {
-		$.ajax({
-			type : 'GET',
-			dataType: "JSON",
-			url: nv_base_siteurl + 'index.php?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=viewcatshops&mod=save_voucher',
-			data:{voucher_id:voucher_id,},
-			success : function(res){
-				if(res.status=="OK"){
-					$('#voucher_'+ voucher_id).html('<button  class="btn_gray">Đã lưu</button>');
-					}else{
-					alert("có lỗi xảy ra!, vui lòng kiểm tra lại!");
-				}
-			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-			}
-		});
-	}
-=======
 function save_voucher(voucher_id) {
 	$.ajax({
 		type: 'GET',
@@ -195,7 +175,6 @@ function save_voucher(voucher_id) {
 		}
 	});
 }
->>>>>>> dev
 	
 </script>
 <!-- END: voucher -->

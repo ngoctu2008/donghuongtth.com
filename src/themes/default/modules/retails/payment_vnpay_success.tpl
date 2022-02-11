@@ -43,12 +43,9 @@
                     </tr>
                 </tbody>
             </table>
-<<<<<<< HEAD
-=======
 			<div class="text-center w-100 p-3">
             Bạn vừa ủng hộ <span style="color:#1358B9">{children_fund}</span> vào quỹ “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”
             </div>
->>>>>>> dev
 
         </div>
         <div class="my-4 fs_18 text-center">THÔNG TIN KHÁCH HÀNG</div>
