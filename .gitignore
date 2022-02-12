@@ -9,3 +9,10 @@ src/data/logs/ip_logs/*.log
 src/data/config/config_global.*
 src/data/logs/ref_logs/*.log
 src/data/config/config_ini.localhost.php
+data/config/config_global.*
+data/logs/ref_logs/*.log
+data/config/config_ini.localhost.php
+config.*
+data/config/config_ini.*.php
+.htaccess
+data/logs/ip_logs/*.log
