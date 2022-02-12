@@ -12,9 +12,9 @@ src/data/config/config_ini.localhost.php
 data/config/config_global.*
 data/logs/ref_logs/*.log
 data/config/config_ini.localhost.php
-config.*
+/config.*
 data/config/config_ini.*.php
-.htaccess
+/.htaccess
 data/logs/ip_logs/*.log
 src/data/logs/ref_logs/tmp.log
 data/logs/ref_logs/tmp.log
