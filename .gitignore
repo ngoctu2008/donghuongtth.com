@@ -16,3 +16,5 @@ config.*
 data/config/config_ini.*.php
 .htaccess
 data/logs/ip_logs/*.log
+src/data/logs/ref_logs/tmp.log
+data/logs/ref_logs/tmp.log
