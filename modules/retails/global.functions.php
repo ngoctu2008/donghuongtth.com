@@ -3139,7 +3139,7 @@ function get_price_ghtk($pick_address, $pick_province, $pick_district, $province
 		"deliver_option" => $deliver_option
 	);
 	$data = post_data($url, $param, $config_setting['token_ghtk']);
-
+	
 	return $data;
 }
 function get_token_ahamove()
