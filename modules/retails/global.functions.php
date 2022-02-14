@@ -3417,7 +3417,7 @@ function update_ghtk_admin($info_order, $order_ghtk)
 	global $config_setting, $db, $admin_info;
 
 	// xử lý thông tin sau khi tạo vận đơn thành công status=2 đơn hàng đang giao
-	$db->query('UPDATE ' . TABLE . '_order SET status = 2, shipping_code=' . $db->quote($order_ghtk['order']['label']) . ' where id = ' . $info_order['id']);
+	$db->query('UPDATE ' . TABLE . '_order SET status = 2, shipping_code = ' . $db->quote($order_ghtk['order']['label']) . ' where id = ' . $info_order['id']);
 
 	$sql = "INSERT INTO " . TABLE . "_history_ghtk
 	( order_id, label, fee, insurance_fee, status_id, time_add)
