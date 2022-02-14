@@ -71,6 +71,7 @@
 	$row = array();
 	$error = array();
 	$row['id'] = $nv_Request->get_int('id', 'post,get', 0);
+	
 	if ($nv_Request->isset_request('submit', 'post')) {
 		
 		$row['address'] = $nv_Request->get_title('maps_address', 'post', '');
@@ -107,8 +108,7 @@
 				$error[] = 'Số điện thoại không hợp lệ';
 			}
 		}
-		
-		
+	
 		if (empty($error)) {
 			try {
 				//$row['status'] = 0;
@@ -376,7 +376,6 @@
 				$xtpl->parse( 'main.edit.ward_id' );
 			}
 		}
-		
 		
 	}
 	
