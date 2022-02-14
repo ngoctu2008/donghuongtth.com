@@ -4545,9 +4545,8 @@ function xulythanhtoanthanhcong_recieve($order_text, $inputData)
 		$email_title = $lang_module['order_email_title'];
 		$email_contents = call_user_func('email_new_order_payment_khach', $data_order, $list_product, $info_order);
 
-
-
 		nv_sendmail(array(
+			
 			$global_config['site_name'],
 			$global_config['site_email']
 		), $order['email'], sprintf($email_title, $data_order['order_code']), $email_contents);
