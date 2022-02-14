@@ -255,8 +255,6 @@
 			$sth->bindValue(':q_phone', '%' . $q . '%');
 		}
 		$sth->execute();
-		
-		
 	}
 	
 	$xtpl = new XTemplate('address.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file);

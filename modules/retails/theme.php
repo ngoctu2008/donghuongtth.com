@@ -419,7 +419,6 @@ function email_new_order_payment_khach($data_order, $data_pro, $info_order)
 		$xtpl->parse('main.data_product.voucher');
 	}
 
-
 	$i = 0;
 	foreach ($data_pro as $data) {
 		$info_product = get_info_product($data['product_id']);
