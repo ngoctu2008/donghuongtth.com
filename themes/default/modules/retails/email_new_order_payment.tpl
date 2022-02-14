@@ -15,7 +15,7 @@
         <div style="background: #FFFFFF;
         border-radius: 4px;padding: 24px 16px;">
             <div style="border-bottom: 1px solid #E1A208;">
-                <a href="https://chonhagiau.com" title="Chợ nhà giàu"><img src="https://chonhagiau.com/uploads/logo.png"
+                <a href="https://chonhagiau.com" title="Chợ nhà giàu"><img src="https://{LOGO_SRC}"
                         alt="" style="width: 20%;"></a>
             </div>
             <h1
@@ -103,7 +103,7 @@
         </div>
         <div style="display: flex;padding: 20px 10px;">
             <div style="display: flex;width: 50%;">
-                <img src="https://chonhagiau.com/uploads/logo.png" alt="" style="width: 22%;">
+                <img src="https://{LOGO_SRC}" alt="" style="width: 22%;">
                 <div style="padding-left: 8px;">
                     <p style="margin: 0;font-size: 10px;font-weight: 500;line-height: 16px">Công ty Cổ phần thương mại điện
                         tử CHỢ NHÀ GIÀU</p>
