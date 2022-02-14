@@ -4635,7 +4635,9 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 	global $db,$global_config,$config_setting,$user_info;
 	$status = false;
 
-	
+		// tính tổng tiền thanh toán
+		$sum_total_payment = $db->query('SELECT sum(total) FROM ' . TABLE . '_order WHERE id IN(' . $order_code . ')')->fetchColumn();
+
 		//$_SESSION[$module_name . '_' . $payment_method] = true;
 		if($payment_method == 'vnpay'){
 				$vnp_SecureHash = $inputData['vnp_SecureHash'];
@@ -4689,6 +4691,7 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 					// check OrderId
 					if ($check_orderid)
 					{
+						
 						if($sum_total_payment && $sum_total_payment == $vnp_Amount ){
 							// check Status
 							if ($check_payment) {
@@ -4701,24 +4704,22 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 									
 								
 							
+							} else {
+								$error[] = 'Thanh toán thất bại!';
+							}
 						} else {
-							$error[] = 'Thanh toán thất bại!';
+							$error[] = 'Số tiền không hợp lệ!';
 						}
 					} else {
-						$error[] = 'Số tiền không hợp lệ!';
+						$error[] = 'Đơn hàng không tìm thấy!';
 					}
-				} else {
-					$error[] = 'Đơn hàng không tìm thấy!';
+				}else{
+					$error[] = 'Chữ ký không hợp lệ!';
 				}
-			}else{
-				$error[] = 'Chữ ký không hợp lệ!';
-			}
 
 			// ket thuc xu ly chuan
 		} elseif ($payment_method == 'recieve') {
 			$db->query('UPDATE ' . TABLE . '_order SET status = 1  WHERE id IN (' . $order_code . ')');
-			// tính tổng tiền thanh toán
-			$sum_total_payment = $db->query('SELECT sum(total) FROM ' . TABLE . '_order WHERE id IN(' . $order_code . ')')->fetchColumn();
 
 			$status = true;
 			//$inputData = array();

@@ -2631,7 +2631,10 @@ if ( $mod == 'add_order' ) {
 	if (defined('NV_IS_USER')) {	
 		$userid=$user_info['userid'];
 	}	
-	
+	if(!$user_info['userid']){
+		$get_address = get_full_address($_SESSION['address_no_login']['ward_id'], $_SESSION['address_no_login']['district_id'], $_SESSION['address_no_login']['province_id']);
+		$address = $_SESSION['address_no_login']['address'] . $get_address;
+	}
 	$error=array();
 	$total_full_total = 0;
 	$fee_transport_total = 0;

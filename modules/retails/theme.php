@@ -805,7 +805,7 @@ function nv_theme_retailshops_order($array_data, $list_address, $address_df, $ar
 
 	$xtpl->assign('OP', $op);
 	$total = 0;
-
+	
 	unset($_SESSION['voucher_shop']);
 	if (!$user_info['userid']) {
 
