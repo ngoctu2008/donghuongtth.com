@@ -290,7 +290,7 @@
 	$xtpl->assign('address_list', NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '='. $module_name .'&amp;' . NV_OP_VARIABLE . '=' . $op);
 	if(isset($_SESSION['back_link']) and !empty($_SESSION['back_link']))
 	$xtpl->assign('back_link', $_SESSION['back_link']);
-	
+	 
 	if ($show_view) {
 		// xoá secsion order
 		unset( $_SESSION['back_link'] );
