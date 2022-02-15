@@ -1930,7 +1930,7 @@ if($mod=='load_order_customer_no_payment'){
 	$db->sqlreset()
 	->select('COUNT(*)')
 	->from('' . TABLE . '_order')
-	->where('payment = 0 AND AND status = -1 AND userid='.$user_info['userid'] . $where);
+	->where('payment = 0 AND status = -1 AND userid='.$user_info['userid'] . $where);
 	
 	$sth = $db->prepare($db->sql());
 	
