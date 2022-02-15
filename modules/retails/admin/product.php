@@ -229,7 +229,7 @@
 		$status_arr['1'] = 'Hiển thị';
 		$status_arr['-1'] = 'Đã xóa';
 		
-		$list_product = $db->query('SELECT * FROM ' . TABLE .'_product WHERE 1'. $where . ' ORDER BY store_id')->fetchAll();
+		$list_product = $db->query('SELECT * FROM ' . TABLE .'_product t1 WHERE t1.status = 1 '. $where . ' ORDER BY store_id')->fetchAll();
 		
 		$stt = 0;
 		foreach ($list_product as $view) {
@@ -243,7 +243,7 @@
 			$data_array['company_name'] = $store_info['company_name'] . ' (Người đại diện: ' . $store_info['name'] . ')';
 			
 			// mã vạch
-			$data_array['barcode'] = $view['barcode'];
+			$data_array['barcode'] =  (string)$view['barcode'];
 			
 			// tên sản phẩm
 			$data_array['name_product'] = $view['name_product'];
@@ -341,7 +341,7 @@
 		$worksheet->getPageSetup()->setPaperSize( phpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4 );
 		$worksheet->getPageSetup()->setHorizontalCentered( true );
 		
-		$spreadsheet->getActiveSheet()->getPageSetup()->setRowsToRepeatAtTopByStartAndEnd( 1, $Excel_Cell_Begin );
+		
 		
 		/*// ngày xuất
 			$TextColumnDate = PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex( 2 );
@@ -361,13 +361,9 @@
 		$array_key_data[] = 'main_category';
 		$array_key_data[] = 'category';
 		$array_key_data[] = 'weight_product';
-		//$array_key_data[] = 'unit_weight';
 		$array_key_data[] = 'length_product';
-		//$array_key_data[] = 'unit_length';
 		$array_key_data[] = 'width_product';
-		//$array_key_data[] = 'unit_width';
 		$array_key_data[] = 'height_product';
-		//$array_key_data[] = 'unit_height';
 		$array_key_data[] = 'classify';
 		$array_key_data[] = 'price_special';
 		$array_key_data[] = 'price';
@@ -381,39 +377,66 @@
 		foreach ($dataContent as $row) 
 		{
 			$columnIndex2 = 0;
-			$pRow++;
 			if($row['classify'] == 'none'){ // nếu không có thuộc tính
+				$pRow++;
 				foreach( $array_key_data as $key_data )
 				{
 					++$columnIndex2;
 					$TextColumnIndex = PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex( $columnIndex2 );
-					$worksheet->setCellValue( $TextColumnIndex . $pRow, $row[$key_data] );
-				}
-			} else{// nếu có thuộc tính
-				$count = count($row['classify']);
-				$tempRow = $pRow;
-				$merge_row = $pRow + $count - 1;
-				foreach( $array_key_data as $key_data ){
-					++$columnIndex2;
-					if($key_data != 'classify'){
-						$TextColumnIndex = PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex( $columnIndex2 );
-						$worksheet->setCellValue( $TextColumnIndex . $pRow, $row[$key_data] );
-						$spreadsheet->getActiveSheet()->mergeCells($TextColumnIndex . $pRow . ':' . $TextColumnIndex . $merge_row);
+					if($key_data != 'barcode'){
+						$worksheet->setCellValue($TextColumnIndex . $pRow, $row[$key_data]);
 					} else{
-						foreach($row['classify'] as $item){
-							$tempCol = $columnIndex2;
-							foreach($key_classify as $key){
-								$TextColumn = PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex( $tempCol );
-								$worksheet->setCellValue( $TextColumn . $tempRow, $item[$key] );
-								$tempCol++;
-							}
-							$tempRow++;
-						}
-						break;
+						$worksheet->setCellValueExplicit($TextColumnIndex . $pRow, $row[$key_data], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
 					}
 				}
-				$pRow = $merge_row;
+			} else{// nếu có thuộc tính
+				foreach($row['classify'] as $classify){
+					$pRow++;
+					$index_classify = 12;
+					$index = 0;
+					foreach($array_key_data as $key){
+						$index++;
+						$TextColumnIndex = PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex( $index );
+						if($key_data != 'barcode'){
+							$worksheet->setCellValue($TextColumnIndex . $pRow, $row[$key]);
+						} else{
+							$worksheet->setCellValueExplicit($TextColumnIndex . $pRow, $row[$key], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+						}
+					}
+					foreach($key_classify as $key){
+						$index_classify++;
+						$TextColumnIndex = PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex( $index_classify );
+						$worksheet->setCellValue( $TextColumnIndex . $pRow, $classify[$key]);
+					}
+				}
+			
+			
+				// $count = count($row['classify']);
+				// $tempRow = $pRow;
+				// $merge_row = $pRow + $count - 1;
+				// foreach( $array_key_data as $key_data ){
+					// ++$columnIndex2;
+					// if($key_data != 'classify'){
+						// $TextColumnIndex = PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex( $columnIndex2 );
+						// // $worksheet->setCellValue( $TextColumnIndex . $pRow, $row[$key_data] );
+						// $worksheet->setCellValueExplicit($TextColumnIndex . $pRow, (string)$row[$key_data], \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+						// $spreadsheet->getActiveSheet()->mergeCells($TextColumnIndex . $pRow . ':' . $TextColumnIndex . $merge_row);
+					// } else{
+						// foreach($row['classify'] as $item){
+							// $tempCol = $columnIndex2;
+							// foreach($key_classify as $key){
+								// $TextColumn = PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex( $tempCol );
+								// $worksheet->setCellValue( $TextColumn . $tempRow, $item[$key] );
+								// $tempCol++;
+							// }
+							// $tempRow++;
+						// }
+						// break;
+					// }
+				// }
+				// $pRow = $merge_row;
 			}
+			
 		}
 		
 		
@@ -509,7 +532,7 @@
         ->select('COUNT(*)')
         ->from(TABLE . '_product t1')
 		->join(' LEFT JOIN ' . TABLE . '_block_id t2 ON t1.id = t2.product_id')
-		->where('t1.status = 1 AND t1.inhome = 1 '.$where);
+		->where('t1.status = 1 '.$where);// AND t1.inhome = 1
 		
 		$sth = $db->prepare($db->sql());
 		
