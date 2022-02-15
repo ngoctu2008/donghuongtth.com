@@ -183,7 +183,39 @@ function popup_vanchuyen(id, store_id, transporters_id, insurance_fee) {
     });
 }
 
-function send_ghtk(id) {
+function cancel_ghtk(order_id) {
+    $.ajax({
+        type: 'GET',
+        url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=cancel_ghtk',
+        dataType: 'json',
+        data: {
+            order_id: order_id,
+        },
+        beforeSend: function() {
+            $('button.btn_ecng').prop('disabled', true);
+        },
+        complete: function() {
+            $('button.btn_ecng').prop('disabled', false);
+        },
+        success: function(res) {
+            if (res.status == 'OK') {
+                alert(res.mess);
+            } else if (res.status == 'ERROR_GHTK') {
+                alert(res.mess);
+            } else if (res.status == 'ERROR_STATUS') {
+                alert(res.mess);
+            } else {
+                alert('Lỗi thiếu tham số truyền vào!');
+            }
+            location.reload();
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+}
+
+function send_ghtk(order_id) {
 
     var pick_option = $("input[name='pick_option']:checked").val();
     var insurance_fee = $("input[name='insurance_fee']").is(':checked');
@@ -198,7 +230,7 @@ function send_ghtk(id) {
         url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&mod=send_ghtk',
         dataType: 'json',
         data: {
-            order_id: id,
+            order_id: order_id,
             pick_option: pick_option,
             insurance_fee: insurance_fee
         },
@@ -212,7 +244,7 @@ function send_ghtk(id) {
             if (res.status == 'OK') {
                 alert('Gửi hàng thành công!');
             } else {
-                alert('Gửi hàng thất bại!');
+                alert(res.mess);
             }
 
             //location.reload();

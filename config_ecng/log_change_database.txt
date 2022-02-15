@@ -1,3 +1,11 @@
+15/02/2022
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_error_ghtk(
+  id int(11) NOT NULL AUTO_INCREMENT,
+  status int(11) DEFAULT '0',
+  title varchar(100) DEFAULT '0'  COMMENT 'Mô tả lỗi',
+  PRIMARY KEY (id)
+) ENGINE=MyISAM";
+
 27/01/2022
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghtk_detail(
   id int(11) NOT NULL AUTO_INCREMENT,

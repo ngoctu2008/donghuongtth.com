@@ -114,6 +114,10 @@
 						<!-- BEGIN: GHTK -->
 						<button onclick="popup_vanchuyen({VIEW.id}, {VIEW.store_id}, {VIEW.transporters_id}, {VIEW.insurance_fee})" type="button" class="btn_ecng">Gởi hàng GHTK</button>
 						<!-- END: GHTK -->
+						<!-- BEGIN: GHTK_CANCEL -->
+						<button onclick="cancel_ghtk({VIEW.id})" type="button" class="btn_ecng mr-2">Hủy đơn GHTK</button>
+						<!-- END: GHTK_CANCEL -->
+						
 						<p>
 							<span class="wrap_admin_button ">
 								<button type="button" style="margin: 3px;padding: 3px" id="button-invoice_{VIEW.id}" data-loading-text="Đang nạp..." data-toggle="tooltip" title="In phiếu bán hàng" class="admin_button btn btn-primary">
