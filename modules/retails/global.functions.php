@@ -154,17 +154,28 @@ function rounding($number)
 
 function get_full_address($ward_id, $district_id, $province_id)
 {
-
-	if ($ward_id) {
-		$ward_id = get_info_ward($ward_id)['title'];
+	global $global_ward, $global_district, $global_province;
+	if ($ward_id) {		
+		$ward = stripos($global_ward[$ward_id]['title'], 'Phường');
+		if(!$ward){
+			$ward_id = $global_ward[$ward_id]['title'];
+		}
+		else{
+			$ward_id = $global_ward[$ward_id]['type'] . ' ' . $global_ward[$ward_id]['title'];
+		}
 	}
 	if ($district_id) {
-		$district_id = get_info_district($district_id)['title'];
+		$district = stripos($global_district[$district_id]['title'], 'Quận');
+		if(!$district){
+			$district_id = $global_district[$district_id]['title'];
+		}
+		else{
+			$district_id = $global_district[$district_id]['type'] . ' ' . $global_district[$district_id]['title'];
+		}
 	}
 	if ($province_id) {
-		$province_id = get_info_province($province_id)['title'];
+		$province_id = $global_province[$province_id]['type'] . ' ' . $global_province[$province_id]['title'];
 	}
-
 	$address = ' , ' . $ward_id . ' , ' . $district_id . ' , ' . $province_id;
 	return $address;
 }
