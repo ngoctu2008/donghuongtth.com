@@ -112,8 +112,10 @@
 	
 	$address_df = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_address WHERE userid = ' . $user_info['userid'] . ' AND status = 1' )->fetch();
 	
-	if($_SESSION['address_no_login']){
-		$address_df = $_SESSION['address_no_login'];
+	if(!$user_info['userid']){
+		if($_SESSION['address_no_login']){
+			$address_df = $_SESSION['address_no_login'];
+		}
 	}
 	
 	$contents = nv_theme_retailshops_order($_SESSION[$module_name . '_cart'], $list_address, $address_df,$array_payment);

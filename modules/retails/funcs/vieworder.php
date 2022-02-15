@@ -148,10 +148,11 @@
 	// print_r(ok);die;
 	$info_store['alias_shop'] = NV_MY_DOMAIN .'/'.get_info_user($info_store['userid'])['username'].'/';
 	
-	if($info_order['payment_method']==0){
-		$info_order['payment_method']='Thanh toán khi nhận hàng';
-		}else{
-		$info_order['payment_method']='Thanh toán qua ví tiền';
+	if($info_order['payment_method']=='vnpay'){
+		$info_order['payment_method']='VN Pay';
+	}
+	elseif ($info_order['payment_method']=='recieve'){
+		$info_order['payment_method']='Thanh toán sau khi nhận hàng';
 	}
 	
 	if(!$info_order['status_payment_vnpay']){
