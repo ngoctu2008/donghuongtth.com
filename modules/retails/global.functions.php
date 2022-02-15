@@ -41,7 +41,7 @@ $global_ward = json_decode($redis->get('location_ward'), true);
 
 
 // lấy tất cả cổng thanh toán
-if (!$redis->exists('catalogy_main')) {
+if (!$redis->exists('payport')) {
 	$payport = get_payment_all();
 	$redis->set('payport', json_encode($payport));
 }
@@ -3759,7 +3759,7 @@ function execPostRequest($url, $data)
 }
 function send_payment($payment_mothod, $mm_amount, $mm_OrderInfo, $list_order)
 {
-	global $payport;
+	global $global_payport;
 	/* global $config_setting;
 		$inputData = array(
         "mm_Version" => "2.0.0",
@@ -3803,7 +3803,7 @@ function send_payment($payment_mothod, $mm_amount, $mm_OrderInfo, $list_order)
 
 
 	
-	$row_payment = $global_array_payments[$payment];
+	$row_payment = $global_payport[$payment_mothod];
 	$payment_config = unserialize(nv_base64_decode($row_payment['config']));
 	$endpoint = $payment_config['endpoint'];
 	$partnerCode = $payment_config['momo_partnerCode'];
@@ -3842,7 +3842,6 @@ function send_payment($payment_mothod, $mm_amount, $mm_OrderInfo, $list_order)
 	);
 	$result = execPostRequest($endpoint, json_encode($data));
 	$jsonResult = json_decode($result, true);  // decode json
-	print_r($jsonResult);die;
 	return $jsonResult['payUrl'];
 }
 function print_ghtk($order_code)
