@@ -17,7 +17,7 @@ $order_full=implode(',',$list_order);
 $list_order_code=implode(',',$list_order_code);
 $mm_OrderInfo='Thanh toan giao dich '.$list_order_code.' vao thoi gian '.date('d-m-Y H:i',NV_CURRENTTIME);
 
-$check_momo = send_momo('momo', $total_full,$mm_OrderInfo,$list_order);
+$check_momo = send_payment('momo', $total_full,$mm_OrderInfo,$list_order);
 $contents1 = array(
 'status' => 'OK_MOMO',
 'link' => $check_momo
