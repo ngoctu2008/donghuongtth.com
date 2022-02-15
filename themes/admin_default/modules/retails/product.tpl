@@ -327,7 +327,7 @@
 	});*/
 	$(".export_file").on('click', function(e) {
 		e.preventDefault();  
-		
+		//alert('Chờ tý nhé!');
 		$.ajax({               
 			type: "GET",
 			url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '={OP}&mod=is_download',
