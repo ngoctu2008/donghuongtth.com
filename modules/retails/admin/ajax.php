@@ -384,7 +384,44 @@
 		die;
 	}
 	
-	
+	if ($mod == 'cancel_ghtk') {
+		$order_id = $nv_Request->get_int('order_id', 'get,post', 0);
+		if (!$order_id) {
+			print_r(json_encode(array('status' => 'ERROR')));
+			die();
+		}
+		
+		//GHTK từ khi shipper lấy hàng sẽ không sẽ không hủy đơn đc
+		$check_status_ghtk = $db->query('SELECT status_id FROM ' . TABLE . '_history_ghtk WHERE order_id = ' . $order_id)->fetchColumn();
+		if($check_status_ghtk['success'] == 1 or $check_status_ghtk == 2 or $check_status_ghtk == 7 or $check_status_ghtk == 12 or $check_status_ghtk == 8 ){
+			$cancel_ghtk = cancel_ghtk_admin($order_id);
+			if($cancel_ghtk){
+				$info_order = get_info_order($order_id);
+				$today = NV_CURRENTTIME;
+				//cập nhật trạng thái hủy
+				$db->query('UPDATE '. TABLE .'_history_ghtk SET status_id = -1 WHERE order_id = ' . $info_order['id'] . ' AND label = "' . $info_order['shipping_code'] . '"');
+				// cập nhật trạng thái đơn hàng
+				$db->query('UPDATE '. TABLE .'_order SET status = 1, time_edit = ' . $today . ' WHERE id = '. $info_order['id']);
+				//ghi lịch sử 
+				$content = $admin_info['username'] . ' đã hủy đơn GHTK' ;
+				history_order($info_order['id'], 1, $content);
+				$reason = $admin_info['username'] . ' đã hủy đơn GHTK' ;
+				insert_history_admin($admin_info['userid'], $reason);
+				
+				print_r( json_encode( array('status'=>'OK', 'mess'=> 'Hủy vận đơn thành công!') ));
+				die();
+			}else{
+				print_r( json_encode( array('status'=>'ERROR_GHTK', 'mess'=> $check_status_ghtk['message']) ));
+				die();
+			}
+			
+		}else{
+			print_r( json_encode( array('status'=>'ERROR_STATUS', 'mess'=> 'Đơn hàng đã được điều phối, không thể hủy') ));
+			die();
+		}
+		
+	}
+
 	if ($mod == 'send_ghtk') {
 		$order_id = $nv_Request->get_int('order_id', 'get,post', 0);
 		$pick_option = $nv_Request->get_title('pick_option', 'get,post', 'cod');
@@ -431,7 +468,7 @@
 		}
 		
 		$pick_province = $global_province[$info_warehouse['province_id']]['type'] . ' ' . $global_province[$info_warehouse['province_id']]['title'];
-		$pick_district = $global_district[$info_warehouse['district_id']]['type'] . ' ' . $global_district[$info_warehouse['district_id']]['title'];
+		$pick_district =  $global_district[$info_warehouse['district_id']]['title'];
 		$pick_ward = $global_ward[$info_warehouse['ward_id']]['type'] . ' ' . $global_ward[$info_warehouse['ward_id']]['title'];
 		$address_short = explode(',',$info_warehouse['address']);
 		$info_warehouse['address'] = $address_short[0];
@@ -484,7 +521,7 @@
 			print_r(json_encode(array('status' => 'OK')));
 			die();
 		}else{
-			print_r(json_encode(array('status' => 'ERROR')));
+			print_r(json_encode(array('status' => 'ERROR', 'mess' => $order_ghtk['message'])));
 			die();
 		}
 	
@@ -1245,35 +1282,49 @@
 			}
 			
 			$xtpl->assign('VIEW', $view);
-			if($view['status']==0){
+			if($view['status']==0)
+			{
 				$xtpl->parse('main.loop.status0');
-				}else if($view['status']==1){
-				if($view['transporters_id'] == 4 || $view['transporters_id'] == 5 ){
-					$xtpl->parse('main.loop.vnpost');
-					}elseif($view['transporters_id'] == 0){
-					$xtpl->parse('main.loop.tu_giao_xac_nhan_dang_giao');
-					}elseif($view['transporters_id'] == 3){
-					$xtpl->parse('main.loop.ghn');
-					}elseif($view['transporters_id'] == 2){
-						$xtpl->parse('main.loop.GHTK');
-					}
-				
-				}else if($view['status']==2){
+			}
+			else if($view['status']==1)
+			{
+			if($view['transporters_id'] == 4 || $view['transporters_id'] == 5 ){
+				$xtpl->parse('main.loop.vnpost');
+				}elseif($view['transporters_id'] == 0){
+				$xtpl->parse('main.loop.tu_giao_xac_nhan_dang_giao');
+				}elseif($view['transporters_id'] == 3){
+				$xtpl->parse('main.loop.ghn');
+				}elseif($view['transporters_id'] == 2){
+					$xtpl->parse('main.loop.GHTK');
+				}
+			
+			}
+			else if($view['status']==2)
+			{
 				// trạng thái đơn hàng đang giao. cho phép admin hủy đơn hàng
-				if($view['transporters_id'] == 4 || $view['transporters_id'] == 5 ){
+				if($view['transporters_id'] == 4 || $view['transporters_id'] == 5 )
+				{
 					$xtpl->parse('main.loop.vnpost_cancel');
-					}elseif($view['transporters_id']== 0){
-					$xtpl->parse('main.loop.tu_giao_xac_nhan_da_giao');
-				}elseif($view['transporters_id'] == 3)
+				}
+				elseif($view['transporters_id']== 0)
+				{
+				$xtpl->parse('main.loop.tu_giao_xac_nhan_da_giao');
+				}
+				elseif($view['transporters_id'] == 3)
 				{
 					$check_status_ghn = $db->query('SELECT status FROM ' . TABLE . '_history_ghn WHERE message like "Success" AND order_id = ' . $view['id'] . ' AND order_code = "' . $view['shipping_code'] . '"')->fetchColumn();
 					if($check_status_ghn == 'ready_to_pick' || $check_status_ghn == 'picking'){
 						$xtpl->parse('main.loop.ghn_cancel');
 					}
 				}
-				//status = 6
-				}else if($view['status']==6){
-				// trạng thái đơn hàng đang giao. cho phép admin hủy đơn hàng
+				elseif($view['transporters_id']== 2)
+				{
+				$xtpl->parse('main.loop.GHTK_CANCEL');
+				}
+			//status = 6
+			}
+			else if($view['status']==6)
+			{
 				if($view['transporters_id'] == 4 || $view['transporters_id'] == 5 ){
 					$xtpl->parse('main.loop.vnpost_reupload');
 				}elseif($view['transporters_id'] == 3){

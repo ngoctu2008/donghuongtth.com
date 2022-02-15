@@ -1,27 +1,4 @@
 <?php
-
-// lấy tất cả category đưa vào redis
-function get_payment_all()
-{
-	global $db, $module_name, $module_upload;
-
-	$list_payment = $db->query('SELECT * FROM ' . TABLE . '_payment WHERE active = 1 ORDER BY weight ASC')->fetchAll();
-
-
-	$arr_temp = array();
-
-	foreach ($list_payment as $value) {
-		$arr_temp[$value['payment']] = $value;
-	}
-
-	return $arr_temp;
-}
-
-
-
-
-
-
 define('NV_TABLE_USER', $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_users');
 define('IDSITE', $global_config['idsite']);
 define('TABLE', $db_config['dbsystem'] . '.' . NV_PREFIXLANG . '_' . $module_name);
@@ -59,6 +36,10 @@ $global_district = json_decode($redis->get('location_district'), true);
 // lấy tất cả xã phường
 $global_ward = json_decode($redis->get('location_ward'), true);
 
+//$global_status_order_ghtk = json_decode($redis->get('status_order_ghtk'),true);
+//print_r($global_status_order_ghtk);die;
+
+
 // lấy tất cả cổng thanh toán
 if (!$redis->exists('catalogy_main')) {
 	$payport = get_payment_all();
@@ -91,6 +72,36 @@ if (!is_dir(NV_ROOTDIR . '/uploads/' . $module_upload . '/' . date('Y_m'))) {
 	nv_mkdir(NV_ROOTDIR . '/uploads/' . $module_upload, date('Y_m'));
 	$upload_dir = 'uploads/' . $module_upload . '/' . date('Y_m');
 	$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_upload_dir(dirname,time) VALUES(' . $db->quote($upload_dir) . ',' . NV_CURRENTTIME . ')');
+}
+
+// function status_order_ghtk()
+// {
+// 	global $db;
+// 	$list = $db->query('SELECT * FROM ' . TABLE . '_status_order_ghtk ')->fetchAll();
+// 	$array_status = array();
+// 	foreach($list as $row)
+// 	{
+// 		$array_status[] = $row['status'];
+// 	}
+// 	print_r($array_status);die;
+// 	return $array_status;
+	
+// }
+
+function get_payment_all()
+{
+	global $db, $module_name, $module_upload;
+
+	$list_payment = $db->query('SELECT * FROM ' . TABLE . '_payment WHERE active = 1 ORDER BY weight ASC')->fetchAll();
+
+
+	$arr_temp = array();
+
+	foreach ($list_payment as $value) {
+		$arr_temp[$value['payment']] = $value;
+	}
+
+	return $arr_temp;
 }
 
 // lọc từ có dấu thành không dấu
@@ -3419,16 +3430,37 @@ function send_ghtk($products, $order_code, $pick_name, $pick_address, $pick_prov
 		)
 	);
 	
-	$data = post_data($url, $param, $config_setting['token_ghtk']);
+	$data = post_data($url, $param, $config_setting['token_ghtk']);print_r($data);die;
+	return $data;
+}
+
+function cancel_ghtk_admin($order_id){
+	global $config_setting, $db, $admin_info;
+	$label_ghtk = $db->query('SELECT shipping_code FROM ' . TABLE . '_order WHERE id = ' . $order_id)->fetchColumn();
+	$curl = curl_init();
+	
+	curl_setopt_array($curl, array(
+		CURLOPT_URL => $config_setting['url_ghtk'] . '/services/shipment/cancel/' . $label_ghtk,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'POST',
+		CURLOPT_HTTPHEADER => array(
+		  'Token: ' . $config_setting['token_ghtk']
+		),
+	));
+	$response = curl_exec($curl);
+	$data = json_decode($response, true);
+	curl_close($curl);
 	return $data;
 }
 
 function update_ghtk_admin($info_order, $order_ghtk)
 {
 	global $config_setting, $db, $admin_info;
-
-	// xử lý thông tin sau khi tạo vận đơn thành công status=2 đơn hàng đang giao
-	$db->query('UPDATE ' . TABLE . '_order SET status = 2, shipping_code=' . $db->quote($order_ghtk['order']['label']) . ' where id = ' . $info_order['id']);
 
 	$sql = "INSERT INTO " . TABLE . "_history_ghtk
 	( order_id, label, fee, insurance_fee, status_id, time_add)
@@ -3442,20 +3474,9 @@ function update_ghtk_admin($info_order, $order_ghtk)
 	$data_insert['status_id'] = $order_ghtk['order']['status_id'];
 	$data_insert['time_add'] = NV_CURRENTTIME;
 	$history_ghtk_id = $db->insert_id($sql, 'id', $data_insert);
-	if ($history_ghtk_id) {
-		$sql = "INSERT INTO " . TABLE . "_history_ghtk_detail
-		( order_id, label, status_id, time_add)
-		VALUES
-		(:order_id, :label, :status_id, :time_add)";
-		$data_insert = array();
-		$data_insert['order_id'] = $info_order['id'];
-		$data_insert['label'] = $order_ghtk['order']['label'];
-		$data_insert['time_add'] = NV_CURRENTTIME;
-		$history_ghtk_detail_id = $db->insert_id($sql, 'id', $data_insert);
-	}
 
 	// xử lý thông tin sau khi tạo vận đơn thành công status=2 đơn hàng đang giao
-	$db->query('UPDATE ' . TABLE . '_order SET status=2, shipping_code=' . $db->quote($order_ghtk['order']['label']) . ' where id=' . $info_order['id']);
+	$db->query('UPDATE ' . TABLE . '_order SET status = 2, shipping_code=' . $db->quote($order_ghtk['order']['label']) . ' where id=' . $info_order['id']);
 	$content = 'Chuyển sang đơn vị vận chuyển GHTK Thành Công';
 	$db->query('INSERT INTO ' . TABLE . '_logs_order(order_id,status_id_old,content,time_add,user_add) VALUES(' . $info_order['id'] . ',2,' . $db->quote($content) . ',' . NV_CURRENTTIME . ',' . $admin_info['userid'] . ')');
 	//lich su admin
@@ -4160,7 +4181,7 @@ function conver_data_img_to_png($img, $file_source, $file_thumb)
 
 function send_email_order_cancel($order)
 {
-	global $db, $lang_module;
+	global $db, $lang_module, $global_config;
 
 
 	// lấy danh sách sản phẩm của đơn hàng

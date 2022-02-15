@@ -27,8 +27,6 @@
 	'district_vnpost',
     'ward'
 	);
-	
-	
 
 	// redis quận huyện
 	if(!$redis->exists('location_province'))
@@ -135,8 +133,6 @@
 		return $data;
 		
 	}
-	
-	
 	
 	// lấy tất cả quận huyện thuộc 1 tỉnh thành
 	function get_district($provinceid)

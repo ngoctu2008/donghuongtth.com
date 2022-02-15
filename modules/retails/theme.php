@@ -780,7 +780,7 @@ function nv_theme_retailshops_list_order($ngay_tu, $ngay_den, $status_ft, $sea_f
 }
 function nv_theme_retailshops_order($array_data, $list_address, $address_df, $array_payment)
 {
-	global $module_info, $lang_module, $lang_global, $op, $module_upload, $module_name, $db, $db_config, $user_info, $global_location, $config_setting;
+	global $module_info, $lang_module, $lang_global, $op, $module_upload, $module_name, $db, $db_config, $user_info, $global_config, $config_setting;
 
 	$xtpl = new XTemplate($op . '.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_info['module_theme']);
 	$xtpl->assign('LANG', $lang_module);
@@ -793,6 +793,7 @@ function nv_theme_retailshops_order($array_data, $list_address, $address_df, $ar
 	$xtpl->assign('MODULE_NAME', $module_name);
 	$xtpl->assign('MODULE_UPLOAD', $module_upload);
 	$xtpl->assign('TEMPLATE', $module_info['template']);
+	$xtpl->assign('LOGO_SRC', $_SERVER["SERVER_NAME"] . '/' . $global_config['site_logo']);
 	if ($user_info['userid']) {
 		$xtpl->assign('EMAIL_USER', $user_info['email']);
 	} else {
@@ -1029,11 +1030,11 @@ function nv_theme_retailshops_order($array_data, $list_address, $address_df, $ar
 			$xtpl->assign('total_price_one_shop', $total_price_one_shop);
 
 			if ($max_price_voucher) {
-				$xtpl->assign('max_price_voucher', '-' . number_format($max_price_voucher) . 'đ');
+				$xtpl->assign('max_price_voucher', '- ' . number_format($max_price_voucher) . 'đ');
 				$xtpl->assign('max_price_voucher_value', $max_price_voucher);
 				//voucherid
 				$xtpl->assign('voucherid_optimal', $voucherid_optimal[0]);
-				$xtpl->assign('border', 'border');
+				$xtpl->assign('border', 'max_price_voucher_shop');
 			} else {
 				$xtpl->assign('max_price_voucher', '');
 				$xtpl->assign('max_price_voucher_value', 0);
