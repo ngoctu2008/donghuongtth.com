@@ -3736,8 +3736,9 @@ function execPostRequest($url, $data)
 	curl_close($ch);
 	return $result;
 }
-function send_momo($mm_amount, $mm_OrderInfo, $mm_TmnCode, $mm_TransactionNo, $mm_HashSecret, $mm_ReturnUrl, $mm_IpAddr)
+function send_payment($payment_mothod, $mm_amount, $mm_OrderInfo, $list_order)
 {
+	global $payport;
 	/* global $config_setting;
 		$inputData = array(
         "mm_Version" => "2.0.0",
@@ -3780,32 +3781,33 @@ function send_momo($mm_amount, $mm_OrderInfo, $mm_TmnCode, $mm_TransactionNo, $m
 
 
 
-	$endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-
-
-	$partnerCode = 'MOMOGQQA20220110';
-	$accessKey = 'eZBxUT4fUAG4WC7E';
+	
+	$row_payment = $global_array_payments[$payment];
+	$payment_config = unserialize(nv_base64_decode($row_payment['config']));
+	$endpoint = $payment_config['endpoint'];
+	$partnerCode = $payment_config['momo_partnerCode'];
+	$accessKey = $payment_config['accessKey'];
 	$orderInfo = $mm_OrderInfo;
 	$amount = $mm_amount;
 	$orderId = time() . "";
-	$redirectUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
-	$ipnUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
+	$redirectUrl = $payment_config['redirectUrl'];
+	$ipnUrl = $payment_config['ipnUrl'];
 	$extraData = "";
 
 
 
 
-	$serectkey = 'K1W2fjpbQr4ZBZzgj4snNVfvSqUkQePE';
+	$serectkey = $payment_config['signature'];
 	$requestId = time() . "";
-	$requestType = "captureWallet";
+	$requestType = $payment_config['requestType'];
 	$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
 	//before sign HMAC SHA256 signature
 	$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
 	$signature = hash_hmac("sha256", $rawHash, $serectkey);
 	$data = array(
 		'partnerCode' => $partnerCode,
-		'partnerName' => "Test",
-		"storeId" => "MomoTestStore",
+		'partnerName' => $payment_config['partnerName'],
+		"storeId" => $payment_config['storeId'],
 		'requestId' => $requestId,
 		'amount' => $amount,
 		'orderId' => $orderId,
