@@ -16,7 +16,7 @@
 			border-radius: 4px;padding: 24px 16px;">
 				<div style="border-bottom: 1px solid #E1A208;">
 					<a href="https://chonhagiau.com" title="Chợ nhà giàu"><img src="https://{LOGO_SRC}"
-					alt="" style="width: 20%;"></a>
+					alt=""></a>
 				</div>
 				<h1
                 style="font-family: Roboto;font-style: normal;font-weight: bold;font-size: 24px;line-height: 28px;text-align: center;text-transform: uppercase;color: #E1A208;">
@@ -49,7 +49,7 @@
                 <div class="border_bt" style="display: flex;border-bottom: 1px solid #dadada;">
                     <div style="width: 50%;display:flex;padding: 10px 0;">
                         <img style="width: 50px;
-						height: 50px;border-radius: 4px;margin: 0px 8px;" src="{image}">
+						height: 50px;border-radius: 4px;margin: 0px 8px;object-fit: contain;" src="{image}">
                         <span style="padding-top: 5px;">{product_name}</span>
 					</div>
                     <div style="width: 20%;text-align:center;padding-top:15px">{product_number}</div>

@@ -36,7 +36,7 @@
 			<div class="col-md-5 p-4 border">
 				<p>Giao Hàng: {info_order.transporters_name} #{info_order.shipping_code}</p>
 				<p>Phí vận chuyển: {info_order.fee_transport} đ</p>
-				<p class="mb-0">Phương Thức Thanh Toán: {info_order.status_payment_vnpay_title}</p>
+				<p class="mb-0">Hình thức thanh toán: {info_order.payment_method}</p>
 			</div>
 		</div>
 	</div>

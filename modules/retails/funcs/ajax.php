@@ -3846,33 +3846,34 @@ if ( $mod == 'tonkho' ) {
 
 if($mod == 'testtt')
 {
-	$a =Array
-	(
-		'success' => '1',
-		'message' => 'Các đơn hàng đã được add vào hệ thống GHTK thành công. Thông tin đơn hàng thành công được trả về trong trường success_orders.',
-		'order' => Array
-			(
-				'partner_id' => 'ECNG0000643 - 09:19 27/01/2022',
-				'label' => 'S20966001.SG30.M2.300071869',
-				'area' => '2',
-				'fee' => '27000',
-				'insurance_fee' => '5000',
-				'estimated_pick_time' => 'Sáng 2022-01-27',
-				'estimated_deliver_time' => 'Chiều 2022-01-27',
-				'products' => Array
-					(
-					),
+	send_mail_payment_fail(849);
+	// $a =Array
+	// (
+	// 	'success' => '1',
+	// 	'message' => 'Các đơn hàng đã được add vào hệ thống GHTK thành công. Thông tin đơn hàng thành công được trả về trong trường success_orders.',
+	// 	'order' => Array
+	// 		(
+	// 			'partner_id' => 'ECNG0000643 - 09:19 27/01/2022',
+	// 			'label' => 'S20966001.SG30.M2.300071869',
+	// 			'area' => '2',
+	// 			'fee' => '27000',
+	// 			'insurance_fee' => '5000',
+	// 			'estimated_pick_time' => 'Sáng 2022-01-27',
+	// 			'estimated_deliver_time' => 'Chiều 2022-01-27',
+	// 			'products' => Array
+	// 				(
+	// 				),
 	
-				'status_id' => '2',
-				'tracking_id' => '300071869',
-				'sorting_code' => 'SG30.M2',
-				'is_xfast' => '0',
-				),
+	// 			'status_id' => '2',
+	// 			'tracking_id' => '300071869',
+	// 			'sorting_code' => 'SG30.M2',
+	// 			'is_xfast' => '0',
+	// 			),
 	
-		'warning_message' => 'Việc vận chuyển hiện tại đang gặp khó khăn do tình hình dịch bệnh phức tạp, vì vậy thời gian giao hàng tới khách sẽ chậm hơn dự kiến.
-	Mong Shop thông cảm và cân nhắc kỹ trước khi gửi hàng. GHTK xin lỗi vì sự bất tiện này.'
-			);
-	print_r($a['order']['label']);die;
+	// 	'warning_message' => 'Việc vận chuyển hiện tại đang gặp khó khăn do tình hình dịch bệnh phức tạp, vì vậy thời gian giao hàng tới khách sẽ chậm hơn dự kiến.
+	// Mong Shop thông cảm và cân nhắc kỹ trước khi gửi hàng. GHTK xin lỗi vì sự bất tiện này.'
+	// 		);
+	// print_r($a['order']['label']);die;
 	
 }
 
