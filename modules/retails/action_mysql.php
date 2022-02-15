@@ -72,8 +72,16 @@ $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lan
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_warehouse_transport";
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghtk";
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghtk_detail";
+$sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_error_ghtk";
 
 $sql_create_module = $sql_drop_module;
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_error_ghtk(
+  id int(11) NOT NULL AUTO_INCREMENT,
+  status int(11) DEFAULT '0',
+  title varchar(100) DEFAULT '0'  COMMENT 'Mô tả lỗi',
+  PRIMARY KEY (id)
+) ENGINE=MyISAM";
 
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghtk_detail(
   id int(11) NOT NULL AUTO_INCREMENT,
