@@ -81,6 +81,7 @@ function email_payment_fail($data_order, $data_pro, $info_order)
 	$info_order['total'] = number_format($info_order['total']);
 	$xtpl->assign('info_order', $info_order);
 	$xtpl->assign('children_fund', $config_setting['children_fund'] . 'đ');
+	$xtpl->assign('LOGO_SRC', $_SERVER["SERVER_NAME"] . '/' . $global_config['site_logo']);
 	$i = 0;
 
 	if ($info_order['voucherid']) {
@@ -143,6 +144,7 @@ function email_new_order_payment($data_order, $data_pro, $info_order)
 	$info_order['voucher_price'] = number_format($info_order['voucher_price']);
 	$info_order['total'] = number_format($info_order['total']);
 	$xtpl->assign('info_order', $info_order);
+	$xtpl->assign('LOGO_SRC', $_SERVER["SERVER_NAME"] . '/' . $global_config['site_logo']);
 	//print_r($info_order);die;
 	$shop_name = $db->query('SELECT company_name FROM ' . TABLE . '_seller_management WHERE id = ' . $info_order['store_id'])->fetchColumn();
 
@@ -211,7 +213,7 @@ function email_order_cancel_seller($data_order, $data_pro, $info_order)
 	$xtpl->assign('info_order', $info_order);
 	$shop_name = $db->query('SELECT company_name FROM ' . TABLE . '_seller_management WHERE id = ' . $info_order['store_id'])->fetchColumn();
 	$xtpl->assign('SHOP_NAME', $shop_name);
-
+	$xtpl->assign('LOGO_SRC', $_SERVER["SERVER_NAME"] . '/' . $global_config['site_logo']);
 	$i = 0;
 
 	if ($info_order['voucherid']) {
@@ -276,7 +278,7 @@ function email_order_not_received_seller($data_order, $data_pro, $info_order)
 	$xtpl->assign('info_order', $info_order);
 	$shop_name = $db->query('SELECT company_name FROM ' . TABLE . '_seller_management WHERE id = ' . $info_order['store_id'])->fetchColumn();
 	$xtpl->assign('SHOP_NAME', $shop_name);
-
+	$xtpl->assign('LOGO_SRC', $_SERVER["SERVER_NAME"] . '/' . $global_config['site_logo']);
 	$i = 0;
 
 	if ($info_order['voucherid']) {
@@ -330,7 +332,7 @@ function email_order_not_received_admin($data_order, $data_pro, $info_order)
 	global $module_info, $lang_module, $module_file, $pro_config, $global_config, $money_config, $db;
 
 	$xtpl = new XTemplate("email_order_not_received_admin.tpl", NV_ROOTDIR . "/themes/" . $global_config['module_theme'] . "/modules/" . $module_file);
-
+	
 	$xtpl->assign('LANG', $lang_module);
 	$xtpl->assign('DATA', $data_order);
 	$info_order['time_add'] = date('d/m/Y - H:i', $info_order['time_add']);
@@ -339,7 +341,7 @@ function email_order_not_received_admin($data_order, $data_pro, $info_order)
 	$info_order['voucher_price'] = number_format($info_order['voucher_price']);
 	$info_order['total'] = number_format($info_order['total']);
 	$xtpl->assign('info_order', $info_order);
-
+	$xtpl->assign('LOGO_SRC', $_SERVER["SERVER_NAME"] . '/' . $global_config['site_logo']);
 	$i = 0;
 
 	if ($info_order['voucherid']) {
@@ -402,6 +404,7 @@ function email_new_order_payment_khach($data_order, $data_pro, $info_order)
 	$info_order['total'] = number_format($info_order['total']);
 	$xtpl->assign('info_order', $info_order);
 	$xtpl->assign('children_fund', $config_setting['children_fund'] . 'đ');
+	$xtpl->assign('LOGO_SRC', $_SERVER["SERVER_NAME"] . '/' . $global_config['site_logo']);
 	//xem thông tin đơn hàng
 	if ($user_info['userid']) {
 		$view_order = 'https://chonhagiau.com/vieworder/?id=' . $info_order['id'];
@@ -418,7 +421,6 @@ function email_new_order_payment_khach($data_order, $data_pro, $info_order)
 	if ($info_order['voucherid']) {
 		$xtpl->parse('main.data_product.voucher');
 	}
-
 
 	$i = 0;
 	foreach ($data_pro as $data) {
@@ -478,7 +480,7 @@ function email_order_cancel_khach($data_order, $data_pro, $info_order)
 	$info_order['voucher_price'] = number_format($info_order['voucher_price']);
 	$info_order['total'] = number_format($info_order['total']);
 	$xtpl->assign('info_order', $info_order);
-
+	$xtpl->assign('LOGO_SRC', $_SERVER["SERVER_NAME"] . '/' . $global_config['site_logo']);
 
 	if ($info_order['voucherid']) {
 		$xtpl->parse('main.data_product.voucher');
@@ -805,7 +807,7 @@ function nv_theme_retailshops_order($array_data, $list_address, $address_df, $ar
 
 	$xtpl->assign('OP', $op);
 	$total = 0;
-
+	
 	unset($_SESSION['voucher_shop']);
 	if (!$user_info['userid']) {
 

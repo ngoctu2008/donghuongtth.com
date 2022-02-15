@@ -1930,7 +1930,7 @@ if($mod=='load_order_customer_no_payment'){
 	$db->sqlreset()
 	->select('COUNT(*)')
 	->from('' . TABLE . '_order')
-	->where('payment = 0 AND userid='.$user_info['userid'] . $where);
+	->where('payment = 0 AND status = -1 AND userid='.$user_info['userid'] . $where);
 	
 	$sth = $db->prepare($db->sql());
 	
@@ -2172,21 +2172,6 @@ if($mod=='repayment'){
 		);
 		print_r( json_encode($result));die;
 		die();
-	}elseif($payment_method == 'recieve'){
-		
-		$list_order = $data['list_order'];
-		$list_order_code = $data['list_order_code'];
-		$info_order = get_info_order($list_order[0]);
-		$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
-		$list_order=implode(',',$list_order);
-		$list_order_code=implode(',',$list_order_code);
-		
-		xulythanhtoanthanhcong_recieve($list_order, $info_order);
-		$contents1 = array(
-			'status' => 'OK_RECIEVE',
-			'link' => nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&amp;order_code=' , true ).$list_order
-			);
-			print_r( json_encode($contents1));die;
 	}elseif($payment_method == 'momo'){
 		require_once(NV_ROOTDIR.'/modules/retails/payment/momo.checkorders.php');
 		/* $list_order = $data['list_order'];
@@ -2631,7 +2616,10 @@ if ( $mod == 'add_order' ) {
 	if (defined('NV_IS_USER')) {	
 		$userid=$user_info['userid'];
 	}	
-	
+	if(!$user_info['userid']){
+		$get_address = get_full_address($_SESSION['address_no_login']['ward_id'], $_SESSION['address_no_login']['district_id'], $_SESSION['address_no_login']['province_id']);
+		$address = $_SESSION['address_no_login']['address'] . $get_address;
+	}
 	$error=array();
 	$total_full_total = 0;
 	$fee_transport_total = 0;
@@ -3843,33 +3831,34 @@ if ( $mod == 'tonkho' ) {
 
 if($mod == 'testtt')
 {
-	$a =Array
-	(
-		'success' => '1',
-		'message' => 'Các đơn hàng đã được add vào hệ thống GHTK thành công. Thông tin đơn hàng thành công được trả về trong trường success_orders.',
-		'order' => Array
-			(
-				'partner_id' => 'ECNG0000643 - 09:19 27/01/2022',
-				'label' => 'S20966001.SG30.M2.300071869',
-				'area' => '2',
-				'fee' => '27000',
-				'insurance_fee' => '5000',
-				'estimated_pick_time' => 'Sáng 2022-01-27',
-				'estimated_deliver_time' => 'Chiều 2022-01-27',
-				'products' => Array
-					(
-					),
+	send_mail_payment_fail(849);
+	// $a =Array
+	// (
+	// 	'success' => '1',
+	// 	'message' => 'Các đơn hàng đã được add vào hệ thống GHTK thành công. Thông tin đơn hàng thành công được trả về trong trường success_orders.',
+	// 	'order' => Array
+	// 		(
+	// 			'partner_id' => 'ECNG0000643 - 09:19 27/01/2022',
+	// 			'label' => 'S20966001.SG30.M2.300071869',
+	// 			'area' => '2',
+	// 			'fee' => '27000',
+	// 			'insurance_fee' => '5000',
+	// 			'estimated_pick_time' => 'Sáng 2022-01-27',
+	// 			'estimated_deliver_time' => 'Chiều 2022-01-27',
+	// 			'products' => Array
+	// 				(
+	// 				),
 	
-				'status_id' => '2',
-				'tracking_id' => '300071869',
-				'sorting_code' => 'SG30.M2',
-				'is_xfast' => '0',
-				),
+	// 			'status_id' => '2',
+	// 			'tracking_id' => '300071869',
+	// 			'sorting_code' => 'SG30.M2',
+	// 			'is_xfast' => '0',
+	// 			),
 	
-		'warning_message' => 'Việc vận chuyển hiện tại đang gặp khó khăn do tình hình dịch bệnh phức tạp, vì vậy thời gian giao hàng tới khách sẽ chậm hơn dự kiến.
-	Mong Shop thông cảm và cân nhắc kỹ trước khi gửi hàng. GHTK xin lỗi vì sự bất tiện này.'
-			);
-	print_r($a['order']['label']);die;
+	// 	'warning_message' => 'Việc vận chuyển hiện tại đang gặp khó khăn do tình hình dịch bệnh phức tạp, vì vậy thời gian giao hàng tới khách sẽ chậm hơn dự kiến.
+	// Mong Shop thông cảm và cân nhắc kỹ trước khi gửi hàng. GHTK xin lỗi vì sự bất tiện này.'
+	// 		);
+	// print_r($a['order']['label']);die;
 	
 }
 

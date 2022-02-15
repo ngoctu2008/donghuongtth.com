@@ -165,17 +165,28 @@ function rounding($number)
 
 function get_full_address($ward_id, $district_id, $province_id)
 {
-
-	if ($ward_id) {
-		$ward_id = get_info_ward($ward_id)['title'];
+	global $global_ward, $global_district, $global_province;
+	if ($ward_id) {		
+		$ward = stripos($global_ward[$ward_id]['title'], 'Phường');
+		if(!$ward){
+			$ward_id = $global_ward[$ward_id]['title'];
+		}
+		else{
+			$ward_id = $global_ward[$ward_id]['type'] . ' ' . $global_ward[$ward_id]['title'];
+		}
 	}
 	if ($district_id) {
-		$district_id = get_info_district($district_id)['title'];
+		$district = stripos($global_district[$district_id]['title'], 'Quận');
+		if(!$district){
+			$district_id = $global_district[$district_id]['title'];
+		}
+		else{
+			$district_id = $global_district[$district_id]['type'] . ' ' . $global_district[$district_id]['title'];
+		}
 	}
 	if ($province_id) {
-		$province_id = get_info_province($province_id)['title'];
+		$province_id = $global_province[$province_id]['type'] . ' ' . $global_province[$province_id]['title'];
 	}
-
 	$address = ' , ' . $ward_id . ' , ' . $district_id . ' , ' . $province_id;
 	return $address;
 }
@@ -4566,9 +4577,8 @@ function xulythanhtoanthanhcong_recieve($order_text, $inputData)
 		$email_title = $lang_module['order_email_title'];
 		$email_contents = call_user_func('email_new_order_payment_khach', $data_order, $list_product, $info_order);
 
-
-
 		nv_sendmail(array(
+			
 			$global_config['site_name'],
 			$global_config['site_email']
 		), $order['email'], sprintf($email_title, $data_order['order_code']), $email_contents);
@@ -4656,7 +4666,9 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 	global $db,$global_config,$config_setting,$user_info;
 	$status = false;
 
-	
+		// tính tổng tiền thanh toán
+		$sum_total_payment = $db->query('SELECT sum(total) FROM ' . TABLE . '_order WHERE id IN(' . $order_code . ')')->fetchColumn();
+
 		//$_SESSION[$module_name . '_' . $payment_method] = true;
 		if($payment_method == 'vnpay'){
 				$vnp_SecureHash = $inputData['vnp_SecureHash'];
@@ -4710,6 +4722,7 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 					// check OrderId
 					if ($check_orderid)
 					{
+						
 						if($sum_total_payment && $sum_total_payment == $vnp_Amount ){
 							// check Status
 							if ($check_payment) {
@@ -4722,24 +4735,22 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 									
 								
 							
+							} else {
+								$error[] = 'Thanh toán thất bại!';
+							}
 						} else {
-							$error[] = 'Thanh toán thất bại!';
+							$error[] = 'Số tiền không hợp lệ!';
 						}
 					} else {
-						$error[] = 'Số tiền không hợp lệ!';
+						$error[] = 'Đơn hàng không tìm thấy!';
 					}
-				} else {
-					$error[] = 'Đơn hàng không tìm thấy!';
+				}else{
+					$error[] = 'Chữ ký không hợp lệ!';
 				}
-			}else{
-				$error[] = 'Chữ ký không hợp lệ!';
-			}
 
 			// ket thuc xu ly chuan
 		} elseif ($payment_method == 'recieve') {
 			$db->query('UPDATE ' . TABLE . '_order SET status = 1  WHERE id IN (' . $order_code . ')');
-			// tính tổng tiền thanh toán
-			$sum_total_payment = $db->query('SELECT sum(total) FROM ' . TABLE . '_order WHERE id IN(' . $order_code . ')')->fetchColumn();
 
 			$status = true;
 			//$inputData = array();
