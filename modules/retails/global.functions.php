@@ -3842,6 +3842,7 @@ function send_payment($payment_mothod, $mm_amount, $mm_OrderInfo, $list_order)
 	);
 	$result = execPostRequest($endpoint, json_encode($data));
 	$jsonResult = json_decode($result, true);  // decode json
+	print_r($jsonResult);die;
 	return $jsonResult['payUrl'];
 }
 function print_ghtk($order_code)
