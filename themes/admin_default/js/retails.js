@@ -246,8 +246,7 @@ function send_ghtk(order_id) {
             } else {
                 alert(res.mess);
             }
-
-            //location.reload();
+            location.reload();
         },
         error: function(xhr, ajaxOptions, thrownError) {
             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

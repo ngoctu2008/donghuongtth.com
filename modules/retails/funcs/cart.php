@@ -8,7 +8,6 @@ if (defined('NV_IS_USER')) {
 	}
 }
 
-
 $contents = nv_theme_retailshops_cart($_SESSION[$module_name . '_cart']);
 $page_title = $lang_module['cart'];
 
