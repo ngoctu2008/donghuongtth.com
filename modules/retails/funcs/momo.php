@@ -42,6 +42,58 @@ if($order_code == '' ){
         
         require_once(NV_ROOTDIR.'/modules/retails/payment/momo.complete.php');
         
+        if($data['status']==0){
+			$error = $data['error'];
+		} 
+		if (!empty($error))
+		{	
+			
+			$xtpl->assign('ERROR', implode('<br />', $error));
+			$xtpl->parse('main.error');
+			/*
+			if(!empty($inputData['vnp_TxnRef']))
+			{
+				send_mail_payment_fail($inputData['vnp_TxnRef']);
+			}*/
+		}
+		
+		if ($data['status'])
+		{
+			// thông tin đơn hàng
+			// lấy thông tin order code
+		/* 	if($payment_method == 'vnpay'){
+				$order_code = $inputData['vnp_TxnRef'];
+			}elseif($payment_method == 'recieve'){
+				$order_code = $inputData['order_code'];
+			} */	
+			$array_order = array();
+			if(!empty($order_code))
+			{
+				$list_orders = GetInfoOrderByID($order_code);
+				$order_code_array = explode(",",$order_code);
+				$info_order = $list_orders[$order_code_array[0]];
+				//$list_order = $db->query('SELECT order_code FROM ' . TABLE .'_order WHERE id IN('. $order_code .')')->fetchAll();
+				foreach($list_orders as $order)
+				{
+					$array_order[] = $order['order_code'];
+				}
+				$xtpl->assign('info_order', $info_order);
+				
+				
+			}
+            $inputData['vnp_txnref'] = implode(' - ',$array_order);
+            
+            $nam = substr( $inputData['vnp_PayDate'],  0, 4);
+            $thang = substr( $inputData['vnp_PayDate'],  4, 2);
+            $ngay = substr( $inputData['vnp_PayDate'],  6, 2);
+            $gio = substr( $inputData['vnp_PayDate'],  8, 2);
+            $phut = substr( $inputData['vnp_PayDate'],  10, 2);
+            
+            $inputData['date_create'] = $ngay . '/' . $thang . '/' . $nam . ' - ' . $gio . ':' . $phut;
+            
+            $inputData['format_vnp_Amount'] = number_format($inputData['vnp_Amount']/100,0,",",",");
+            $xtpl->assign('thanhtoan', $inputData);
+        }
         if($user_info['userid']){
             $xtpl->parse('main.thanhcong.history');
         }
