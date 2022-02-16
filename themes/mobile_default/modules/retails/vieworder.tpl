@@ -24,6 +24,17 @@
 						</li>
 						<!-- END: ghn -->
 					</ul>
+
+					<ul class="timeline">
+						<!-- BEGIN: GHTK -->
+						<li>
+							<span class="">{LOOP_GHTK.time_add}</span>
+							<span class="{time_line_active}">{LOOP_GHTK.status_id}</span>
+							<p class="">{LOOP_GHTK.reason}</p>
+						</li>
+						<!-- END: GHTK -->
+					</ul>
+
 				</div>
 			</div>
 		</div>

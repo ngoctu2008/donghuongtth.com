@@ -20,15 +20,7 @@
 		$arr_classify = $nv_Request->get_array('arr_classify_ajax', 'post,get', '');
 		$arr_star = $nv_Request->get_array('arr_star_ajax', 'post,get', '');
 		$arr_comment = $nv_Request->get_array('arr_comment_ajax', 'post,get', '');
-		
 		$id_order = $nv_Request->get_int('id_order_ajax', 'post,get', 0);
-		
-		/*
-			$json[] = ['status'=>'OK1111', 'text'=>$arr_product];
-			print_r( json_encode( $json[0] ) );
-			die();
-		*/
-		
 		foreach($arr_star as $star)
 		{
 			if(!$star)
@@ -38,7 +30,6 @@
 				die();
 			}
 		}
-		
 		foreach($arr_comment as $comment)
 		{
 			if(!$comment)
@@ -48,15 +39,12 @@
 				die();
 			}
 		}
-		
-		
 		if(!$id_order)
 		{
 			$json[] = ['status'=>'NO', 'text'=>'No'];
 			print_r( json_encode( $json[0] ) );
 			die();
 		}
-		
 		// kiểm tra id_order đã nhập đánh giá chưa
 		$check_danhgia = $db->query('SELECT id FROM '. TABLE .'_rate WHERE order_id =' . $id_order)->fetchColumn();
 		if($check_danhgia)
@@ -65,7 +53,6 @@
 			print_r( json_encode( $json[0] ) );
 			die();
 		}
-		
 		for($i = 0; $i < count($arr_product); $i++)
 		{
 			
@@ -77,8 +64,6 @@
 			
 			$info_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id = ' . $id_order)->fetch();
 			;
-			
-			
 			$sql = "INSERT INTO " . TABLE . "_rate (product_id, classify_value_product_id, content, status, time_add, userid, star, other_image, order_id)
 			VALUES ( 
 			" . intval($product_id) . ",
@@ -93,8 +78,6 @@
 			)";
 			$data_insert = [];
 			$rowcontent['id'] = $db->insert_id($sql, 'id', $data_insert);
-			
-			
 			$list_rate =  $db->query("SELECT * FROM " .TABLE."_rate WHERE product_id = " . $product_id) -> fetchAll();
 			if($list_rate){
 				$total_star = 0; 
@@ -107,24 +90,15 @@
 				}else{
 				$rate['rate'] = 0;
 			}
-			
-			
-			
 			$sth = $db->prepare('UPDATE ' . TABLE . '_product SET star = ' . $rate['rate'] . ', number_rate = ' . count($list_rate) . ' WHERE id=' . $product_id);
 			$sth->execute();
-			
 			$content_ip= $user_info['username'] . ' đã đánh giá đơn hàng vào lúc ' . date('d/m/y H:i',NV_CURRENTTIME) . '(' . $info_order['order_code'] . ')';
 			$db->query('INSERT INTO '.$db_config['dbsystem']. '.'.$db_config['prefix'].'_notification_shop(language,area,module,admin_view_allowed,logic_mode ,send_from,send_to,content,add_time,obid,type,product_id) VALUES ('.$db->quote(NV_LANG_DATA) .',1,'.$db->quote($module_name).',0,0,'.$user_info['userid'].',' . $info_order['store_id'] .','.$db->quote($content_ip).','.NV_CURRENTTIME.',' . $info_order['store_id'] . ',"rate", ' . $product_id . ')');
-			
 		}
-		
 		$json[] = ['status'=>'OK', 'text'=>'Thêm đánh giá thành công!'];
 		print_r( json_encode( $json[0] ) );
 		die();
-		
 	}
-	
-	
 	$id = $nv_Request->get_title( 'id', 'post,get' );
 	if (!defined('NV_IS_USER')) {
 		echo '<script language="javascript">';
@@ -138,22 +112,12 @@
 		}
 	}
 	
-	
 	check_store_order_id($id);
-	// print_r($id);die;
-	$info_order = get_info_order($id);
 
-	
+	$info_order = get_info_order($id);
 	$info_store = get_info_store( $info_order['store_id'] );
-	// print_r(ok);die;
 	$info_store['alias_shop'] = NV_MY_DOMAIN .'/'.get_info_user($info_store['userid'])['username'].'/';
-	
-	if($info_order['payment_method']==0){
-		$info_order['payment_method']='Thanh toán khi nhận hàng';
-		}else{
-		$info_order['payment_method']='Thanh toán qua ví tiền';
-	}
-	
+
 	if(!$info_order['status_payment_vnpay']){
 		
 		$check_voucher = check_voucher('', $info_order['voucherid'], $info_store['userid']);
@@ -217,11 +181,6 @@
 	$xtpl->assign('NV_BASE_SITEURL', NV_BASE_SITEURL);
 	$xtpl->assign( 'LANG', $lang_module );
 	$xtpl->assign( 'GLANG', $lang_global );
-	
-	
-	
-	
-	
 	$xtpl->assign( 'LANG', $lang_module );
 	$xtpl->assign( 'NV_LANG_VARIABLE', NV_LANG_VARIABLE );
 	$xtpl->assign( 'NV_LANG_DATA', NV_LANG_DATA );
@@ -237,7 +196,6 @@
 	$xtpl->assign( 'back_link', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=ordercustomer',true));
 	$xtpl->assign('children_fund', $config_setting['children_fund'] . 'đ');
 	
-
 	if($user_info['userid']){
 		$info_order['check_rate'] = $db->query('SELECT count(*) FROM ' . TABLE . '_order t1 INNER JOIN ' . TABLE . '_order_item t2 ON t1.id = t2.order_id WHERE t2.product_id = ' . $info_order['id'] . ' AND t1.status = 3')->fetchColumn();
 		$info_order['check_rate_st1'] = $db->query('SELECT count(*) FROM ' . TABLE . '_product t1 INNER JOIN ' . TABLE . '_rate t2 ON t1.id = t2.product_id WHERE t2.product_id = ' . $info_order['id'] . ' AND t2.userid = ' .$user_info['userid'] . ' AND t2.status = 1')->fetchColumn();
@@ -245,18 +203,14 @@
 		$info_order['info_rate'] = $db->query('SELECT t2.* FROM ' . TABLE . '_product t1 INNER JOIN ' . TABLE . '_rate t2 ON t1.id = t2.product_id WHERE t2.product_id = ' . $info_order['id'] . ' AND t2.userid = ' .$user_info['userid'])->fetch();
 		
 		$info_order['check_rate_st2'] = $db->query('SELECT count(*) FROM ' . TABLE . '_product t1 INNER JOIN ' . TABLE . '_rate t2 ON t1.id = t2.product_id WHERE t2.product_id = ' . $info_order['id'] . ' AND t2.userid = ' .$user_info['userid'] . ' AND t2.status = 2')->fetchColumn();
-		
-		
 	}
 	
-	if($info_order['status_payment_vnpay'] and $info_order['payment'])
-	{
-		$info_order['status_payment_vnpay_title'] = 'VNPAY';
+	if($info_order['payment']){
+		$info_order['status_payment'] = 'Đã thanh toán';
+	}else{
+		$info_order['status_payment'] = 'Chưa thanh toán';
 	}
-	else
-	{
-		$info_order['status_payment_vnpay_title'] = 'Chưa thanh toán';
-	}
+	$info_order['payment_method'] = $global_payport[$info_order['payment_method']]['paymentname'];
 
 	$info_order['time_add']=date('d-m-Y H:i',$info_order['time_add']);
 	$xtpl->assign( 'info_order', $info_order );
@@ -271,13 +225,9 @@
 		$xtpl->parse( 'main.view.generate_page' );
 	}
 	$number = $page > 1 ? ( $per_page * ( $page - 1 ) ) + 1 : 1;
-	
 	$tamtinh = 0;
-	
 	$i = 1;
-	
 	while ( $view = $sth->fetch() ) {
-		
 		$view['number'] = $number++;
 		if($view['classify_value_product_id']>0){
 			$classify_value_product_id=get_info_classify_value_product($view['classify_value_product_id']);
@@ -303,39 +253,30 @@
 			$server = 'banhang.'.$_SERVER["SERVER_NAME"];
 			$view['image']  ='https://'. $server .NV_BASE_SITEURL . NV_FILES_DIR . '/' . $module_upload. '/' . $view['image'] ;
 		}
-		
 		$view['alias_product'] =nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $view['alias'].'-'.$view['id_product'], true );
-		
 		$xtpl->assign( 'VIEW', $view );
 		$xtpl->parse( 'main.view.loop' );
 		$list_product[] = $view;
-		
-		
 	}
-	
 	$tamtinh=number_format($tamtinh);
-	
 	$xtpl->assign( 'tamtinh', $tamtinh );
-	
 	$stt_logs=1;
 	foreach($list_logs_order as $value_logs){
-		if($value_logs['status_id_old']==-1){
+		if($value_logs['status_id_old'] == -1){
 			$value_logs['status_id_old']='';
 			}else{
-			$value_logs['status_id_old']=get_info_order_status($value_logs['status_id_old'])['name'];
+			$value_logs['status_id_old'] = get_info_order_status($value_logs['status_id_old'])['name'];
 		}
 		if($value_logs['user_add']>0){
-			$value_logs['user_add']=get_info_user($value_logs['user_add'])['username'];
+			$value_logs['user_add'] = get_info_user($value_logs['user_add'])['username'];
 			}else{
-			$value_logs['user_add']='Khách đặt hàng không có tài khoản';
+			$value_logs['user_add'] = 'Khách đặt hàng không có tài khoản';
 		}
 		$value_logs['time_add']=date('d/m/Y H:i',$value_logs['time_add']);
 		$value_logs['number']=$stt_logs++;
 		$xtpl->assign( 'LOOP_LOGS', $value_logs );
 		$xtpl->parse( 'main.logs_order' );
 	}
-	
-	
 	if(!empty($info_order['shipping_code'])){
 		if($info_order['transporters_id']==4 || $info_order['transporters_id']==5){
 			$list_tracuu=check_info_order_vnpost_history($info_order['shipping_code']);
@@ -346,10 +287,8 @@
 				
 				$xtpl->parse( 'main.vnpost' );
 			}
-			}elseif($info_order['transporters_id'] == 3){
+		}elseif($info_order['transporters_id'] == 3){
 			$list_tracuu_ghn = check_info_order_ghn_history($info_order['shipping_code']);
-			
-		
 			foreach($list_tracuu_ghn as $value){
 				//print_r($value);die;
 				$value['status_ghn'] = $global_status_ghn[$value['status']]['desc_status_ghn'];
@@ -363,10 +302,25 @@
 				$xtpl->assign( 'LOOP_GHN', $value );
 				$xtpl->parse( 'main.ghn' );
 			}
+		}elseif($info_order['transporters_id'] == 2){
+			$time_line = time_line_ghtk($info_order['shipping_code']);
+			foreach($time_line as $index => $value){
+				
+				if ($index == 0){
+					$xtpl->assign( 'time_line_active', 'secondary_text' );
+				}else{
+					$xtpl->assign( 'time_line_active', '' );
+				}
+				$value['status_id'] = $global_status_order_ghtk[$value['status_id']]['name'];
+				$value['time_add'] = date('H:i - d/m/Y',$value['time_add']);
+				if($value['reason_code']){
+					$value['reason'] = ' - ' . $global_status_order_error_ghtk[$value['reason_code']]['title'] ;
+				}
+				$xtpl->assign( 'LOOP_GHTK', $value );
+				$xtpl->parse( 'main.GHTK' );
+			}
 		}
 	}
-	
-	
 	
 	if($info_order['status1']==3){
 		foreach ($list_product as $key => $view) {
@@ -424,8 +378,6 @@
 						$y ++;
 					}
 				}
-				
-				
 				}else{
 				$xtpl->assign( 'VIEW', $view );
 				$xtpl->parse('main.view.rate.loop.no_star');

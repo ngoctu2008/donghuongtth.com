@@ -36,9 +36,9 @@ $global_district = json_decode($redis->get('location_district'), true);
 // lấy tất cả xã phường
 $global_ward = json_decode($redis->get('location_ward'), true);
 
-//$global_status_order_ghtk = json_decode($redis->get('status_order_ghtk'),true);
-//print_r($global_status_order_ghtk);die;
+$global_status_order_ghtk = json_decode($redis->get('status_order_ghtk'),true);
 
+$global_status_order_error_ghtk = json_decode($redis->get('status_order_error_ghtk'),true);
 
 // lấy tất cả cổng thanh toán
 if (!$redis->exists('catalogy_main')) {
@@ -46,6 +46,7 @@ if (!$redis->exists('catalogy_main')) {
 	$redis->set('payport', json_encode($payport));
 }
 $global_payport = json_decode($redis->get('payport'), true);
+
 //$redis->delete('catalogy_main');
 if (!$redis->exists('catalogy_main')) {
 	$catalogys = get_categories_all();
@@ -53,10 +54,6 @@ if (!$redis->exists('catalogy_main')) {
 }
 
 $global_catalogys = json_decode($redis->get('catalogy_main'), true);
-
-//print_r($global_catalogys);die;
-
-// danh mục đa cấp đưa hết vào redis lev theo cấp
 
 //$redis->delete('catalogy_main_all_lev');
 
@@ -66,6 +63,12 @@ if (!$redis->exists('catalogy_main_all_lev')) {
 	$redis->set('catalogy_main_all_lev', json_encode($catalogys));
 }
 
+function time_line_ghtk($shipping_code)
+{
+	global $db;
+	$list_status = $db->query('SELECT status_id, reason_code, reason, time_add FROM ' . TABLE . '_history_ghtk_detail WHERE label ="' . $shipping_code . '" ORDER BY time_add DESC')->fetchAll();
+	return $list_status;
+}
 
 //Tự tạo thêm thư mục theo ngày tháng
 if (!is_dir(NV_ROOTDIR . '/uploads/' . $module_upload . '/' . date('Y_m'))) {
@@ -74,19 +77,30 @@ if (!is_dir(NV_ROOTDIR . '/uploads/' . $module_upload . '/' . date('Y_m'))) {
 	$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_upload_dir(dirname,time) VALUES(' . $db->quote($upload_dir) . ',' . NV_CURRENTTIME . ')');
 }
 
-// function status_order_ghtk()
-// {
-// 	global $db;
-// 	$list = $db->query('SELECT * FROM ' . TABLE . '_status_order_ghtk ')->fetchAll();
-// 	$array_status = array();
-// 	foreach($list as $row)
-// 	{
-// 		$array_status[] = $row['status'];
-// 	}
-// 	print_r($array_status);die;
-// 	return $array_status;
+function status_order_ghtk()
+{
+	global $db;
+	$list = $db->query('SELECT * FROM ' . TABLE . '_status_order_ghtk ')->fetchAll();
+	$array_status = array();
+	foreach($list as $row)
+	{
+		$array_status[$row['status']] = $row;
+	}
+	return $array_status;
+}
+
+function status_order_error_ghtk()
+{
+	global $db;
+	$list = $db->query('SELECT * FROM ' . TABLE . '_status_order_error_ghtk ')->fetchAll();
+	$array_status = array();
+	foreach($list as $row)
+	{
+		$array_status[$row['status']] = $row;
+	}
 	
-// }
+	return $array_status;
+}
 
 function get_payment_all()
 {
@@ -512,7 +526,7 @@ function update_time_add_order($order_id)
 // xử lý thanh toán vnpay thành công
 function xulythanhtoanthanhcong($order_text, $inputData)
 {
-	global $db, $db_config, $user_info, $module_name, $lang_module, $global_payport;
+	global $db, $db_config, $user_info, $module_name, $lang_module, $global_payport, $global_config;
 
 	$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
 
@@ -3450,7 +3464,7 @@ function cancel_ghtk_admin($order_id){
 function update_ghtk_admin($info_order, $order_ghtk)
 {
 	global $config_setting, $db, $admin_info;
-
+	
 	$sql = "INSERT INTO " . TABLE . "_history_ghtk
 	( order_id, label, fee, insurance_fee, status_id, time_add)
 	VALUES
@@ -3462,8 +3476,8 @@ function update_ghtk_admin($info_order, $order_ghtk)
 	$data_insert['insurance_fee'] = $order_ghtk['order']['insurance_fee'];
 	$data_insert['status_id'] = $order_ghtk['order']['status_id'];
 	$data_insert['time_add'] = NV_CURRENTTIME;
+	
 	$history_ghtk_id = $db->insert_id($sql, 'id', $data_insert);
-
 	// xử lý thông tin sau khi tạo vận đơn thành công status=2 đơn hàng đang giao
 	$db->query('UPDATE ' . TABLE . '_order SET status = 2, shipping_code=' . $db->quote($order_ghtk['order']['label']) . ' where id=' . $info_order['id']);
 	$content = 'Chuyển sang đơn vị vận chuyển GHTK Thành Công';

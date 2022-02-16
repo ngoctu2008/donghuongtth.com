@@ -234,7 +234,7 @@
 								<td>
 									Phương thức thanh toán: 
 									<span class="to_mau">
-										{info_order.payment_method}
+										{info_order.payment_method} - {info_order.status_payment}
 									</span>
 								</td>
 							</tr>
@@ -494,7 +494,15 @@
 					<p style="margin-top: 15px;">{LOOP_GHN.warehouse} {LOOP_GHN.status_error_ghn}</p>
 				</li>
 				<!-- END: ghn -->
+				<!-- BEGIN: GHTK -->
+				<li>
+					<span class="">{LOOP_GHTK.time_add}  </span>
+					<span class="{time_line_active}">{LOOP_GHTK.status_id}</span>
+					<span class="">{LOOP_GHTK.reason}</span>
+				</li>
+				<!-- END: GHTK -->
 			</ul>
+			
 		</div>
 	</div>
 	

@@ -19,11 +19,17 @@
 
 
 	//redis GHTK
-	// if(!$redis->exists('status_order_ghtk'))
-	// {
-	// 	$status_order_ghtk = status_order_ghtk();
-	// 	$redis->set('status_order_ghtk', json_encode($status_order_ghtk));	
-	// }
+	if(!$redis->exists('status_order_error_ghtk'))
+	{
+		$status_order_error_ghtk = status_order_error_ghtk();
+		$redis->set('status_order_error_ghtk', json_encode($status_order_error_ghtk));	
+	}
+
+	if(!$redis->exists('status_order_ghtk'))
+	{
+		$status_order_ghtk = status_order_ghtk();
+		$redis->set('status_order_ghtk', json_encode($status_order_ghtk));	
+	}
 	
 	// phí bảo hiểm hàng hóa 1 vận đơn
 	function baohiemhanghoa($order)
