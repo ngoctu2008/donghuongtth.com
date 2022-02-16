@@ -4757,7 +4757,7 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 			$i = 0;
 			$rawHash = "";
 			
-			$row_payment = $global_payport[$payment_method]
+			$row_payment = $global_payport[$payment_method];
 			$payment_config = unserialize(nv_base64_decode($row_payment['config']));
 			$endpoint = $payment_config['endpoint'];
 			$partnerCode = $inputData['partnerCode'];
