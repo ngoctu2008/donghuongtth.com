@@ -7,7 +7,7 @@
     <div class="row mt-5">
         <div class="col-6 pr-5">
 		<p class="text_gray_color fs_16	">Thông tin liên hệ</p>
-		<img src="{NV_SITE_BASEURL}/themes/default/chonhagiau/images/logo.png" style="width : 383px;">
+		<img src="https://chonhagiau.com/uploads/logo_ecng_400px.png">
             <!-- BEGIN: dep -->
             <div class="panel panel-default pr-5">
                 <div class="panel-body bg_gray  rounded pl-3 py-2 mb-3 " style="width : 383px;">
