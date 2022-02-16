@@ -4795,9 +4795,9 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 					
 					if($sum_total_payment && $sum_total_payment == $amount ){
 						// check Status
-						if ($inputData['resultCode'] == '0') {
+						if ($resultCode == '0') {
 									$status = true;
-
+									UpdatePaymentOrder($order_code);
 						} else {
 							$error[] = 'Thanh toán thất bại!';
 						}
