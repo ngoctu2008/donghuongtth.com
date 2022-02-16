@@ -40,7 +40,7 @@ if($order_code == '' ){
         }
         
         
-        require_once(NV_ROOTDIR.'modules/retails/payment/momo.complete.php');
+        require_once(NV_ROOTDIR.'/modules/retails/payment/momo.complete.php');
         
         if($user_info['userid']){
             $xtpl->parse('main.thanhcong.history');

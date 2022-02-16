@@ -17,8 +17,8 @@ foreach ($data as $key => $value)
 {
         $inputData[$key] = $value;
 }
-//$error = CheckPaymentOrder($payment_method,$order_code,$inputData);	
-//$data = GetPaymentStatus($payment_method,$order_code,$error,$inputData);
+$error = CheckPaymentOrder($payment_method,$order_code,$inputData);	
+$data = GetPaymentStatus($payment_method,$order_code,$error,$inputData);
 
 print_r($error);
 print_r($data);
