@@ -17,7 +17,7 @@ foreach ($data as $key => $value)
 {
         $inputData[$key] = $value;
 }
-
+$order_code = str_replace('-',',', $inputData['orderId']);
 $error = CheckPaymentOrder($payment_method,$order_code,$inputData);	
 $data = GetPaymentStatus($payment_method,$order_code,$error,$inputData);
 

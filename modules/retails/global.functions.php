@@ -3760,48 +3760,6 @@ function execPostRequest($url, $data)
 function send_payment($payment_mothod, $mm_amount, $mm_OrderInfo, $list_order)
 {
 	global $global_payport;
-	/* global $config_setting;
-		$inputData = array(
-        "mm_Version" => "2.0.0",
-        "mm_TmnCode" => $mm_TmnCode,
-        "mm_Amount" => (int)$mm_amount * 100,
-        "mm_Command" => "pay",
-        "mm_CreateDate" => date('YmdHis') ,
-        "mm_CurrCode" => "VND",
-        "mm_IpAddr" => $mm_IpAddr,
-        "mm_Locale" => 'vn',
-        "mm_OrderInfo" => $mm_OrderInfo,
-        "mm_ReturnUrl" => $mm_ReturnUrl,
-        "mm_TxnRef" => $mm_TransactionNo,
-		);
-		ksort($inputData);
-		$hashdata = "";
-		$i = 0;
-		foreach ($inputData as $key => $value)
-		{
-			if ($i == 1)
-			{
-				$hashdata .= '&' . $key . "=" . $value;
-			}
-			else
-			{
-				$hashdata .= $key . "=" . $value;
-				$i = 1;
-			}
-			$query .= urlencode($key) . "=" . urlencode($value) . '&';
-		}
-		$mm_Url = $mm_Url . "?" . $query;
-		if (isset($mm_HashSecret))
-		{
-			$mmSecureHash = hash('sha256', $mm_HashSecret . $hashdata);
-			$mm_Url .= 'mm_SecureHashType=SHA256&mm_SecureHash=' . $mmSecureHash;
-		}
-		$url = 'https://test-payment.momo.vn/v2/gateway/api/create' . $mm_Url;
-		return $url; */
-
-
-
-
 	
 	$row_payment = $global_payport[$payment_mothod];
 	$payment_config = unserialize(nv_base64_decode($row_payment['config']));
@@ -4662,17 +4620,35 @@ function CheckPaymentOrder($payment_method, $order_code, $inputData)
 			$error[] = 'Giao dịch không thành công!';
 		}
 	}
+	if ($payment_method == 'momo') {
+		/*
+		https://dev.chonhagiau.com/momo/?partnerCode=MOMOGQQA20220110&orderId=870&requestId=1644977949&amount=35000&orderInfo=Thanh+toan+giao+dich+ECNG0000870+vao+thoi+gian+16-02-2022+09%3A19&orderType=momo_wallet&transId=2644025059&resultCode=0&message=Giao+d%E1%BB%8Bch+th%C3%A0nh+c%C3%B4ng.&payType=qr&responseTime=1644978032873&extraData=&signature=3dd35a45a42df0185d2986932718a4e6a309207a88f7f9ebbfb87547675f0539*/
+		if ($inputData['resultCode'] != '0') {
+			$error[] = $inputData['message'];
+		}/*  elseif ($inputData['resultCode'] == '21') {
+			$error[] = 'Số tiền không hợp lệ!';
+		} elseif ($inputData['resultCode'] == '42') {
+			$error[] = 'Không tìm thấy giao dịch xác nhận!';
+		} elseif ($inputData['resultCode'] == '97') {
+			$error[] = 'Chữ ký không hợp lệ!';
+		} elseif ($inputData['resultCode'] == '99') {
+			$error[] = 'Lỗi hệ thống khác!';
+		} elseif ($inputData['resultCode'] == '24') {
+			$error[] = 'Giao dịch không thành công!';
+		} */
+	}
 
 	return $error;
 }
 function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
-	global $db,$global_config,$config_setting,$user_info;
+	global $db,$global_config,$config_setting,$user_info,$global_payport;
 	$status = false;
 
 		// tính tổng tiền thanh toán
 		$sum_total_payment = $db->query('SELECT sum(total) FROM ' . TABLE . '_order WHERE id IN(' . $order_code . ')')->fetchColumn();
 
 		//$_SESSION[$module_name . '_' . $payment_method] = true;
+		
 		if($payment_method == 'vnpay'){
 				$vnp_SecureHash = $inputData['vnp_SecureHash'];
 				unset($inputData['vnp_SecureHashType']);
@@ -4759,7 +4735,88 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 			//$inputData = array();
 			//$inputData['order_code'] = $nv_Request->get_title('order_code', 'get', '', 1);
 
-		}
+		}elseif($payment_method == 'momo'){
+			/*
+		https://dev.chonhagiau.com/momo/?partnerCode=MOMOGQQA20220110&orderId=870&requestId=1644977949&amount=35000&orderInfo=Thanh+toan+giao+dich+ECNG0000870+vao+thoi+gian+16-02-2022+09%3A19&orderType=momo_wallet&transId=2644025059&resultCode=0&message=Giao+d%E1%BB%8Bch+th%C3%A0nh+c%C3%B4ng.&payType=qr&responseTime=1644978032873&extraData=&signature=3dd35a45a42df0185d2986932718a4e6a309207a88f7f9ebbfb87547675f0539*/
+	
+			$orderType = $inputData['orderType'];
+			$transId = $inputData['transId'];
+			$resultCode = $inputData['resultCode'];
+			$message = $inputData['message'];
+			$payType = $inputData['payType'];
+			$responseTime = $inputData['responseTime'];
+			$momo_signature = $inputData['signature'];
+			unset($inputData['orderType']);
+			unset($inputData['transId']);
+			unset($inputData['resultCode']);
+			unset($inputData['message']);
+			unset($inputData['payType']);
+			unset($inputData['responseTime']);
+			unset($inputData['signature']);
+			ksort($inputData);
+			$i = 0;
+			$rawHash = "";
+			
+			$row_payment = $global_payport[$payment_mothod];
+			$payment_config = unserialize(nv_base64_decode($row_payment['config']));
+			$endpoint = $payment_config['endpoint'];
+			$partnerCode = $inputData['partnerCode'];
+			$accessKey = $payment_config['accessKey'];
+			$orderInfo = $inputData['orderInfo'];
+			$amount = $inputData['amount'];
+			$orderId = $inputData['orderId'];
+			$redirectUrl = $payment_config['redirectUrl'];
+			$ipnUrl = $payment_config['ipnUrl'];
+			$serectkey = $payment_config['signature'];
+			$requestId = $inputData['requestId'];
+			$requestType = $payment_config['requestType'];
+			$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+			$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+			$signature = hash_hmac("sha256", $rawHash, $serectkey);
+			
+			if (!defined('NV_IS_USER') or !$global_config['allowuserlogin']) {
+					$user_info['userid'] = 0;
+			}
+			$order_text = str_replace('-',',', $orderId);
+			$check_orderid = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .')')->fetchColumn(); 
+
+			//print_r($tongtien_thanhtoan);die;
+			$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+			$signature = hash_hmac("sha256", $rawHash, $serectkey);
+		
+			// checksum
+			//print_r($vnp_SecureHash);die;
+			if ($signature == $momo_signature)
+			{
+				// check OrderId
+				if ($check_orderid)
+				{
+					
+					if($sum_total_payment && $sum_total_payment == $amount ){
+						// check Status
+						if ($check_payment) {
+							
+								if ($inputData['resultCode'] == '00')
+								{
+									$status = true;
+								
+								}
+						
+						} else {
+							$error[] = 'Thanh toán thất bại!';
+						}
+					} else {
+						$error[] = 'Số tiền không hợp lệ!';
+					}
+				} else {
+					$error[] = 'Đơn hàng không tìm thấy!';
+				}
+			}else{
+				$error[] = 'Chữ ký không hợp lệ!';
+			}
+
+		// ket thuc xu ly chuan
+	}
 		
 	
 	$data=array();
