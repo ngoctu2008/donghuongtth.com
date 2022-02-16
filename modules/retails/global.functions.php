@@ -4757,7 +4757,7 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 			$i = 0;
 			$rawHash = "";
 			
-			$row_payment = $global_payport[$payment_mothod];
+			$row_payment = $global_payport[$payment_method]
 			$payment_config = unserialize(nv_base64_decode($row_payment['config']));
 			$endpoint = $payment_config['endpoint'];
 			$partnerCode = $inputData['partnerCode'];
@@ -4783,7 +4783,7 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 			//print_r($tongtien_thanhtoan);die;
 			$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
 			$signature = hash_hmac("sha256", $rawHash, $serectkey);
-		
+			print_r($rawHash);
 			// checksum
 			//print_r($vnp_SecureHash);die;
 			if ($signature == $momo_signature)
