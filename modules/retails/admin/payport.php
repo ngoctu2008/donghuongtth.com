@@ -118,7 +118,7 @@ if ($nv_Request->isset_request('saveconfigpaymentedit', 'post')) {
 
     nv_insert_logs(NV_LANG_DATA, $module_name, 'log_edit_product', "edit " . $paymentname, $admin_info['userid']);
     $nv_Cache->delMod($module_name);
-
+    $redis->delete('payport');
     Header("Location: " . NV_BASE_ADMINURL . "index.php?" . NV_NAME_VARIABLE . "=" . $module_name . "&" . NV_OP_VARIABLE . "=" . $op);
 }
 
@@ -202,7 +202,7 @@ if (NV_LANG_DATA == 'vi') {
 $xtpl->parse('main');
 $contents = $xtpl->text('main');
 // xóa cache redis danh mục payment
-$redis->delete('payport');
+
 include NV_ROOTDIR . '/includes/header.php';
 echo nv_admin_theme($contents);
 include NV_ROOTDIR . '/includes/footer.php';

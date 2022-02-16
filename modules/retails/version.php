@@ -13,7 +13,7 @@ if (!defined('NV_MAINFILE'))
 
 $module_version = array(
     'name' => 'retails',
-    'modfuncs' => 'main,detail,search,ajax,viewcat,cart,order,vieworder,ordercustomer,viewcatshops,follow,wishlist,address,vnpay_inp,payment,categories,re-payment,complain,complain-list,complain-view,complain-vandon,cronjob,landingpage,product-shock,voucher-wallet,check-order',
+    'modfuncs' => 'main,detail,search,ajax,viewcat,cart,order,vieworder,ordercustomer,viewcatshops,follow,wishlist,address,vnpay_inp,payment,categories,re-payment,complain,complain-list,complain-view,complain-vandon,cronjob,landingpage,product-shock,voucher-wallet,check-order,momo',
     'change_alias' => 'main,detail,search,viewcat,cart,order,vieworder,ordercustomer,viewcatshops,follow,wishlist,cronjob,landingpage,product-shock,voucher-wallet,check-order',
     'submenu' => 'ordercustomer,address,follow, wishlist,address,landingpage,product-shock,voucher-wallet,check-order',
     'is_sysmod' => 0,

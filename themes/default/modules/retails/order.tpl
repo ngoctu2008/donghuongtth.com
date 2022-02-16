@@ -8,6 +8,12 @@
 	.modal-backdrop.show {
 	display:none;
 	}
+	#modal_login{
+		z-index:1040 !important;
+	}
+	.modal{
+		z-index:2 !important;
+	}
 	.modal-open{
 	overflow: inherit;
 	padding-right:inherit !important;
@@ -82,15 +88,14 @@
 	<div class="payment_address bg_white rounded-lg p-4 my-3">
 		<p class="secondary_text fs_18"><i class="fa fa-map-marker pr-2" aria-hidden="true"></i>Địa chỉ nhận hàng</p>
 		<div class="row">
-			<div class="col-10">
-				<p class="fs_16 d-flex justify-content-between">
-					<span class="text-break">{ADDRESS.name} </span>
-					<span class="ml-2 mr-3">{ADDRESS.phone}</span>
-					<span class="text_gray_color text-break">{ADDRESS.address}</span>
-				</p>
+			<div class="col-lg-11 col-md-10">
+				<div class="row fs_16">
+					<div class="col-lg-4 col-md-4 text-break">{ADDRESS.name}</div>
+					<div class="col-lg-2 col-md-4">{ADDRESS.phone}</div>
+					<div class="col-lg-6 col-md-4 text_gray_color">{ADDRESS.address}</div>
+				</div>
 			</div>
-			<div class="col-2 text-center"><button class="btn_none secondary_text ml-3" id="change_address">Thay đổi</button></div>
-			
+			<div class="col-lg-1 col-md-2 text-center"><button class="btn_none secondary_text ml-3" id="change_address">Thay đổi</button></div>
 		</div>
 		
 	</div>
@@ -117,15 +122,15 @@
 			<!-- BEGIN: address_no_login -->
 
 				<div class="row mt-4">
-					<div class="col-11">
-						<p class="fs_16 d-flex justify-content-between">
-							<span class="text-break">{FULL_NAME}</span>
-							<span class="text-break">{FULL_ADDRESS}</span>
-							<span class="ml-2 mr-3">{FULL_PHONE}</span>
-							<span class="text-break">{FULL_EMAIL}</span>
-						</p>
+					<div class="col-lg-11 col-md-10">
+						<div class="row fs_16">
+							<div class="col-lg-3 col-md-6 text-break pb-2">{FULL_NAME}</div>
+							<div class="col-lg-2 col-md-6 pb-2">{FULL_PHONE}</div>
+							<div class="col-lg-3 col-md-6">{FULL_EMAIL}</div>
+							<div class="col-lg-4 col-md-6 text_gray_color">{FULL_ADDRESS}</div>
+						</div>
 					</div>
-					<a href="{LINK_ADDRESS}" class="col-1 text-center secondary_text">Thay đổi</a>
+					<a href="{LINK_ADDRESS}" class="col-lg-1 col-md-2 text-center secondary_text">Thay đổi</a>
 				</div>
 
 			<!-- END: address_no_login -->
@@ -274,6 +279,11 @@
 			<span hidden id="price_choosed_{info_store.id}">{max_price_voucher_value}</span>
 			<div class="w-100 position-relative"> 
 				<div class="text-right">
+					<svg width="20" height="14" style="margin-bottom:2px ;" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M16.5 5.33317V6.33317C17.0523 6.33317 17.5 5.88546 17.5 5.33317H16.5ZM16.5 8.6665H17.5C17.5 8.11422 17.0523 7.6665 16.5 7.6665V8.6665ZM1.5 8.6665V7.6665C0.947715 7.6665 0.5 8.11422 0.5 8.6665H1.5ZM1.5 5.33317H0.5C0.5 5.88546 0.947715 6.33317 1.5 6.33317L1.5 5.33317ZM12.5 1.1665C12.5 0.614219 12.0523 0.166504 11.5 0.166504C10.9477 0.166504 10.5 0.614219 10.5 1.1665H12.5ZM10.5 2.83317C10.5 3.38546 10.9477 3.83317 11.5 3.83317C12.0523 3.83317 12.5 3.38546 12.5 2.83317H10.5ZM12.5 6.1665C12.5 5.61422 12.0523 5.1665 11.5 5.1665C10.9477 5.1665 10.5 5.61422 10.5 6.1665H12.5ZM10.5 7.83317C10.5 8.38546 10.9477 8.83317 11.5 8.83317C12.0523 8.83317 12.5 8.38546 12.5 7.83317H10.5ZM12.5 11.1665C12.5 10.6142 12.0523 10.1665 11.5 10.1665C10.9477 10.1665 10.5 10.6142 10.5 11.1665H12.5ZM10.5 12.8332C10.5 13.3855 10.9477 13.8332 11.5 13.8332C12.0523 13.8332 12.5 13.3855 12.5 12.8332H10.5ZM3.16667 0.166504C1.69391 0.166504 0.5 1.36041 0.5 2.83317H2.5C2.5 2.46498 2.79848 2.1665 3.16667 2.1665V0.166504ZM14.8333 0.166504H3.16667V2.1665H14.8333V0.166504ZM17.5 2.83317C17.5 1.36041 16.3061 0.166504 14.8333 0.166504V2.1665C15.2015 2.1665 15.5 2.46498 15.5 2.83317H17.5ZM17.5 5.33317V2.83317H15.5V5.33317H17.5ZM15.8333 6.99984C15.8333 6.63165 16.1318 6.33317 16.5 6.33317V4.33317C15.0272 4.33317 13.8333 5.52708 13.8333 6.99984H15.8333ZM16.5 7.6665C16.1318 7.6665 15.8333 7.36803 15.8333 6.99984H13.8333C13.8333 8.4726 15.0272 9.6665 16.5 9.6665V7.6665ZM17.5 11.1665V8.6665H15.5V11.1665H17.5ZM14.8333 13.8332C16.3061 13.8332 17.5 12.6393 17.5 11.1665H15.5C15.5 11.5347 15.2015 11.8332 14.8333 11.8332V13.8332ZM3.16667 13.8332H14.8333V11.8332H3.16667V13.8332ZM0.5 11.1665C0.5 12.6393 1.69391 13.8332 3.16667 13.8332V11.8332C2.79848 11.8332 2.5 11.5347 2.5 11.1665H0.5ZM0.5 8.6665V11.1665H2.5V8.6665H0.5ZM2.16667 6.99984C2.16667 7.36803 1.86819 7.6665 1.5 7.6665V9.6665C2.97276 9.6665 4.16667 8.4726 4.16667 6.99984H2.16667ZM1.5 6.33317C1.86819 6.33317 2.16667 6.63165 2.16667 6.99984H4.16667C4.16667 5.52708 2.97276 4.33317 1.5 4.33317V6.33317ZM0.5 2.83317V5.33317H2.5V2.83317H0.5ZM10.5 1.1665V2.83317H12.5V1.1665H10.5ZM10.5 6.1665V7.83317H12.5V6.1665H10.5ZM10.5 11.1665V12.8332H12.5V11.1665H10.5Z" fill="#E1A208"/>
+					</svg>
+					<span class="pr-5 fw_500">
+					Voucher của Shop</span>
 					<span id="max_price_voucher_{info_store.id}" class="{border} secondary_text p-1">{max_price_voucher}</span>
 					<span id="select_voucher_{info_store.id}" class="pl-2 secondary_text" style="cursor:pointer" data-toggle="modal" data-target="#voucher_modal_{info_store.id}">
 						Chọn Voucher 
@@ -356,10 +366,15 @@
 				
 				$.map( list_voucher_{info_store.id}, function(giatri, chiso) {
 					
-					content += '<div class="mb-3 coupons_voucher_wallet rounded d-flex" style="height:100px">';
+					
+					if(giatri["status"] == 1){
+						content += '<div class="mb-3 coupons_voucher_wallet rounded d-flex " style="height:100px;background:#fdf8eb">';
+						}else{
+							content += '<div class="mb-3 coupons_voucher_wallet rounded d-flex " style="height:100px">';
+					}
 					content += '<div class="coupons_left w-25">';
 					content += '<div class="pl-2">';
-					content += '<img class="img-fluid rounded" src="/ch-nha-giau/src/uploads/logo_ecng_1.png" alt=""/>';
+					content += '<img class="img-fluid rounded" src="https://{LOGO_SRC}" alt=""/>';
 					content += '</div>';
 					content += '<div class="coupons_left-border">';
 					content += '</div>';
@@ -390,31 +405,9 @@
 					content += '</div>';
 					content += '</div>';
 					content += '</div>';
-					
-					
-					
-					<!-- content += '<p>' + giatri["voucher_name"] +'</p>'; -->
-					<!-- content += '<p> HSD '+ giatri["time_to"] +'</p>'; -->
-					
-					<!-- content += '<p> Giảm '+ giatri["discount_price"] +'</p>'; -->
-					<!-- if(giatri["maximum_discount"] > 0){ -->
-					<!-- content += '<p> Giảm tối đa ' + format_number(Number(giatri["maximum_discount"])) + 'đ' +'</p>'; -->
-					<!-- } -->
-					
-					<!-- content += '<p> Đơn tối thiểu ' + format_number(Number(giatri["minimum_price"])) + 'đ' +'</p>'; -->
-					
-					<!-- var ojb = JSON.stringify(giatri).replace(/"/g, '&quot;'); -->
-					<!-- content += '<p>'+ giatri["list_product"] +'</p>'; -->
-					<!-- if(giatri["status"] == 1){ -->
-					<!-- content += '<button onclick="remove_choose_voucher_' + store_id + '(' + giatri["voucherid"] + ','+ store_id +')">Bỏ chọn</button>'; -->
-					<!-- }else{ -->
-					<!-- content += '<button onclick="apply_voucher_'+ store_id +'('+ ojb + ','+ store_id + ','+ chiso +');">Áp dụng</button>';	 -->
-					<!-- } -->
 				});	
 				$('#list_voucher_shop_' + store_id).html(content);
-				
 			}
-			
 			
 			function apply_voucher_{info_store.id}(value, store_id, chiso){
 				//đổi thông tin session voucherid
@@ -454,7 +447,8 @@
 							//thay đổi các chỉ số
 							$('#voucherid_choosed_'+ store_id ).text(value.voucherid);
 							$('#price_choosed_'+ store_id ).text(value.price);
-							$('#max_price_voucher_'+ store_id ).html('-' + format_number(Number(value.price)) + 'đ');
+							$('#max_price_voucher_'+ store_id ).html('- ' + format_number(Number(value.price)) + 'đ');
+							$('#max_price_voucher_'+ store_id ).addClass('max_price_voucher_shop');
 							//cập nhật
 							show_list_voucher_{info_store.id}(store_id);
 						}
@@ -467,6 +461,7 @@
 				});
 				
 			}
+			
 			
 			function updateAll_status_{info_store.id}(voucherid){
 				objIndex = list_voucher_{info_store.id}.findIndex((obj => obj.voucherid > 1));
@@ -510,6 +505,7 @@
 							$('#voucherid_choosed_'+ store_id ).text(0);
 							$('#price_choosed_'+ store_id ).text(0);
 							$('#max_price_voucher_'+ store_id ).html('');
+							$('#max_price_voucher_'+ store_id ).removeClass('max_price_voucher_shop');
 							//cập nhật
 							show_list_voucher_{info_store.id}(store_id);
 						}
