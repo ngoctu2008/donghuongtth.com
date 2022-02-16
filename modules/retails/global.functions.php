@@ -3810,7 +3810,8 @@ function send_payment($payment_mothod, $mm_amount, $mm_OrderInfo, $list_order)
 	$accessKey = $payment_config['accessKey'];
 	$orderInfo = $mm_OrderInfo;
 	$amount = $mm_amount;
-	$orderId = time() . "";
+	$order_full=implode('-',$list_order);
+	$orderId = $order_full;
 	$redirectUrl = $payment_config['redirectUrl'];
 	$ipnUrl = $payment_config['ipnUrl'];
 	$extraData = "";
