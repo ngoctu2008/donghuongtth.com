@@ -3465,65 +3465,40 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	$length_product = $nv_Request->get_float( 'length', 'get,post', 0 );
 	$width_product = $nv_Request->get_float( 'width', 'get,post', 0 );
 	$height_product = $nv_Request->get_float( 'height', 'get,post', 0 );
+
 	$total = $nv_Request->get_int( 'total', 'get,post', 0 );
 	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
-	$ward_id_ghn_receive = get_info_ward( $ward_id )['ghnid'];
+	$ward_id_ghn_receive = $global_ward[$ward_id]['ghnid'];
+	
 	$district_id = $nv_Request->get_int( 'district_id', 'get,post', 0 );
-	$district_id_ghn_receive = get_info_district( $district_id )['ghnid'];
+	$district_id_ghn_receive = $global_district[$district_id]['ghnid'];
+
 	$shops_id_session = $nv_Request->get_int( 'shops_id', 'get,post', 0 );
 	$warehouse_id = $nv_Request->get_int( 'warehouse_id', 'get,post', 0 );
 	$info_warehouse = get_info_warehouse( $warehouse_id );
-	$province_id_ghn_send = get_info_province( $info_warehouse['province_id'] )['ghnid'];
-	$district_id_ghn_send = get_info_district( $info_warehouse['district_id'] )['ghnid'];
+
+	$province_id_ghn_send = $global_province[$info_warehouse['province_id']]['ghnid'];
+	$district_id_ghn_send = $global_district[$info_warehouse['district_id']]['ghnid'];
+
 	$transporters_id = $nv_Request->get_int( 'transporters_id', 'get,post', 0 );
-	$code_transporters = get_info_transporters( $transporters_id )['code_transporters'];
 	$shop_id = $info_warehouse['shops_id_ghn'];
-	
-	$service = get_service_ghn($shop_id,$district_id_ghn_send,$district_id_ghn_receive);
-	
-	$service['code_message_value'];
-	
+
 	if($weight_product == 0 and $length_product == 0 and $width_product == 0 and $height_product == 0  ){
 		$_SESSION['transporter_fee'][$shops_id_session][3] = 0;
-		print_r( json_encode( array('fee'=>0, 'mess'=>$service['code_message_value']) ) );
+		print_r(json_encode(array('fee'=>0)));
 		die;
 	}
+	$fee = get_price_ghn_2( 2, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
 	
-	foreach($service['data'] as $data ){
-		if($data['service_type_id']==$code_transporters){
-			$service_id=$data['service_id'];
-		}
-	}
-	
-	
-	$fee = get_price_ghn( $service_id, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
-	if($fee['code']==400){
-		$fee = get_price_ghn_2( $code_transporters, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
-	}
-	
-	if($fee['code']==400 ) {
-		$tranposter_fee = -1;
+		if($fee['code'] == 400 ) {
+			$tranposter_fee = -1;
 		} else {
-		if ( get_info_transporters( $transporters_id )['type'] == 0 ) {
-			$tranposter_fee = $fee['data']['total']+get_info_transporters( $transporters_id )['money'];
-			} else {
-			$tranposter_fee = $fee['data']['total']-get_info_transporters( $transporters_id )['money'];
-			if ( $tranposter_fee<0 ) {
-				$tranposter_fee = 0;
-			}
+			$tranposter_fee = $fee['data']['total'] + get_info_transporters( $transporters_id )['money'];
+			$tranposter_fee = rounding($tranposter_fee);
 		}
-		$mod = $tranposter_fee%1000;
-		if($mod>0){
-			$thuong = ceil($tranposter_fee / 1000);
-			$tranposter_fee=$thuong*1000;
-		}
-	}
-	//print_r( json_encode( $tranposter_fee ) );
-	$_SESSION['transporter_fee'][$shops_id_session][3] = $tranposter_fee;
-	
-	print_r( json_encode( array('fee'=>$tranposter_fee, 'mess'=>$service['code_message_value']) ) );
-	die;
-	
+		$_SESSION['transporter_fee'][$shops_id_session][3] = $tranposter_fee;
+		print_r(json_encode(array('fee'=>$tranposter_fee)));
+		die;		
 	
 }
 if ( $mod == 'get_transport_fee_ghtk' ) {
@@ -3542,13 +3517,13 @@ if ( $mod == 'get_transport_fee_ghtk' ) {
 		die;
 	}
 	//format thông tin
-	$pick_province = $global_province[$info_warehouse['province_id']]['title'];
-	$pick_district = $global_district[$info_warehouse['district_id']]['title'];
+	$pick_province = $global_province[$info_warehouse['province_id']]['type'] . ' ' . $global_province[$info_warehouse['province_id']]['title'];
+	$pick_district = $global_district[$info_warehouse['district_id']]['type'] . ' ' . $global_district[$info_warehouse['district_id']]['title'];
 	$address_shop = explode(',', $info_warehouse['address']);
 	$pick_address = $address_shop[0];
 	//nhận
-	$province = $global_province[$province_id]['title'];
-	$district = $global_district[$district_id]['title'];
+	$province = $global_province[$province_id]['type'] . ' ' . $global_province[$province_id]['title'];
+	$district = $global_district[$district_id]['type'] . ' ' . $global_district[$district_id]['title'];
 	$address = explode(',', $address);
 	$address = $address[0];
 	
