@@ -23,6 +23,21 @@ if ($mod == "set_default") {
 	die();
 }
 
+$province_id = $nv_Request->get_int('province_id', 'post,get');
+$district_id = $nv_Request->get_int('district_id', 'post,get');
+
+
+if ($mod == "district_id") {
+	$district_id = $global_province[$province_id]['district'];
+	print_r(json_encode($district_id));
+	die;
+}
+if ($mod == "ward_id") {
+	$ward_id = $global_district[$district_id]['ward'];
+	print_r(json_encode($ward_id));
+	die;
+}
+
 if ($nv_Request->isset_request('delete_id', 'get') and $nv_Request->isset_request('delete_checkss', 'get')) {
 	$id = $nv_Request->get_int('delete_id', 'get');
 	$delete_checkss = $nv_Request->get_string('delete_checkss', 'get');
@@ -238,26 +253,10 @@ if ($user_info['userid']) {
 }
 $xtpl->assign('Q', $q);
 
-$province_id = $nv_Request->get_int('province_id', 'post,get');
-$district_id = $nv_Request->get_int('district_id', 'post,get');
-
 foreach ($global_province as $result) {
 	$xtpl->assign('STATUS', $result);
 	$xtpl->parse('main.edit.province_id');
 }
-
-
-if ($mod == "district_id") {
-	$district_id = $global_province[$province_id]['district'];
-	print_r(json_encode($district_id));
-	die;
-}
-if ($mod == "ward_id") {
-	$ward_id = $global_district[$district_id]['ward'];
-	print_r(json_encode($ward_id));
-	die;
-}
-
 
 $xtpl->assign('address', NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=address&amp;id=0');
 
@@ -307,9 +306,6 @@ if ($show_view) {
 	$xtpl->parse('main.view1');
 } else {
 	$xtpl->assign('DIS', '');
-
-	
-
 	$address_ward = explode(',', $row['address']);
 	
 	$address_ward = $address_ward[0];
