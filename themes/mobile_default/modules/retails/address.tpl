@@ -82,13 +82,15 @@
                     placeholder="Nhập họ tên" required="required">
             </div>
         </div>
-        <div class="input-group mb-4 p-1 input_ecng {show_email}">
+        <!-- BEGIN: address_no_login -->
+        <div class="input-group mb-4 p-1 input_ecng">
             <div>Email</div>
             <div class="input_error_noIcon">
                 <input type="text" name="email" value="{ROW.email}" class="form-control form-control-underlined"
                     placeholder="Nhập email" required="required">
             </div>
         </div>
+        <!-- END: address_no_login -->
         <div class="input-group mb-4 p-1 input_ecng">
             <div>Số điện thoại</div>
             <div class="input_error_noIcon">
@@ -168,10 +170,11 @@
 
 
         <div class="form-group" style="text-align: center">
-            <input class="btn_ecng w-100 p-3 fs_16 {show_submit1}" name="submit" type="submit" value="{LANG.save}" />
-            <!-- Lưu địa chỉ không cần login -->
-            <input id="submit_no_login" class="btn_ecng w-100 p-3 fs_16 {show_submit}" name="submit" type="submit"
+            <input class="btn_ecng w-100 p-3 fs_16 {d_none_submit}" name="submit" type="submit" value="{LANG.save}" />
+            <!-- BEGIN: address_submit -->
+            <input id="submit_no_login" class="btn_ecng w-100 p-3 fs_16" name="submit" type="submit"
                 value="{LANG.save}" />
+            <!-- END: address_submit -->
         </div>
     </form>
 
