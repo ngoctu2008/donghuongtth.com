@@ -167,22 +167,10 @@ function get_full_address($ward_id, $district_id, $province_id)
 {
 	global $global_ward, $global_district, $global_province;
 	if ($ward_id) {		
-		$ward = stripos($global_ward[$ward_id]['title'], 'Phường');
-		if(!$ward){
-			$ward_id = $global_ward[$ward_id]['title'];
-		}
-		else{
-			$ward_id = $global_ward[$ward_id]['type'] . ' ' . $global_ward[$ward_id]['title'];
-		}
+		$ward_id = $global_ward[$ward_id]['type'] . ' ' . $global_ward[$ward_id]['title'];
 	}
 	if ($district_id) {
-		$district = stripos($global_district[$district_id]['title'], 'Quận');
-		if(!$district){
-			$district_id = $global_district[$district_id]['title'];
-		}
-		else{
-			$district_id = $global_district[$district_id]['type'] . ' ' . $global_district[$district_id]['title'];
-		}
+		$district_id = $global_district[$district_id]['type'] . ' ' . $global_district[$district_id]['title'];
 	}
 	if ($province_id) {
 		$province_id = $global_province[$province_id]['type'] . ' ' . $global_province[$province_id]['title'];
@@ -1590,7 +1578,7 @@ function get_district_select2($q, $provinceid)
 	global $db;
 
 	$list = $db->query("SELECT * FROM " . NV_TABLE_DISTRICT . " where title like '%" . str_replace(' ', '%', $q) . "%' and provinceid=" . $provinceid)->fetchAll();
-
+	
 	return $list;
 }
 function get_warehouse_select2($q, $sell_id)
