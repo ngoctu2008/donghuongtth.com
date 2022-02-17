@@ -549,13 +549,9 @@
 						<input class="hidden transporter_store_active" id="transporter_first_{info_store.id}_{key_warehouse}" value="{transporter_first}"/>đ</div>
 						<script>			
 							$( document ).ready(function() {
-								
-								
 								if(transporter_{info_store.id} == ''){
 									shop_tu_giao({info_store.id}, {key_warehouse});
 								}
-								
-								
 								function shop_tu_giao(store_id, warehouse_id){
 									if(transporter_{info_store.id} == ''){
 										$('#shipping_price_' + store_id + '_' + warehouse_id).html('{self_transport_price_max}');
@@ -686,28 +682,23 @@
 	change_payment();
 	function nv_carrier_change(store_id,warehouse_id,a)
 	{ 
-		
 		$('#method_transfer_'+store_id+'_'+warehouse_id).html(a.title);
 		$('#method_time_'+store_id+'_'+warehouse_id).html(a.title2);
 		var transporter_first=document.getElementById('transporter_first_'+store_id+'_'+warehouse_id)
 		transporter_first.setAttribute("value",a.value);
 		var price = document.getElementById('phivanchuyen_'+store_id+'_'+warehouse_id+'_'+a.value).textContent;
-		
 		var price_old = (document.getElementById("shipping_price_"+store_id+"_"+warehouse_id).textContent).split(" ")[0]
 		document.getElementById("shipping_price_"+store_id+"_"+warehouse_id).textContent = price;
 		price_old = Number(price_old.replaceAll(",", ""));
 		if(Number.isNaN(price_old)){
 			price_old=0;
 		}
-		
 		price_new = Number(price.split(" ")[0].replaceAll(",", ""));
 		if(Number.isNaN(price_new)){
 			price_new=0;
 		}
-		
 		tongphivanchuyen = Number(tongphivanchuyen) - Number(price_old) + Number(price_new);
 		sum_phivanchuyen(); 
-		
 		$('#transporter_'+ store_id +'_'+ warehouse_id).modal('toggle');
 	}
 	function load_data_tranposter_next(store_id,warehouse_id,transporter_id,name_transporters,description,phivanchuyen){
@@ -715,7 +706,7 @@
 		var checked = '';
 		var onclick = 'onclick="nv_carrier_change('+store_id+','+warehouse_id+',this)"';
 		
-		if(transporter_id==transporter_first){
+		if(transporter_id == transporter_first){
 			checked = 'checked=checked';
 		}
 		
@@ -733,9 +724,7 @@
 		var lng = document.getElementById('lng').value;
 		var address = document.getElementById('address').value;
 		if(isEmpty("#tranposter_next_"+store_id+"_"+warehouse_id)==true){
-			
 			transporter_store.forEach((element,index)=>{
-				
 				if(element.id == 5 || element.id  == 4){
 					$.ajax({
 						type : 'POST',
@@ -780,7 +769,7 @@
 						success : function(res){
 							//console.log(res);
 							if(Number(res)==-1){
-								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,'Miến phí vận chuyển');
+								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,'Quá giới hạn cân nặng');
 								}else{
 								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,format_number(Number(res)));
 							}
@@ -789,7 +778,7 @@
 				}
 				else if(element.id  == 3){
 					$.ajax({
-						type : 'POST',
+						type : 'GET',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
 						dataType: "json",
 						data:{weight: Number(total_weight),
@@ -859,12 +848,7 @@
 							lat : lat, 
 							lng : lng
 						},
-						beforeSend: function() { 
-							
-						},	
-						complete: function() {
-							
-						},
+						
 						success : function(res){
 							//console.log(res);
 							if(Number(res)==-1){
@@ -909,18 +893,14 @@
 								warehouse_id : warehouse_id, 
 								//transporters_id: element.id, sau này nếu chọn thêm hình thức của GHTK sẽ truyển thêm
 							},
-							
 							success : function(res){
 								//console.log(res);
 								if(Number(res)==-1){
-									if(vitri+1==transporter.length){
-										$('#shipping_price_'+store_id+'_'+warehouse_id).html('Đơn hàng của bạn hiện không có nhà vận chuyển nào đáp ứng được. Vui lòng tách đơn');
-										$('#text_phivanchuyen_'+store_id+'_'+warehouse_id).addClass('hidden');
-										$('#button_change_method_tranfer').addClass('hidden');
-										}else{
-										get_transport_fee(index+1,warehouse_id,store_id,total_weight,total_width,total_length,total_height,total_warehouse,transporter_store);
-									}
-									}else{
+									$('#shipping_price_'+store_id+'_'+warehouse_id).html('Quá giới hạn cân nặng');
+									$('#text_phivanchuyen_'+store_id+'_'+warehouse_id).addClass('hidden');
+									$('#method_transfer_'+store_id+'_'+warehouse_id).html(element.name_transporters);
+									$('#button_change_method_tranfer').addClass('hidden');
+								}else{
 									$('#shipping_price_'+store_id+'_'+warehouse_id).html('Đang cập nhật cước phí tạm tính, vui lòng đợi chút');
 									$('#method_transfer_'+store_id+'_'+warehouse_id).html(element.name_transporters);
 									$('#method_time_'+store_id+'_'+warehouse_id).html(element.description);
@@ -958,12 +938,7 @@
 							lat : lat, 
 							lng : lng
 						},
-						beforeSend: function() { 
-							$('#button-payment-method').prop('disabled', true);
-						},	
-						complete: function() {
-							$('#button-payment-method').prop('disabled', false);
-						},
+						
 						success : function(res){
 							//console.log(res);
 							if(Number(res.fee)==-1){
