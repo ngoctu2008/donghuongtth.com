@@ -5067,7 +5067,7 @@ function CheckPaymentStatus($payment_method,$order_code,$errors,$inputData){
 			if (!defined('NV_IS_USER') or !$global_config['allowuserlogin']) {
 					$user_info['userid'] = 0;
 			}
-			$order_text = str_replace('-',',', $orderId);
+			$order_text = str_replace('-',',', $order_code);
 			$check_orderid = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .')')->fetchColumn(); 
 
 			//print_r($tongtien_thanhtoan);die;
