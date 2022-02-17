@@ -12,6 +12,7 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
   responsedode varchar(255) DEFAULT '' COMMENT 'Mã phản hồi',
   transactionno varchar(255) DEFAULT '' COMMENT 'Mã GD Tại VNPAY',
   bankcode varchar(255) DEFAULT '' COMMENT 'Mã Ngân hàng',
+  cardtype varchar(255) DEFAULT '' COMMENT 'Mã Ngân hàng',
   paydate int(10) DEFAULT '0' COMMENT 'Thời gian thanh toán',
   status varchar(255) DEFAULT '' COMMENT 'Trạng thái thanh toán',
   addtime int(11) NOT NULL DEFAULT '0',
