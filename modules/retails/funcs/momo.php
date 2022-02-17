@@ -19,7 +19,7 @@ if($order_code == '' ){
         }
      
         require_once(NV_ROOTDIR.'/modules/retails/payment/momo.complete.php');
-        
+        nv_redirect_location(nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=payment&order_code='.$order_code,true), true);
     }   
 
 }
