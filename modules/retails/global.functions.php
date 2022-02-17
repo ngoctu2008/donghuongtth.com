@@ -2994,7 +2994,6 @@ function get_service_ghn($shop_id, $district_from, $district_to)
 		"from_district" => (int)$district_from,
 		"to_district" => (int)$district_to
 	);
-
 	$data = post_data_ghn($url, $param);
 	return $data;
 }
@@ -3393,7 +3392,7 @@ function get_info_product_ghtk($q)
 	return $data;
 }
 
-function send_ghtk($products, $order_code, $pick_name, $pick_address, $pick_province, $pick_district, $pick_ward, $pick_tel, $tel, $name, $address, $province, $district, $ward, $pick_money, $value, $transport, $deliver_option, $return_name, $return_address, $return_province, $return_district, $return_ward, $return_tel, $return_email, $pick_option, $is_freeship)
+function send_ghtk($products, $order_code, $pick_name, $pick_address, $pick_province, $pick_district, $pick_ward, $pick_tel, $tel, $name, $address, $province, $district, $ward, $pick_money, $value, $transport, $deliver_option, $pick_option, $is_freeship)
 {
 	global $config_setting;
 	$url = $config_setting['url_ghtk'] . '/services/shipment/order';
@@ -3421,19 +3420,11 @@ function send_ghtk($products, $order_code, $pick_name, $pick_address, $pick_prov
 			"value" => $value,
 			"transport" => $transport,
 			"deliver_option" => $deliver_option,
-			"use_return_address" => 1, //Bằng 0 nghĩa là địa chỉ trả hàng giống địa chỉ lấy hàng nên các field địa chỉ trả hàng không cần truyền qua. Bằng 1 nghĩa là sử dụng địa chỉ trả hàng khác địa chỉ lấy hàng
-			"return_name" => $return_name,
-			"return_address" => $return_address,
-			"return_province" => $return_province,
-			"return_district" => $return_district,
-			"return_ward" => $return_ward,
-			"return_tel" => $return_tel,
-			"return_email" => $return_email,
 			"pick_option" => $pick_option,
 		)
 	);
 	
-	$data = post_data($url, $param, $config_setting['token_ghtk']);print_r($data);die;
+	$data = post_data($url, $param, $config_setting['token_ghtk']);
 	return $data;
 }
 
@@ -4224,7 +4215,7 @@ function send_email_order_cancel($order)
 //gửi mail cho khách thông báo thanh toán thất bại
 function send_mail_payment_fail($order_text)
 {
-	global $db, $db_config, $lang_module;
+	global $db, $db_config, $lang_module, $global_config;
 
 	$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
 	foreach ($list_order as $order) {
@@ -4257,7 +4248,7 @@ function send_mail_payment_fail($order_text)
 //gửi mail cho khách và seller thông báo đơn hàng giao thành công
 function send_mail_order_delivered($order)
 {
-	global $db, $db_config, $lang_module;
+	global $db, $db_config, $lang_module, $global_config;
 
 	// lấy danh sách sản phẩm của đơn hàng
 	$list_product = $db->query('SELECT product_id, quantity, classify_value_product_id, quantity, price FROM ' . TABLE . '_order_item WHERE order_id =' . $order['id'])->fetchAll();
@@ -4297,7 +4288,7 @@ function send_mail_order_delivered($order)
 //gửi mail cho admin và seller thông báo đơn hàng giao thành công nhưng khách chưa nhận được
 function send_mail_order_not_received($order)
 {
-	global $db, $db_config, $lang_module, $config_setting;
+	global $db, $db_config, $lang_module, $config_setting, $global_config;
 
 	// lấy danh sách sản phẩm của đơn hàng
 	$list_product = $db->query('SELECT product_id, quantity, classify_value_product_id, quantity, price FROM ' . TABLE . '_order_item WHERE order_id =' . $order['id'])->fetchAll();
@@ -4423,100 +4414,10 @@ function vnpay_refund($info_order)
 
 	return true;
 }
-// xử lý thanh toán vnpay thành công test
-function xulythanhtoanthanhcong_test($order_text, $inputData)
-{
-	global $db, $db_config, $user_info, $module_name, $lang_module;
 
-	$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
-
-	// cập nhật kho hàng sau khi thanh toán thành công
-	foreach ($list_order as $order) {
-		//update voucher 
-
-		$update_voucher = $db->query('UPDATE ' . TABLE . '_voucher SET usage_limit_quantity = usage_limit_quantity - 1 WHERE id = ' . $order['voucherid']);
-
-		$update_order_voucher = $db->query('UPDATE ' . TABLE . '_order_voucher SET status =  1 WHERE order_id = ' . $order['id']);
-
-		// lấy danh sách sản phẩm của đơn hàng
-		$list_product = $db->query('SELECT product_id, quantity, classify_value_product_id, quantity, price FROM ' . TABLE . '_order_item WHERE order_id =' . $order['id'])->fetchAll();
-		//print_r($list_product);die;
-		foreach ($list_product as $product) {
-			// cập nhật kho sau khi thanh toán thành công
-
-			$where = '';
-
-			if ($product['classify_value_product_id']) {
-				$where .= ' AND id=' . $product['classify_value_product_id'];
-			}
-
-			$db->query('UPDATE ' . TABLE . '_product_classify_value_product SET sl_tonkho = sl_tonkho - ' . $product['quantity'] . ' WHERE product_id =' . $product['product_id'] . $where);
-
-			$db->query('UPDATE ' . TABLE . '_product SET number_order = number_order + ' . $product['quantity'] . ' WHERE id = ' . $product['product_id']);
-		}
-
-		// gửi thông báo email về cho khách hàng, cửa hàng
-		$content_ip = 'Hiện có 1 đơn hàng mới';
-		if (!empty($user_info)) {
-			$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_notification(language,area,module,admin_view_allowed,logic_mode ,send_from,send_to,content,add_time,obid,type) VALUES (' . $db->quote(NV_LANG_DATA) . ',1,' . $db->quote($module_name) . ',0,0,' . $user_info['userid'] . ',' . $order['store_id'] . ',' . $db->quote($content_ip) . ',' . NV_CURRENTTIME . ',' . $order['id'] . ',"order")');
-			$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_notification_shop(language,area,module,admin_view_allowed,logic_mode ,send_from,send_to,content,add_time,obid,type) VALUES (' . $db->quote(NV_LANG_DATA) . ',1,' . $db->quote($module_name) . ',0,0,' . $user_info['userid'] . ',' . $order['store_id'] . ',' . $db->quote($content_ip) . ',' . NV_CURRENTTIME . ',' . $order['id'] . ',"order")');
-		} else {
-			$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_notification(language,area,module,admin_view_allowed,logic_mode ,send_from,send_to,content,add_time,obid,type) VALUES (' . $db->quote(NV_LANG_DATA) . ',1,' . $db->quote($module_name) . ',0,0,0,' . $order['store_id'] . ',' . $db->quote($content_ip) . ',' . NV_CURRENTTIME . ',' . $order['id'] . ',"order")');
-			$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_notification_shop(language,area,module,admin_view_allowed,logic_mode ,send_from,send_to,content,add_time,obid,type) VALUES (' . $db->quote(NV_LANG_DATA) . ',1,' . $db->quote($module_name) . ',0,0,0,' . $order['store_id'] . ',' . $db->quote($content_ip) . ',' . NV_CURRENTTIME . ',' . $order['id'] . ',"order")');
-		}
-
-		$content = 'Đơn hàng mới đã xác nhận';
-		if (!empty($user_info)) {
-
-			$db->query('INSERT INTO ' . TABLE . '_logs_order(order_id,status_id_old,content,time_add,user_add) VALUES(' . $order['id'] . ',1,' . $db->quote($content) . ',' . NV_CURRENTTIME . ',' . $user_info['userid'] . ')');
-		} else {
-			$db->query('INSERT INTO ' . TABLE . '_logs_order(order_id,status_id_old,content,time_add,user_add) VALUES(' . $order['id'] . ',1,' . $db->quote($content) . ',' . NV_CURRENTTIME . ',1)');
-		}
-
-		// cập nhật thông tin đơn hàng thanh toán thành công status_payment_vnpay = 1
-
-		$update_status_payment_vnpay = $db->query('UPDATE ' . TABLE . '_order SET status_payment_vnpay = 1, status = 1, payment =' . $order['total'] . ', vnpay_code ="' . $inputData['vnp_TransactionNo'] . '" WHERE id =' . $order['id']);
-
-		update_time_add_order($order['id']);
-
-		if ($order['transporters_id']) {
-			$order['name_transporters'] = $db->query('SELECT name_transporters FROM ' . TABLE . '_transporters WHERE id =' . $order['transporters_id'])->fetchColumn();
-		} else {
-			$order['name_transporters'] = $lang_module['tranposter_tugiao'];
-		}
-
-
-		// Gui mail thong bao den khach hang
-		$data_order['id'] = $order['id'];
-		$info_order = $order;
-		$data_order['order_code'] = $order['order_code'];
-
-		$email_title = $lang_module['order_email_title'];
-		$email_contents = call_user_func('email_new_order_payment_khach', $data_order, $list_product, $info_order);
-
-
-
-		nv_sendmail(array(
-			$global_config['site_name'],
-			$global_config['site_email']
-		), $order['email'], sprintf($email_title, $data_order['order_code']), $email_contents);
-
-
-		// Gui mail thong bao den nhà bán hàng
-		$email_contents = call_user_func('email_new_order_payment', $data_order, $list_product, $info_order);
-		$email_title = $lang_module['order_email_title'];
-
-		nv_sendmail(array(
-			$global_config['site_name'],
-			$global_config['site_email']
-		), get_info_store($order['store_id'])['email'], sprintf($email_title, $data_order['order_code']), $email_contents);
-	}
-
-	return true;
-}
 function xulythanhtoanthanhcong_recieve($order_text, $inputData)
 {
-	global $db, $db_config, $user_info, $module_name, $lang_module, $global_payport;
+	global $db, $db_config, $user_info, $module_name, $lang_module, $global_payport, $global_config;
 
 	$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
 
@@ -4617,7 +4518,7 @@ function PaymentMethod()
 }
 function GetPaymentMethodOrder($order_code)
 {
-	global $db;
+	global $db, $module_name;
 	$order = explode(",", $order_code);
 
 	$orders = $db->query('SELECT * FROM ' . TABLE . '_order where id IN (' . $order_code . ' )')->fetchAll();
