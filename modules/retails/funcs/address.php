@@ -308,13 +308,16 @@ if ($show_view) {
 } else {
 	$xtpl->assign('DIS', '');
 
+	
+
 	$address_ward = explode(',', $row['address']);
+	
 	$address_ward = $address_ward[0];
 
 	$xtpl->assign('AD', $address_ward);
 	if ($row['province_id']) {
-		$list_province = get_province_select2('');
-
+		$global_province[$province_id]['district'];
+		$list_province = $global_province;
 		foreach ($list_province as $value_list) {
 			if ($row['province_id'] == $value_list['provinceid']) {
 				$value_list["selected"] = "selected";
@@ -325,23 +328,25 @@ if ($show_view) {
 	}
 
 	if ($row['province_id'] and $row['district_id']) {
-		$list_district = get_district_select2('', $row['province_id']);
-
+		// $list_district = get_district_select2('', $row['province_id']);
+		$list_district = $global_province[$row['province_id']]['district'];
 		foreach ($list_district as $value_list) {
 			if ($row['district_id'] == $value_list['districtid']) {
 				$value_list["selected"] = "selected";
 			}
+			$value_list['title'] = $value_list['type'] . ' ' . $value_list['title'];
 			$xtpl->assign('STATUS', $value_list);
 			$xtpl->parse('main.edit.district_id');
 		}
 	}
 
 	if ($row['province_id'] and $row['district_id'] and $row['ward_id']) {
-		$list_ward = get_ward_select2('', $row['district_id']);
+		$list_ward = $global_district[$row['district_id']]['ward'];
 		foreach ($list_ward as $value_list) {
 			if ($row['ward_id'] == $value_list['wardid']) {
 				$value_list["selected"] = "selected";
 			}
+			$value_list['title'] = $value_list['type'] . ' ' . $value_list['title'];
 			$xtpl->assign('STATUS', $value_list);
 			$xtpl->parse('main.edit.ward_id');
 		}
