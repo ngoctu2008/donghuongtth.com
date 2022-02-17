@@ -301,7 +301,7 @@
                         Object.keys(res).forEach(function(key) {
                             $('#district_id').append("<option value=" + res[key][
                                 'districtid'
-                            ] + ">" + res[key]['title'] + "</option>");
+                            ] + ">" + res[key]['type'] + ' ' + res[key]['title'] + "</option>");
                         });
                     },
                 });
@@ -320,11 +320,9 @@
                     success: function(res) {
                         $('#ward_id option').remove();
                         $('#ward_id').append("<option disabled selected>Chọn xã phường</option>");
-                        console.log(res);
                         Object.keys(res).forEach(function(key) {
-                            console.log(res[key]);
                             $('#ward_id').append("<option value=" + res[key]['wardid'] +
-                                ">" + res[key]['title'] + "</option>");
+                                ">" + res[key]['type'] +' '+ res[key]['title'] + "</option>");
                         });
                     },
                 });
