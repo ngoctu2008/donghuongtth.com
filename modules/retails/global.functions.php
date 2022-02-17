@@ -4801,7 +4801,7 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 								$user_info['userid'] = 0;
 						}
 						$order_text = str_replace('-',',', $order_code);
-							$check_payment = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .') WHERE payment > 0 AND status_payment_vnpay == 1 ')->fetchColumn(); 
+							$check_payment = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .') AND payment > 0 AND status_payment_vnpay = 1 ')->fetchColumn(); 
 								if($check_payment == 0){
 									$status = UpdatePaymentOrder($payment_method,$order_code, $inputData);
 								}
