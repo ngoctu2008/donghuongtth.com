@@ -5043,21 +5043,15 @@ function CheckPaymentStatus($payment_method,$order_code,$errors,$inputData){
 			}
 			$order_text = str_replace('-',',', $order_code);
 			$check_orderid = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .')')->fetchColumn(); 
-			$check_payment = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .') WHERE payment > 0 AND status_payment_vnpay == 1 ')->fetchColumn(); 
+			$check_payment = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .') AND payment > 0 AND status_payment_vnpay = 1 ')->fetchColumn(); 
 			// check OrderId
 			if ($check_orderid)
 			{
 				
 				if($check_payment ){
-					// check Status
-					if ($resultCode == '0') {
-								$status = true;
-								
-					} else {
-						$error[] = 'Thanh toán thất bại!';
-					}
+					$status = true;
 				} else {
-					$error[] = 'Số tiền không hợp lệ!';
+					$error[] = 'Thanh toán thất bại!';
 				}
 			} else {
 				$error[] = 'Đơn hàng không tìm thấy!';
