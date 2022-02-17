@@ -292,15 +292,15 @@ function add_order($list_transporters,$info_customer){
 					
 					$db->query( 'INSERT INTO ' . TABLE . '_order_item(order_id, product_id, weight, length, height, width, price, classify_value_product_id, quantity, total, voucher_price) VALUES('. $order_id . ',' . $value_product['product_id'] .',' . $total_weight . ',' . $total_length . ',' . $total_height . ',' . $total_width . ',' . $value_product['price'] .',' . $value_product['classify_value_product_id'] . ',' . $value_product['num'] . ',' . $total . ',' . $price_voucher . ')' );
 					//xóa sp trong Cart
-					//unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']][$key_product] );
+					unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']][$key_product] );
 					if ( count( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] ) == 0 ) {
-						//unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] );
+						unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']][$value_transporters['warehouse_id']] );
 					}
 					if ( count( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] ) == 0 ) {
-						//unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] );
+						unset( $_SESSION[$module_data . '_cart'][$value_transporters['store_id']] );
 					}
 					//xóa voucher
-					//unset( $_SESSION['voucher_shop'][$value_transporters['store_id']] );
+					unset( $_SESSION['voucher_shop'][$value_transporters['store_id']] );
 					
 					$data['list_product'][]=$value_product;
 				}
@@ -310,7 +310,7 @@ function add_order($list_transporters,$info_customer){
 		$data['list_order'][]=$order_id;
 		$data['list_order_code'][]=$order_code;
 	}
-	unset( $_SESSION[$module_data . '_cart'] );
+	//unset( $_SESSION[$module_data . '_cart'] );
 	//$data['list_order'] = $list_order;
 	//$data['list_order_code'] = $list_order_code;
 	return $data;
