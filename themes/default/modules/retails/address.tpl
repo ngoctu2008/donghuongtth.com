@@ -62,7 +62,7 @@
         <div class="panel-body">
             <form class="form-horizontal"
                 action="{NV_BASE_SITEURL}index.php?{NV_LANG_VARIABLE}={NV_LANG_DATA}&amp;{NV_NAME_VARIABLE}={MODULE_NAME}&amp;{NV_OP_VARIABLE}={OP}"
-                method="post" id="form_add_address">
+                method="get" id="form_add_address">
                 <input type="hidden" name="id" value="{ROW.id}" />
                 <div class="row">
                     <div class="col-9 p-4">
@@ -115,6 +115,7 @@
                                     <div class="input_error_noIcon w-100">
                                         <select id="province_id" name="province_id" required="required"
                                             class="form-control">
+                                            <option value="" disabled selected>Chọn tỉnh thành</option>
                                             <!-- BEGIN: province_id -->
                                             <option value="{STATUS.provinceid}" {STATUS.selected}>
                                                 {STATUS.title}
@@ -126,34 +127,6 @@
                             </div>
                         </div>
 
-                        <script>
-                            $('#province_id').select2();
-                            $('#province_id').change(function() {
-                                var province_id = $(this).val();
-                                if (province_id > 0) {
-                                    $.ajax({
-                                        url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '={OP}&mod=district_id&province_id=' + province_id,
-                                        data: {
-                                            province_id:province_id,
-                                        },
-                                        delay: 250,
-                                        data: function(params) {
-                                            var query = {
-                                                q: params.term
-                                            }
-                                            return query;
-                                        },
-                                        processResults: function(data) {
-                                            return {
-                                                results: data
-                                            };
-                                        },
-                                        cache: true
-                                    });
-                                }
-                            });
-                        </script>
-
                         <div class="form-group row">
                             <label for="staticEmail" class="col-3 col-form-label">Chọn quận, huyện(<span
                                     class="text_red">*</span>) </label>
@@ -162,9 +135,6 @@
                                     <div class="input_error_noIcon w-100">
                                         <select id="district_id" name="district_id" required="required"
                                             class="form-control" {DIS}>
-                                            <option value="{STATUS.districtid}" {STATUS.selected}>
-                                                {STATUS.title}
-                                            </option>
                                             <!-- BEGIN: district_id -->
                                             <option value="{STATUS.districtid}" {STATUS.selected}>
                                                 {STATUS.title}
@@ -309,161 +279,56 @@
 
             }
         });
-        thanh();
 
-        function thanh() {
-            $.ajax({
-                url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '={OP}&mod=province_id',
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    var query = {
-                        q: params.term
-                    }
-                    return query;
-                },
-                processResults: function(data) {
-                    return {
-                        results: data
-                    };
-                },
-                cache: true
-            })
-        }
-
-
-
-        $('#province_id1').select2({
-            placeholder: 'Chọn tỉnh thành12',
-            ajax: {
-                url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '={OP}&mod=province_id',
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    var query = {
-                        q: params.term
-                    }
-                    return query;
-                },
-                processResults: function(data) {
-                    return {
-                        results: data
-                    };
-                },
-                cache: true
-            }
-        }).on('change', function(e) {
-            document.getElementById("district_id").disabled = false;
-            document.getElementById("ward_id").disabled = false;
-            var province_id = $('#province_id').val();
-            $('#district_id').empty();
-            $('#ward_id').empty();
-            $('#district_id').select2({
-                placeholder: 'Chọn quận huyện',
-                ajax: {
-                    url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '={OP}&mod=district_id&province_id=' + province_id,
-                    dataType: 'json',
+        $('#province_id').select2();
+        $('#district_id').select2();
+        $('#ward_id').select2();
+        $('#province_id').change(function() {
+            var province_id = $(this).val();
+            if (province_id > 0) {
+                $.ajax({
+                    url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '={OP}&mod=district_id',
+                    data: {
+                        province_id: province_id,
+                    },
                     delay: 250,
-                    data: function(params) {
-                        var query = {
-                            q: params.term
-                        }
-                        return query;
+                    dataType: 'json',
+                    success: function(res) {
+                        $('#district_id option').remove();
+                        $('#ward_id option').remove();
+                        $('#district_id').append(
+                            "<option disabled selected>Chọn tỉnh quận, huyện</option>");
+                        Object.keys(res).forEach(function(key) {
+                            $('#district_id').append("<option value=" + res[key][
+                                'districtid'
+                            ] + ">" + res[key]['type'] + ' ' + res[key]['title'] + "</option>");
+                        });
                     },
-                    processResults: function(data) {
-                        return {
-                            results: data
-                        };
+                });
+            }
+        });
+        $('#district_id').change(function() {
+            var district_id = $(this).val();
+            if (district_id > 0) {
+                $.ajax({
+                    url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '={OP}&mod=ward_id',
+                    data: {
+                        district_id: district_id,
                     },
-                    cache: true
-                }
-            }).on('change', function(e) {
-                var district_id = $('#district_id').val();
-                $('#ward_id').empty();
-                $('#ward_id').select2({
-                    placeholder: 'Chọn xã phường',
-                    ajax: {
-                        url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '={OP}&mod=ward_id&district_id=' + district_id,
-                        dataType: 'json',
-                        delay: 250,
-                        data: function(params) {
-                            var query = {
-                                q: params.term
-                            }
-                            return query;
-                        },
-                        processResults: function(data) {
-                            return {
-                                results: data
-                            };
-                        },
-                        cache: true
-                    }
-                })
-            })
+                    delay: 250,
+                    dataType: 'json',
+                    success: function(res) {
+                        $('#ward_id option').remove();
+                        $('#ward_id').append("<option disabled selected>Chọn xã phường</option>");
+                        Object.keys(res).forEach(function(key) {
+                            $('#ward_id').append("<option value=" + res[key]['wardid'] +
+                                ">" + res[key]['type'] +' '+ res[key]['title'] + "</option>");
+                        });
+                    },
+                });
+            }
         });
 
-
-        $('#district_id').select2({
-
-        }).on('change', function(e) {
-            var district_id = $('#district_id').val();
-            $('#ward_id').empty();
-            $('#ward_id').select2({
-                placeholder: 'Chọn xã phường',
-                ajax: {
-                    url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '={OP}&mod=ward_id&district_id=' + district_id,
-                    dataType: 'json',
-                    delay: 250,
-                    data: function(params) {
-                        var query = {
-                            q: params.term
-                        }
-                        return query;
-                    },
-                    processResults: function(data) {
-                        return {
-                            results: data
-                        };
-                    },
-                    cache: true
-                }
-            })
-        })
-        $('#ward_id').select2({
-
-        })
-        async function change_address_order(a) {
-            var province_name = $('#province_id').find('option:selected').text();
-            var district_name = $('#district_id').find('option:selected').text();
-            var ward_name = $('#ward_id').find('option:selected').text();
-            var address = $('#address').val();
-            var address_full = ''
-            if (address != '') {
-                address_full = address
-                if (ward_name != '') {
-                    address_full = await address_full + ',' + ward_name
-                }
-                if (district_name != '') {
-                    address_full = await address_full + ', ' + district_name
-                }
-                if (province_name != '') {
-                    address_full = await address_full + ', ' + province_name
-                }
-            } else {
-                if (ward_name != '') {
-                    address_full = await ward_name
-                }
-                if (district_name != '') {
-                    address_full = await address_full + ', ' + district_name
-                }
-                if (province_name != '') {
-                    address_full = await address_full + ', ' + province_name
-                }
-            }
-            document.getElementById('maps_address').value = await address_full
-            initializeMap();
-        }
         async function change_ward_order(a) {
             var province_name = $('#province_id').find('option:selected').text();
             var district_name = $('#district_id').find('option:selected').text();
@@ -542,8 +407,6 @@
                 } else {
                     alert(res.mess);
                 }
-                //window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=order',true).'";
-                // window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=address&id=0',true).'";
             },
             error: function(xhr, ajaxOptions, thrownError) {
 

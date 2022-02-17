@@ -22,38 +22,20 @@ if ($mod == "set_default") {
 	print_r(json_encode($json[0]));
 	die();
 }
-if ($mod == "province_id") {
-	$q = $nv_Request->get_string('q', 'get', '');
-	$list = get_province_select2($q);
 
-	foreach ($list as $result) {
-		$json[] = ['id' => $result['provinceid'], 'text' => $result['title']];
-	}
-	print_r(json_encode($json));
-	die();
-}
+$province_id = $nv_Request->get_int('province_id', 'post,get');
+$district_id = $nv_Request->get_int('district_id', 'post,get');
+
+
 if ($mod == "district_id") {
-	$q = $nv_Request->get_string('q', 'get', '');
-	$province_id = $nv_Request->get_string('province_id', 'get', '');
-	$list = get_district_select2($q, $province_id);
-
-	foreach ($list as $result) {
-		$json[] = ['id' => $result['districtid'], 'text' => $result['title']];
-	}
-	print_r(json_encode($json));
-	die();
+	$district_id = $global_province[$province_id]['district'];
+	print_r(json_encode($district_id));
+	die;
 }
 if ($mod == "ward_id") {
-	$q = $nv_Request->get_string('q', 'get', '');
-	$district_id = $nv_Request->get_string('district_id', 'get', '');
-	$list = get_ward_select2($q, $district_id);
-
-
-	foreach ($list as $result) {
-		$json[] = ['id' => $result['wardid'], 'text' => $result['title']];
-	}
-	print_r(json_encode($json));
-	die();
+	$ward_id = $global_district[$district_id]['ward'];
+	print_r(json_encode($ward_id));
+	die;
 }
 
 if ($nv_Request->isset_request('delete_id', 'get') and $nv_Request->isset_request('delete_checkss', 'get')) {
@@ -76,24 +58,18 @@ $row = array();
 $error = array();
 $row['id'] = $nv_Request->get_int('id', 'post,get', 0);
 
-if ($nv_Request->isset_request('submit', 'post')) {
+if ($nv_Request->isset_request('submit', 'get')) {
 
-	$row['address'] = $nv_Request->get_title('maps_address', 'post', '');
-	$row['userid'] = $nv_Request->get_int('userid', 'post', 0);
-	$row['status'] = $nv_Request->get_int('status', 'post', 0);
+	$row['address'] = $nv_Request->get_title('maps_address', 'get', '');
+	$row['userid'] = $nv_Request->get_int('userid', 'get', 0);
+	$row['status'] = $nv_Request->get_int('status', 'get', 0);
 	$row['time'] = NV_CURRENTTIME;
-	$row['ward_id'] = $nv_Request->get_int('ward_id', 'post', 0);
-	$row['district_id'] = $nv_Request->get_int('district_id', 'post', 0);
-	$row['province_id'] = $nv_Request->get_int('province_id', 'post', 0);
+	$row['ward_id'] = $nv_Request->get_int('ward_id', 'get', 0);
+	$row['district_id'] = $nv_Request->get_int('district_id', 'get', 0);
+	$row['province_id'] = $nv_Request->get_int('province_id', 'get', 0);
 
-	$row['phone'] = $nv_Request->get_title('phone', 'post', '');
-	$row['name'] = $nv_Request->get_title('name', 'post', '');
-	//$row['lat'] = $nv_Request->get_string('lat', 'post', '');
-	//$row['lng'] = $nv_Request->get_string('lng', 'post', '');
-	//$row['centerlng'] = $nv_Request->get_string('centerlng', 'post', '');
-	//$row['centerlat'] = $nv_Request->get_string('centerlat', 'post', '');
-	//$row['maps_mapzoom'] = $nv_Request->get_string('maps_mapzoom', 'post', '');
-
+	$row['phone'] = $nv_Request->get_title('phone', 'get', '');
+	$row['name'] = $nv_Request->get_title('name', 'get', '');
 
 	if (empty($row['address'])) {
 		$error[] = $lang_module['error_required_address'];
@@ -126,24 +102,21 @@ if ($nv_Request->isset_request('submit', 'post')) {
 				if (!$check)
 					$row['status'] = 1;
 			}
-			// print_r($row['province_id']);die;
+			
 			$address = get_full_address($row['ward_id'], $row['district_id'], $row['province_id']);
-
 			$address_full = $row['address'] . $address;
 
-
-			if (!$user_info) {
-			} else {
+			if ($user_info) {
 				if (empty($row['id'])) {
 
 					$stmt = $db->prepare('INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_address (lat,lng,address,name, userid, status, time_add, ward_id, district_id, province_id, phone,centerlat,centerlng,maps_mapzoom) VALUES (:lat,:lng,:address,:name, :userid, :status, :time, :ward_id, :district_id, :province_id, :phone,:centerlat,:centerlng,:maps_mapzoom)');
+					
+					
 				} else {
 
 					$stmt = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_address SET lat = :lat,lng = :lng,name = :name,address = :address, userid = :userid, status = :status, time_edit = :time, ward_id = :ward_id, district_id = :district_id, province_id = :province_id, phone = :phone, centerlat=:centerlat,centerlng=:centerlng,maps_mapzoom=:maps_mapzoom WHERE id=' . $row['id']);
 				}
 			}
-
-
 
 			$stmt->bindParam(':status', $row['status'], PDO::PARAM_INT);
 			$stmt->bindParam(':address', $address_full, PDO::PARAM_STR);
@@ -161,8 +134,10 @@ if ($nv_Request->isset_request('submit', 'post')) {
 			$stmt->bindParam(':centerlng', $row['centerlng'], PDO::PARAM_STR);
 			$stmt->bindParam(':maps_mapzoom', $row['maps_mapzoom'], PDO::PARAM_STR);
 
-			$exc = $stmt->execute();
+			
 
+			$exc = $stmt->execute();
+			
 			if ($exc) {
 				$nv_Cache->delMod($module_name);
 				if (empty($row['id'])) {
@@ -276,12 +251,15 @@ if ($user_info['userid']) {
 } else {
 	$xtpl->assign('show_submit1', 'd-none');
 }
-
 $xtpl->assign('Q', $q);
 
+foreach ($global_province as $result) {
+	$xtpl->assign('STATUS', $result);
+	$xtpl->parse('main.edit.province_id');
+}
 
 $xtpl->assign('address', NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=address&amp;id=0');
-$xtpl->assign('address_list', NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=' . $op);
+
 if (isset($_SESSION['back_link']) and !empty($_SESSION['back_link']))
 	$xtpl->assign('back_link', $_SESSION['back_link']);
 
@@ -316,7 +294,7 @@ if ($show_view) {
 			$xtpl->parse('main.view.loop.delete');
 		}
 
-		
+
 
 		$xtpl->assign('VIEW', $view);
 		$xtpl->parse('main.view.loop');
@@ -328,15 +306,14 @@ if ($show_view) {
 	$xtpl->parse('main.view1');
 } else {
 	$xtpl->assign('DIS', '');
-
 	$address_ward = explode(',', $row['address']);
+	
 	$address_ward = $address_ward[0];
 
 	$xtpl->assign('AD', $address_ward);
-
 	if ($row['province_id']) {
-		$list_province = get_province_select2('');
-
+		$global_province[$province_id]['district'];
+		$list_province = $global_province;
 		foreach ($list_province as $value_list) {
 			if ($row['province_id'] == $value_list['provinceid']) {
 				$value_list["selected"] = "selected";
@@ -347,23 +324,25 @@ if ($show_view) {
 	}
 
 	if ($row['province_id'] and $row['district_id']) {
-		$list_district = get_district_select2('', $row['province_id']);
-
+		// $list_district = get_district_select2('', $row['province_id']);
+		$list_district = $global_province[$row['province_id']]['district'];
 		foreach ($list_district as $value_list) {
 			if ($row['district_id'] == $value_list['districtid']) {
 				$value_list["selected"] = "selected";
 			}
+			$value_list['title'] = $value_list['type'] . ' ' . $value_list['title'];
 			$xtpl->assign('STATUS', $value_list);
 			$xtpl->parse('main.edit.district_id');
 		}
 	}
 
 	if ($row['province_id'] and $row['district_id'] and $row['ward_id']) {
-		$list_ward = get_ward_select2('', $row['district_id']);
+		$list_ward = $global_district[$row['district_id']]['ward'];
 		foreach ($list_ward as $value_list) {
 			if ($row['ward_id'] == $value_list['wardid']) {
 				$value_list["selected"] = "selected";
 			}
+			$value_list['title'] = $value_list['type'] . ' ' . $value_list['title'];
 			$xtpl->assign('STATUS', $value_list);
 			$xtpl->parse('main.edit.ward_id');
 		}
