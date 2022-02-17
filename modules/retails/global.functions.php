@@ -4637,7 +4637,7 @@ function CheckPaymentOrder($payment_method, $order_code, $inputData)
 	if ($payment_method == 'momo') {
 		/*
 		https://dev.chonhagiau.com/momo/?partnerCode=MOMOGQQA20220110&orderId=870&requestId=1644977949&amount=35000&orderInfo=Thanh+toan+giao+dich+ECNG0000870+vao+thoi+gian+16-02-2022+09%3A19&orderType=momo_wallet&transId=2644025059&resultCode=0&message=Giao+d%E1%BB%8Bch+th%C3%A0nh+c%C3%B4ng.&payType=qr&responseTime=1644978032873&extraData=&signature=3dd35a45a42df0185d2986932718a4e6a309207a88f7f9ebbfb87547675f0539*/
-		if ($inputData['resultCode'] != '0') {
+		if ($inputData['resultCode'] != '0' && $inputData['resultCode'] != '') {
 			$error[] = $inputData['message'];
 		}/*  elseif ($inputData['resultCode'] == '21') {
 			$error[] = 'Số tiền không hợp lệ!';
