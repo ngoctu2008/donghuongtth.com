@@ -4918,12 +4918,12 @@ function UpdatePaymentOrder($payment_method,$order_text, $inputData)
 	$row['userid'] = $info['userid'];
 	$row['requestId'] = $inputData['requestId'];
 	$row['orderinfo'] = $inputData['orderInfo'];
-	$row['responsedode'] = $returnData['resultCode'];
+	$row['responsedode'] = $inputData['resultCode'];
 	$row['transactionno'] = $inputData['transId'];
 	$row['bankcode'] = $inputData['orderType'];
 	$row['cardtype'] = $inputData['payType'];
 	$row['paydate'] = $inputData['responseTime'];
-	$row['status'] = $returnData['message'];
+	$row['status'] = $inputData['message'];
 
 	$row['addtime'] = NV_CURRENTTIME;
 
@@ -4937,7 +4937,7 @@ function UpdatePaymentOrder($payment_method,$order_text, $inputData)
 	$stmt->bindParam(':phone_register', $row['phone_register'], PDO::PARAM_STR);
 	$stmt->bindParam(':userid', $row['userid'], PDO::PARAM_INT);
 	$stmt->bindParam(':requestid', $row['requestId'], PDO::PARAM_STR);
-	$stmt->bindParam(':orderid', $row['orderId'], PDO::PARAM_STR);
+	$stmt->bindParam(':orderid', $row['orderid'], PDO::PARAM_STR);
 	$stmt->bindParam(':orderinfo', $row['orderinfo'], PDO::PARAM_STR);
 	$stmt->bindParam(':responsedode', $row['responsedode'], PDO::PARAM_STR);
 	$stmt->bindParam(':transactionno', $row['transactionno'], PDO::PARAM_STR);
