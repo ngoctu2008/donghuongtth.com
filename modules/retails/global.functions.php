@@ -84,7 +84,7 @@ function status_order_ghtk()
 	$array_status = array();
 	foreach($list as $row)
 	{
-		$array_status[$row['status']] = $row;
+		$array_status[get_price_ghtk] = $row;
 	}
 	return $array_status;
 }
