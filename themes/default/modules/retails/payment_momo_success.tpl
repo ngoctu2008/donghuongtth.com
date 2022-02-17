@@ -31,7 +31,7 @@
                 <tbody>
                     <tr>
                         <td class="text_gray_color">Hình thức thanh toán</td>
-                        <td class="text-right font-weight-bold">VN PAY</td>
+                        <td class="text-right font-weight-bold">MoMo</td>
                     </tr>
                     <tr>
                         <td class="text_gray_color">Tổng tiền thanh toán</td>
