@@ -5029,76 +5029,32 @@ function CheckPaymentStatus($payment_method,$order_code,$errors,$inputData){
 			/*
 		https://dev.chonhagiau.com/momo/?partnerCode=MOMOGQQA20220110&orderId=870&requestId=1644977949&amount=35000&orderInfo=Thanh+toan+giao+dich+ECNG0000870+vao+thoi+gian+16-02-2022+09%3A19&orderType=momo_wallet&transId=2644025059&resultCode=0&message=Giao+d%E1%BB%8Bch+th%C3%A0nh+c%C3%B4ng.&payType=qr&responseTime=1644978032873&extraData=&signature=3dd35a45a42df0185d2986932718a4e6a309207a88f7f9ebbfb87547675f0539*/
 	
-			$orderType = $inputData['orderType'];
-			$transId = $inputData['transId'];
-			$resultCode = $inputData['resultCode'];
-			$message = $inputData['message'];
-			$payType = $inputData['payType'];
-			$responseTime = $inputData['responseTime'];
-			$momo_signature = $inputData['signature'];
-			unset($inputData['orderType']);
-			unset($inputData['transId']);
-			unset($inputData['resultCode']);
-			unset($inputData['message']);
-			unset($inputData['payType']);
-			unset($inputData['responseTime']);
-			unset($inputData['signature']);
-			ksort($inputData);
-			$i = 0;
-			$rawHash = "";
-			
-			$row_payment = $global_payport[$payment_method];
-			$payment_config = unserialize(nv_base64_decode($row_payment['config']));
-			$endpoint = $payment_config['endpoint'];
-			$partnerCode = $inputData['partnerCode'];
-			$accessKey = $payment_config['accessKey'];
-			$orderInfo = $inputData['orderInfo'];
-			$amount = $inputData['amount'];
-			$orderId = $inputData['orderId'];
-			$redirectUrl = $payment_config['redirectUrl'];
-			$ipnUrl = $payment_config['ipnUrl'];
-			$serectkey = $payment_config['signature'];
-			$requestId = $inputData['requestId'];
-			$requestType = $payment_config['requestType'];
-			$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-			$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-			$signature = hash_hmac("sha256", $rawHash, $serectkey);
 			
 			if (!defined('NV_IS_USER') or !$global_config['allowuserlogin']) {
 					$user_info['userid'] = 0;
 			}
 			$order_text = str_replace('-',',', $order_code);
 			$check_orderid = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .')')->fetchColumn(); 
-
-			//print_r($tongtien_thanhtoan);die;
-						/*accessKey=$accessKey&amount=$amount&extraData=$extraData&message=$message&orderId=$orderId&orderInfo=$orderInfo&orderType=$orderType&partnerCode=$partnerCode&payType=$payType&requestId=$requestId&responseTime=$responseTime&resultCode=$resultCode&transId=$transId*/
-			$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&message=" . $message . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&orderType=" . $orderType . "&partnerCode=" . $partnerCode . "&payType=" . $payType . "&requestId=" . $requestId . "&responseTime=" . $responseTime . "&resultCode=" . $resultCode . "&transId=" . $transId;
-			$signature = hash_hmac("sha256", $rawHash, $serectkey);
-			// checksum
-			//print_r($vnp_SecureHash);die;
-			if ($signature == $momo_signature)
+			$check_payment = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .') WHERE payment > 0 AND status_payment_vnpay == 1 ')->fetchColumn(); 
+			// check OrderId
+			if ($check_orderid)
 			{
-				// check OrderId
-				if ($check_orderid)
-				{
-					
-					if($sum_total_payment && $sum_total_payment == $amount ){
-						// check Status
-						if ($resultCode == '0') {
-									$status = true;
-									
-						} else {
-							$error[] = 'Thanh toán thất bại!';
-						}
+				
+				if($check_payment ){
+					// check Status
+					if ($resultCode == '0') {
+								$status = true;
+								
 					} else {
-						$error[] = 'Số tiền không hợp lệ!';
+						$error[] = 'Thanh toán thất bại!';
 					}
 				} else {
-					$error[] = 'Đơn hàng không tìm thấy!';
+					$error[] = 'Số tiền không hợp lệ!';
 				}
-			}else{
-				$error[] = 'Chữ ký không hợp lệ!';
+			} else {
+				$error[] = 'Đơn hàng không tìm thấy!';
 			}
+
 
 		// ket thuc xu ly chuan
 	}
