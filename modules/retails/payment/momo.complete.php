@@ -19,7 +19,7 @@ foreach ($data as $key => $value)
 }
 $error = CheckPaymentOrder($payment_method,$order_code,$inputData);	
 $data = GetPaymentStatus($payment_method,$order_code,$error,$inputData);
+if($data['status'] == 1){
+  
+}
 
-print_r($error);
-print_r($data);
-die;

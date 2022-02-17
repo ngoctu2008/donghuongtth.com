@@ -39,11 +39,12 @@ $info_store = get_info_store( $store_id );
 $info_warehouse = get_info_warehouse( $warehouse_id );
 $info_warehouse['address'] = $info_warehouse['address'];
 
-if($info_order['payment_method']==0){
-	$info_order['payment_method']='Thanh toán khi nhận hàng';
-	}else{
-	$info_order['payment_method']='Thanh toán qua ví tiền';
+if($info_order['payment']){
+	$info_order['status_payment'] = 'Đã thanh toán';
+}else{
+	$info_order['status_payment'] = 'Chưa thanh toán';
 }
+$info_order['payment_method'] = $global_payport[$info_order['payment_method']]['paymentname'];
 
 $info_order['shop_id'] = get_info_store($info_order['store_id'])['userid'];
 
@@ -143,47 +144,61 @@ foreach($list_logs_order as $value_logs){
 		$value_logs['user_add']='GHN';
 		}else if($value_logs['user_add']== 4){
 		$value_logs['user_add']='VNPOST';
+	}else if($value_logs['user_add']== 2){
+		$value_logs['user_add']='GHTK';
 	}else{
 		$value_logs['user_add'] = get_info_user_fullname($value_logs['user_add']);
 	}
 	
-	$value_logs['time_add']=date('H:i d/m/Y',$value_logs['time_add']);
+	$value_logs['time_add'] = date('H:i d/m/Y',$value_logs['time_add']);
 	$value_logs['number']=$stt_logs++;
 	$xtpl->assign( 'LOOP_LOGS', $value_logs );
 	$xtpl->parse( 'main.logs_order' );
 }
 
+if(!empty($info_order['shipping_code'])){
+	if($info_order['transporters_id']==4 || $info_order['transporters_id']==5){
+		$list_tracuu=check_info_order_vnpost_history($info_order['shipping_code']);
+		foreach($list_tracuu as $value){
+			$value['status_vnpost'] = $global_status_vnpos[$value['status_vnpost']]['name_status_vnpost'];
+			$value['addtime'] = date('d/m/Y - H:i',$value['addtime']);
+			$xtpl->assign( 'LOOP_TRACUU', $value );
+			
+			$xtpl->parse( 'main.vnpost' );
+		}
+	}elseif($info_order['transporters_id'] == 3){
+		$list_tracuu_ghn = check_info_order_ghn_history($info_order['shipping_code']);
+		foreach($list_tracuu_ghn as $value){
+			//print_r($value);die;
+			$value['status_ghn'] = $global_status_ghn[$value['status']]['desc_status_ghn'];
 
-// lấy tất cả thông tin vận chuyển
-$list_vnpost = $db->query('SELECT * FROM '. TABLE .'_history_vnpos_detail WHERE order_id ='. $id . ' ORDER BY id DESC')->fetchAll();
-
-$stt = 1;
-
-foreach($list_vnpost as $post)
-{
-	$post['status_vnpost'] = $global_status_vnpos[$post['status_vnpost']]['name_status_vnpost'];
-
-	
-	$post['addtime'] = date('d/m/Y - H:i',$post['addtime']);
-	
-	$xtpl->assign( 'stt', $stt );
-	$stt++;
-	$xtpl->assign( 'post', $post );
-	$xtpl->parse( 'main.post' );
-}
-//thông tin vận chuyển GHN
-$list_tracuu_ghn = check_info_order_ghn_history($info_order['shipping_code']);
-foreach($list_tracuu_ghn as $value){
-	$value['status_ghn'] = $global_status_ghn[$value['status']]['desc_status_ghn'];
-	
-	if($value['reason_code']){
-		$value['status_error_ghn'] = $global_status_error_ghn[$value['reason_code']]['desc_status_ghn'];
-		$value['status_error_ghn'] = '(' . $value['status_error_ghn'] . ')';
+			if($value['reason_code']){
+				$value['status_error_ghn'] = $global_status_error_ghn[$value['reason_code']]['desc_status_ghn'];
+				$value['status_error_ghn'] = '(' . $value['status_error_ghn'] . ')';
+			}
+			
+			$value['time_add'] = date('d/m/Y - H:i',$value['time_add']);
+			$xtpl->assign( 'LOOP_GHN', $value );
+			$xtpl->parse( 'main.ghn' );
+		}
+	}elseif($info_order['transporters_id'] == 2){
+		$time_line = time_line_ghtk($info_order['shipping_code']);
+		foreach($time_line as $index => $value){
+			
+			if ($index == 0){
+				$xtpl->assign( 'time_line_active', 'secondary_text' );
+			}else{
+				$xtpl->assign( 'time_line_active', '' );
+			}
+			$value['status_id'] = $global_status_order_ghtk[$value['status_id']]['name'];
+			$value['time_add'] = date('H:i - d/m/Y',$value['time_add']);
+			if($value['reason_code']){
+				$value['reason'] = ' - ' . $global_status_order_error_ghtk[$value['reason_code']]['title'] ;
+			}
+			$xtpl->assign( 'LOOP_GHTK', $value );
+			$xtpl->parse( 'main.GHTK' );
+		}
 	}
-	
-	$value['time_add'] = date('d/m/Y - H:i',$value['time_add']);
-	$xtpl->assign( 'LOOP_GHN', $value );
-	$xtpl->parse( 'main.ghn' );
 }
 
 

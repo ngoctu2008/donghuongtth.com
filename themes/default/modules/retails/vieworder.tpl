@@ -2,8 +2,7 @@
 <div class="content_detail_order">
     <div class="info_order bg_white p-3">
         <div class=" d-flex justify-content-between">
-            <p class="fs_18 "><span class="text_gray_color">Chi tiết đơn hàng {info_order.order_code}</span> -
-                <span>{info_order.status}</span></p>
+        <p class="fs_18 mb-0"><span class="text_gray_color">Chi tiết đơn hàng {info_order.order_code}</span> - {info_order.status}  - <span class="secondary_text">{info_order.status_payment} <span></p>
             <p>Ngày mua: {info_order.time_add}</p>
         </div>
         <div class="primary_text">Bạn vừa ủng hộ <span style="color:#1358B9">{children_fund}</span> vào quỹ “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</div>
@@ -25,11 +24,18 @@
                             <p class="pt-2">{LOOP_GHN.warehouse} {LOOP_GHN.status_error_ghn}</p>
                         </li>
                         <!-- END: ghn -->
+                        <!-- BEGIN: GHTK -->
+						<li>
+                            <span class="">{LOOP_GHTK.time_add}  </span>
+                            <span class="{time_line_active}">{LOOP_GHTK.status_id}</span>
+                            <span class="">{LOOP_GHTK.reason}</span>
+                        </li>
+                        <!-- END: GHTK -->
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="pb-2">Địa chỉ nhận hàng</div>
+        <div class="pb-2">{info_order.status_payment}</div>
         <div class="row px-2">
             <div class="col-md-7 p-4 border">
                 <p><span class="pr-2">Tên: </span> {info_order.order_name}</p>
@@ -37,7 +43,7 @@
                 <p class="mb-0"><span class="pr-2">Điện thoại: </span> {info_order.phone}</p>
             </div>
             <div class="col-md-5 p-4 border">
-                <p class="">Hình thức thanh toán: {info_order.payment_method}</p>
+                <p class="">Phương Thức Thanh Toán: {info_order.payment_method}</p>
                 <p>Giao Hàng: {info_order.transporters_name} {info_order.shipping_code}</p>
                 <p>Phí vận chuyển: {info_order.fee_transport}đ</p>
 

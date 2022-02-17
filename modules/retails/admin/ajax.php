@@ -327,10 +327,7 @@
 		}
 		
 	}
-	
-	
-	
-	
+
 	if($mod=='check_khaigia_ghn'){
 		
 		$order_id = $nv_Request->get_int('order_id', 'get,post', '');
@@ -467,24 +464,24 @@
 			
 		}
 		
-		$pick_province = $global_province[$info_warehouse['province_id']]['type'] . ' ' . $global_province[$info_warehouse['province_id']]['title'];
+		$pick_province =  $global_province[$info_warehouse['province_id']]['title'];
 		$pick_district =  $global_district[$info_warehouse['district_id']]['title'];
-		$pick_ward = $global_ward[$info_warehouse['ward_id']]['type'] . ' ' . $global_ward[$info_warehouse['ward_id']]['title'];
+		$pick_ward =  $global_ward[$info_warehouse['ward_id']]['title'];
 		$address_short = explode(',',$info_warehouse['address']);
 		$info_warehouse['address'] = $address_short[0];
 		$shop_name = $db->query('SELECT company_name FROM ' . TABLE . '_seller_management WHERE id = ' . $info_order['store_id'])->fetchColumn();
 	
-		$province = $global_province[$info_order['province_id']]['type'] . ' ' . $global_province[$info_order['province_id']]['title'];
-		$district = $global_district[$info_order['district_id']]['type'] . ' ' . $global_district[$info_order['district_id']]['title'];
-		$ward = $global_ward[$info_order['ward_id']]['type'] . ' ' . $global_ward[$info_order['ward_id']]['title'];
+		$province =  $global_province[$info_order['province_id']]['title'];
+		$district =  $global_district[$info_order['district_id']]['title'];
+		$ward =  $global_ward[$info_order['ward_id']]['title'];
 		$address_short = explode(',',$info_order['address']);
 		$info_order['address'] = $address_short[0];
 	
 		$return_name = $config_setting['name_ecng'];
 		$return_address = $config_setting['address_ecng'];
-		$return_province = $global_province[$config_setting['province_ecng']]['type'] . ' ' . $global_province[$config_setting['province_ecng']]['title'];
-		$return_district = $global_district[$config_setting['district_ecng']]['type'] . ' ' . $global_district[$config_setting['district_ecng']]['title'];
-		$return_ward = $global_ward[$config_setting['ward_ecng']]['type'] . ' ' . $global_ward[$config_setting['ward_ecng']]['title'];
+		$return_province =  $global_province[$config_setting['province_ecng']]['title'];
+		$return_district =  $global_district[$config_setting['district_ecng']]['title'];
+		$return_ward =  $global_ward[$config_setting['ward_ecng']]['title'];
 		$return_address = explode(',',$config_setting['address_ecng']);
 		$return_address = $return_address[0];
 		
@@ -514,7 +511,26 @@
 		}
 		
 		$info_order['order_code'] = $info_order['order_code'] . ' - ' . nv_date("H:i d/m/Y", NV_CURRENTTIME);
-		$order_ghtk = send_ghtk($list_item, $info_order['order_code'], $shop_name, $info_warehouse['address'], $pick_province, $pick_district, $pick_ward, $info_warehouse['phone_send'], $info_order['phone'], $info_order['order_name'], $info_order['address'], $province, $district, $ward, $pick_money, $value, 'road', '', $return_name, $return_address, $return_province, $return_district, $return_ward, $return_tel, $return_email, $pick_option, $is_freeship);
+		//$order_ghtk = send_ghtk($list_item, $info_order['order_code'], $shop_name, $info_warehouse['address'], $pick_province, $pick_district, $pick_ward, $info_warehouse['phone_send'], $info_order['phone'], $info_order['order_name'], $info_order['address'], $province, $district, $ward, $pick_money, $value, 'road', '', $return_name, $return_address, $return_province, $return_district, $return_ward, $return_tel, $return_email, $pick_option, $is_freeship);
+		
+		$order_ghtk = array (
+			'success' => true,
+			'message' => '',
+			'order' => 
+			array (
+			  'partner_id' => '123123a',
+			  'label' => 'S20966001.SG12.D1.BC.300078019',
+			  'area' => '1',
+			  'fee' => '30400',
+			  'insurance_fee' => '15000',
+			  'estimated_pick_time' => 'Sáng 2017-07-01',
+			  'estimated_deliver_time' => 'Chiều 2017-07-01',
+			  'products' => 
+			  array (
+			  ),
+			  'status_id' => 2,
+			),
+		);
 		
 		if ($order_ghtk['success']) {
 			update_ghtk_admin($info_order, $order_ghtk);
