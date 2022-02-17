@@ -4798,7 +4798,6 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 						/*accessKey=$accessKey&amount=$amount&extraData=$extraData&message=$message&orderId=$orderId&orderInfo=$orderInfo&orderType=$orderType&partnerCode=$partnerCode&payType=$payType&requestId=$requestId&responseTime=$responseTime&resultCode=$resultCode&transId=$transId*/
 			$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&message=" . $message . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&orderType=" . $orderType . "&partnerCode=" . $partnerCode . "&payType=" . $payType . "&requestId=" . $requestId . "&responseTime=" . $responseTime . "&resultCode=" . $resultCode . "&transId=" . $transId;
 			$signature = hash_hmac("sha256", $rawHash, $serectkey);
-			print_r($rawHash);
 			// checksum
 			//print_r($vnp_SecureHash);die;
 			if ($signature == $momo_signature)
@@ -4840,7 +4839,11 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 function UpdatePaymentOrder($payment_method,$order_text, $inputData)
 {
 	global $db, $db_config, $user_info, $module_name, $lang_module, $global_payport;
-
+	if($payment_method == 'vnpay'){
+		$transporters_id = $inputData['vnp_TransactionNo'];
+	}elseif($payment_method == 'momo'){
+		$transporters_id = $inputData['transId'];
+	}
 	$list_order = $db->query('SELECT * FROM ' . TABLE . '_order WHERE id IN(' . $order_text . ')')->fetchAll();
 
 	// cập nhật kho hàng sau khi thanh toán thành công
@@ -4887,7 +4890,7 @@ function UpdatePaymentOrder($payment_method,$order_text, $inputData)
 
 		// cập nhật thông tin đơn hàng thanh toán thành công status_payment_vnpay = 1
 
-		$update_status_payment_vnpay = $db->query('UPDATE ' . TABLE . '_order SET status_payment_vnpay = 1, status = 1, payment =' . $order['total'] . ', vnpay_code ="' . $inputData['vnp_TransactionNo'] . '" WHERE id =' . $order['id']);
+		$update_status_payment_vnpay = $db->query('UPDATE ' . TABLE . '_order SET status_payment_vnpay = 1, status = 1, payment =' . $order['total'] . ', vnpay_code ="' . $transporters_id . '" WHERE id =' . $order['id']);
 
 		update_time_add_order($order['id']);
 
@@ -4926,4 +4929,184 @@ function UpdatePaymentOrder($payment_method,$order_text, $inputData)
 	}
 
 	return true;
+}
+function CheckPaymentStatus($payment_method,$order_code,$errors,$inputData){
+	global $db,$global_config,$config_setting,$user_info,$global_payport;
+	$status = false;
+
+		// tính tổng tiền thanh toán
+		$sum_total_payment = $db->query('SELECT sum(total) FROM ' . TABLE . '_order WHERE id IN(' . $order_code . ')')->fetchColumn();
+
+		//$_SESSION[$module_name . '_' . $payment_method] = true;
+		
+		if($payment_method == 'vnpay'){
+				$vnp_SecureHash = $inputData['vnp_SecureHash'];
+				unset($inputData['vnp_SecureHashType']);
+				unset($inputData['vnp_SecureHash']);
+				unset($inputData['order_code']);
+				ksort($inputData);
+				$i = 0;
+				$hashData = "";
+				
+				foreach ($inputData as $key => $value)
+				{
+					if ($i == 1)
+					{
+						$hashData = $hashData . '&' . $key . "=" . $value;
+					}
+					else
+					{
+						$hashData = $hashData . $key . "=" . $value;
+						$i = 1;
+					}
+				}
+			
+			$vnp_HashSecret = $config_setting['checksum_vnpay'];
+
+			$order_text = $inputData['vnp_TxnRef'];
+
+				if (!$order_text) {
+					$returnData['RspCode'] = '01';
+					$returnData['Message'] = 'Order not found!';
+				}
+
+				
+				if (!defined('NV_IS_USER') or !$global_config['allowuserlogin']) {
+						$user_info['userid'] = 0;
+				}
+				$check_orderid = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .')')->fetchColumn(); 
+
+				//print_r($tongtien_thanhtoan);die;
+
+			
+				$secureHash = hash('sha256', $vnp_HashSecret . $hashData);
+				//print_r($id_order);die;
+			
+				$vnp_Amount = $inputData['vnp_Amount'];
+				$vnp_Amount = (int)$vnp_Amount / 100;
+				// checksum
+				//print_r($vnp_SecureHash);die;
+				if ($secureHash == $vnp_SecureHash)
+				{
+					// check OrderId
+					if ($check_orderid)
+					{
+						
+						if($sum_total_payment && $sum_total_payment == $vnp_Amount ){
+							// check Status
+							if ($check_payment) {
+								
+									if ($inputData['vnp_ResponseCode'] == '00')
+									{
+										$status = true;
+									
+									}
+									
+								
+							
+							} else {
+								$error[] = 'Thanh toán thất bại!';
+							}
+						} else {
+							$error[] = 'Số tiền không hợp lệ!';
+						}
+					} else {
+						$error[] = 'Đơn hàng không tìm thấy!';
+					}
+				}else{
+					$error[] = 'Chữ ký không hợp lệ!';
+				}
+
+			// ket thuc xu ly chuan
+		} elseif ($payment_method == 'recieve') {
+			$db->query('UPDATE ' . TABLE . '_order SET status = 1  WHERE id IN (' . $order_code . ')');
+
+			$status = true;
+			//$inputData = array();
+			//$inputData['order_code'] = $nv_Request->get_title('order_code', 'get', '', 1);
+
+		}elseif($payment_method == 'momo'){
+			/*
+		https://dev.chonhagiau.com/momo/?partnerCode=MOMOGQQA20220110&orderId=870&requestId=1644977949&amount=35000&orderInfo=Thanh+toan+giao+dich+ECNG0000870+vao+thoi+gian+16-02-2022+09%3A19&orderType=momo_wallet&transId=2644025059&resultCode=0&message=Giao+d%E1%BB%8Bch+th%C3%A0nh+c%C3%B4ng.&payType=qr&responseTime=1644978032873&extraData=&signature=3dd35a45a42df0185d2986932718a4e6a309207a88f7f9ebbfb87547675f0539*/
+	
+			$orderType = $inputData['orderType'];
+			$transId = $inputData['transId'];
+			$resultCode = $inputData['resultCode'];
+			$message = $inputData['message'];
+			$payType = $inputData['payType'];
+			$responseTime = $inputData['responseTime'];
+			$momo_signature = $inputData['signature'];
+			unset($inputData['orderType']);
+			unset($inputData['transId']);
+			unset($inputData['resultCode']);
+			unset($inputData['message']);
+			unset($inputData['payType']);
+			unset($inputData['responseTime']);
+			unset($inputData['signature']);
+			ksort($inputData);
+			$i = 0;
+			$rawHash = "";
+			
+			$row_payment = $global_payport[$payment_method];
+			$payment_config = unserialize(nv_base64_decode($row_payment['config']));
+			$endpoint = $payment_config['endpoint'];
+			$partnerCode = $inputData['partnerCode'];
+			$accessKey = $payment_config['accessKey'];
+			$orderInfo = $inputData['orderInfo'];
+			$amount = $inputData['amount'];
+			$orderId = $inputData['orderId'];
+			$redirectUrl = $payment_config['redirectUrl'];
+			$ipnUrl = $payment_config['ipnUrl'];
+			$serectkey = $payment_config['signature'];
+			$requestId = $inputData['requestId'];
+			$requestType = $payment_config['requestType'];
+			$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+			$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+			$signature = hash_hmac("sha256", $rawHash, $serectkey);
+			
+			if (!defined('NV_IS_USER') or !$global_config['allowuserlogin']) {
+					$user_info['userid'] = 0;
+			}
+			$order_text = str_replace('-',',', $orderId);
+			$check_orderid = $db->query('SELECT id FROM ' . TABLE . '_order WHERE userid ='. $user_info['userid'] .' AND id IN('. $order_text .')')->fetchColumn(); 
+
+			//print_r($tongtien_thanhtoan);die;
+						/*accessKey=$accessKey&amount=$amount&extraData=$extraData&message=$message&orderId=$orderId&orderInfo=$orderInfo&orderType=$orderType&partnerCode=$partnerCode&payType=$payType&requestId=$requestId&responseTime=$responseTime&resultCode=$resultCode&transId=$transId*/
+			$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&message=" . $message . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&orderType=" . $orderType . "&partnerCode=" . $partnerCode . "&payType=" . $payType . "&requestId=" . $requestId . "&responseTime=" . $responseTime . "&resultCode=" . $resultCode . "&transId=" . $transId;
+			$signature = hash_hmac("sha256", $rawHash, $serectkey);
+			// checksum
+			//print_r($vnp_SecureHash);die;
+			if ($signature == $momo_signature)
+			{
+				// check OrderId
+				if ($check_orderid)
+				{
+					
+					if($sum_total_payment && $sum_total_payment == $amount ){
+						// check Status
+						if ($resultCode == '0') {
+									$status = true;
+									
+						} else {
+							$error[] = 'Thanh toán thất bại!';
+						}
+					} else {
+						$error[] = 'Số tiền không hợp lệ!';
+					}
+				} else {
+					$error[] = 'Đơn hàng không tìm thấy!';
+				}
+			}else{
+				$error[] = 'Chữ ký không hợp lệ!';
+			}
+
+		// ket thuc xu ly chuan
+	}
+		
+	
+	$data=array();
+	$data['status'] = $status;
+	$data['error'] = $error;
+	$data['sum_total_payment'] = $sum_total_payment;
+	return $data;
 }

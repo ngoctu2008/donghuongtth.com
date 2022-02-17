@@ -48,7 +48,7 @@
 			}
 		}
 		$error = CheckPaymentOrder($payment_method,$order_code,$inputData);	
-		$data = GetPaymentStatus($payment_method,$order_code,$error,$inputData);
+		$data = CheckPaymentStatus($payment_method,$order_code,$error,$inputData);
 		 if($data['status']==0){
 			$error = $data['error'];
 		} 
@@ -111,8 +111,12 @@
 				$inputData['format_Amount'] = number_format($data['sum_total_payment'],0,",",",");
 				$xtpl->assign('thanhtoan', $inputData);
 			}elseif($payment_method == 'momo'){
-				require_once(NV_ROOTDIR.'modules/retails/payment/momo.complete.php');
+				$inputData['vnp_txnref'] = implode(' - ',$array_order);
 				
+				$inputData['date_create'] = date("d/m/Y H:i",$info_order['time_add']);//$ngay . '/' . $thang . '/' . $nam . ' - ' . $gio . ':' . $phut;
+				
+				$inputData['format_Amount'] = number_format($data['sum_total_payment'],0,",",",");
+				$xtpl->assign('thanhtoan', $inputData);
 			}
 			
 			if($user_info['userid']){
