@@ -35,7 +35,7 @@
                     </tr>
                     <tr>
                         <td class="text_gray_color">Tổng tiền thanh toán</td>
-                        <td class="text-right font-weight-bold">{thanhtoan.format_vnp_Amount}</td>
+                        <td class="text-right font-weight-bold">{thanhtoan.format_Amount}</td>
                     </tr>
                     <tr>
                         <td class="text_gray_color">Thời gian giao dịch</td>
