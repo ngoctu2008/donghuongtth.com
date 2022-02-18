@@ -138,8 +138,8 @@ if ($nv_Request->isset_request('submit', 'post')) {
 	}
 	
 	// địa chỉ ngắn gọn
+	$short_address = $row['address'];
 	$address = get_full_address($row['ward_id'], $row['district_id'], $row['province_id']);
-
 	$row['address'] = $row['address'] . $address;
 	
 	if (empty($error)) {
@@ -339,7 +339,10 @@ if ($nv_Request->isset_request('submit', 'post')) {
 
 			$exc = $stmt->execute();
 			if ($exc) {
-
+				$district_id_ghn = $global_district[$row['district_id']]['ghnid'];
+				$ward_id_ghn = $global_ward[$row['ward_id']]['ghnid'];
+				$ward_id_vtp = $global_ward[$row['ward_id']]['vtpid'];
+				
 				if (empty($row['id'])) {
 					$email_contents = 'Gian hàng của bạn đã được tạo thành công, tên đăng nhập: ' . $row['username'] . ', Mật khẩu: ' . $row['password1'];
 					$email_title = "Thư báo tạo gian hàng thành công";
@@ -351,7 +354,6 @@ if ($nv_Request->isset_request('submit', 'post')) {
 
 					// khởi tạo tất cả đơn vị vận chuyển đang hoạt động cho cửa hàng mới tạo này
 					$list_tranpost = $db->query('SELECT id FROM ' . TABLE . '_transporters WHERE status = 1 ORDER BY weight ASC')->fetchAll();
-
 					foreach ($list_tranpost as $tranpost) {
 						// thêm vào
 						$db->query('INSERT INTO ' . TABLE . '_transporters_shop(sell_id, transporters_id, status) VALUES(' . $sell_id . ',' . $tranpost['id'] . ',1)');
@@ -390,10 +392,8 @@ if ($nv_Request->isset_request('submit', 'post')) {
 					$data_insert['maps_mapzoom'] = $row['maps_mapzoom'];
 
 					$warehouse_id = $db->insert_id($sql, 'id', $data_insert);
-					//warehouse
-					//bao nhiêu đơn vị vc sẽ thêm bấy nhiêu
-					//viettel post   
-					$shops_id_vtp_data = create_warehouse_viettelpost($row['phone_send'], $row['name_send'], $row['address'], get_info_ward($row['ward_id'])['vtpid']);
+					//viettel post  
+					$shops_id_vtp_data = create_warehouse_viettelpost($row['phone_send'], $row['company_name'], $short_address, $ward_id_vtp);
 					if ($shops_id_vtp_data['status'] == 200) {
 						$shop_id_vtp = $shops_id_vtp_data['data'][0]['groupaddressId'];
 						$sql = "INSERT INTO " . TABLE . "_warehouse_transport
@@ -408,9 +408,28 @@ if ($nv_Request->isset_request('submit', 'post')) {
 						$data_insert['status'] = 1;
 						$vtp_id = $db->insert_id($sql, 'id', $data_insert);
 					} else {
-						$error[] = 'Lỗi API Viettel Post';die('Lỗi API Viettel Post');
+						$error[] = $shops_id_vtp_data['message'];print_r($shops_id_vtp_data['message']);die;
 					}
 					//viettel post 
+					//GHN
+					$shops_id_ghn_data = create_store_ghn($district_id_ghn, $ward_id_ghn, $row['company_name'],$row['phone_send'], $row['address']);
+					if($shops_id_ghn_data['code'] == 200){
+						$shops_id_ghn = $shops_id_ghn_data['data']['shop_id'];
+						$sql = "INSERT INTO " . TABLE . "_warehouse_transport
+							( warehouse_id, transportid_ecng, storeid_transport, time_add, status)
+							VALUES
+							(:warehouse_id, :transportid_ecng, :storeid_transport, :time_add, :status)";
+						$data_insert = array();
+						$data_insert['warehouse_id'] = $warehouse_id;
+						$data_insert['transportid_ecng'] = '3'; // GHN = 3
+						$data_insert['storeid_transport'] = $shops_id_ghn;
+						$data_insert['time_add'] = NV_CURRENTTIME;
+						$data_insert['status'] = 1;
+						$ghn_id = $db->insert_id($sql, 'id', $data_insert);
+					}else{
+						$error[] = $shops_id_ghn_data['message'];print_r($shops_id_ghn_data['message']);die;
+					}
+					//GHN
 					nv_insert_logs(NV_LANG_DATA, $module_name, 'Add Seller_management', ' ', $admin_info['userid']);
 				} else {
 
@@ -424,7 +443,6 @@ if ($nv_Request->isset_request('submit', 'post')) {
 					$cusId = 0;
 					$shops_id_ghn = 0;
 					//update kho và đơn vị vc
-					
 					if ($row['warehouse_id'] > 0) {
 						//kiểm tra thông tin kho có thay đổi không nếu có cập nhật lại kho và API
 						$check_wareHouse = get_info_warehouse($row['warehouse_id']);
@@ -433,14 +451,23 @@ if ($nv_Request->isset_request('submit', 'post')) {
 							$db->query('UPDATE ' . TABLE . '_warehouse SET name_warehouse = ' . $db->quote($row['name_warehouse']) . ',name_send = ' . $db->quote($row['name_send']) . ', phone_send = ' . $db->quote($row['phone_send']) . ', address = ' . $db->quote($row['address']) . ', shops_id_ghn = ' . $shops_id_ghn . ',province_id = ' . $db->quote($row['province_id']) . ',district_id = ' . $db->quote($row['district_id']) . ',ward_id = ' . $db->quote($row['ward_id']) . ', user_edit = ' . $admin_info['userid'] . ',time_edit = ' . NV_CURRENTTIME . ', status = 1, lat = ' . $db->quote($row['lat']) . ', lng = ' . $db->quote($row['lng']) . ',cusId = ' . $cusId . ' , groupaddressId = ' . $groupaddressId . ',centerlat = ' . $db->quote($row['centerlat']) . ',centerlng = ' . $db->quote($row['centerlng']) . ',maps_mapzoom = ' . $db->quote($row['maps_mapzoom']) . ' where id = ' . $row['warehouse_id']);
 
 							//viettel post
-							// $shops_id_vtp_data = create_warehouse_viettelpost($row['phone_send'], $row['name_send'], $row['address'], get_info_ward($row['ward_id'])['vtpid']);
-							// if ($shops_id_vtp_data['status'] == 200) {
-							// 	$shop_id_vtp = $shops_id_vtp_data['data'][0]['groupaddressId'];
-							// 	$db->query('UPDATE ' . TABLE . '_warehouse_transport SET storeid_transport = ' . $shop_id_vtp . ' WHERE warehouse_id = ' . $row['warehouse_id'] . ' AND FIND_IN_SET(1, transportid_ecng)');
-							// } else {
-							// 	$error[] = 'Lỗi API Viettel Post';die('Lỗi API Viettel Post');
-							// }
+							$shops_id_vtp_data = create_warehouse_viettelpost($row['phone_send'], $row['company_name'], $short_address, $ward_id_vtp);
+							if ($shops_id_vtp_data['status'] == 200) {
+								$shop_id_vtp = $shops_id_vtp_data['data'][0]['groupaddressId'];
+								$db->query('UPDATE ' . TABLE . '_warehouse_transport SET storeid_transport = ' . $shop_id_vtp . ' WHERE warehouse_id = ' . $row['warehouse_id'] . ' AND FIND_IN_SET(1, transportid_ecng)');
+							} else {
+								$error[] = $shops_id_vtp_data['message'];print_r($shops_id_vtp_data['message']);die;
+							}
 							//viettel post
+							//GHN
+							$shops_id_ghn_data = create_store_ghn($district_id_ghn, $ward_id_ghn, $row['company_name'], $row['phone_send'], $row['address']);
+							if($shops_id_ghn_data['code'] == 200){
+								$shops_id_ghn = $shops_id_ghn_data['data']['shop_id'];
+								$db->query('UPDATE ' . TABLE . '_warehouse_transport SET storeid_transport = ' . $shops_id_ghn . ' WHERE warehouse_id = ' . $row['warehouse_id'] . ' AND FIND_IN_SET(3, transportid_ecng)');
+							}else{
+								$error[] = $shops_id_ghn_data['message'];print_r($shops_id_ghn_data['message']);die;
+							}
+							//GHN
 						}
 					}
 

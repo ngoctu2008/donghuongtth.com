@@ -8,7 +8,42 @@
 		* @Createdate Mon, 21 Dec 2020 09:48:26 GMT
 	*/
 	
-	/*
+/*
+// tạo ID GHN tự động cho tất cả kho
+		
+	// lấy danh sách kho hàng
+		
+	$list_detail = $db->query('SELECT * FROM ' . TABLE .'_warehouse WHERE 1')->fetchAll();
+	$arr = array();
+	foreach($list_detail as $value)
+	{	
+		$district_id = $global_district[$value['district_id']]['ghnid'];
+
+		$ward_id = $global_ward[$value['ward_id']]['ghnid'];
+		$shops_id_ghn = create_store_ghn($district_id, $ward_id, $value['name_send'],$value['phone_send'], $value['address']);
+		$shops_id_ghn = $shops_id_ghn['data']['shop_id'];
+		
+		if($shops_id_ghn)
+		{
+			$arr[] = $shops_id_ghn;
+			$shop_id_vtp = $shops_id_vtp_data['data'][0]['groupaddressId'];
+			$sql = "INSERT INTO " . TABLE . "_warehouse_transport
+				( warehouse_id, transportid_ecng, storeid_transport, time_add, status)
+				VALUES
+				(:warehouse_id, :transportid_ecng, :storeid_transport, :time_add, :status)";
+			$data_insert = array();
+			$data_insert['warehouse_id'] = $value['id'];
+			$data_insert['transportid_ecng'] = '3'; // viettel post = 1
+			$data_insert['storeid_transport'] = $shops_id_ghn;
+			$data_insert['time_add'] = NV_CURRENTTIME;
+			$data_insert['status'] = 1;
+			$vtp_id = $db->insert_id($sql, 'id', $data_insert);
+		}
+	}
+	
+	print_r($arr);die;
+
+	
 
 // tool đồng bộ thêm đơn vị vận chuyển GHTK cho tất cả cửa hàng tự động bật
 	$list_store = $db->query('SELECT id FROM ' . TABLE .'_seller_management')->fetchAll();
@@ -61,30 +96,7 @@
 	
 	
 		
-		// tạo ID GHN tự động cho tất cả kho
 		
-		// lấy danh sách kho hàng
-		
-		$list_detail = $db->query('SELECT * FROM ' . TABLE .'_warehouse WHERE shops_id_ghn = 0')->fetchAll();
-		
-		
-		
-	$arr = array();
-	
-	foreach($list_detail as $value)
-	{
-	$shops_id_ghn_data = create_store_ghn(get_info_district($value['district_id'])['ghnid'],get_info_ward($value['ward_id'])['ghnid'],$value['name_send'],$value['phone_send'],$value['address']);
-	
-	$shops_id_ghn = $shops_id_ghn_data['data']['shop_id'];
-	
-	if($shops_id_ghn)
-	{
-	$arr[] = $shops_id_ghn_data;
-	$db->query('UPDATE ' . TABLE . '_warehouse SET shops_id_ghn='.$db->quote($shops_id_ghn).' where id='.$value['id']);
-	}
-	}
-	
-	print_r($arr);die(ok);
 	
 	
 	
