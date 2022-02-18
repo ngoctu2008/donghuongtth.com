@@ -108,13 +108,6 @@
 	$info_store = get_info_store( $info_order['store_id'] );
 	$info_store['alias_shop'] = NV_MY_DOMAIN .'/'.get_info_user($info_store['userid'])['username'].'/';
 	
-	if($info_order['payment_method']=='vnpay'){
-		$info_order['payment_method']='VN Pay';
-	}
-	elseif ($info_order['payment_method']=='recieve'){
-		$info_order['payment_method']='Thanh toán sau khi nhận hàng';
-	}
-	
 	if(!$info_order['status_payment_vnpay']){
 		
 		$check_voucher = check_voucher('', $info_order['voucherid'], $info_store['userid']);
@@ -139,7 +132,6 @@
 	$info_order['total']=number_format($info_order['total']);
 	$info_order['fee_transport']=number_format($info_order['fee_transport']);
 	$info_order['voucher_price']=number_format($info_order['voucher_price']);
-	
 	$info_order['address'] = $info_order['address'];
 	$per_page = 20;
 	$page = $nv_Request->get_int( 'page', 'post,get', 1 );
@@ -192,15 +184,6 @@
 	$xtpl->assign( 'info_warehouse', $info_warehouse );
 	$xtpl->assign( 'back_link', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=ordercustomer',true));
 	$xtpl->assign('children_fund', $config_setting['children_fund'] . 'đ');
-	
-	if($user_info['userid']){
-		$info_order['check_rate'] = $db->query('SELECT count(*) FROM ' . TABLE . '_order t1 INNER JOIN ' . TABLE . '_order_item t2 ON t1.id = t2.order_id WHERE t2.product_id = ' . $info_order['id'] . ' AND t1.status = 3')->fetchColumn();
-		$info_order['check_rate_st1'] = $db->query('SELECT count(*) FROM ' . TABLE . '_product t1 INNER JOIN ' . TABLE . '_rate t2 ON t1.id = t2.product_id WHERE t2.product_id = ' . $info_order['id'] . ' AND t2.userid = ' .$user_info['userid'] . ' AND t2.status = 1')->fetchColumn();
-		
-		$info_order['info_rate'] = $db->query('SELECT t2.* FROM ' . TABLE . '_product t1 INNER JOIN ' . TABLE . '_rate t2 ON t1.id = t2.product_id WHERE t2.product_id = ' . $info_order['id'] . ' AND t2.userid = ' .$user_info['userid'])->fetch();
-		
-		$info_order['check_rate_st2'] = $db->query('SELECT count(*) FROM ' . TABLE . '_product t1 INNER JOIN ' . TABLE . '_rate t2 ON t1.id = t2.product_id WHERE t2.product_id = ' . $info_order['id'] . ' AND t2.userid = ' .$user_info['userid'] . ' AND t2.status = 2')->fetchColumn();
-	}
 	
 	if($info_order['payment']){
 		$info_order['status_payment'] = 'Đã thanh toán';
@@ -403,7 +386,7 @@
 	$xtpl->parse( 'main' );
 	$contents = $xtpl->text( 'main' );
 	
-	$page_title = $lang_module['vieworder'].' '.$info_order['order_code'];
+	$page_title = $lang_module['check_order'].' '.$info_order['order_code'];
 	$array_mod_title[] = array(
 	'catid' => 0,
 	'title' => 'Kiểm tra đơn hàng',

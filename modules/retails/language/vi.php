@@ -157,6 +157,7 @@ $lang_module['store_id'] = 'Cửa hàng';
 $lang_module['warehouse_id'] = 'Kho hàng';
 $lang_module['view']='Xem';
 $lang_module['vieworder']='Xem chi tiết đơn hàng';
+$lang_module['check_order']='Kiểm tra đơn hàng';
 $lang_module['ordercustomer']='Quản lý đơn hàng khách hàng';
 
 //Lang for function categoryshop

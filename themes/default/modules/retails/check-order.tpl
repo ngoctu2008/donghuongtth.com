@@ -35,12 +35,12 @@
                 </div>
             </div>
         </div>
-        <div class="pb-2">{info_order.status_payment}</div>
         <div class="row px-2">
             <div class="col-md-7 p-4 border">
                 <p><span class="pr-2">Tên: </span> {info_order.order_name}</p>
                 <p><span class="pr-2">Địa chỉ: </span> {info_order.address}</p>
-                <p class="mb-0"><span class="pr-2">Điện thoại: </span> {info_order.phone}</p>
+                <p><span class="pr-2">Điện thoại: </span> {info_order.phone}</p>
+                <p class="mb-0">Email: {info_order.email}</p>
             </div>
             <div class="col-md-5 p-4 border">
                 <p class="">Phương Thức Thanh Toán: {info_order.payment_method}</p>
