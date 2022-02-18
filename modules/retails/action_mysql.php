@@ -399,6 +399,25 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
   addtime int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (id)
 ) ENGINE=MyISAM";
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_payment(
+  id mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  price double NOT NULL DEFAULT '0' COMMENT 'Số tiền thanh toán',
+  name_register varchar(255) NOT NULL COMMENT 'Tên đầy đủ',
+  email_register varchar(255) DEFAULT '' COMMENT 'Email',
+  phone_register varchar(255) DEFAULT '' COMMENT 'Số điện thoại',
+  userid varchar(255) DEFAULT '' COMMENT 'Tài khoản thanh toán',
+  requestid varchar(255) DEFAULT '' COMMENT 'requestid',
+  orderid varchar(255) DEFAULT '' COMMENT 'Mã đơn hàng',
+  orderinfo varchar(255) DEFAULT '' COMMENT 'Nội dung thanh toán',
+  responsedode varchar(255) DEFAULT '' COMMENT 'Mã phản hồi',
+  transactionno varchar(255) DEFAULT '' COMMENT 'Mã GD Tại VNPAY',
+  bankcode varchar(255) DEFAULT '' COMMENT 'Mã Ngân hàng',
+  cardtype varchar(255) DEFAULT '' ,
+  paydate int(10) DEFAULT '0' COMMENT 'Thời gian thanh toán',
+  status varchar(255) DEFAULT '' COMMENT 'Trạng thái thanh toán',
+  addtime int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (id)
+) ENGINE=MyISAM";
 
 
 

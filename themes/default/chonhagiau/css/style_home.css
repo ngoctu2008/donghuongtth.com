@@ -1069,3 +1069,8 @@ and (-webkit-min-device-pixel-ratio: 1.5) {
     background-repeat: repeat-y;
     padding: 5px 12px !important;
   }
+  .select2-selection.select2-selection--single{
+    border: 1px solid #dee2e6 !important;
+    height: 35.5px !important;
+    padding-top: 2.5px !important;
+  }

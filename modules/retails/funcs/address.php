@@ -229,6 +229,8 @@ if (!$nv_Request->isset_request('id', 'post,get')) {
 	$sth->execute();
 }
 
+
+
 $xtpl = new XTemplate('address.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file);
 $xtpl->assign('LANG', $lang_module);
 $xtpl->assign('NV_LANG_VARIABLE', NV_LANG_VARIABLE);
@@ -242,14 +244,52 @@ $xtpl->assign('NV_ASSETS_DIR', NV_ASSETS_DIR);
 $xtpl->assign('OP', $op);
 $xtpl->assign('ROW', $row);
 
+if(!$user_info['userid']){
+	$address_no_login = $_SESSION['address_no_login'];
+	$xtpl->assign('ROW', $address_no_login);
+	if ($address_no_login['province_id']) {
+		foreach ($global_province as $value_list) {
+			
+			if ($address_no_login['province_id'] == $value_list['provinceid']) {
+				$value_list["selected"] = "selected";
+			}
+			$xtpl->assign('STATUS', $value_list);
+			$xtpl->parse('main.edit.province_id');
+		}
+	}
+	if ($address_no_login['province_id'] and $address_no_login['district_id']) {
+		$list_district = $global_province[$address_no_login['province_id']]['district'];
+		foreach ($list_district as $value_list) {
+			if ($address_no_login['district_id'] == $value_list['districtid']) {
+				$value_list["selected"] = "selected";
+			}
+			$value_list['title'] = $value_list['type'] . ' ' . $value_list['title'];
+			$xtpl->assign('STATUS', $value_list);
+			$xtpl->parse('main.edit.district_id');
+		}
+	}
+
+	if ($address_no_login['province_id'] and $address_no_login['district_id'] and $address_no_login['ward_id']) {
+		$list_ward = $global_district[$address_no_login['district_id']]['ward'];
+		foreach ($list_ward as $value_list) {
+			if ($address_no_login['ward_id'] == $value_list['wardid']) {
+				$value_list["selected"] = "selected";
+			}
+			$value_list['title'] = $value_list['type'] . ' ' . $value_list['title'];
+			$xtpl->assign('STATUS', $value_list);
+			$xtpl->parse('main.edit.ward_id');
+		}
+	}
+	
+}
+
 if ($row['status']) {
 	$xtpl->assign('checked', 'checked=checked');
 }
-if ($user_info['userid']) {
-	$xtpl->assign('show_email', 'd-none');
-	$xtpl->assign('show_submit', 'd-none');
-} else {
-	$xtpl->assign('show_submit1', 'd-none');
+if (!$user_info['userid']) {
+	$xtpl->parse('main.edit.address_no_login');
+	$xtpl->parse('main.edit.address_submit');
+	$xtpl->assign('d_none_submit', 'd-none');
 }
 $xtpl->assign('Q', $q);
 
@@ -309,10 +349,14 @@ if ($show_view) {
 	$address_ward = explode(',', $row['address']);
 	
 	$address_ward = $address_ward[0];
-
-	$xtpl->assign('AD', $address_ward);
+	if($user_info['userid']){
+		$xtpl->assign('AD', $address_ward);
+	}
+	else{
+		$xtpl->assign('AD', $address_no_login['address']);
+	}
+	
 	if ($row['province_id']) {
-		$global_province[$province_id]['district'];
 		$list_province = $global_province;
 		foreach ($list_province as $value_list) {
 			if ($row['province_id'] == $value_list['provinceid']) {

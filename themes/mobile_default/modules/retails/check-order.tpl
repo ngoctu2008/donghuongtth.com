@@ -40,9 +40,10 @@
 		</div>
 		<div class="row px-2">
 			<div class="col-md-7 p-4 border">
-				<p>{info_order.order_name}</p>
-				<p>{info_order.address}</p>
-				<p class="mb-0">Điện thoại: {info_order.phone}</p>
+				<p>Tên: {info_order.order_name}</p>
+				<p>Địa chỉ: {info_order.address}</p>
+				<p>Điện thoại: {info_order.phone}</p>
+				<p class="mb-0">Email: {info_order.email}</p>
 			</div>
 			<div class="col-md-5 p-4 border">
 				<p>Giao Hàng: {info_order.transporters_name} #{info_order.shipping_code}</p>

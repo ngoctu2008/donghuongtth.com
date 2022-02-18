@@ -78,8 +78,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-group row {show_email} ">
+                        <!-- BEGIN: address_no_login -->
+                        <div class="form-group row">
                             <label for="staticEmail" class="col-3 col-form-label">Email(<span class="text_red">*</span>)
                             </label>
                             <div class="col-9">
@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <!-- END: address_no_login -->
                         <div class="form-group row">
                             <label for="staticEmail" class="col-3 col-form-label">Số điện thoại(<span
                                     class="text_red">*</span>) </label>
@@ -178,7 +178,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row {show_submit1}">
+                        <div class="form-group row {d_none_submit}">
                             <div class="col-3">
                             </div>
                             <div class="col-9 d-flex">
@@ -208,10 +208,11 @@
 
 
                 <div class="form-group pb-4" style="text-align: center">
-                    <input class="btn_ecng {show_submit1}" name="submit" type="submit" value="{LANG.save}" />
-                    <!-- Lưu địa chỉ không cần login -->
-                    <input id="submit_no_login" class="btn_ecng {show_submit}" name="submit" type="submit"
+                    <input class="btn_ecng {d_none_submit}" name="submit" type="submit" value="{LANG.save}" />
+                    <!-- BEGIN: address_submit -->
+                    <input id="submit_no_login" class="btn_ecng" name="submit" type="submit"
                         value="{LANG.save}" />
+                    <!-- END: address_submit -->
                 </div>
             </form>
         </div>
@@ -329,6 +330,15 @@
             }
         });
 
+        $(document).on("keypress", 'form', function (e) {
+            if (e.target.className.indexOf("allowEnter") == -1) {
+                var code = e.keyCode || e.which;
+                if (code == 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+        });
         async function change_ward_order(a) {
             var province_name = $('#province_id').find('option:selected').text();
             var district_name = $('#district_id').find('option:selected').text();

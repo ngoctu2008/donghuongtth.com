@@ -3750,51 +3750,96 @@ function execPostRequest($url, $data)
 	curl_close($ch);
 	return $result;
 }
-function send_payment($payment_mothod, $mm_amount, $mm_OrderInfo, $list_order)
+function send_payment($payment_method, $mm_amount, $mm_OrderInfo, $list_order)
 {
 	global $global_payport;
-	
-	$row_payment = $global_payport[$payment_mothod];
-	$payment_config = unserialize(nv_base64_decode($row_payment['config']));
-	$endpoint = $payment_config['endpoint'];
-	$partnerCode = $payment_config['momo_partnerCode'];
-	$accessKey = $payment_config['accessKey'];
-	$orderInfo = $mm_OrderInfo;
-	$amount = $mm_amount;
-	$order_full=implode('-',$list_order);
-	$orderId = $order_full;
-	$redirectUrl = $payment_config['redirectUrl'];
-	$ipnUrl = $payment_config['ipnUrl'];
-	$extraData = "";
+	if($payment_method == 'momo'){
+		$row_payment = $global_payport[$payment_method];
+		$payment_config = unserialize(nv_base64_decode($row_payment['config']));
+		$endpoint = $payment_config['endpoint'];
+		$partnerCode = $payment_config['momo_partnerCode'];
+		$accessKey = $payment_config['accessKey'];
+		$orderInfo = $mm_OrderInfo;
+		$amount = $mm_amount;
+		$order_full=implode('-',$list_order);
+		$orderId = $order_full;
+		$redirectUrl = $payment_config['redirectUrl'];
+		$ipnUrl = $payment_config['ipnUrl'];
+		$extraData = "";
 
 
 
 
-	$serectkey = $payment_config['signature'];
-	$requestId = time() . "";
-	$requestType = $payment_config['requestType'];
-	$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-	//before sign HMAC SHA256 signature
-	$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-	$signature = hash_hmac("sha256", $rawHash, $serectkey);
-	$data = array(
-		'partnerCode' => $partnerCode,
-		'partnerName' => $payment_config['partnerName'],
-		"storeId" => $payment_config['storeId'],
-		'requestId' => $requestId,
-		'amount' => $amount,
-		'orderId' => $orderId,
-		'orderInfo' => $orderInfo,
-		'redirectUrl' => $redirectUrl,
-		'ipnUrl' => $ipnUrl,
-		'lang' => 'vi',
-		'extraData' => $extraData,
-		'requestType' => $requestType,
-		'signature' => $signature
-	);
-	$result = execPostRequest($endpoint, json_encode($data));
-	$jsonResult = json_decode($result, true);  // decode json
-	return $jsonResult['payUrl'];
+		$serectkey = $payment_config['signature'];
+		$requestId = time() . "";
+		$requestType = $payment_config['requestType'];
+		$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+		//before sign HMAC SHA256 signature
+		$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+		$signature = hash_hmac("sha256", $rawHash, $serectkey);
+		$data = array(
+			'partnerCode' => $partnerCode,
+			'partnerName' => $payment_config['partnerName'],
+			"storeId" => $payment_config['storeId'],
+			'requestId' => $requestId,
+			'amount' => $amount,
+			'orderId' => $orderId,
+			'orderInfo' => $orderInfo,
+			'redirectUrl' => $redirectUrl,
+			'ipnUrl' => $ipnUrl,
+			'lang' => 'vi',
+			'extraData' => $extraData,
+			'requestType' => $requestType,
+			'signature' => $signature
+		);
+		$result = execPostRequest($endpoint, json_encode($data));
+		$jsonResult = json_decode($result, true);  // decode json
+		return $jsonResult['payUrl'];
+	} else if($payment_method == 'sacombank'){
+		$row_payment = $global_payport[$payment_method];
+		$payment_config = unserialize(nv_base64_decode($row_payment['config']));
+		$endpoint = $payment_config['endpoint_test'];
+		$partnerCode = $payment_config['sacombank_partnerCode'];
+		$accessKey = $payment_config['accessKey'];
+		$orderInfo = $mm_OrderInfo;
+		$amount = $mm_amount;
+		$order_full=implode('-',$list_order);
+		$orderId = $order_full;
+		$redirectUrl = $payment_config['redirectUrl'];
+		$ipnUrl = $payment_config['ipnUrl'];
+		$extraData = "";
+		// $ProfileID = '';
+
+
+
+		$serectkey = $payment_config['signature'];
+		$TransactionID = time() . "";
+		$TransactionDateTime = date('Y-m-d\TH:i:s');
+		$requestType = $payment_config['requestType'];
+		$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+		//before sign HMAC SHA256 signature
+		$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+		$signature = hash_hmac("sha256", $rawHash, $serectkey);
+		$data = array(
+			'ProfileID' =>$payment_config['profileID'],
+			'AccessKey' =>$payment_config['accessKey'],
+			'TransactionID' => $TransactionID,
+			'TransactionDateTime' => $TransactionDateTime,
+			'Language' => 'VI',
+			'TotalAmount' => $amount,
+			'Currency' => 'VND',
+			'FirstName' => $orderInfo,
+			'redirectUrl' => $redirectUrl,
+			'ipnUrl' => $ipnUrl,
+			'lang' => 'vi',
+			'extraData' => $extraData,
+			'requestType' => $requestType,
+			'signature' => $signature
+		);
+		$result = execPostRequest($endpoint, json_encode($data));
+		$jsonResult = json_decode($result, true);  // decode json
+		return $jsonResult['payUrl'];
+	}
 }
 function print_ghtk($order_code)
 {
@@ -4374,7 +4419,94 @@ function vnpay_refund($info_order)
 
 	return true;
 }
+// hoàn trả tiền vnpay
+function momo_refund($info_order)
+{
+	global $db, $user_info, $config_setting,$global_payport;
 
+	//$info_order = get_info_order($order_id);
+
+	if (!$info_order['vnpay_code'])
+		return true;
+
+	// lấy thông tin thanh toán
+	$history_vnpay = $db->query('SELECT price, name_register, vnp_paydate FROM ' . TABLE . '_history_vnpay WHERE vnp_transactionno = ' . $info_order['vnpay_code'])->fetch();
+
+
+	// hoàn tiền toàn phần 02, hoàn tiền 1 phần 03
+	if ($info_order['total'] == $history_vnpay['price']) {
+		$vnp_TransactionType = '02';
+	} else {
+		$vnp_TransactionType = '03';
+	}
+
+
+	$amount = ($history_vnpay["price"]) * 100;
+	$ipaddr = $_SERVER['REMOTE_ADDR'];
+	$inputData = array(
+		"vnp_Version" => '2.0.0',
+		"vnp_TransactionType" => $vnp_TransactionType,
+		"vnp_Command" => "refund",
+		"vnp_CreateBy" => $history_vnpay["name_register"],
+		"vnp_TmnCode" => $config_setting['website_code_vnpay'],
+		"vnp_TxnRef" => $info_order['id'],
+		"vnp_Amount" => $amount,
+		"vnp_OrderInfo" => 'Hoan tien don hang',
+		"vnp_TransDate" => $history_vnpay["vnp_paydate"],
+		"vnp_CreateDate" => date('YmdHis'),
+		"vnp_IpAddr" => $ipaddr
+	);
+	ksort($inputData);
+	$query = "";
+	$i = 0;
+	$hashdata = "";
+	foreach ($inputData as $key => $value) {
+		if ($i == 1) {
+			$hashdata .= '&' . $key . "=" . $value;
+		} else {
+			$hashdata .= $key . "=" . $value;
+			$i = 1;
+		}
+		$query .= urlencode($key) . "=" . urlencode($value) . '&';
+	}
+
+	$vnp_apiUrl = 'https://merchant.vnpay.vn/merchant_webapi/merchant.html' . "?" . $query;
+	if (isset($config_setting['checksum_vnpay'])) {
+		$vnpSecureHash = hash('sha256', $config_setting['checksum_vnpay'] . $hashdata);
+		$vnp_apiUrl .= 'vnp_SecureHash=' . $vnpSecureHash;
+	}
+
+	$ch = curl_init($vnp_apiUrl);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HEADER, 0);
+	$data = curl_exec($ch);
+	curl_close($ch);
+
+
+	$inputData = array();
+
+	$array = explode('&', $data);
+
+	foreach ($array as $item) {
+		$arr = explode('=', $item);
+		$inputData[$arr[0]] = $arr[1];
+	}
+
+	// lưu thông tin lịch sử hoàn tiền vnpay
+	$row['time_add'] = NV_CURRENTTIME;
+
+	$stmt = $db->prepare('INSERT INTO ' . TABLE . '_vnpay_refund (order_id, responsecode, message, user_add, time_add) VALUES (:order_id, :responsecode, :message, :user_add, :time_add)');
+
+	$stmt->bindParam(':time_add', $row['time_add'], PDO::PARAM_INT);
+	$stmt->bindParam(':order_id', $info_order['id'], PDO::PARAM_INT);
+	$stmt->bindParam(':responsecode', $inputData['vnp_ResponseCode'], PDO::PARAM_STR);
+	$stmt->bindParam(':message', $inputData['vnp_Message'], PDO::PARAM_STR);
+	$stmt->bindParam(':user_add', $user_info['userid'], PDO::PARAM_INT);
+
+	$exc = $stmt->execute();
+
+	return true;
+}
 function xulythanhtoanthanhcong_recieve($order_text, $inputData)
 {
 	global $db, $db_config, $user_info, $module_name, $lang_module, $global_payport, $global_config;
@@ -4649,13 +4781,6 @@ function GetPaymentStatus($payment_method,$order_code,$errors,$inputData){
 			$payType = $inputData['payType'];
 			$responseTime = $inputData['responseTime'];
 			$momo_signature = $inputData['signature'];
-			unset($inputData['orderType']);
-			unset($inputData['transId']);
-			unset($inputData['resultCode']);
-			unset($inputData['message']);
-			unset($inputData['payType']);
-			unset($inputData['responseTime']);
-			unset($inputData['signature']);
 			ksort($inputData);
 			$i = 0;
 			$rawHash = "";
@@ -4824,7 +4949,49 @@ function UpdatePaymentOrder($payment_method,$order_text, $inputData)
 			$global_config['site_email']
 		), get_info_store($order['store_id'])['email'], sprintf($email_title, $data_order['order_code']), $email_contents);
 	}
+	// lấy thông tin đăng ký
+	$info = $db->query('SELECT * FROM ' . TABLE . '_order  WHERE id IN(' . $order_text . ')')->fetch();
+			/*
+		https://dev.chonhagiau.com/momo/?partnerCode=MOMOGQQA20220110&orderId=870&requestId=1644977949&amount=35000&orderInfo=Thanh+toan+giao+dich+ECNG0000870+vao+thoi+gian+16-02-2022+09%3A19&orderType=momo_wallet&transId=2644025059&resultCode=0&message=Giao+d%E1%BB%8Bch+th%C3%A0nh+c%C3%B4ng.&payType=qr&responseTime=1644978032873&extraData=&signature=3dd35a45a42df0185d2986932718a4e6a309207a88f7f9ebbfb87547675f0539*/
+	
+	$row['orderid'] = str_replace(',',' - ', $order_text);
 
+	$row['price'] = $inputData['amount'] ;
+	$row['name_register'] = $info['order_name'];
+	$row['email_register'] = $info['email'];
+	$row['phone_register'] = $info['phone'];
+	$row['userid'] = $info['userid'];
+	$row['requestId'] = $inputData['requestId'];
+	$row['orderinfo'] = $inputData['orderInfo'];
+	$row['responsedode'] = $inputData['resultCode'];
+	$row['transactionno'] = $inputData['transId'];
+	$row['bankcode'] = $inputData['orderType'];
+	$row['cardtype'] = $inputData['payType'];
+	$row['paydate'] = $inputData['responseTime'];
+	$row['status'] = $inputData['message'];
+
+	$row['addtime'] = NV_CURRENTTIME;
+
+	$stmt = $db->prepare('INSERT INTO ' . TABLE . '_history_payment (price, name_register, email_register, phone_register, userid, requestid, orderid, orderinfo, responsedode, transactionno, bankcode, cardtype, paydate, status, addtime) VALUES (:price, :name_register, :email_register, :phone_register, :userid, :requestid, :orderid, :orderinfo, :responsedode, :transactionno, :bankcode, :cardtype, :paydate, :status, :addtime)');
+
+	$stmt->bindParam(':addtime', $row['addtime'], PDO::PARAM_INT);
+
+	$stmt->bindParam(':price', $row['price'], PDO::PARAM_STR);
+	$stmt->bindParam(':name_register', $row['name_register'], PDO::PARAM_STR);
+	$stmt->bindParam(':email_register', $row['email_register'], PDO::PARAM_STR);
+	$stmt->bindParam(':phone_register', $row['phone_register'], PDO::PARAM_STR);
+	$stmt->bindParam(':userid', $row['userid'], PDO::PARAM_INT);
+	$stmt->bindParam(':requestid', $row['requestId'], PDO::PARAM_STR);
+	$stmt->bindParam(':orderid', $row['orderid'], PDO::PARAM_STR);
+	$stmt->bindParam(':orderinfo', $row['orderinfo'], PDO::PARAM_STR);
+	$stmt->bindParam(':responsedode', $row['responsedode'], PDO::PARAM_STR);
+	$stmt->bindParam(':transactionno', $row['transactionno'], PDO::PARAM_STR);
+	$stmt->bindParam(':bankcode', $row['bankcode'], PDO::PARAM_STR);
+	$stmt->bindParam(':cardtype', $row['cardtype'], PDO::PARAM_STR);
+	$stmt->bindParam(':paydate', $row['paydate'], PDO::PARAM_STR);
+	$stmt->bindParam(':status', $row['status'], PDO::PARAM_STR);
+
+	$exc = $stmt->execute();
 	return true;
 }
 function CheckPaymentStatus($payment_method,$order_code,$errors,$inputData){
@@ -4941,6 +5108,7 @@ function CheckPaymentStatus($payment_method,$order_code,$errors,$inputData){
 					$status = true;
 				} else {
 					$error[] = 'Thanh toán thất bại!';
+					send_mail_payment_fail($order_text);
 				}
 			} else {
 				$error[] = 'Đơn hàng không tìm thấy!';

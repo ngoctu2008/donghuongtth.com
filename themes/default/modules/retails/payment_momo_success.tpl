@@ -35,7 +35,7 @@
                     </tr>
                     <tr>
                         <td class="text_gray_color">Tổng tiền thanh toán</td>
-                        <td class="text-right font-weight-bold">{thanhtoan.format_vnp_Amount}</td>
+                        <td class="text-right font-weight-bold">{thanhtoan.format_Amount}</td>
                     </tr>
                     <tr>
                         <td class="text_gray_color">Thời gian giao dịch</td>
@@ -44,7 +44,7 @@
                 </tbody>
             </table>
 			<div class="text-center w-100 p-3">
-            Bạn vừa ủng hộ <span style="color:#1358B9">{children_fund}</span> vào quỹ “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”
+            Bạn đã ủng hộ <span style="color:#1358B9">{children_fund}</span> vào quỹ “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ” từ đơn hàng này.
             </div>
 
         </div>

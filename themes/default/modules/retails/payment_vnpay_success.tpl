@@ -44,7 +44,7 @@
                 </tbody>
             </table>
 			<div class="text-center w-100 p-3">
-            Bạn vừa ủng hộ <span style="color:#1358B9">{children_fund}</span> vào quỹ “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”
+            Bạn đã ủng hộ <span style="color:#1358B9">{children_fund}</span> vào quỹ “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ” từ đơn hàng này.
             </div>
 
         </div>
