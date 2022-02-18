@@ -1123,6 +1123,8 @@
 								location.href = res.link.replace("&amp;", "&");
 								}else if(res.status=='OK_MOMO'){
 								location.href = res.link
+								}else if(res.status=='OK_SACOMBANK'){
+									location.href = res.link
 								}else if(res.status=='error_password_money'){
 								$("#button-payment-method").attr("disabled", false);
 								$("#button-payment-method").html("Đặt hàng");
