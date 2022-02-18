@@ -21,7 +21,7 @@
             <h1
                 style="font-family: Roboto;font-style: normal;font-weight: bold;font-size: 24px;line-height: 28px;text-align: center;text-transform: uppercase;color: #E1A208;">
                 thanh toán Chưa thành công</h1>
-                <p style="text-align: center;font-weight: 500;">Bạn vừa ủng hộ <span style="color: #1358B9;">{children_fund}</span> vào “ <span style="color: #E1A208;">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ”</p>
+                <p style="text-align: center;font-weight: 500;">Bạn đã ủng hộ <span style="color: #1358B9;">{children_fund}</span> vào “ <span style="color: #E1A208;">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ” từ đơn hàng này.</p>
             <div>
                 <p>Chào bạn <span style="font-weight: 700;">{info_order.order_name},</span> </p>
                 <p>Đơn hàng <span>#{DATA.order_code}</span> của bạn <span style="font-weight: 500;">thanh toán chưa thành
