@@ -5063,6 +5063,7 @@ function CheckPaymentStatus($payment_method,$order_code,$errors,$inputData){
 					$status = true;
 				} else {
 					$error[] = 'Thanh toán thất bại!';
+					send_mail_payment_fail($order_text);
 				}
 			} else {
 				$error[] = 'Đơn hàng không tìm thấy!';
