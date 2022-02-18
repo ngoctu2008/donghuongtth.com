@@ -293,6 +293,15 @@
                 });
             }
         });
+        $(document).on("keypress", 'form', function (e) {
+            if (e.target.className.indexOf("allowEnter") == -1) {
+                var code = e.keyCode || e.which;
+                if (code == 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+        });
         async function change_address_order(a) {
             var province_name = $('#province_id').find('option:selected').text();
             var district_name = $('#district_id').find('option:selected').text();
