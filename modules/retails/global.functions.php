@@ -3750,51 +3750,96 @@ function execPostRequest($url, $data)
 	curl_close($ch);
 	return $result;
 }
-function send_payment($payment_mothod, $mm_amount, $mm_OrderInfo, $list_order)
+function send_payment($payment_method, $mm_amount, $mm_OrderInfo, $list_order)
 {
 	global $global_payport;
-	
-	$row_payment = $global_payport[$payment_mothod];
-	$payment_config = unserialize(nv_base64_decode($row_payment['config']));
-	$endpoint = $payment_config['endpoint'];
-	$partnerCode = $payment_config['momo_partnerCode'];
-	$accessKey = $payment_config['accessKey'];
-	$orderInfo = $mm_OrderInfo;
-	$amount = $mm_amount;
-	$order_full=implode('-',$list_order);
-	$orderId = $order_full;
-	$redirectUrl = $payment_config['redirectUrl'];
-	$ipnUrl = $payment_config['ipnUrl'];
-	$extraData = "";
+	if($payment_method == 'momo'){
+		$row_payment = $global_payport[$payment_method];
+		$payment_config = unserialize(nv_base64_decode($row_payment['config']));
+		$endpoint = $payment_config['endpoint'];
+		$partnerCode = $payment_config['momo_partnerCode'];
+		$accessKey = $payment_config['accessKey'];
+		$orderInfo = $mm_OrderInfo;
+		$amount = $mm_amount;
+		$order_full=implode('-',$list_order);
+		$orderId = $order_full;
+		$redirectUrl = $payment_config['redirectUrl'];
+		$ipnUrl = $payment_config['ipnUrl'];
+		$extraData = "";
 
 
 
 
-	$serectkey = $payment_config['signature'];
-	$requestId = time() . "";
-	$requestType = $payment_config['requestType'];
-	$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-	//before sign HMAC SHA256 signature
-	$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-	$signature = hash_hmac("sha256", $rawHash, $serectkey);
-	$data = array(
-		'partnerCode' => $partnerCode,
-		'partnerName' => $payment_config['partnerName'],
-		"storeId" => $payment_config['storeId'],
-		'requestId' => $requestId,
-		'amount' => $amount,
-		'orderId' => $orderId,
-		'orderInfo' => $orderInfo,
-		'redirectUrl' => $redirectUrl,
-		'ipnUrl' => $ipnUrl,
-		'lang' => 'vi',
-		'extraData' => $extraData,
-		'requestType' => $requestType,
-		'signature' => $signature
-	);
-	$result = execPostRequest($endpoint, json_encode($data));
-	$jsonResult = json_decode($result, true);  // decode json
-	return $jsonResult['payUrl'];
+		$serectkey = $payment_config['signature'];
+		$requestId = time() . "";
+		$requestType = $payment_config['requestType'];
+		$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+		//before sign HMAC SHA256 signature
+		$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+		$signature = hash_hmac("sha256", $rawHash, $serectkey);
+		$data = array(
+			'partnerCode' => $partnerCode,
+			'partnerName' => $payment_config['partnerName'],
+			"storeId" => $payment_config['storeId'],
+			'requestId' => $requestId,
+			'amount' => $amount,
+			'orderId' => $orderId,
+			'orderInfo' => $orderInfo,
+			'redirectUrl' => $redirectUrl,
+			'ipnUrl' => $ipnUrl,
+			'lang' => 'vi',
+			'extraData' => $extraData,
+			'requestType' => $requestType,
+			'signature' => $signature
+		);
+		$result = execPostRequest($endpoint, json_encode($data));
+		$jsonResult = json_decode($result, true);  // decode json
+		return $jsonResult['payUrl'];
+	} else if($payment_method == 'sacombank'){
+		$row_payment = $global_payport[$payment_method];
+		$payment_config = unserialize(nv_base64_decode($row_payment['config']));
+		$endpoint = $payment_config['endpoint_test'];
+		$partnerCode = $payment_config['sacombank_partnerCode'];
+		$accessKey = $payment_config['accessKey'];
+		$orderInfo = $mm_OrderInfo;
+		$amount = $mm_amount;
+		$order_full=implode('-',$list_order);
+		$orderId = $order_full;
+		$redirectUrl = $payment_config['redirectUrl'];
+		$ipnUrl = $payment_config['ipnUrl'];
+		$extraData = "";
+		// $ProfileID = '';
+
+
+
+		$serectkey = $payment_config['signature'];
+		$TransactionID = time() . "";
+		$TransactionDateTime = date('Y-m-d\TH:i:s');
+		$requestType = $payment_config['requestType'];
+		$extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+		//before sign HMAC SHA256 signature
+		$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+		$signature = hash_hmac("sha256", $rawHash, $serectkey);
+		$data = array(
+			'ProfileID' =>$payment_config['profileID'],
+			'AccessKey' =>$payment_config['accessKey'],
+			'TransactionID' => $TransactionID,
+			'TransactionDateTime' => $TransactionDateTime,
+			'Language' => 'VI',
+			'TotalAmount' => $amount,
+			'Currency' => 'VND',
+			'FirstName' => $orderInfo,
+			'redirectUrl' => $redirectUrl,
+			'ipnUrl' => $ipnUrl,
+			'lang' => 'vi',
+			'extraData' => $extraData,
+			'requestType' => $requestType,
+			'signature' => $signature
+		);
+		$result = execPostRequest($endpoint, json_encode($data));
+		$jsonResult = json_decode($result, true);  // decode json
+		return $jsonResult['payUrl'];
+	}
 }
 function print_ghtk($order_code)
 {
