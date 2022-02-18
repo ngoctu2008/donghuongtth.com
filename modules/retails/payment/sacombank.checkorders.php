@@ -16,7 +16,7 @@ $list_order_code = $data['list_order_code'];
 $order_full=implode(',',$list_order);
 $list_order_code=implode(',',$list_order_code);
 $mm_OrderInfo='Thanh toan giao dich '.$list_order_code.' vao thoi gian '.date('d-m-Y H:i',NV_CURRENTTIME);
-
+die($data);
 $check_sacombank = send_payment('sacombank', $total_full,$mm_OrderInfo,$list_order);
 $contents1 = array(
 'status' => 'OK_SACOMBANK',
