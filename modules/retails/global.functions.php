@@ -4483,12 +4483,12 @@ function momo_refund($info_order)
 	if($data['resultCode'] == 0 ){
 		// lưu thông tin lịch sử hoàn tiền vnpay
 		//$row['responseTime'] = NV_CURRENTTIME;
-
+		$responsecode = ($data['resultCode'] == 0) ? '0' : $data['resultCode'];
 		$stmt = $db->prepare('INSERT INTO ' . TABLE . '_payment_refund (order_id, responsecode, message, user_add, time_add) VALUES (:order_id, :responsecode, :message, :user_add, :time_add)');
 
 		$stmt->bindParam(':time_add', $data['responseTime'], PDO::PARAM_INT);
 		$stmt->bindParam(':order_id', $info_order['id'], PDO::PARAM_INT);
-		$stmt->bindParam(':responsecode', $data['resultCode'], PDO::PARAM_STR);
+		$stmt->bindParam(':responsecode', $responsecode, PDO::PARAM_STR);
 		$stmt->bindParam(':message', $data['message'], PDO::PARAM_STR);
 		$stmt->bindParam(':user_add', $user_info['userid'], PDO::PARAM_INT);
 
