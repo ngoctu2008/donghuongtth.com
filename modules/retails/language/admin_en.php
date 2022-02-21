@@ -361,3 +361,15 @@ $lang_module['order_not_received_seller'] = 'order_not_received_seller';
 
 //Lang for function order_seller_delivery_failed
 $lang_module['order_seller_delivery_failed'] = 'order_seller_delivery_failed';
+
+//Lang for function history_ghtk
+$lang_module['history_ghtk'] = 'history_ghtk';
+$lang_module['fee'] = 'Fee';
+$lang_module['fee_update'] = 'Fee update';
+$lang_module['for_control'] = 'For control';
+$lang_module['for_control_return'] = 'For control return';
+$lang_module['insurance_fee'] = 'Insurance fee';
+$lang_module['label'] = 'Label';
+$lang_module['pick_money'] = 'Pick money';
+$lang_module['status_id'] = 'Status id';
+$lang_module['weight'] = 'Weight';

@@ -1,3 +1,6 @@
+21/1/2022
+ALTER TABLE `tms_vi_retails_history_ghtk` CHANGE `label` `label` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT ' Mã đơn hàng';
+
 17/02/2022
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_payment(
   id mediumint(8) unsigned NOT NULL AUTO_INCREMENT,

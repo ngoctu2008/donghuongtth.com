@@ -486,3 +486,14 @@ $lang_module['paymentname'] = 'Tên cổng thanh toán';
 $lang_module['browse_image'] = 'Chọn hình ảnh';
 $lang_module['images_button'] = 'Ảnh nút thanh toán tại giỏ hàng';
 $lang_module['domain'] = 'Domain';
+
+//Lang for function history_ghtk
+$lang_module['history_ghtk'] = 'Đối soát GHTK';
+$lang_module['fee'] = 'Phí dịch vụ cuối cùng';
+$lang_module['fee_update'] = 'Phí dịch vụ được GHTK cập nhật';
+$lang_module['for_control'] = '0 chưa đối soát, 1 đã đối soát';
+$lang_module['for_control_return'] = '0 chưa đối soát, 1 đã đối soát';
+$lang_module['insurance_fee'] = 'Phí bảo hiểm';
+$lang_module['label'] = 'Mã đơn hàng';
+$lang_module['pick_money'] = 'Phí thu hộ';
+$lang_module['status_id'] = 'Trạng thái đơn';
