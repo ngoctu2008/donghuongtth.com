@@ -4496,8 +4496,8 @@ function momo_refund($info_order)
 		$stmt->bindParam(':user_add', $user_info['userid'], PDO::PARAM_INT);
 
 		$exc = $stmt->execute();
-
-		return true;
+		return $data;
+			
 	
 }
 function xulythanhtoanthanhcong_recieve($order_text, $inputData)
