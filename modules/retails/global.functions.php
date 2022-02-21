@@ -3750,10 +3750,8 @@ function execPostRequest($url, $data)
 	curl_close($ch);
 	return $result;
 }
-function send_payment($payment_method, $mm_amount, $mm_OrderInfo, $list_order)
-{
+function MoMoSend($payment_method, $mm_amount, $mm_OrderInfo, $list_order){
 	global $global_payport;
-	if($payment_method == 'momo'){
 		$row_payment = $global_payport[$payment_method];
 		$payment_config = unserialize(nv_base64_decode($row_payment['config']));
 		$endpoint = $payment_config['endpoint'];
@@ -3766,9 +3764,6 @@ function send_payment($payment_method, $mm_amount, $mm_OrderInfo, $list_order)
 		$redirectUrl = $payment_config['redirectUrl'];
 		$ipnUrl = $payment_config['ipnUrl'];
 		$extraData = "";
-
-
-
 
 		$serectkey = $payment_config['signature'];
 		$requestId = time() . "";
@@ -3795,6 +3790,13 @@ function send_payment($payment_method, $mm_amount, $mm_OrderInfo, $list_order)
 		$result = execPostRequest($endpoint, json_encode($data));
 		$jsonResult = json_decode($result, true);  // decode json
 		return $jsonResult['payUrl'];
+}
+
+function send_payment($payment_method, $mm_amount, $mm_OrderInfo, $list_order)
+{
+	global $global_payport;
+	if($payment_method == 'momo'){
+		return MoMoSend($payment_method, $mm_amount, $mm_OrderInfo, $list_order);
 	} else if($payment_method == 'sacombank'){
 		$row_payment = $global_payport[$payment_method];
 		$payment_config = unserialize(nv_base64_decode($row_payment['config']));
@@ -4419,7 +4421,40 @@ function vnpay_refund($info_order)
 
 	return true;
 }
-// hoàn trả tiền vnpay
+
+// hoàn trả tiền momo
+function MoMoRefund($payment_method, $mm_amount, $mm_OrderInfo, $list_order,$transId){
+	global $global_payport;
+		$row_payment = $global_payport[$payment_method];
+		$payment_config = unserialize(nv_base64_decode($row_payment['config']));
+		$endpoint = $payment_config['endpoint_refund'];
+		$partnerCode = $payment_config['momo_partnerCode'];
+		$accessKey = $payment_config['accessKey'];
+		$description = $mm_OrderInfo;
+		$amount = $mm_amount;
+		$order_full=implode('-',$list_order);
+		$orderId = $order_full;
+
+		$serectkey = $payment_config['signature'];
+		$requestId = time() . "";
+		//before sign HMAC SHA256 signature
+		/*accessKey=$acessKey&amount=$amount&description=$description&orderId=$orderId&partnerCode=$partnerCode&requestId=$requestId&transId=$transId*/
+		$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&description=" . $description . "&orderId=" . $orderId . "&orderId=" . $orderId . "&partnerCode=" . $partnerCode . "&requestId=" . $requestId . "&transId=" . $transId;
+		$signature = hash_hmac("sha256", $rawHash, $serectkey);
+		$data = array(
+			'partnerCode' => $partnerCode,
+			'orderId' => $orderId,
+			'requestId' => $requestId,
+			'amount' => $amount,
+			'transId' => $transId,
+			'lang' => 'vi',
+			'description' => $description,
+			'signature' => $signature
+		);
+		$result = execPostRequest($endpoint, json_encode($data));
+		$jsonResult = json_decode($result, true);  // decode json
+		return $jsonResult;
+}
 function momo_refund($info_order)
 {
 	global $db, $user_info, $config_setting,$global_payport;
@@ -4430,82 +4465,37 @@ function momo_refund($info_order)
 		return true;
 
 	// lấy thông tin thanh toán
-	$history_vnpay = $db->query('SELECT price, name_register, vnp_paydate FROM ' . TABLE . '_history_vnpay WHERE vnp_transactionno = ' . $info_order['vnpay_code'])->fetch();
+	$history_vnpay = $db->query('SELECT price, name_register, paydate FROM ' . TABLE . '_history_payment WHERE transactionno = ' . $info_order['vnpay_code'])->fetch();
 
 
 	// hoàn tiền toàn phần 02, hoàn tiền 1 phần 03
 	if ($info_order['total'] == $history_vnpay['price']) {
-		$vnp_TransactionType = '02';
+		$TransactionType = '02';
 	} else {
-		$vnp_TransactionType = '03';
+		$TransactionType = '03';
 	}
 
 
-	$amount = ($history_vnpay["price"]) * 100;
-	$ipaddr = $_SERVER['REMOTE_ADDR'];
-	$inputData = array(
-		"vnp_Version" => '2.0.0',
-		"vnp_TransactionType" => $vnp_TransactionType,
-		"vnp_Command" => "refund",
-		"vnp_CreateBy" => $history_vnpay["name_register"],
-		"vnp_TmnCode" => $config_setting['website_code_vnpay'],
-		"vnp_TxnRef" => $info_order['id'],
-		"vnp_Amount" => $amount,
-		"vnp_OrderInfo" => 'Hoan tien don hang',
-		"vnp_TransDate" => $history_vnpay["vnp_paydate"],
-		"vnp_CreateDate" => date('YmdHis'),
-		"vnp_IpAddr" => $ipaddr
-	);
-	ksort($inputData);
-	$query = "";
-	$i = 0;
-	$hashdata = "";
-	foreach ($inputData as $key => $value) {
-		if ($i == 1) {
-			$hashdata .= '&' . $key . "=" . $value;
-		} else {
-			$hashdata .= $key . "=" . $value;
-			$i = 1;
-		}
-		$query .= urlencode($key) . "=" . urlencode($value) . '&';
+	$amount = ($history_vnpay["price"]) ;
+	
+	$data = MoMoRefund($payment_method, $amount, $mm_OrderInfo, $list_order,$info_order['vnpay_code']);
+
+	if($data['resultCode'] == 0 ){
+		// lưu thông tin lịch sử hoàn tiền vnpay
+		//$row['responseTime'] = NV_CURRENTTIME;
+
+		$stmt = $db->prepare('INSERT INTO ' . TABLE . '_payment_refund (order_id, responsecode, message, user_add, time_add) VALUES (:order_id, :responsecode, :message, :user_add, :time_add)');
+
+		$stmt->bindParam(':time_add', $data['responseTime'], PDO::PARAM_INT);
+		$stmt->bindParam(':order_id', $info_order['id'], PDO::PARAM_INT);
+		$stmt->bindParam(':responsecode', $data['resultCode'], PDO::PARAM_STR);
+		$stmt->bindParam(':message', $data['message'], PDO::PARAM_STR);
+		$stmt->bindParam(':user_add', $user_info['userid'], PDO::PARAM_INT);
+
+		$exc = $stmt->execute();
+
+		return true;
 	}
-
-	$vnp_apiUrl = 'https://merchant.vnpay.vn/merchant_webapi/merchant.html' . "?" . $query;
-	if (isset($config_setting['checksum_vnpay'])) {
-		$vnpSecureHash = hash('sha256', $config_setting['checksum_vnpay'] . $hashdata);
-		$vnp_apiUrl .= 'vnp_SecureHash=' . $vnpSecureHash;
-	}
-
-	$ch = curl_init($vnp_apiUrl);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-	$data = curl_exec($ch);
-	curl_close($ch);
-
-
-	$inputData = array();
-
-	$array = explode('&', $data);
-
-	foreach ($array as $item) {
-		$arr = explode('=', $item);
-		$inputData[$arr[0]] = $arr[1];
-	}
-
-	// lưu thông tin lịch sử hoàn tiền vnpay
-	$row['time_add'] = NV_CURRENTTIME;
-
-	$stmt = $db->prepare('INSERT INTO ' . TABLE . '_vnpay_refund (order_id, responsecode, message, user_add, time_add) VALUES (:order_id, :responsecode, :message, :user_add, :time_add)');
-
-	$stmt->bindParam(':time_add', $row['time_add'], PDO::PARAM_INT);
-	$stmt->bindParam(':order_id', $info_order['id'], PDO::PARAM_INT);
-	$stmt->bindParam(':responsecode', $inputData['vnp_ResponseCode'], PDO::PARAM_STR);
-	$stmt->bindParam(':message', $inputData['vnp_Message'], PDO::PARAM_STR);
-	$stmt->bindParam(':user_add', $user_info['userid'], PDO::PARAM_INT);
-
-	$exc = $stmt->execute();
-
-	return true;
 }
 function xulythanhtoanthanhcong_recieve($order_text, $inputData)
 {
