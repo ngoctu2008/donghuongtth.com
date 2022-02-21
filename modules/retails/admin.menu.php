@@ -50,6 +50,8 @@ $submenu['vnpay_refund']=$lang_module['vnpay_refund'];
 $submenu['history_vnpay']=$lang_module['history_vnpay'];
 $submenu['history_vnpos']=$lang_module['history_vnpos'];
 
+$submenu['history_ghtk']=$lang_module['history_ghtk'];
+
 
 
 
