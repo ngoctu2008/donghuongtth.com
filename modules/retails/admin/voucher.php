@@ -7,20 +7,18 @@
  * @License GNU/GPL version 2 or any later version
  * @Createdate Tue, 05 Oct 2021 01:02:53 GMT
  */
-
 if (!defined('NV_IS_FILE_ADMIN'))
     die('Stop!!!');
-
-// Change status
+    // Change status
 if ($nv_Request->isset_request('change_status', 'post, get')) {
     $id = $nv_Request->get_int('id', 'post, get', 0);
     $content = 'NO_' . $id;
 
-    $query = 'SELECT status FROM ' . NV_PREFIXLANG . '_' . $module_data . '_voucher WHERE id=' . $id;
+    $query = 'SELECT status FROM ' . NV_PREFIXLANG . '_' . $module_data . '_voucher_shop WHERE id=' . $id;
     $row = $db->query($query)->fetch();
     if (isset($row['status']))     {
         $status = ($row['status']) ? 0 : 1;
-        $query = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_voucher SET status=' . intval($status) . ' WHERE id=' . $id;
+        $query = 'UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_voucher_shop SET status=' . intval($status) . ' WHERE id=' . $id;
         $db->query($query);
         $content = 'OK_' . $id;
     }
@@ -34,7 +32,7 @@ if ($nv_Request->isset_request('delete_id', 'get') and $nv_Request->isset_reques
     $id = $nv_Request->get_int('delete_id', 'get');
     $delete_checkss = $nv_Request->get_string('delete_checkss', 'get');
     if ($id > 0 and $delete_checkss == md5($id . NV_CACHE_PREFIX . $client_info['session_id'])) {
-        $db->query('DELETE FROM ' . NV_PREFIXLANG . '_' . $module_data . '_voucher  WHERE id = ' . $db->quote($id));
+        $db->query('DELETE FROM ' . NV_PREFIXLANG . '_' . $module_data . '_voucher_shop  WHERE id = ' . $db->quote($id));
         $nv_Cache->delMod($module_name);
         nv_insert_logs(NV_LANG_DATA, $module_name, 'Delete Voucher', 'ID: ' . $id, $admin_info['userid']);
         nv_redirect_location(NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op);
@@ -75,14 +73,14 @@ if ($nv_Request->isset_request('submit', 'post')) {
             if (empty($row['id'])) {
                 $row['time_add'] = 0;
 
-                $stmt = $db->prepare('INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_voucher (userid, voucher_name, voucher_code, time_from, time_to, discount_price, minimum_price, usage_limit_quantity, time_add, status) VALUES (:userid, :voucher_name, :voucher_code, :time_from, :time_to, :discount_price, :minimum_price, :usage_limit_quantity, :time_add, :status)');
+                $stmt = $db->prepare('INSERT INTO ' . NV_PREFIXLANG . '_' . $module_data . '_voucher_shop (userid, voucher_name, voucher_code, time_from, time_to, discount_price, minimum_price, usage_limit_quantity, time_add, status) VALUES (:userid, :voucher_name, :voucher_code, :time_from, :time_to, :discount_price, :minimum_price, :usage_limit_quantity, :time_add, :status)');
 
                 $stmt->bindParam(':time_add', $row['time_add'], PDO::PARAM_INT);
                 $stmt->bindValue(':status', 1, PDO::PARAM_INT);
 
 
             } else {
-                $stmt = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_voucher SET userid = :userid, voucher_name = :voucher_name, voucher_code = :voucher_code, time_from = :time_from, time_to = :time_to, discount_price = :discount_price, minimum_price = :minimum_price, usage_limit_quantity = :usage_limit_quantity WHERE id=' . $row['id']);
+                $stmt = $db->prepare('UPDATE ' . NV_PREFIXLANG . '_' . $module_data . '_voucher_shop SET userid = :userid, voucher_name = :voucher_name, voucher_code = :voucher_code, time_from = :time_from, time_to = :time_to, discount_price = :discount_price, minimum_price = :minimum_price, usage_limit_quantity = :usage_limit_quantity WHERE id=' . $row['id']);
             }
             $stmt->bindParam(':userid', $row['userid'], PDO::PARAM_INT);
             $stmt->bindParam(':voucher_name', $row['voucher_name'], PDO::PARAM_STR);
@@ -109,7 +107,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
         }
     }
 } elseif ($row['id'] > 0) {
-    $row = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_voucher WHERE id=' . $row['id'])->fetch();
+    $row = $db->query('SELECT * FROM ' . NV_PREFIXLANG . '_' . $module_data . '_voucher_shop WHERE id=' . $row['id'])->fetch();
     if (empty($row)) {
         nv_redirect_location(NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=' . $op);
     }
@@ -158,7 +156,7 @@ if (!$nv_Request->isset_request('id', 'post,get')) {
     $page = $nv_Request->get_int('page', 'post,get', 1);
     $db->sqlreset()
         ->select('COUNT(*)')
-        ->from('' . NV_PREFIXLANG . '_' . $module_data . '_voucher');
+        ->from('' . NV_PREFIXLANG . '_' . $module_data . '_voucher_shop');
 
     if (!empty($q)) {
         $db->where('userid LIKE :q_userid OR voucher_name LIKE :q_voucher_name OR voucher_code LIKE :q_voucher_code OR time_from LIKE :q_time_from OR time_to LIKE :q_time_to OR discount_price LIKE :q_discount_price');
