@@ -4478,7 +4478,7 @@ function momo_refund($info_order)
 
 	$amount = ($history_vnpay["price"]) ;
 	
-	$data = MoMoRefund($payment_method, $amount, $mm_OrderInfo, $list_order,$info_order['vnpay_code']);
+	$data = MoMoRefund($info_order['payment_method'], $amount, $mm_OrderInfo, $list_order,$info_order['vnpay_code']);
 
 	if($data['resultCode'] == 0 ){
 		// lưu thông tin lịch sử hoàn tiền vnpay
