@@ -467,6 +467,7 @@
 		$pick_province =  $global_province[$info_warehouse['province_id']]['title'];
 		$pick_district =  $global_district[$info_warehouse['district_id']]['title'];
 		$pick_ward =  $global_ward[$info_warehouse['ward_id']]['title'];
+		$address_create_order = $info_warehouse['address'];
 		$address_short = explode(',',$info_warehouse['address']);
 		$info_warehouse['address'] = $address_short[0];
 		$shop_name = $db->query('SELECT company_name FROM ' . TABLE . '_seller_management WHERE id = ' . $info_order['store_id'])->fetchColumn();
@@ -504,9 +505,9 @@
 		
 		$info_order['order_code'] = $info_order['order_code'] . ' - ' . nv_date("H:i d/m/Y", NV_CURRENTTIME);
 		$order_ghtk = send_ghtk($list_item, $info_order['order_code'], $shop_name, $info_warehouse['address'], $pick_province, $pick_district, $pick_ward, $info_warehouse['phone_send'], $info_order['phone'], $info_order['order_name'], $info_order['address'], $province, $district, $ward, $pick_money, $value, 'road', '', $pick_option, $is_freeship);
-	
+		
 		if ($order_ghtk['success']) {
-			update_ghtk_admin($info_order, $order_ghtk);
+			update_ghtk_admin($info_order, $order_ghtk, $address_create_order, $info_warehouse['phone_send'], $shop_name);
 			print_r(json_encode(array('status' => 'OK')));
 			die();
 		}else{

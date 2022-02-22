@@ -3451,14 +3451,14 @@ function cancel_ghtk_admin($order_id){
 	return $data;
 }
 
-function update_ghtk_admin($info_order, $order_ghtk)
+function update_ghtk_admin($info_order, $order_ghtk, $address_create_order, $phone_send, $shop_name)
 {
 	global $config_setting, $db, $admin_info;
 	
 	$sql = "INSERT INTO " . TABLE . "_history_ghtk
-	( order_id, label, fee, insurance_fee, status_id, time_add)
+	( order_id, label, fee, insurance_fee, status_id, time_add, address_send, phone_send, name_send)
 	VALUES
-	(:order_id, :label, :fee, :insurance_fee, :status_id, :time_add)";
+	(:order_id, :label, :fee, :insurance_fee, :status_id, :time_add, :address_send, :phone_send, :name_send)";
 	$data_insert = array();
 	$data_insert['order_id'] = $info_order['id'];
 	$data_insert['label'] = $order_ghtk['order']['label'];
@@ -3466,8 +3466,12 @@ function update_ghtk_admin($info_order, $order_ghtk)
 	$data_insert['insurance_fee'] = $order_ghtk['order']['insurance_fee'];
 	$data_insert['status_id'] = $order_ghtk['order']['status_id'];
 	$data_insert['time_add'] = NV_CURRENTTIME;
+	$data_insert['address_send'] = $address_create_order;
+	$data_insert['phone_send'] = $phone_send;
+	$data_insert['name_send'] = $shop_name;
 	
 	$history_ghtk_id = $db->insert_id($sql, 'id', $data_insert);
+	
 	// xử lý thông tin sau khi tạo vận đơn thành công status=2 đơn hàng đang giao
 	$db->query('UPDATE ' . TABLE . '_order SET status = 2, shipping_code=' . $db->quote($order_ghtk['order']['label']) . ' where id=' . $info_order['id']);
 	$content = 'Chuyển sang đơn vị vận chuyển GHTK Thành Công';

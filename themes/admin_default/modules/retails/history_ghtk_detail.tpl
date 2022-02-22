@@ -28,7 +28,7 @@
             <tbody>
                 <tr>
                     <td>Tên Shop</td>
-                    <td>{VIEW.shop_name}</td>
+                    <td>{VIEW.name_send}</td>
 
                 </tr>
                 <tr>
@@ -37,7 +37,7 @@
                 </tr>
                 <tr>
                     <td>Địa chỉ</td>
-                    <td>{VIEW.shop_address}</td>
+                    <td>{VIEW.address_send}</td>
                 </tr>
             </tbody>
         </table>

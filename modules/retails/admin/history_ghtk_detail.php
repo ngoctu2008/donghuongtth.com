@@ -3,7 +3,7 @@ if (!defined('NV_IS_FILE_ADMIN'))
 die('Stop!!!');
 $id = $nv_Request->get_int('id', 'post,get', 0);
 
-$view = $db->query('SELECT t1.*, t2.*, t3.address as shop_address, t3.phone_send  FROM ' . TABLE .'_order t1 INNER JOIN ' . TABLE . '_history_ghtk t2 ON t1.id = t2.order_id INNER JOIN ' . TABLE . '_warehouse t3 ON t1.warehouse_id = t3.id  WHERE t1.id = ' . $id)->fetch();
+$view = $db->query('SELECT *  FROM ' . TABLE .'_order t1 INNER JOIN ' . TABLE . '_history_ghtk t2 ON t1.id = t2.order_id  WHERE t1.id = ' . $id)->fetch();
 
 
 $xtpl = new XTemplate('history_ghtk_detail.tpl', NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file);
@@ -44,7 +44,6 @@ if($view['for_control']){
 
 $address_user = get_full_address($view['ward_id'], $view['district_id'], $view['province_id']);
 $view['address_user'] = $view['address'] . $address_user;
-$view['shop_name'] = get_name_store($view['store_id']);
 $view['status_ghtk'] = $global_status_order_ghtk[$view['status_id']]['name'];
 $view['total_weight'] = $view['total_weight'] . 'kg';
 $view['weight'] = $view['weight'] . 'kg';
