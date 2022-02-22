@@ -402,10 +402,12 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_payment(
   id mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   price double NOT NULL DEFAULT '0' COMMENT 'Số tiền thanh toán',
+  fee_shipping double NOT NULL DEFAULT '0' COMMENT 'Số tiền thanh toán',
   name_register varchar(255) NOT NULL COMMENT 'Tên đầy đủ',
   email_register varchar(255) DEFAULT '' COMMENT 'Email',
   phone_register varchar(255) DEFAULT '' COMMENT 'Số điện thoại',
   userid varchar(255) DEFAULT '' COMMENT 'Tài khoản thanh toán',
+  payment_method varchar(250) DEFAULT '' COMMENT 'payment_method',
   requestid varchar(255) DEFAULT '' COMMENT 'requestid',
   orderid varchar(255) DEFAULT '' COMMENT 'Mã đơn hàng',
   orderinfo varchar(255) DEFAULT '' COMMENT 'Nội dung thanh toán',
@@ -418,7 +420,15 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
   addtime int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (id)
 ) ENGINE=MyISAM";
-
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_payment_refund(
+  id int(11) NOT NULL AUTO_INCREMENT,
+  order_id int(11) NOT NULL DEFAULT '0' COMMENT 'Mã đơn hàng',
+  responsecode varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'vnp_ResponseCode',
+  message varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'vnp_Message',
+  user_add int(11) NOT NULL,
+  time_add int(11) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM";
 
 
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_block(
