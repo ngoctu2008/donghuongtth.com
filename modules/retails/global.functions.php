@@ -4977,7 +4977,7 @@ function UpdatePaymentOrder($payment_method,$order_text, $inputData)
 	
 		
 	
-		$stmt = $db->prepare('INSERT INTO ' . TABLE . '_history_payment (price, fee_shipping, name_register, email_register, phone_register, userid, payment_method, requestid, orderid, orderinfo, responsedode, transactionno, bankcode, cardtype, paydate, status, addtime) VALUES (:price, :fee_shippping, :name_register, :email_register, :phone_register, :userid, :payment_method, :requestid, :orderid, :orderinfo, :responsedode, :transactionno, :bankcode, :cardtype, :paydate, :status, :addtime)');
+		$stmt = $db->prepare('INSERT INTO ' . TABLE . '_history_payment (price, fee_shipping, name_register, email_register, phone_register, userid, payment_method, requestid, orderid, orderinfo, responsedode, transactionno, bankcode, cardtype, paydate, status, addtime) VALUES (:price, :fee_shipping, :name_register, :email_register, :phone_register, :userid, :payment_method, :requestid, :orderid, :orderinfo, :responsedode, :transactionno, :bankcode, :cardtype, :paydate, :status, :addtime)');
 	
 		$stmt->bindParam(':addtime', $row['addtime'], PDO::PARAM_INT);
 	
