@@ -778,7 +778,7 @@
 				}
 				else if(element.id  == 3){
 					$.ajax({
-						type : 'GET',
+						type : 'POST',
 						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
 						dataType: "json",
 						data:{weight: Number(total_weight),
@@ -914,47 +914,46 @@
 						})
 					}
 					else if(element.id  == 3 ){
-					$.ajax({
-						type : 'GET',
-						url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
-						dataType: "json",
-						data:{weight: Number(total_weight),
-							length : Number(total_length),
-							width : Number(total_width),
-							height : Number(total_height),
-							province_id : province_id,
-							ward_id : ward_id,
-							district_id : district_id,
-							shops_id : store_id,
-							warehouse_id : warehouse_id, 
-						},
-						
-						success : function(res){
+						$.ajax({
+							type : 'POST',
+							url : nv_base_siteurl + 'index.php?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax' + '&mod=get_transport_fee_ghn',
+							dataType: "json",
+							data:{weight: Number(total_weight),
+								length : Number(total_length),
+								width : Number(total_width),
+								height : Number(total_height),
+								province_id : province_id,
+								ward_id : ward_id,
+								district_id : district_id,
+								shops_id : store_id,
+								warehouse_id : warehouse_id, 
+							},
 							
-							if(Number(res)==-1){
-									$('#shipping_price_'+store_id+'_'+warehouse_id).html('Quá giới hạn cân nặng');
-									$('#text_phivanchuyen_'+store_id+'_'+warehouse_id).addClass('hidden');
+							success : function(res){
+								
+								if(Number(res)==-1){
+										$('#shipping_price_'+store_id+'_'+warehouse_id).html('Quá giới hạn cân nặng');
+										$('#text_phivanchuyen_'+store_id+'_'+warehouse_id).addClass('hidden');
+										$('#method_transfer_'+store_id+'_'+warehouse_id).html(element.name_transporters);
+										$('#button_change_method_tranfer').addClass('hidden');
+								}else{
+									transporter_first.setAttribute("value",element.id)
+									$('#shipping_price_'+store_id+'_'+warehouse_id).html('Đang cập nhật cước phí tạm tính, vui lòng đợi chút')
 									$('#method_transfer_'+store_id+'_'+warehouse_id).html(element.name_transporters);
-									$('#button_change_method_tranfer').addClass('hidden');
-							}else{
-								transporter_first.setAttribute("value",element.id)
-								$('#shipping_price_'+store_id+'_'+warehouse_id).html('Đang cập nhật cước phí tạm tính, vui lòng đợi chút')
-								$('#method_transfer_'+store_id+'_'+warehouse_id).html(element.name_transporters);
-								$('#method_time_'+store_id+'_'+warehouse_id).html(element.description);
-								if(Number(res.fee)==0){
-									$('#shipping_price_'+store_id+'_'+warehouse_id).html('0')
-									}else{
-									$('#shipping_price_'+store_id+'_'+warehouse_id).html(format_number(Number(res.fee)));
-									tongphivanchuyen = tongphivanchuyen + Number(res.fee);
 									$('#method_time_'+store_id+'_'+warehouse_id).html(element.description);
-									sum_phivanchuyen();
+									if(Number(res.fee)==0){
+										$('#shipping_price_'+store_id+'_'+warehouse_id).html('0')
+										}else{
+										$('#shipping_price_'+store_id+'_'+warehouse_id).html(format_number(Number(res.fee)));
+										tongphivanchuyen = tongphivanchuyen + Number(res.fee);
+										$('#method_time_'+store_id+'_'+warehouse_id).html(element.description);
+										sum_phivanchuyen();
+									}
 								}
 							}
-						}
-						
-					})
-					
-				}
+							
+						})
+					}
 			}
 		})
 		

@@ -2809,7 +2809,7 @@ function create_warehouse_viettelpost($phone, $name, $address, $ward_id)
 function post_data($url, $param_array, $token)
 {
 	$json = json_encode($param_array);
-	// URL có chứa hai thông tin name và diachi
+
 	$curl = curl_init($url);
 	curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
 	curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
@@ -2985,61 +2985,36 @@ function create_store_ghn($district_id, $ward_code, $name, $phone, $address)
 	return $data;
 }
 
-function post_data_ghn($url, $param)
+function post_data_ghn($url, $param_array, $shop_id)
 {
 	global $config_setting;
-	$json = json_encode($param);
-	$curl = curl_init();
+	$json = json_encode($param_array);
 
-	curl_setopt_array($curl, array(
-		CURLOPT_URL => $url,
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'POST',
-		CURLOPT_POSTFIELDS => $json,
-		CURLOPT_HTTPHEADER => array(
-			'token: ' . $config_setting['token_ghn'],
-			'Content-Type: application/json'
-		),
+	$curl = curl_init($url);
+	curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+		'Content-Type: application/json',
+		'Content-Length: ' . strlen($json) . '',
+		'h-token:' . $config_setting['token_ghn'],
+		'Token:' . $config_setting['token_ghn'],
+		'ShopId:' . $shop_id,
 	));
-	$response = curl_exec($curl);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+	$result = curl_exec($curl);
+	$data = json_decode($result, true);
 	curl_close($curl);
-	$data = json_decode($response, true);
 	return $data;
+	
 }
 
-function get_price_ghn_2($service_type_id, $to_district_id, $to_ward_code, $height, $length, $weight, $width, $insurance_value, $from_district_id)
-{	
-	global $config_setting;
-	$url = $config_setting['url_ghn'] . '/v2/shipping-order/fee';
-	$param = array(
-		"service_type_id" => (int)$service_type_id,
-		"from_district_id" => (int)$from_district_id,
-		"to_district_id" => (int)$to_district_id,
-		"to_ward_code" => (string)($to_ward_code),
-		"height" => (int)$height,
-		"length" => (int)$length,
-		"weight" => (int)$weight,
-		"width" => (int)$width,
-		"insurance_value" => (int)$insurance_value,
-		"coupon" => null
-	);
-	$data = post_data($url, $param, $config_setting['token_ghn']);
-
-	return $data;
-}
-
-function get_price_ghn($service_id, $shop_id, $to_district_id, $to_ward_code, $height, $length, $weight, $width, $insurance_value, $from_district_id)
+function get_fee_ghn($service_id, $shop_id, $to_district_id, $to_ward_code, $height, $length, $weight, $width, $insurance_value, $from_district_id)
 {
 	global $config_setting;
 	$url = $config_setting['url_ghn'] . '/v2/shipping-order/fee';
 	$param = array(
-		"service_id" => (int)$service_id,
-		"shop_id" => (int)$shop_id,
+		"service_type_id" => (int)$service_id,
 		"from_district_id" => (int)$from_district_id,
 		"to_district_id" => (int)$to_district_id,
 		"to_ward_code" => (string)($to_ward_code),
@@ -3050,8 +3025,8 @@ function get_price_ghn($service_id, $shop_id, $to_district_id, $to_ward_code, $h
 		"insurance_value" => (int)$insurance_value,
 		"coupon" => null
 	);
-	$data = post_data($url, $param, $config_setting['token_ghn']);
-
+	$data = post_data_ghn($url, $param, $config_setting['token_ghn']);
+	
 	return $data;
 }
 
@@ -3086,8 +3061,11 @@ function ghn_cancel($shop_id, $ship_code)
 	curl_close($curl);
 	return $data;
 }
-//tính lại phí vận chuyển GHN
-
+function get_store_id_ghn($warehouse_id){
+	global $db;
+	$store = $db->query('SELECT storeid_transport FROM ' . TABLE . '_warehouse_transport WHERE FIND_IN_SET(3, transportid_ecng) AND warehouse_id = ' . $warehouse_id)->fetchColumn();
+	return $store;
+}
 
 function search_store_ghn($client_phone)
 {

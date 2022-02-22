@@ -3481,16 +3481,16 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	}
 
 	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
-	$ward_id_ghn_receive = $global_ward[$ward_id]['ghnid'];
+	$to_ward = $global_ward[$ward_id]['ghnid'];
 	
 	$district_id = $nv_Request->get_int( 'district_id', 'get,post', 0 );
-	$district_id_ghn_receive = $global_district[$district_id]['ghnid'];
-	
+	$to_district = $global_district[$district_id]['ghnid'];
+
 	$warehouse_id = $nv_Request->get_int( 'warehouse_id', 'get,post', 0 );
-	$info_warehouse = get_info_warehouse( $warehouse_id );
-	$district_id_ghn_send = $global_district[$info_warehouse['district_id']]['ghnid'];
-	
-	$fee = get_price_ghn_2( 2, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
+	$store_id_ghn = get_store_id_ghn($warehouse_id);
+	$from_district = $global_district[$info_warehouse['district_id']]['ghnid'];
+
+	$fee = get_fee_ghn( 2, $store_id_ghn, $to_district, $to_ward, $height_product, $length_product, $weight_product, $width_product, 0,$from_district );
 		if($fee['code'] == 400 ) {
 			$tranposter_fee = -1;
 		} else {
