@@ -3025,7 +3025,7 @@ function get_fee_ghn($service_id, $shop_id, $to_district_id, $to_ward_code, $hei
 		"insurance_value" => (int)$insurance_value,
 		"coupon" => null
 	);
-	$data = post_data_ghn($url, $param, $config_setting['token_ghn']);
+	$data = post_data_ghn($url, $param, $shop_id);
 	
 	return $data;
 }
