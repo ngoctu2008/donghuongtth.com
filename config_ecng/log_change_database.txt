@@ -3,10 +3,26 @@ ALTER TABLE `tms_vi_retails_history_ghtk` ADD `address_send` VARCHAR(100) CHARAC
 ALTER TABLE `tms_vi_retails_history_ghtk` ADD `phone_send` VARCHAR(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'Số điện thoại lên vận đơn' AFTER `address_send`;
 ALTER TABLE `tms_vi_retails_history_ghtk` ADD `name_send` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'Tên shop lên vận đơn' AFTER `phone_send`;
 
+AFTER TABLE `tms_vi_retails_history_payment` `fee_shipping` DOUBLE NOT NULL DEFAULT '0' AFTER `price`;  
+AFTER TABLE `tms_vi_retails_history_payment` `payment_method` VARCHAR(250) DEFAULT '' AFTER `userid`;  
+AFTER TABLE `tms_vi_retails_payment_refund` `payment_method` VARCHAR(250) DEFAULT '' AFTER `order_id`; 
 21/1/2022
 ALTER TABLE `tms_vi_retails_history_ghtk` CHANGE `label` `label` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT ' Mã đơn hàng';
-
+ 
 17/02/2022
+CREATE TABLE `tms_vi_retails_payment_refund` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Mã đơn hàng',
+  `responsecode` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'vnp_ResponseCode',
+  `message` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'vnp_Message',
+  `user_add` int(11) NOT NULL,
+  `time_add` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `tms_vi_retails_payment_refund`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `tms_vi_retails_payment_refund`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+COMMIT;
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_payment(
   id mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   price double NOT NULL DEFAULT '0' COMMENT 'Số tiền thanh toán',
