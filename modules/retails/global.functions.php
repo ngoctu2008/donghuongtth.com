@@ -4437,13 +4437,13 @@ function MoMoRefund($payment_method, $mm_amount, $mm_OrderInfo, $list_order,$tra
 		$description = $mm_OrderInfo;
 		$amount = $mm_amount;
 		$order_full=implode('-',$list_order);
-		$orderId = $order_full;
+		$orderId = $transId;
 
 		$serectkey = $payment_config['signature'];
 		$requestId = time() . "";
 		//before sign HMAC SHA256 signature
 		/*accessKey=$acessKey&amount=$amount&description=$description&orderId=$orderId&partnerCode=$partnerCode&requestId=$requestId&transId=$transId*/
-		$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&description=" . $description . "&orderId=" . $orderId . "&orderId=" . $orderId . "&partnerCode=" . $partnerCode . "&requestId=" . $requestId . "&transId=" . $transId;
+		$rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&description=" . $description . "&orderId=" . $orderId . "&partnerCode=" . $partnerCode . "&requestId=" . $requestId . "&transId=" . $transId;
 		$signature = hash_hmac("sha256", $rawHash, $serectkey);
 		$data = array(
 			'partnerCode' => $partnerCode,
@@ -4481,10 +4481,13 @@ function momo_refund($info_order)
 
 
 	$amount = ($history_vnpay["price"]) ;
+	$list_order = array();
+	$list_order[] = $info_order['id'];
 	
+	$mm_OrderInfo = 'Huy giao dich '.$info_order['order_code'];
 	$data = MoMoRefund($info_order['payment_method'], $amount, $mm_OrderInfo, $list_order,$info_order['vnpay_code']);
 
-	if($data['resultCode'] == 0 ){
+	
 		// lưu thông tin lịch sử hoàn tiền vnpay
 		//$row['responseTime'] = NV_CURRENTTIME;
 		$responsecode = ($data['resultCode'] == 0) ? '0' : $data['resultCode'];
@@ -4497,9 +4500,9 @@ function momo_refund($info_order)
 		$stmt->bindParam(':user_add', $user_info['userid'], PDO::PARAM_INT);
 
 		$exc = $stmt->execute();
-
-		return true;
-	}
+		return $data;
+			
+	
 }
 function xulythanhtoanthanhcong_recieve($order_text, $inputData)
 {

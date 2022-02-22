@@ -1262,6 +1262,7 @@
 			
 			$view['link_phat'] = NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=order_punish&amp;order_id=' . $view['id'];
 			
+
 			if($view['status_payment_vnpay'])
 			{
 				$view['thanhtoan'] = $lang_module['da_thanhtoan'];
@@ -1327,10 +1328,21 @@
 				$xtpl->parse('main.loop.status_cancel');
 			}
 			
+			
 			// hủy đơn nếu đã thanh toán thì hiển thị chức năng hoàn tiền đơn hàng
 			if($view['status'] == 4 and $view['status_payment_vnpay'] and $view['payment_tam'])
 			{
-				$xtpl->parse('main.loop.hoantien');
+				if($view['payment_method'] == 'vnpay'){
+					$xtpl->parse('main.loop.hoantien');
+				}
+				else{
+					$payment_refund = $db->query('SELECT responsecode FROM '.TABLE.'_payment_refund where order_id='.$view['id'])->fetchAll();
+					foreach($payment_refund as $view){
+						if($view['responsecode']){
+							$xtpl->parse('main.loop.hoantien');
+						}
+					}
+				}
 			}
 			
 			// status = 4 đơn hàng hủy

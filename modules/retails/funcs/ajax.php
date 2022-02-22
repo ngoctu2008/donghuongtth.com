@@ -1707,14 +1707,23 @@ if($mod=='change_status_cancel'){
 	$payment_method = GetPaymentMethodOrder($order_id);
 	if($payment_method == 'vnpay'){
 		vnpay_refund($info_order);
-	}else{
-		momo_refund($info_order);
+		print_r( json_encode( array('status'=>'OK' ) ));
+		die();
+	}elseif($payment_method == 'momo'){
+		$result = momo_refund($info_order);
+		if($result['resultCode'] == 0){
+			print_r( json_encode( array('status'=>'OK' ) ));
+		}else{
+			print_r( json_encode( array('status'=>'ERROR' ) ));
+		}
+			
+
+		die();
 	}
 	// hoàn trả tiền vnpay
 	
 	
-	print_r( json_encode( array('status'=>'OK' ) ));
-	die();
+	
 }
 if($mod=='change_status_success'){
 	$order_id = $nv_Request->get_title( 'order_id', 'post,get' );
