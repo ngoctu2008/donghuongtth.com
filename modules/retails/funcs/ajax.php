@@ -1914,7 +1914,12 @@ if($mod=='load_order_customer'){
 		// cho phép hủy đơn hàng trong vòng 2h, khác trạng thái hủy đơn
 		if((NV_CURRENTTIME - $view['time_add']) < 7200 and $view['status'] != 4)
 		{//print_r($view['time_add']);die;
-			$xtpl->parse('main.loop.status_cancel');
+			$row_payment = $global_payport[$view['payment_method']];
+			$payment_config = unserialize(nv_base64_decode($row_payment['config']));
+			if($view['payment_method'] == 'vnpay' || ($view['payment_method'] == 'momo' && $payment_config['enable_refund'] == 1)){
+				$xtpl->parse('main.loop.status_cancel');
+			}
+			
 		}
 		$xtpl->parse('main.loop');
 	}
