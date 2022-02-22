@@ -1333,12 +1333,17 @@
 			if($view['status'] == 4 and $view['status_payment_vnpay'] and $view['payment_tam'])
 			{
 				if($view['payment_method'] == 'vnpay'){
-					$xtpl->parse('main.loop.hoantien');
+					$payment_refund_vnpay = $db->query('SELECT responsecode FROM '.TABLE.'_vnpay_refund where order_id='.$view['id'])->fetchAll();
+					foreach($payment_refund_vnpay as $view){
+						if(!$view['responsecode'] == '00'){
+							$xtpl->parse('main.loop.hoantien');
+						}
+					}
 				}
 				else{
 					$payment_refund = $db->query('SELECT responsecode FROM '.TABLE.'_payment_refund where order_id='.$view['id'])->fetchAll();
 					foreach($payment_refund as $view){
-						if($view['responsecode']){
+						if(!$view['responsecode'] == '0' || !$view['responsecode'] == '00'){
 							$xtpl->parse('main.loop.hoantien');
 						}
 					}

@@ -3478,36 +3478,30 @@ if ( $mod == 'get_transport_fee_ghn' ) {
 	$length_product = $nv_Request->get_float( 'length', 'get,post', 0 );
 	$width_product = $nv_Request->get_float( 'width', 'get,post', 0 );
 	$height_product = $nv_Request->get_float( 'height', 'get,post', 0 );
-
-	$total = $nv_Request->get_int( 'total', 'get,post', 0 );
-	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
-	$ward_id_ghn_receive = $global_ward[$ward_id]['ghnid'];
-	
-	$district_id = $nv_Request->get_int( 'district_id', 'get,post', 0 );
-	$district_id_ghn_receive = $global_district[$district_id]['ghnid'];
-
 	$shops_id_session = $nv_Request->get_int( 'shops_id', 'get,post', 0 );
-	$warehouse_id = $nv_Request->get_int( 'warehouse_id', 'get,post', 0 );
-	$info_warehouse = get_info_warehouse( $warehouse_id );
-
-	$province_id_ghn_send = $global_province[$info_warehouse['province_id']]['ghnid'];
-	$district_id_ghn_send = $global_district[$info_warehouse['district_id']]['ghnid'];
-
-	$transporters_id = $nv_Request->get_int( 'transporters_id', 'get,post', 0 );
-	$shop_id = $info_warehouse['shops_id_ghn'];
-
 	if($weight_product == 0 and $length_product == 0 and $width_product == 0 and $height_product == 0  ){
 		$_SESSION['transporter_fee'][$shops_id_session][3] = 0;
 		print_r(json_encode(array('fee'=>0)));
 		die;
 	}
-	$fee = get_price_ghn_2( 2, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
+
+	$ward_id = $nv_Request->get_int( 'ward_id', 'get,post', 0 );
+	$ward_id_ghn_receive = $global_ward[$ward_id]['ghnid'];
 	
+	$district_id = $nv_Request->get_int( 'district_id', 'get,post', 0 );
+	$district_id_ghn_receive = $global_district[$district_id]['ghnid'];
+	
+	$warehouse_id = $nv_Request->get_int( 'warehouse_id', 'get,post', 0 );
+	$info_warehouse = get_info_warehouse( $warehouse_id );
+	$district_id_ghn_send = $global_district[$info_warehouse['district_id']]['ghnid'];
+	
+	$fee = get_price_ghn_2( 2, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0,$district_id_ghn_send );
 		if($fee['code'] == 400 ) {
 			$tranposter_fee = -1;
 		} else {
-			$tranposter_fee = $fee['data']['total'] + get_info_transporters( $transporters_id )['money'];
+			$tranposter_fee = $fee['data']['total'] + get_info_transporters(3)['money'];
 			$tranposter_fee = rounding($tranposter_fee);
+			
 		}
 		$_SESSION['transporter_fee'][$shops_id_session][3] = $tranposter_fee;
 		print_r(json_encode(array('fee'=>$tranposter_fee)));
