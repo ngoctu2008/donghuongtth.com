@@ -2984,18 +2984,6 @@ function create_store_ghn($district_id, $ward_code, $name, $phone, $address)
 	$data = post_data($url, $param, $config_setting['token_ghn']);
 	return $data;
 }
-function get_service_ghn($shop_id, $district_from, $district_to)
-{
-	global $config_setting;
-	$url = $config_setting['url_ghn'] . '/v2/shipping-order/available-services';
-	$param = array(
-		"shop_id" => (int)$shop_id,
-		"from_district" => (int)$district_from,
-		"to_district" => (int)$district_to
-	);
-	$data = post_data_ghn($url, $param);
-	return $data;
-}
 
 function post_data_ghn($url, $param)
 {
@@ -3024,13 +3012,12 @@ function post_data_ghn($url, $param)
 	return $data;
 }
 
-function get_price_ghn_2($service_type_id, $shop_id, $to_district_id, $to_ward_code, $height, $length, $weight, $width, $insurance_value, $from_district_id)
-{
+function get_price_ghn_2($service_type_id, $to_district_id, $to_ward_code, $height, $length, $weight, $width, $insurance_value, $from_district_id)
+{	
 	global $config_setting;
 	$url = $config_setting['url_ghn'] . '/v2/shipping-order/fee';
 	$param = array(
 		"service_type_id" => (int)$service_type_id,
-		"shop_id" => $shop_id,
 		"from_district_id" => (int)$from_district_id,
 		"to_district_id" => (int)$to_district_id,
 		"to_ward_code" => (string)($to_ward_code),
@@ -3045,6 +3032,7 @@ function get_price_ghn_2($service_type_id, $shop_id, $to_district_id, $to_ward_c
 
 	return $data;
 }
+
 function get_price_ghn($service_id, $shop_id, $to_district_id, $to_ward_code, $height, $length, $weight, $width, $insurance_value, $from_district_id)
 {
 	global $config_setting;
@@ -3100,38 +3088,7 @@ function ghn_cancel($shop_id, $ship_code)
 }
 //tính lại phí vận chuyển GHN
 
-function get_free_ship_ghn($service_id, $weight_product, $length_product, $width_product, $height_product, $total, $province_id, $district_id, $ward_id, $transporters_id, $shop_id)
-{
-	global $config_setting;
 
-	if (!$weight_product and !$length_product and !$width_product and !$height_product)
-		return 0;
-
-	$ward_id_ghn_receive = get_info_ward($ward_id)['ghnid'];
-	$district_id_ghn_receive = get_info_district($district_id)['ghnid'];
-	$info_warehouse = get_info_warehouse_store($shop_id);
-	$province_id_ghn_send = get_info_province($info_warehouse['province_id'])['ghnid'];
-	$district_id_ghn_send = get_info_district($info_warehouse['district_id'])['ghnid'];
-	$shop_id = $info_warehouse['shops_id_ghn'];
-	$fee = get_price_ghn_2($service_id, $shop_id, $district_id_ghn_receive, $ward_id_ghn_receive, $height_product, $length_product, $weight_product, $width_product, 0, $district_id_ghn_send);
-	$tranposter_fee = $fee['data']['total'];
-
-
-	if (empty($tranposter_fee)) {
-
-		return (array());
-	} else {
-		// cộng thêm phí vận chuyển hệ thống sàn thương mại
-		$tranposter_fee = $tranposter_fee + (($tranposter_fee * $config_setting['percent_of_ship']) / 100);
-
-		$mod = $tranposter_fee % 1000;
-		if ($mod > 0) {
-			$thuong = ceil($tranposter_fee / 1000);
-			$tranposter_fee = $thuong * 1000;
-		}
-	}
-	return $tranposter_fee;
-}
 function search_store_ghn($client_phone)
 {
 	global $config_setting;
@@ -4493,9 +4450,10 @@ function momo_refund($info_order)
 		// lưu thông tin lịch sử hoàn tiền vnpay
 		//$row['responseTime'] = NV_CURRENTTIME;
 		$responsecode = ($data['resultCode'] == 0) ? '0' : $data['resultCode'];
-		$stmt = $db->prepare('INSERT INTO ' . TABLE . '_payment_refund (order_id, responsecode, message, user_add, time_add) VALUES (:order_id, :responsecode, :message, :user_add, :time_add)');
+		$stmt = $db->prepare('INSERT INTO ' . TABLE . '_payment_refund (order_id, payment_method, responsecode, message, user_add, time_add) VALUES (:order_id, :payment_method, :responsecode, :message, :user_add, :time_add)');
 
 		$stmt->bindParam(':time_add', $data['responseTime'], PDO::PARAM_INT);
+		$stmt->bindParam(':payment_method', $info_order['payment_method'], PDO::PARAM_STR);
 		$stmt->bindParam(':order_id', $info_order['id'], PDO::PARAM_INT);
 		$stmt->bindParam(':responsecode', $responsecode, PDO::PARAM_STR);
 		$stmt->bindParam(':message', $data['message'], PDO::PARAM_STR);
