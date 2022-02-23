@@ -2173,7 +2173,7 @@ if($mod=='repayment'){
 	}
 	
 	$order_full = $data['id_order'];
-	$list_order_code = implode(',',$list_order_code);
+	$list_order_code = implode(',',$arrcode);
 	//Hoang thanh toan lai	
 	if($payment_method == 'vnpay'){
 			
@@ -2192,6 +2192,8 @@ if($mod=='repayment'){
 		print_r( json_encode($result));die;
 		die();
 	}elseif($payment_method == 'momo'){
+		$data['list_order'] = explode(",",$data['id_order']);
+		$data['list_order_code'] = $arrcode;
 		require_once(NV_ROOTDIR.'/modules/retails/payment/momo.checkorders.php');
 		/* $list_order = $data['list_order'];
 		$list_order_code = $data['list_order_code'];
