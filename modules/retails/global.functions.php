@@ -4396,7 +4396,7 @@ function MoMoRefund($payment_method, $mm_amount, $mm_OrderInfo, $list_order,$tra
 		$description = $mm_OrderInfo;
 		$amount = $mm_amount;
 		$order_full=implode('-',$list_order);
-		$orderId = $transId;
+		$orderId = $transId . '-' . $order_full;
 
 		$serectkey = $payment_config['signature'];
 		$requestId = time() . "";
