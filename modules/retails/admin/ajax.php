@@ -781,9 +781,9 @@ if ($mod == 'order_refund') {
 	}elseif($payment_method == 'momo'){
 		$result = momo_refund($info_order);
 		if($result['resultCode'] == 0){
-			print_r( json_encode( array('status'=>'OK' ) ));
+			print_r( json_encode( array('status'=>'OK', 'mess' => 'Hoàn tiền thành công' ) ));
 		}else{
-			print_r( json_encode( array('status'=>'ERROR' ) ));
+			print_r( json_encode( array('status'=>'ERROR', 'mess' => 'Hoàn tiền thất bại' ) ));
 		}
 			
 
