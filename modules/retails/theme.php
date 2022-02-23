@@ -14,7 +14,7 @@ if (!defined('NV_IS_MOD_RETAILSHOPS'))
 
 /**
  * email_new_order_payment()
- *
+ **
  * @param mixed $content
  * @param mixed $data_content
  * @param mixed $data_pro
