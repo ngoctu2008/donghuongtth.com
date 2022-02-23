@@ -93,7 +93,7 @@
 					<th>Tổng tiền hàng</th>
 					<th>Phí vận chuyển</th>
 					<th>PHÍ SÀN</th>
-					<th>Phí VNPAY</th>
+					<th>Phí Cổng thanh toán</th>
 					<th>BHHH & phí chênh lệch</th>
 					<th>Voucher</th>
 					<th>Phí phạt</th>
@@ -112,7 +112,7 @@
 					<td>{VIEW.total_format} </td>
 					<td>{VIEW.fee_transport_format}</td>
 					<td>{VIEW.phisan_format}</td>
-					<td>{VIEW.phivnpay_format}</td>
+					<td>{VIEW.feepayport_format}({VIEW.payment_method})</td>
 					<td>{VIEW.bhhh_format}</td>
 					<td>{VIEW.voucher_price_format}</td>
 					<td>{VIEW.phi_phat_format}</td>

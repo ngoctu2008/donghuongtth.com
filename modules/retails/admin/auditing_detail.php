@@ -419,12 +419,12 @@
 			$view['phisan_format'] = number_format($view['phisan']);
 			$phisan += $view['phisan'];
 			$view['ecng'] += $view['phisan'];
-			
+			$view['payment_method_name'] = $global_payport[$view['payment_method']]['paymentname'];
 			// phí vnpay
-			$view['vnpay'] = phi_vnpay_order($view, $status);
-			$view['phivnpay_format'] = number_format($view['vnpay']);
-			$vnpay += $view['vnpay'];
-			$view['ecng'] += $view['vnpay'];
+			$view['payport'] = phi_payport_order($view, $status);
+			$view['feepayport_format'] = number_format($view['payport']);
+			$payport += $view['payport'];
+			$view['ecng'] += $view['payport'];
 			
 			// phí phạt	
 			$view['phi_phat'] = phi_phat_order($view, $status);
@@ -455,7 +455,7 @@
 	$xtpl->assign('phisan', number_format($phisan));
 	$xtpl->assign('ship', number_format($fee_transport));
 	$xtpl->assign('voucher', number_format($voucher_price));
-	$xtpl->assign('vnpay', number_format($vnpay));
+	$xtpl->assign('payport', number_format($payport));
 	$xtpl->assign('ECNG', number_format($ecng));
 	$xtpl->assign('SELLER', number_format($seller));
 	$xtpl->assign('phi_phat', number_format($phi_phat));

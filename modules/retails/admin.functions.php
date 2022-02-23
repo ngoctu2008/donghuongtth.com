@@ -231,7 +231,6 @@
 	function phi_vnpay_order($order, $status)
 	{
 		global $db;
-		$payment_method = GetPaymentMethodOrder($order);
 		$where = '';
 		if($status == 0){
 			$where .= ' AND t1.status = 7';
@@ -240,7 +239,7 @@
 			}else if($status == 2){
 			$where .= ' AND (t1.status = 6)';
 		}
-		if($payment_method == 'vnpay'){
+		if($order['payment_method'] == 'vnpay'){
 			$vnpay = $db->query('SELECT t2.price, t2.vnp_bankcode,t1.payment FROM ' . TABLE .'_order t1, ' . TABLE .'_history_vnpay t2 WHERE t1.id = '. $order['id'] .' AND t1.vnpay_code = t2.vnp_transactionno AND t2.vnp_responsedode ="00" AND t1.store_id = '. $order['store_id'] .' AND t1.status_payment_vnpay = 1 '. $where)->fetch();
 		
 			// VISA,MASTERCARD,JCB là quốc tế
@@ -264,13 +263,54 @@
 					$cuocphi = (($vnpay['payment'] * 1.1)/100) + 1650;
 				}
 			}
-		}elseif($payment_method == 'momo'){
+		}elseif($order['payment_method'] == 'momo'){
 			$cuocphi = (($vnpay['payment'] * 2)/100) ;
 		}
 		
 		return $cuocphi;
 	}
-	
+	// phi vnpay order
+	function phi_payport_order($order, $status)
+	{
+		global $db;
+		$where = '';
+		if($status == 0){
+			$where .= ' AND t1.status = 7';
+			} else if($status == 1){
+			$where .= ' AND (t1.status = 3 OR t1.status = 2)';
+			}else if($status == 2){
+			$where .= ' AND (t1.status = 6)';
+		}
+		if($order['payment_method'] == 'vnpay'){
+			$vnpay = $db->query('SELECT t2.price, t2.vnp_bankcode,t1.payment FROM ' . TABLE .'_order t1, ' . TABLE .'_history_vnpay t2 WHERE t1.id = '. $order['id'] .' AND t1.vnpay_code = t2.vnp_transactionno AND t2.vnp_responsedode ="00" AND t1.store_id = '. $order['store_id'] .' AND t1.status_payment_vnpay = 1 '. $where)->fetch();
+		
+			// VISA,MASTERCARD,JCB là quốc tế
+			$array_quocte = array(
+			'1' => 'VISA',
+			'2' => 'MASTERCARD',
+			'3' => 'JCB'
+			);
+			// thẻ nội địa 1.1% + 1.650đ
+			
+			$cuocphi = 0;
+			if($vnpay['price']){
+				if(in_array($vnpay['vnp_bankcode'],$array_quocte))
+				{
+					// thẻ quốc tế 2.4% + 2.200
+					$cuocphi = (($vnpay['payment'] * 2.4)/100) + 2200;
+				}
+				else
+				{
+					// thẻ nội địa
+					$cuocphi = (($vnpay['payment'] * 1.1)/100) + 1650;
+				}
+			}
+		}elseif($order['payment_method'] == 'momo'){
+						$cuocphi = (($order['payment'] * 2)/100) ;
+		}
+		
+		return $cuocphi;
+	}
 	
 	// phí phi_phat
 	function phi_phat($store_id, $status, $from, $to)

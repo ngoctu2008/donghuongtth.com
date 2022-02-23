@@ -95,7 +95,6 @@
 					<th>Tổng giá trị sản phẩm</th>
 					<th>Phí vận chuyển</th>
 					<th>Phí sàn</th>
-					<th>Cổng thanh toán</th>
 					<th>Phí Cổng TT</th>
 					<th>BHHH & phí chênh lệch</th>
 					<th>Voucher</th>
@@ -112,7 +111,6 @@
 					<td><a href="{VIEW.link_total_product}" target="_blank">{VIEW.sum_total_product_format}</a></td>
 					<td>{VIEW.ship_format}</td>
 					<td>{VIEW.phisan_format} </td>
-					<td>{VIEW.payment_method_name}</td>
 					<td>{VIEW.vnpay_format}</td>
 					<td>{VIEW.insurance_format}</td>
 					<td>{VIEW.voucher_format}</td>
