@@ -1089,9 +1089,9 @@ iframe {
 .icon_freeship_frams{
 	width:90px;
 }
-#description ol,#description ul	{
-	list-style: nomarl !important;
-	padding-left: 15px !important;
+#description ol,#description ul, #specifications ol,	#specifications ul{
+	list-style: initial;
+	padding-left: 15px;
 }
 #description table,#specifications table{
 	width:100% !important;

@@ -564,3 +564,6 @@ ul.nav.nav-pills li a{
     background-repeat: repeat-y;
     padding: 5px 12px !important;
   }
+  #page-bodyhtml ul{
+	margin-left: 0 !important;
+  }
