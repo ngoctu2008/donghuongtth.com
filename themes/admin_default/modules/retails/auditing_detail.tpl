@@ -126,7 +126,7 @@
 					<td>{total_product}</td>
 					<td>{ship} </td>
 					<td>{phisan}</td>
-					<td>{vnpay}</td>
+					<td>{payport}</td>
 					<td>{bhhh}</td>
 					<td>{voucher}</td>
 					<td>{phi_phat}</td>
