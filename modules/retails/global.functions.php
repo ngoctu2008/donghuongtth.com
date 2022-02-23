@@ -4446,7 +4446,7 @@ function momo_refund($info_order)
 	$mm_OrderInfo = 'Huy giao dich '.$info_order['order_code'];
 	$data = MoMoRefund($info_order['payment_method'], $amount, $mm_OrderInfo, $list_order,$info_order['vnpay_code']);
 
-	
+		$userid = ($admin_info['userid'] != 0) ? $admin_info['userid'] : $user_info['userid'];
 		// lưu thông tin lịch sử hoàn tiền vnpay
 		//$row['responseTime'] = NV_CURRENTTIME;
 		$responsecode = ($data['resultCode'] == 0) ? '0' : $data['resultCode'];
@@ -4457,7 +4457,7 @@ function momo_refund($info_order)
 		$stmt->bindParam(':order_id', $info_order['id'], PDO::PARAM_INT);
 		$stmt->bindParam(':responsecode', $responsecode, PDO::PARAM_STR);
 		$stmt->bindParam(':message', $data['message'], PDO::PARAM_STR);
-		$stmt->bindParam(':user_add', $user_info['userid'], PDO::PARAM_INT);
+		$stmt->bindParam(':user_add', $userid , PDO::PARAM_INT);
 
 		$exc = $stmt->execute();
 		return $data;
