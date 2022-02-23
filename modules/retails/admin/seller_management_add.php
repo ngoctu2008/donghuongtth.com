@@ -54,6 +54,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
 	$row['cover_image'] = $nv_Request->get_title('cover_image', 'post', '');
 	$row['image_after'] = $nv_Request->get_title('image_after', 'post', '');
 	$row['bank_id'] = $nv_Request->get_int('bank_id', 'post', 0);
+	$row['catalogy'] = $nv_Request->get_int('catalogy', 'post', 0);
 	$row['acount_name'] = $nv_Request->get_title('acount_name', 'post', '');
 	$row['acount_number'] = $nv_Request->get_title('acount_number', 'post', '');
 	$row['branch_name'] = $nv_Request->get_title('branch_name', 'post', '');
@@ -67,11 +68,11 @@ if ($nv_Request->isset_request('submit', 'post')) {
 	$row['district_id'] = $nv_Request->get_title('district_id', 'post', '');
 	$row['ward_id'] = $nv_Request->get_title('ward_id', 'post', '');
 	$row['address'] = $nv_Request->get_title('address', 'post', '');
-	$row['centerlat'] = $nv_Request->get_title('centerlat', 'post', '');
-	$row['centerlng'] = $nv_Request->get_title('centerlng', 'post', '');
+	$row['centerlat'] = $nv_Request->get_title('centerlat', 'post', 0);
+	$row['centerlng'] = $nv_Request->get_title('centerlng', 'post', 0);
 	$row['lat'] = $nv_Request->get_title('lat', 'post', '');
 	$row['lng'] = $nv_Request->get_title('lng', 'post', '');
-	$row['maps_mapzoom'] = $nv_Request->get_title('maps_mapzoom', 'post', '');
+	$row['maps_mapzoom'] = $nv_Request->get_title('maps_mapzoom', 'post', 0);
 	$row['userid'] = $nv_Request->get_int('userid', 'post', 0);
 	
 	// kiểm tra store_code không được trùng
@@ -299,7 +300,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
 				$row['user_add'] = $admin_info['userid'];
 				$row['time_add'] = NV_CURRENTTIME;
 
-				$stmt = $db->prepare('INSERT INTO ' . TABLE . '_seller_management (description_shop,image_banner,avatar_image,cover_image,userid, company_name, store_code, company_code, address, province_id, district_id, ward_id, name, phone, email, image_before, image_after, bank_id, acount_name, acount_number, branch_name,user_add, time_add, user_edit, time_edit, status, weight) VALUES (:description_shop,:image_banner,:avatar_image, :cover_image,:userid, :company_name, :store_code, :company_code, :address, :province_id, :district_id, :ward_id, :name, :phone, :email, :image_before, :image_after, :bank_id, :acount_name, :acount_number, :branch_name, :user_add, :time_add, :user_edit, :time_edit, :status, :weight)');
+				$stmt = $db->prepare('INSERT INTO ' . TABLE . '_seller_management (description_shop,image_banner,avatar_image,cover_image,userid, company_name, store_code, company_code, address, province_id, district_id, ward_id, name, phone, email, image_before, image_after, bank_id, catalogy, acount_name, acount_number, branch_name,user_add, time_add, user_edit, time_edit, status, weight) VALUES (:description_shop,:image_banner,:avatar_image, :cover_image,:userid, :company_name, :store_code, :company_code, :address, :province_id, :district_id, :ward_id, :name, :phone, :email, :image_before, :image_after, :bank_id, :catalogy, :acount_name, :acount_number, :branch_name, :user_add, :time_add, :user_edit, :time_edit, :status, :weight)');
 
 				$stmt->bindParam(':userid', $row['userid'], PDO::PARAM_INT);
 				$stmt->bindParam(':user_add', $row['user_add'], PDO::PARAM_INT);
@@ -313,7 +314,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
 				$stmt->bindParam(':weight', $weight, PDO::PARAM_INT);
 			} else {
 
-				$stmt = $db->prepare('UPDATE ' . TABLE . '_seller_management SET description_shop = :description_shop,image_banner = :image_banner,avatar_image = :avatar_image,cover_image = :cover_image,company_name = :company_name, store_code = :store_code, company_code = :company_code, address = :address, province_id = :province_id, district_id = :district_id, ward_id = :ward_id, name = :name, phone = :phone, email = :email, image_before = :image_before, image_after = :image_after, bank_id = :bank_id, acount_name = :acount_name, acount_number = :acount_number, branch_name = :branch_name WHERE id=' . $row['id']);
+				$stmt = $db->prepare('UPDATE ' . TABLE . '_seller_management SET description_shop = :description_shop,image_banner = :image_banner,avatar_image = :avatar_image,cover_image = :cover_image,company_name = :company_name, store_code = :store_code, company_code = :company_code, address = :address, province_id = :province_id, district_id = :district_id, ward_id = :ward_id, name = :name, phone = :phone, email = :email, image_before = :image_before, image_after = :image_after, bank_id = :bank_id, catalogy =:catalogy, acount_name = :acount_name, acount_number = :acount_number, branch_name = :branch_name WHERE id=' . $row['id']);
 			}
 
 			$stmt->bindParam(':description_shop', $row['description_shop'], PDO::PARAM_STR);
@@ -333,6 +334,7 @@ if ($nv_Request->isset_request('submit', 'post')) {
 			$stmt->bindParam(':image_before', $row['image_before'], PDO::PARAM_STR);
 			$stmt->bindParam(':image_after', $row['image_after'], PDO::PARAM_STR);
 			$stmt->bindParam(':bank_id', $row['bank_id'], PDO::PARAM_INT);
+			$stmt->bindParam(':catalogy', $row['catalogy'], PDO::PARAM_INT);
 			$stmt->bindParam(':acount_name', $row['acount_name'], PDO::PARAM_STR);
 			$stmt->bindParam(':acount_number', $row['acount_number'], PDO::PARAM_STR);
 			$stmt->bindParam(':branch_name', $row['branch_name'], PDO::PARAM_STR);
@@ -524,6 +526,8 @@ if ($nv_Request->isset_request('submit', 'post')) {
 	$row['store'] = '';
 	$row['username'] = '';
 	$row['password'] = '';
+	$row['catalogy'] = 0;
+	
 }
 
 
@@ -554,6 +558,17 @@ if ($row['id'] > 0) {
 	$check = '';
 }
 $xtpl->assign('check', $check);
+
+// danh sách ngành hàng
+foreach($catalogy_main_lev0 as $catalogy)
+{
+	$xtpl->assign('OPTION', array(
+		'key' => $catalogy['id'],
+		'title' => $catalogy['name'],
+		'selected' => ($catalogy['id'] == $row['catalogy']) ? ' selected="selected"' : ''
+	));
+	$xtpl->parse('main.catalogy');
+}
 
 foreach ($array_bank_id_retailshops as $value) {
 	$xtpl->assign('OPTION', array(
