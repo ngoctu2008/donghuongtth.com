@@ -7,7 +7,7 @@
 		* @License GNU/GPL version 2 or any later version
 		* @Createdate Mon, 21 Dec 2020 09:48:26 GMT
 	*/
-	
+ 
 /*
 // tạo ID GHN tự động cho tất cả kho
 		

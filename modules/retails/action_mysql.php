@@ -61,6 +61,7 @@ $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lan
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_vnpos";
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_vnpos_detail";
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghn";
+$sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghn_api";
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghn_detail";
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_ghn";
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_error_ghn";
@@ -75,6 +76,49 @@ $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lan
 $sql_drop_module[] = "DROP TABLE IF EXISTS " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_error_ghtk";
 
 $sql_create_module = $sql_drop_module;
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghn_api(
+  id int(11) NOT NULL AUTO_INCREMENT,
+  order_id int(11) DEFAULT '0',
+  order_code varchar(100) DEFAULT '0' NOT NULL COMMENT 'Mã đơn hàng',
+  fee_api double DEFAULT '0'  COMMENT 'Cước chính',
+  insurance_fee_api double DEFAULT '0' COMMENT 'Phí khai giá',
+  station_send_fee_api double DEFAULT '0' COMMENT 'Phí gửi hàng tại bưu cục',
+  station_get_fee_api double DEFAULT '0' COMMENT 'Phí lấy hàng tại bưu cục',
+  return_fee_api double DEFAULT '0' COMMENT 'Phí hoàn hàng',
+  r2s_fee_api double DEFAULT '0' COMMENT 'Phí giao lại hàng',
+  total_fee_api double DEFAULT '0' COMMENT 'Tổng ship',
+  converted_weight mediumint(8) DEFAULT '0' COMMENT 'Khối lượng quy đổi',
+  weight mediumint(8) DEFAULT '0' COMMENT 'Khối lượng',
+  length mediumint(8) DEFAULT '0' COMMENT 'Chiều dài',
+  width mediumint(8) DEFAULT '0' COMMENT 'Chiều rộng',
+  height mediumint(8) DEFAULT '0' COMMENT 'Chiều cao',
+  PRIMARY KEY (id)
+) ENGINE=MyISAM";
+
+$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghn(
+  id int(11) NOT NULL AUTO_INCREMENT,
+  order_id int(11) DEFAULT '0',
+  user_add mediumint(8) COMMENT 'Người thêm', 
+  order_code varchar(100) DEFAULT '0' NOT NULL COMMENT 'Mã đơn hàng',
+  fee double DEFAULT '0'  COMMENT 'Cước chính',
+  insurance_fee double DEFAULT '0' COMMENT 'Phí khai giá',
+  station_send_fee double DEFAULT '0' COMMENT 'Phí gửi hàng tại bưu cục',
+  station_get_fee double DEFAULT '0' COMMENT 'Phí lấy hàng tại bưu cục',
+  return_fee double DEFAULT '0' COMMENT 'Phí hoàn hàng',
+  r2s_fee double DEFAULT '0' COMMENT 'Phí giao lại hàng',
+  total_fee double DEFAULT '0' COMMENT 'Tổng ship',
+  cod double DEFAULT '0' COMMENT 'Tiền thu hộ',
+  status varchar(100) COMMENT 'Trạng thái ',
+  message varchar(100) COMMENT 'mess trả về',
+  time_add int(11) COMMENT 'Ngày tạo',
+  time_edit int(11) DEFAULT '0' COMMENT 'Ngày sửa',
+  for_control tinyint(2) DEFAULT '0' COMMENT 'Đối soát 0 chưa đối soát, 1 đã đối soát	',
+  address_send varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'Địa chỉ lên vận đơn'
+  phone_send varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'Số điện thoại lên vận đơn'
+  name_send varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'Tên shop lên vận đơn'
+  PRIMARY KEY (id)
+) ENGINE=MyISAM";
 
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_status_order_error_ghtk(
   id int(11) NOT NULL AUTO_INCREMENT,
@@ -182,30 +226,6 @@ $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_
   PRIMARY KEY (id)
 ) ENGINE=MyISAM";
 
-$sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_history_ghn(
-  id int(11) NOT NULL AUTO_INCREMENT,
-  order_id int(11) DEFAULT '0',
-  code int(11) NOT NULL DEFAULT '0' COMMENT 'Mã code Success hoặc error',
-  order_code varchar(100) DEFAULT '0' NOT NULL COMMENT ' Mã đơn hàng',
-  main_service double DEFAULT '0' NOT NULL COMMENT 'Cước chính',
-  insurance double DEFAULT '0' COMMENT 'Phí khai giá',
-  total_fee double DEFAULT '0' COMMENT 'Tổng ship',
-  cod double DEFAULT '0' COMMENT 'ship COD',
-  coupon double DEFAULT '0' COMMENT 'Giảm giá ship',
-  convertedweight double DEFAULT '0' COMMENT 'Trọng lượng quy đổi thực tính',
-  weight double DEFAULT '0' COMMENT 'Trọng lượng thực tính',
-  width double DEFAULT '0' COMMENT 'Chiều rộng thực tính',
-  length double DEFAULT '0' COMMENT 'Chiều dài thực tính',
-  height double DEFAULT '0' COMMENT 'Chiều cao thực tính',
-  desc_order varchar(200) DEFAULT '' COMMENT 'Thông tin trạng thái đơn hàng',
-  reason varchar(200) DEFAULT '' COMMENT 'Lý do hủy',
-  status varchar(100) COMMENT 'Trạng thái ',
-  message varchar(100) COMMENT 'mess trả về',
-  time_add int(11) COMMENT 'Ngày tạo',
-  time_edit int(11) DEFAULT '0' COMMENT 'Ngày sửa',
-  doisoat int(11) DEFAULT '0' COMMENT 'Đối soát 0 chưa đối soát, 1 đã đối soát	',
-  PRIMARY KEY (id)
-) ENGINE=MyISAM";
 
 $sql_create_module[] = "CREATE TABLE " . $db_config['prefix'] . "_" . $lang . "_" . $module_data . "_bank(
   bank_id int(11) NOT NULL AUTO_INCREMENT,
