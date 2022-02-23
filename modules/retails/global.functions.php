@@ -3721,7 +3721,7 @@ function MoMoSend($payment_method, $mm_amount, $mm_OrderInfo, $list_order){
 		$orderInfo = $mm_OrderInfo;
 		$amount = $mm_amount;
 		$order_full=implode('-',$list_order);
-		$orderId = $order_full;
+		$orderId = time() . "-" . $order_full;
 		$redirectUrl = $payment_config['redirectUrl'];
 		$ipnUrl = $payment_config['ipnUrl'];
 		$extraData = "";
