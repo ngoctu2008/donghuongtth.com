@@ -79,7 +79,7 @@
 						
 						
 						<!-- BEGIN: hoantien -->
-						<button onclick="order_hoantien({VIEW.id})" type="button" class="btn btn-primary">Hoàn tiền</button>
+						<button onclick="order_refund({VIEW.id},'{VIEW.payment_method}')" type="button" class="btn btn-primary">Hoàn tiền</button>
 						<!-- END: hoantien -->
 						
 						
