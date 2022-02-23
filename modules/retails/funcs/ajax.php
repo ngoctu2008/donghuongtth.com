@@ -1704,7 +1704,7 @@ if($mod=='change_status_cancel'){
 	
 	$info_order['lydohuy'] = $content;
 	send_email_order_cancel($info_order);
-	$payment_method = GetPaymentMethodOrder($order_id);
+	$payment_method = $info_order['payment_method'];
 	if($payment_method == 'vnpay'){
 		vnpay_refund($info_order);
 		print_r( json_encode( array('status'=>'OK' ) ));

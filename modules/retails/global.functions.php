@@ -4312,14 +4312,14 @@ function vnpay_refund($info_order)
 
 
 	// hoàn tiền toàn phần 02, hoàn tiền 1 phần 03
-	if ($info_order['total'] == $history_vnpay['price']) {
+	if ($info_order['payment'] == $history_vnpay['price']) {
 		$vnp_TransactionType = '02';
 	} else {
 		$vnp_TransactionType = '03';
 	}
 
 
-	$amount = ($history_vnpay["price"]) * 100;
+	$amount = ($info_order['payment']) * 100;
 	$ipaddr = $_SERVER['REMOTE_ADDR'];
 	$inputData = array(
 		"vnp_Version" => '2.0.0',
