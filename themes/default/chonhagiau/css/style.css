@@ -1714,9 +1714,10 @@ iframe {
 .icon_freeship_frams{
 	width:90px !important;
 }
-#description table{
-	width:100% !important;
+#description ol,#description ul	{
+	list-style: nomarl !important;
+	padding-left: 20px !important;
 }
-#specifications table{
+#description table,#specifications table{
 	width:100% !important;
 }
