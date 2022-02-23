@@ -230,7 +230,7 @@
 			// phí bảo hiểm hàng hóa
 			$data_array['insurance'] = phi_baohiem($view['store_id'], $status, $ngay_tu, $ngay_den);
 			$data_array['ecng_nhan'] += $data_array['insurance'];
-			$data_array['payment_method_name'] = $global_payport[$view['payment_method']]['paymentname'];
+			//$data_array['payment_method_name'] = $global_payport[$view['payment_method']]['paymentname'];
 			// phí vnpay
 			$data_array['vnpay'] = phi_vnpay($view['store_id'], $status, $ngay_tu, $ngay_den);
 			$data_array['ecng_nhan'] += $data_array['vnpay'];
@@ -283,7 +283,7 @@
 		$array_key_data[] = 'sum_total_product';
 		$array_key_data[] = 'phisan';
 		$array_key_data[] = 'insurance';
-		$array_key_data[] = 'payment';
+		//$array_key_data[] = 'payment';
 		$array_key_data[] = 'vnpay';
 		$array_key_data[] = 'sum_ship';
 		$array_key_data[] = 'sum_voucher';
@@ -410,7 +410,7 @@
 			$view['phisan_format'] = number_format($view['phisan']);
 			$phisan = $phisan + $view['phisan'];
 			$view['ecng_nhan'] += $view['phisan'];
-			$view['payment_method_name'] = $global_payport[$view['payment_method']]['paymentname'];
+			//$view['payment_method_name'] = $global_payport[$view['payment_method']]['paymentname'];
 			// phí vnpay
 			$view['vnpay'] = phi_vnpay($view['store_id'], $status, $ngay_tu, $ngay_den);
 			$view['vnpay_format'] = number_format($view['vnpay']);
