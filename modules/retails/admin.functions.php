@@ -215,7 +215,7 @@
 			
 			$tongtien += $cuocphi;
 		}
-		$list_payment = $db->query('SELECT t2.price, t2.vnp_bankcode,t1.payment,t1.payment_method FROM ' . TABLE .'_order t1, ' . TABLE .'_history_payment t2 WHERE t1.vnpay_code = t2.transactionno AND (t2.responsedode ="0" OR t2.responsedode ="00") AND t1.store_id = '. $store_id .' AND t1.status_payment_vnpay = 1 ' . $where)->fetchAll();
+		$list_payment = $db->query('SELECT t2.price, t2.bankcode,t1.payment,t1.payment_method FROM ' . TABLE .'_order t1, ' . TABLE .'_history_payment t2 WHERE t1.vnpay_code = t2.transactionno AND (t2.responsedode ="0" OR t2.responsedode ="00") AND t1.store_id = '. $store_id .' AND t1.status_payment_vnpay = 1 ' . $where)->fetchAll();
 		
 		foreach($list_payment as $payment)
 		{
