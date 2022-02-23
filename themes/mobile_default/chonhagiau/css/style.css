@@ -1090,7 +1090,7 @@ iframe {
 	width:90px;
 }
 #description ol,#description ul, #specifications ol,	#specifications ul{
-	list-style: nomarl !important;
+	list-style: initial !important;
 	padding-left: 15px !important;
 }
 #description table,#specifications table{

@@ -1715,7 +1715,7 @@ iframe {
 	width:90px !important;
 }
 #description ol,#description ul,#specifications ol,#specifications ul{
-	list-style: nomarl !important;
+	list-style: initial !important;
 	padding-left: 20px !important;
 }
 #description table,#specifications table{
