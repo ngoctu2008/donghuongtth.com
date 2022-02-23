@@ -281,6 +281,7 @@
 			}else if($status == 2){
 			$where .= ' AND (t1.status = 6)';
 		}
+		$cuocphi = 0;
 		if($order['payment_method'] == 'vnpay'){
 			$vnpay = $db->query('SELECT t2.price, t2.vnp_bankcode,t1.payment FROM ' . TABLE .'_order t1, ' . TABLE .'_history_vnpay t2 WHERE t1.id = '. $order['id'] .' AND t1.vnpay_code = t2.vnp_transactionno AND t2.vnp_responsedode ="00" AND t1.store_id = '. $order['store_id'] .' AND t1.status_payment_vnpay = 1 '. $where)->fetch();
 		
@@ -292,7 +293,7 @@
 			);
 			// thẻ nội địa 1.1% + 1.650đ
 			
-			$cuocphi = 0;
+			
 			if($vnpay['price']){
 				if(in_array($vnpay['vnp_bankcode'],$array_quocte))
 				{

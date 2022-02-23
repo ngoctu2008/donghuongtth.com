@@ -355,7 +355,7 @@
 		$num_items = $db->query('SELECT COUNT(id) FROM ' . TABLE .'_order WHERE 1 '. $where)->fetchColumn();
 		
 		$db->sqlreset()
-		->select('id, store_id, order_code, transporters_id, shipping_code, total_product, fee_transport, total, voucher_price')
+		->select('id, store_id, order_code, transporters_id, shipping_code, total_product, fee_transport, total, voucher_price, payment_method')
 		->from(' '.TABLE .'_order')
 		->where('1 '. $where)
         ->order('time_edit ASC')
