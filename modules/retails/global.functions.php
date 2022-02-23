@@ -4420,7 +4420,7 @@ function MoMoRefund($payment_method, $mm_amount, $mm_OrderInfo, $list_order,$tra
 }
 function momo_refund($info_order)
 {
-	global $db, $user_info, $config_setting,$global_payport;
+	global $db, $user_info, $admin_info, $config_setting,$global_payport;
 
 	//$info_order = get_info_order($order_id);
 
@@ -4446,7 +4446,7 @@ function momo_refund($info_order)
 	$mm_OrderInfo = 'Huy giao dich '.$info_order['order_code'];
 	$data = MoMoRefund($info_order['payment_method'], $amount, $mm_OrderInfo, $list_order,$info_order['vnpay_code']);
 
-		$userid = ($admin_info['userid'] != 0) ? $admin_info['userid'] : $user_info['userid'];
+		$userid = ($admin_info['admin_id'] != 0) ? $admin_info['admin_id'] : $user_info['userid'];
 		// lưu thông tin lịch sử hoàn tiền vnpay
 		//$row['responseTime'] = NV_CURRENTTIME;
 		$responsecode = ($data['resultCode'] == 0) ? '0' : $data['resultCode'];
