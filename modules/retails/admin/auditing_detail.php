@@ -382,7 +382,7 @@
 		$voucher_price = 0;
 		$bhhh = 0;
 		$phisan = 0;
-		$vnpay = 0;
+		$payport = 0;
 		$phi_phat = 0;
 		$ecng = 0;
 		$seller = 0;
