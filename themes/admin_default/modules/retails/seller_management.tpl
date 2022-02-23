@@ -77,9 +77,16 @@
 					<div class="form-group">
 						<div class="input-group" style="width:100%">
 							<span class="input-group-addon w100">
-								Ngân hàng
+								Ngành hàng
 							</span>
-							<select class="form-control bank_id" name="bank_id"></select>
+							<select class="form-control catalogy" name="catalogy">
+							<option value="0"> -- Tất cả --</option>
+							<!-- BEGIN: catalogy -->
+							<option value="{OPTION.key}" {OPTION.selected}>
+								{OPTION.title}
+							</option>
+							<!-- END: catalogy -->
+					</select>
 						</div>
 					</div>
 				</div>
@@ -154,7 +161,7 @@
 						Còn lại
 					</th>
                     <th class="text-center" style="vertical-align:middle"> 
-                        Yêu cầu kích hoạt
+                        Ngành hàng
 					</th>
 					<th class="text-center" style="vertical-align:middle"> 
                         Shop nổi bật
@@ -309,17 +316,7 @@
 					<td style="vertical-align:middle">{VIEW.total_order_plus}</td>
 					<td style="vertical-align:middle">{VIEW.remaining_order}</td>
 					<td> 
-						<!-- BEGIN: require -->
-						<span class="red">
-							{VIEW.reason}  
-						</span>
-						<span style="color: blue;">
-							({VIEW.time_require})
-						</span>
-						<!-- END: require -->
-						<!-- BEGIN: no_require -->
-						
-						<!-- END: no_require -->
+						{VIEW.catalogy}
 					</td>
 					<!-- check active shop hot  -->
 					<td class="text-center">
@@ -348,29 +345,9 @@
 <!-- END: view -->
 
 <script type="text/javascript">
-	
-    $('.bank_id').select2({
-        placeholder: "Mời bạn chọn ngân hàng",
-        ajax: {
-			url: script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable +
-			'=ajax&mod=get_bank_search',
-			dataType: 'json',
-			delay: 250,
-			data: function(params) {
-				var query = {
-					q: params.term
-				}
-				return query;
-			},
-			method: 'post',
-			processResults: function(data) {
-				return {
-					results: data
-				};
-			},
-			cache: true
-		}
-	})
+	$('.catalogy').select2({
+				placeholder: "Mời bạn chọn ngành hàng"
+			})
 	//<![CDATA[
 	$(".selectfile").click(function() {
 		var area = "id_image_before";
@@ -483,9 +460,7 @@
 		firstDay: 1,
 		showOtherMonths: true,
 	});
-	$(".bank_id").select2("trigger", "select", {
-		data: { id: {bank_id}, text: '{bank_name}' }
-	});
+
 	$('.export_file').on('click', function(e) {
 		var all = $(this).attr('data-all');	
 		var form_data = $('#formsearch').serializeArray(); 

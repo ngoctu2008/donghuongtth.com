@@ -186,6 +186,26 @@
 					<input class="form-control lowercase" type="email" name="email_representative" value="{ROW.email_representative}" required="required" oninvalid="setCustomValidity('{LANG.validate_email}')" oninput="setCustomValidity('')" />
 				</div>
 			</div>
+
+			<div class="form-group">
+				<label class="col-sm-5 col-md-4 control-label">
+					<strong>
+						Ngành hàng
+					</strong>
+					<span class="red">(*)</span>
+				</label>
+				<div class="col-sm-19 col-md-20">
+					<select class="form-control catalogy" name="catalogy">
+							<option value="0"> -- Tất cả --</option>
+							<!-- BEGIN: catalogy -->
+							<option value="{OPTION.key}" {OPTION.selected}>
+								{OPTION.title}
+							</option>
+							<!-- END: catalogy -->
+					</select>
+				</div>
+			</div>
+
 			<div class="form-group">
 				<label class="col-sm-5 col-md-4 control-label">
 					<strong>
@@ -575,6 +595,10 @@
 				placeholder: "Mời bạn chọn phường xã _shop"
 			})
 			<!-- END: add_warehouse_js -->
+
+			$('.catalogy').select2({
+				placeholder: "Mời bạn chọn ngành hàng"
+			})
 
 			$('.bank_id').select2({
 				placeholder: "Mời bạn chọn ngân hàng"

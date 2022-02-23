@@ -59,9 +59,10 @@ $global_catalogys = json_decode($redis->get('catalogy_main'), true);
 
 
 if (!$redis->exists('catalogy_main_all_lev')) {
-	$catalogys = get_categories_all_lev(0);
-	$redis->set('catalogy_main_all_lev', json_encode($catalogys));
+	$catalogy_main_all_lev = get_categories_all_lev(0);
+	$redis->set('catalogy_main_all_lev', json_encode($catalogy_main_all_lev));
 }
+$catalogy_main_lev0 = json_decode($redis->get('catalogy_main_all_lev'), true);
 
 function time_line_ghtk($shipping_code)
 {

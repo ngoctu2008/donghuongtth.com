@@ -1,3 +1,6 @@
+23/02/2022
+ALTER TABLE `tms_vi_retails_seller_management` ADD `catalogy` INT(10) NOT NULL DEFAULT '0' COMMENT 'Ngành hàng' AFTER `bank_id`;
+
 22/02/2022
 ALTER TABLE `tms_vi_retails_history_ghtk` ADD `address_send` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'Địa chỉ lên vận đơn' AFTER `for_control_return`;
 ALTER TABLE `tms_vi_retails_history_ghtk` ADD `phone_send` VARCHAR(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'Số điện thoại lên vận đơn' AFTER `address_send`;
