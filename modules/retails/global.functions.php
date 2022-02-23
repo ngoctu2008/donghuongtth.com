@@ -4428,18 +4428,18 @@ function momo_refund($info_order)
 		return true;
 
 	// lấy thông tin thanh toán
-	$history_vnpay = $db->query('SELECT price, name_register, paydate FROM ' . TABLE . '_history_payment WHERE transactionno = ' . $info_order['vnpay_code'])->fetch();
+	$history = $db->query('SELECT price, name_register, paydate FROM ' . TABLE . '_history_payment WHERE orderid = ' . $info_order['id'] . ' AND transactionno = ' . $info_order['vnpay_code'])->fetch();
 
 
 	// hoàn tiền toàn phần 02, hoàn tiền 1 phần 03
-	if ($info_order['total'] == $history_vnpay['price']) {
+	if ($info_order['total'] == $history['price']) {
 		$TransactionType = '02';
 	} else {
 		$TransactionType = '03';
 	}
 
 
-	$amount = ($history_vnpay["price"]) ;
+	$amount = ($history["price"]) ;
 	$list_order = array();
 	$list_order[] = $info_order['id'];
 	
