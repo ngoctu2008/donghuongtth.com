@@ -1710,7 +1710,7 @@ if($mod=='change_status_cancel'){
 		print_r( json_encode( array('status'=>'OK' ) ));
 		die();
 	}elseif($payment_method == 'momo'){
-		$result = momo_refund($info_order);
+		$result = momo_refund($info_order, true);
 		if($result['resultCode'] == 0){
 			print_r( json_encode( array('status'=>'OK' ) ));
 		}else{

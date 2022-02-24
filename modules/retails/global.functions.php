@@ -4419,7 +4419,7 @@ function MoMoRefund($payment_method, $mm_amount, $mm_OrderInfo, $list_order,$tra
 		$jsonResult = json_decode($result, true);  // decode json
 		return $jsonResult;
 }
-function momo_refund($info_order)
+function momo_refund($info_order, $fee_shiping)
 {
 	global $db, $user_info, $admin_info, $config_setting,$global_payport;
 
@@ -4441,6 +4441,9 @@ function momo_refund($info_order)
 
 
 	$amount = ($history["price"]) ;
+	if($fee_shiping){
+		$amount += ($history["fee_shipping"]) ;
+	}
 	$list_order = array();
 	$list_order[] = $info_order['id'];
 	
