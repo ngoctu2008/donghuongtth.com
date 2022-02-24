@@ -95,7 +95,7 @@
 					<th>Tổng giá trị sản phẩm</th>
 					<th>Phí vận chuyển</th>
 					<th>Phí sàn</th>
-					<th>Phí VNPAY</th>
+					<th>Phí Cổng TT</th>
 					<th>BHHH & phí chênh lệch</th>
 					<th>Voucher</th>
 					<th>Phí phạt</th>

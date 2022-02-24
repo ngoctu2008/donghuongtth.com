@@ -1704,13 +1704,13 @@ if($mod=='change_status_cancel'){
 	
 	$info_order['lydohuy'] = $content;
 	send_email_order_cancel($info_order);
-	$payment_method = GetPaymentMethodOrder($order_id);
+	$payment_method = $info_order['payment_method'];
 	if($payment_method == 'vnpay'){
 		vnpay_refund($info_order);
 		print_r( json_encode( array('status'=>'OK' ) ));
 		die();
 	}elseif($payment_method == 'momo'){
-		$result = momo_refund($info_order);
+		$result = momo_refund($info_order, true);
 		if($result['resultCode'] == 0){
 			print_r( json_encode( array('status'=>'OK' ) ));
 		}else{
@@ -1914,7 +1914,12 @@ if($mod=='load_order_customer'){
 		// cho phép hủy đơn hàng trong vòng 2h, khác trạng thái hủy đơn
 		if((NV_CURRENTTIME - $view['time_add']) < 7200 and $view['status'] != 4)
 		{//print_r($view['time_add']);die;
-			$xtpl->parse('main.loop.status_cancel');
+			$row_payment = $global_payport[$view['payment_method']];
+			$payment_config = unserialize(nv_base64_decode($row_payment['config']));
+			if($view['payment_method'] == 'vnpay' || ($view['payment_method'] == 'momo' && $payment_config['enable_refund'] == 1)){
+				$xtpl->parse('main.loop.status_cancel');
+			}
+			
 		}
 		$xtpl->parse('main.loop');
 	}
@@ -2168,7 +2173,7 @@ if($mod=='repayment'){
 	}
 	
 	$order_full = $data['id_order'];
-	$list_order_code = implode(',',$list_order_code);
+	$list_order_code = implode(',',$arrcode);
 	//Hoang thanh toan lai	
 	if($payment_method == 'vnpay'){
 			
@@ -2187,6 +2192,8 @@ if($mod=='repayment'){
 		print_r( json_encode($result));die;
 		die();
 	}elseif($payment_method == 'momo'){
+		$data['list_order'] = explode(",",$data['id_order']);
+		$data['list_order_code'] = $arrcode;
 		require_once(NV_ROOTDIR.'/modules/retails/payment/momo.checkorders.php');
 		/* $list_order = $data['list_order'];
 		$list_order_code = $data['list_order_code'];

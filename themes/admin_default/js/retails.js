@@ -507,10 +507,10 @@ function plus_money(id, money, store_id) {
 }
 
 // function hoàn tiền đơn hàng khi đã hủy và kh đã thanh toán đơn hàng
-function order_hoantien(order_id) {
+function order_refund(order_id,payment_method) {
     var check = confirm("Bạn có chắc là hoàn tiền đơn hàng không?");
     if (check) {
-        $.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&nocache=' + new Date().getTime(), '&order_id=' + order_id + '&mod=order_hoantien', function(res) {
+        $.post(script_name + '?' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=ajax&nocache=' + new Date().getTime(), '&order_id=' + order_id + '&payment_method=' + payment_method  + '&mod=order_refund', function(res) {
             res2 = JSON.parse(res);
             if (res2.status == 'OK') {
                 alert(res2.mess);

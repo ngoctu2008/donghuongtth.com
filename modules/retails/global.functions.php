@@ -59,9 +59,10 @@ $global_catalogys = json_decode($redis->get('catalogy_main'), true);
 
 
 if (!$redis->exists('catalogy_main_all_lev')) {
-	$catalogys = get_categories_all_lev(0);
-	$redis->set('catalogy_main_all_lev', json_encode($catalogys));
+	$catalogy_main_all_lev = get_categories_all_lev(0);
+	$redis->set('catalogy_main_all_lev', json_encode($catalogy_main_all_lev));
 }
+$catalogy_main_lev0 = json_decode($redis->get('catalogy_main_all_lev'), true);
 
 function time_line_ghtk($shipping_code)
 {
@@ -3699,7 +3700,7 @@ function MoMoSend($payment_method, $mm_amount, $mm_OrderInfo, $list_order){
 		$orderInfo = $mm_OrderInfo;
 		$amount = $mm_amount;
 		$order_full=implode('-',$list_order);
-		$orderId = $order_full;
+		$orderId = time() . "-" . $order_full;
 		$redirectUrl = $payment_config['redirectUrl'];
 		$ipnUrl = $payment_config['ipnUrl'];
 		$extraData = "";
@@ -4289,14 +4290,14 @@ function vnpay_refund($info_order)
 
 
 	// hoàn tiền toàn phần 02, hoàn tiền 1 phần 03
-	if ($info_order['total'] == $history_vnpay['price']) {
+	if ($info_order['payment'] == $history_vnpay['price']) {
 		$vnp_TransactionType = '02';
 	} else {
 		$vnp_TransactionType = '03';
 	}
 
 
-	$amount = ($history_vnpay["price"]) * 100;
+	$amount = ($info_order['payment']) * 100;
 	$ipaddr = $_SERVER['REMOTE_ADDR'];
 	$inputData = array(
 		"vnp_Version" => '2.0.0',
@@ -4374,7 +4375,7 @@ function MoMoRefund($payment_method, $mm_amount, $mm_OrderInfo, $list_order,$tra
 		$description = $mm_OrderInfo;
 		$amount = $mm_amount;
 		$order_full=implode('-',$list_order);
-		$orderId = $transId;
+		$orderId = $transId . '-' . $order_full;
 
 		$serectkey = $payment_config['signature'];
 		$requestId = time() . "";
@@ -4396,9 +4397,9 @@ function MoMoRefund($payment_method, $mm_amount, $mm_OrderInfo, $list_order,$tra
 		$jsonResult = json_decode($result, true);  // decode json
 		return $jsonResult;
 }
-function momo_refund($info_order)
+function momo_refund($info_order, $fee_shiping)
 {
-	global $db, $user_info, $config_setting,$global_payport;
+	global $db, $user_info, $admin_info, $config_setting,$global_payport;
 
 	//$info_order = get_info_order($order_id);
 
@@ -4406,25 +4407,28 @@ function momo_refund($info_order)
 		return true;
 
 	// lấy thông tin thanh toán
-	$history_vnpay = $db->query('SELECT price, name_register, paydate FROM ' . TABLE . '_history_payment WHERE transactionno = ' . $info_order['vnpay_code'])->fetch();
+	$history = $db->query('SELECT price, name_register, paydate FROM ' . TABLE . '_history_payment WHERE orderid = ' . $info_order['id'] . ' AND transactionno = ' . $info_order['vnpay_code'])->fetch();
 
 
 	// hoàn tiền toàn phần 02, hoàn tiền 1 phần 03
-	if ($info_order['total'] == $history_vnpay['price']) {
+	if ($info_order['total'] == $history['price']) {
 		$TransactionType = '02';
 	} else {
 		$TransactionType = '03';
 	}
 
 
-	$amount = ($history_vnpay["price"]) ;
+	$amount = ($history["price"]) ;
+	if($fee_shiping){
+		$amount += ($history["fee_shipping"]) ;
+	}
 	$list_order = array();
 	$list_order[] = $info_order['id'];
 	
 	$mm_OrderInfo = 'Huy giao dich '.$info_order['order_code'];
 	$data = MoMoRefund($info_order['payment_method'], $amount, $mm_OrderInfo, $list_order,$info_order['vnpay_code']);
 
-	
+		$userid = ($admin_info['admin_id'] != 0) ? $admin_info['admin_id'] : $user_info['userid'];
 		// lưu thông tin lịch sử hoàn tiền vnpay
 		//$row['responseTime'] = NV_CURRENTTIME;
 		$responsecode = ($data['resultCode'] == 0) ? '0' : $data['resultCode'];
@@ -4435,7 +4439,7 @@ function momo_refund($info_order)
 		$stmt->bindParam(':order_id', $info_order['id'], PDO::PARAM_INT);
 		$stmt->bindParam(':responsecode', $responsecode, PDO::PARAM_STR);
 		$stmt->bindParam(':message', $data['message'], PDO::PARAM_STR);
-		$stmt->bindParam(':user_add', $user_info['userid'], PDO::PARAM_INT);
+		$stmt->bindParam(':user_add', $userid , PDO::PARAM_INT);
 
 		$exc = $stmt->execute();
 		return $data;

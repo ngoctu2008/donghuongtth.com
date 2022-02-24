@@ -45,7 +45,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
   font-weight: 400;
-  background: #EFEFEF;
+  background: #F1F2F3;
   line-height: 16px;
   color: #000;
   height: auto; }
@@ -1089,9 +1089,10 @@ iframe {
 .icon_freeship_frams{
 	width:90px;
 }
-#description table{
-	width:100% !important;
+#description ol,#description ul, #specifications ol,	#specifications ul{
+	list-style: initial;
+	padding-left: 15px;
 }
-#specifications table{
+#description table,#specifications table{
 	width:100% !important;
 }

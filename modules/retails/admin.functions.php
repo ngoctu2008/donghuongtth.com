@@ -181,7 +181,7 @@
 			$where .= ' AND (t1.status = 6)';
 		}
 		
-		$list_vnpay = $db->query('SELECT t2.price, t2.vnp_bankcode FROM ' . TABLE .'_order t1, ' . TABLE .'_history_vnpay t2 WHERE t1.vnpay_code = t2.vnp_transactionno AND t2.vnp_responsedode ="00" AND t1.store_id = '. $store_id .' AND t1.status_payment_vnpay = 1 ' . $where)->fetchAll();
+		$list_vnpay = $db->query('SELECT t2.price, t2.vnp_bankcode,t1.payment FROM ' . TABLE .'_order t1, ' . TABLE .'_history_vnpay t2 WHERE t1.vnpay_code = t2.vnp_transactionno AND t2.vnp_responsedode ="00" AND t1.store_id = '. $store_id .' AND t1.status_payment_vnpay = 1 ' . $where)->fetchAll();
 		
 		
 		$tongtien = 0;
@@ -195,25 +195,35 @@
 		
 		foreach($list_vnpay as $vnpay)
 		{
-			
+			/*
+			Array ( [price] => 1575000 [vnp_bankcode] => VISA )
+			*/
 			// thẻ nội địa 1.1% + 1.650đ
 			
 			if(in_array($vnpay['vnp_bankcode'],$array_quocte))
 			{
 				// thẻ quốc tế 2.4% + 2.200
-				$cuocphi = (($vnpay['price'] * 2.4)/100) + 2200;
+				$cuocphi = (($vnpay['payment'] * 2.4)/100) + 2200;
 				
 			}
 			else
 			{
 				// thẻ nội địa
-				$cuocphi = (($vnpay['price'] * 1.1)/100) + 1650;
+				$cuocphi = (($vnpay['payment'] * 1.1)/100) + 1650;
 			}
 			
 			
 			$tongtien += $cuocphi;
 		}
+		$list_payment = $db->query('SELECT t2.price, t2.bankcode,t1.payment,t1.payment_method FROM ' . TABLE .'_order t1, ' . TABLE .'_history_payment t2 WHERE t1.vnpay_code = t2.transactionno AND (t2.responsedode ="0" OR t2.responsedode ="00") AND t1.store_id = '. $store_id .' AND t1.status_payment_vnpay = 1 ' . $where)->fetchAll();
 		
+		foreach($list_payment as $payment)
+		{
+
+			$cuocphi = (($vnpay['payment'] * 2)/100);
+			
+			$tongtien += $cuocphi;
+		}
 		return $tongtien;
 	}
 	
@@ -221,7 +231,6 @@
 	function phi_vnpay_order($order, $status)
 	{
 		global $db;
-		
 		$where = '';
 		if($status == 0){
 			$where .= ' AND t1.status = 7';
@@ -230,32 +239,79 @@
 			}else if($status == 2){
 			$where .= ' AND (t1.status = 6)';
 		}
-		$vnpay = $db->query('SELECT t2.price, t2.vnp_bankcode FROM ' . TABLE .'_order t1, ' . TABLE .'_history_vnpay t2 WHERE t1.id = '. $order['id'] .' AND t1.vnpay_code = t2.vnp_transactionno AND t2.vnp_responsedode ="00" AND t1.store_id = '. $order['store_id'] .' AND t1.status_payment_vnpay = 1 '. $where)->fetch();
+		if($order['payment_method'] == 'vnpay'){
+			$vnpay = $db->query('SELECT t2.price, t2.vnp_bankcode,t1.payment FROM ' . TABLE .'_order t1, ' . TABLE .'_history_vnpay t2 WHERE t1.id = '. $order['id'] .' AND t1.vnpay_code = t2.vnp_transactionno AND t2.vnp_responsedode ="00" AND t1.store_id = '. $order['store_id'] .' AND t1.status_payment_vnpay = 1 '. $where)->fetch();
 		
-		// VISA,MASTERCARD,JCB là quốc tế
-		$array_quocte = array(
-		'1' => 'VISA',
-		'2' => 'MASTERCARD',
-		'3' => 'JCB'
-		);
-		// thẻ nội địa 1.1% + 1.650đ
-		
-		$cuocphi = 0;
-		if($vnpay['price']){
-			if(in_array($vnpay['vnp_bankcode'],$array_quocte))
-			{
-				// thẻ quốc tế 2.4% + 2.200
-				$cuocphi = (($vnpay['price'] * 2.4)/100) + 2200;
+			// VISA,MASTERCARD,JCB là quốc tế
+			$array_quocte = array(
+			'1' => 'VISA',
+			'2' => 'MASTERCARD',
+			'3' => 'JCB'
+			);
+			// thẻ nội địa 1.1% + 1.650đ
+			
+			$cuocphi = 0;
+			if($vnpay['price']){
+				if(in_array($vnpay['vnp_bankcode'],$array_quocte))
+				{
+					// thẻ quốc tế 2.4% + 2.200
+					$cuocphi = (($vnpay['payment'] * 2.4)/100) + 2200;
+				}
+				else
+				{
+					// thẻ nội địa
+					$cuocphi = (($vnpay['payment'] * 1.1)/100) + 1650;
+				}
 			}
-			else
-			{
-				// thẻ nội địa
-				$cuocphi = (($vnpay['price'] * 1.1)/100) + 1650;
-			}
+		}elseif($order['payment_method'] == 'momo'){
+			$cuocphi = (($vnpay['payment'] * 2)/100) ;
 		}
+		
 		return $cuocphi;
 	}
-	
+	// phi vnpay order
+	function phi_payport_order($order, $status)
+	{
+		global $db;
+		$where = '';
+		if($status == 0){
+			$where .= ' AND t1.status = 7';
+			} else if($status == 1){
+			$where .= ' AND (t1.status = 3 OR t1.status = 2)';
+			}else if($status == 2){
+			$where .= ' AND (t1.status = 6)';
+		}
+		$cuocphi = 0;
+		if($order['payment_method'] == 'vnpay'){
+			$vnpay = $db->query('SELECT t2.price, t2.vnp_bankcode,t1.payment FROM ' . TABLE .'_order t1, ' . TABLE .'_history_vnpay t2 WHERE t1.id = '. $order['id'] .' AND t1.vnpay_code = t2.vnp_transactionno AND t2.vnp_responsedode ="00" AND t1.store_id = '. $order['store_id'] .' AND t1.status_payment_vnpay = 1 '. $where)->fetch();
+		
+			// VISA,MASTERCARD,JCB là quốc tế
+			$array_quocte = array(
+			'1' => 'VISA',
+			'2' => 'MASTERCARD',
+			'3' => 'JCB'
+			);
+			// thẻ nội địa 1.1% + 1.650đ
+			
+			
+			if($vnpay['price']){
+				if(in_array($vnpay['vnp_bankcode'],$array_quocte))
+				{
+					// thẻ quốc tế 2.4% + 2.200
+					$cuocphi = (($vnpay['payment'] * 2.4)/100) + 2200;
+				}
+				else
+				{
+					// thẻ nội địa
+					$cuocphi = (($vnpay['payment'] * 1.1)/100) + 1650;
+				}
+			}
+		}elseif($order['payment_method'] == 'momo'){
+						$cuocphi = (($order['payment'] * 2)/100) ;
+		}
+		
+		return $cuocphi;
+	}
 	
 	// phí phi_phat
 	function phi_phat($store_id, $status, $from, $to)
