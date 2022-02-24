@@ -1281,7 +1281,7 @@ if ($mod == 'load_order') {
 			$payment_refund = $db->query('SELECT responsecode FROM ' . TABLE . '_payment_refund where order_id=' . $view['id'])->fetch();
 		}
 
-		if ($view['status'] == 5 and $view['status_payment_vnpay'] and $view['payment_tam']) {
+		if (($view['status'] == 5 || $view['status'] == 4) and $view['status_payment_vnpay'] and $view['payment_tam']) {
 			if (($view['payment_method'] == 'vnpay' && $payment_refund['responsecode'] != '00') || ($view['payment_method'] == 'momo' and $payment_refund['responsecode'] != '0')) {
 				$xtpl->parse('main.loop.hoantien');
 			}
