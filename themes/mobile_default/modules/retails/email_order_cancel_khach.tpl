@@ -65,7 +65,7 @@
 					</div>
                     <div style="width: 40%;text-align: end;padding-right: 10px;">
                         <p>{info_order.name_transporters}</p>
-                        <p>VNPay</p>
+                        <p>{info_order.payment_method_name}/p>
                         <p>{info_order.total_product}đ</p>
                         <!-- BEGIN: voucher -->
 						<p>-{info_order.voucher_price}đ</p>

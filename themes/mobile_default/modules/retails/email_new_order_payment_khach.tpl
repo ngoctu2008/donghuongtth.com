@@ -78,7 +78,7 @@
 					<!-- END: voucher -->
                         <p>{info_order.total}đ</p>
                         <p>{info_order.name_transporters}</p>
-                        <p>VNPay</p>
+                        <p>{info_order.payment_method_name}</p>
 					</div>
 				</div>
 			</div>
