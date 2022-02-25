@@ -17,7 +17,6 @@
 	
 	require_once NV_ROOTDIR . '/modules/' . $module_file . '/global.functions.php';
 
-	$redis->delete('status_order_ghn');
 	//redis GHN
 	if(!$redis->exists('status_order_error_ghn'))
 	{

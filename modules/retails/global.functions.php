@@ -19,7 +19,6 @@ $global_status_order_ghn = json_decode($redis->get('status_order_ghn'),true);
 // trạng thái lỗi vận chuyển GHN
 $global_status_order_error_ghn = json_decode($redis->get('status_order_error_ghn'),true);
 
-
 // trạng thái khiếu nại
 $sql = "SELECT * FROM " . TABLE . "_complain_status WHERE status = 1 ORDER BY weight ASC";
 $global_status_complain = $nv_Cache->db($sql, 'weight', $module_name);
@@ -80,11 +79,11 @@ if (!is_dir(NV_ROOTDIR . '/uploads/' . $module_upload . '/' . date('Y_m'))) {
 function status_order_error_ghn()
 {
 	global $db;
-	$list = $db->query('SELECT * FROM ' . TABLE . '_status_error_ghn ')->fetchAll();
+	$list = $db->query('SELECT * FROM ' . TABLE . '_status_error_ghn')->fetchAll();
 	$array_status = array();
 	foreach($list as $row)
 	{
-		$array_status[$row['status']] = $row;
+		$array_status[$row['code_status_ghn']] = $row;
 	}
 	return $array_status;
 }
