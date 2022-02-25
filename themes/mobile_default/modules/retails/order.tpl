@@ -863,6 +863,7 @@
 			
 		}
 	}
+	
 	function get_transport_fee(vitri,warehouse_id,store_id,total_weight,total_width,total_length,total_height,total_warehouse,transporter_store){
 		
 		var province_id = $('input[name=province_id]').val();
