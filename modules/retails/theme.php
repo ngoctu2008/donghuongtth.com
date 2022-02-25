@@ -154,6 +154,7 @@ function email_new_order_payment($data_order, $data_pro, $info_order)
 
 	if ($info_order['voucherid']) {
 		$xtpl->parse('main.data_product.voucher');
+		$xtpl->parse('main.data_product.voucher_title');
 	}
 
 	foreach ($data_pro as $data) {
@@ -420,6 +421,7 @@ function email_new_order_payment_khach($data_order, $data_pro, $info_order)
 
 	if ($info_order['voucherid']) {
 		$xtpl->parse('main.data_product.voucher');
+		$xtpl->parse('main.data_product.voucher_title');
 	}
 
 	$i = 0;
