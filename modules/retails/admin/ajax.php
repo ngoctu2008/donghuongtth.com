@@ -999,6 +999,9 @@ if ($mod == 'load_order') {
 	$ngay_den = $nv_Request->get_title('ngay_den', 'post,get');
 	$ngay_tu = $nv_Request->get_title('ngay_tu', 'post,get');
 	$status_ft = $nv_Request->get_title('status_search', 'post,get', -2);
+	if($status_ft == ''){
+		$status_ft = -2;
+	}
 	$store_id = $nv_Request->get_int('store_id', 'post,get', 0);
 	$_SESSION[$module_data . '_status_view_order'] = $status_ft;
 	$warehouse_id = $nv_Request->get_int('warehouse_id', 'post,get', 0);
