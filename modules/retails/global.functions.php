@@ -15,9 +15,9 @@ $global_status_order = $nv_Cache->db($sql, 'status_id', $module_name);
 $sql = "SELECT * FROM " . TABLE . "_status_vnpos";
 $global_status_vnpos = $nv_Cache->db($sql, 'id_status', $module_name);
 // trạng thái vận chuyển GHN
-$global_status_ghn = $nv_Cache->db("SELECT * FROM " . TABLE . "_status_ghn", 'name_status_ghn', $module_name);
+$global_status_order_ghn = json_decode($redis->get('status_order_ghtk'),true);
 // trạng thái lỗi vận chuyển GHN
-$global_status_error_ghn = $nv_Cache->db("SELECT * FROM " . TABLE . "_status_error_ghn", 'code_status_ghn', $module_name);
+//$global_status_error_ghn = $nv_Cache->db("SELECT * FROM " . TABLE . "_status_error_ghn", 'code_status_ghn', $module_name);
 
 
 // trạng thái khiếu nại
@@ -78,6 +78,18 @@ if (!is_dir(NV_ROOTDIR . '/uploads/' . $module_upload . '/' . date('Y_m'))) {
 	$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_upload_dir(dirname,time) VALUES(' . $db->quote($upload_dir) . ',' . NV_CURRENTTIME . ')');
 }
 
+function status_order_ghn()
+{
+	global $db;
+	$list = $db->query('SELECT * FROM ' . TABLE . '_status_order_ghtk ')->fetchAll();
+	$array_status = array();
+	foreach($list as $row)
+	{
+		$array_status[$row['status']] = $row;
+	}
+	return $array_status;
+}
+
 function status_order_ghtk()
 {
 	global $db;
@@ -85,7 +97,7 @@ function status_order_ghtk()
 	$array_status = array();
 	foreach($list as $row)
 	{
-		$array_status[get_price_ghtk] = $row;
+		$array_status[$row['status']] = $row;
 	}
 	return $array_status;
 }
