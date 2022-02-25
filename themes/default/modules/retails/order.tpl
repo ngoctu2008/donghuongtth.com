@@ -771,7 +771,11 @@
 							if(Number(res)==-1){
 								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,'Quá giới hạn cân nặng');
 								}else{
-								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,format_number(Number(res)));
+									if(Number(res.fee)==0){
+										load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,'Miễn phí vận chuyển');
+										}else{
+										load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,format_number(Number(res.fee)));
+									}
 							}
 						}
 					})
@@ -794,9 +798,10 @@
 						success : function(res){
 							//console.log(res);
 							if(Number(res.fee)==-1){
+								load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,'Quá giới hạn cân nặng');
 								}else{
 								if(Number(res.fee)==0){
-									load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,'Quá giới hạn cân nặng');
+									load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,'Miễn phí vận chuyển');
 									}else{
 									load_data_tranposter_next(store_id,warehouse_id,element.id,element.name_transporters,element.description,format_number(Number(res.fee)));
 								}
