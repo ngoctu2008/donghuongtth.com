@@ -30,7 +30,7 @@
                 <tbody>
                     <tr>
                         <td class="text_gray_color">Hình thức thanh toán</td>
-                        <td class="text-right font-weight-bold">Thanh toán sau khi nhận hàng</td>
+                        <td class="text-right font-weight-bold">{thanhtoan.payment_method_name}</td>
                     </tr>
                     <tr>
                         <td class="text_gray_color">Tổng tiền thanh toán</td>
