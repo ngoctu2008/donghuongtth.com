@@ -82,7 +82,7 @@
                         <p>{info_order.total_product}đ</p>
                         <p>{info_order.fee_transport}</p>
 						<!-- BEGIN: voucher -->
-					<p>-{info_order.voucher_price}đ</p>
+					<p>- {info_order.voucher_price}đ</p>
 					<!-- END: voucher -->
                         <p>{info_order.total}đ</p>
                     </div>
