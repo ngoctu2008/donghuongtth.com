@@ -775,8 +775,12 @@ if ($mod == 'order_refund') {
 	$db->query('UPDATE ' . TABLE . '_order SET status=5 where id=' . $order_id);
 	// hoàn trả tiền vnpay
 	if($payment_method == 'vnpay'){
-		vnpay_refund($info_order);
-		print_r( json_encode( array('status'=>'OK' , 'mess' => 'Hoàn tiền thành công' ) ));
+		if(vnpay_refund($info_order)){
+			print_r( json_encode( array('status'=>'OK' , 'mess' => 'Hoàn tiền thành công' ) ));
+		}else{
+			print_r( json_encode( array('status'=>'ERROR', 'mess' => 'Hoàn tiền thất bại' ) ));
+		}
+		
 		die();
 	}elseif($payment_method == 'momo'){
 		$result = momo_refund($info_order, flase);
