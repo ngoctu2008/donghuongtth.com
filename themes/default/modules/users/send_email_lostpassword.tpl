@@ -27,7 +27,7 @@
                 <div style="font-size: 14px; line-height: 24px; text-align: left;">
                     <p style="color:#000">ECNG | Sàn Thương Mại Điện Tử Chợ Nhà Giàu</p>
                     <p style="color:#000">Email: oder@chonhagiau.com</p>
-                    <p style="color:#000">Điện thoại: 083 308 1888</p>
+                    <p style="color:#000">Điện thoại: 1900 966 961</p>
                 </div>               
             </div>
         </div>

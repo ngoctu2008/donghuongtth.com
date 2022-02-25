@@ -68,7 +68,9 @@
             </table>
         </div>
         <div class="row justify-content-center my-4 pb-3">
+        <!-- BEGIN: history -->
             <div class="text-center p-2"><a href="{HISTORY}" class="btn_ecng_outline py-2">Lịch sử mua hàng</a></div>
+             <!-- END: history -->
             <div class="text-center p-2"><a  href="{NV_BASE_SITEURL}" class="btn_ecng py-2">Trang chủ</a></div>
         </div>
     </div>
