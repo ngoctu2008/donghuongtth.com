@@ -776,7 +776,7 @@ if ($mod == 'order_refund') {
 	// hoàn trả tiền vnpay
 	if($payment_method == 'vnpay'){
 		vnpay_refund($info_order);
-		print_r( json_encode( array('status'=>'OK' ) ));
+		print_r( json_encode( array('status'=>'OK' , 'mess' => 'Hoàn tiền thành công' ) ));
 		die();
 	}elseif($payment_method == 'momo'){
 		$result = momo_refund($info_order, flase);
@@ -785,8 +785,6 @@ if ($mod == 'order_refund') {
 		}else{
 			print_r( json_encode( array('status'=>'ERROR', 'mess' => 'Hoàn tiền thất bại' ) ));
 		}
-			
-
 		die();
 	}
 	// ghi lại lịch sử
