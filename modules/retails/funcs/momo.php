@@ -5,6 +5,7 @@ sleep(2);
 $orderId = $nv_Request->get_title('orderId', 'get', '', 1);
 $order_code_arr = explode("-", $orderId);
 unset($order_code_arr[0]);
+print_r($order_code_arr);die;
 $order_code = $order_code_arr[1];
 if($order_code == '' ){
     nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name );
