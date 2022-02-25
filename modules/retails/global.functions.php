@@ -4197,7 +4197,7 @@ function send_mail_payment_fail($order_text)
 //gửi mail cho khách và seller thông báo đơn hàng giao thành công
 function send_mail_order_delivered($order)
 {
-	global $db, $db_config, $lang_module, $global_config;
+	global $db, $db_config, $lang_module, $global_config, $global_payport;
 
 	// lấy danh sách sản phẩm của đơn hàng
 	$list_product = $db->query('SELECT product_id, quantity, classify_value_product_id, quantity, price FROM ' . TABLE . '_order_item WHERE order_id =' . $order['id'])->fetchAll();
@@ -4213,6 +4213,8 @@ function send_mail_order_delivered($order)
 	$data_order['id'] = $order['id'];
 	$info_order = $order;
 	$data_order['order_code'] = $order['order_code'];
+	$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
+
 	$info_shop = $db->query('SELECT * FROM ' . TABLE . '_seller_management WHERE id = ' . $order['store_id'])->fetch();
 
 	$email_title = 'Thông báo đơn hàng giao thành công';
@@ -4237,7 +4239,7 @@ function send_mail_order_delivered($order)
 //gửi mail cho admin và seller thông báo đơn hàng giao thành công nhưng khách chưa nhận được
 function send_mail_order_not_received($order)
 {
-	global $db, $db_config, $lang_module, $config_setting, $global_config;
+	global $db, $db_config, $lang_module, $config_setting, $global_config,$global_payport;
 
 	// lấy danh sách sản phẩm của đơn hàng
 	$list_product = $db->query('SELECT product_id, quantity, classify_value_product_id, quantity, price FROM ' . TABLE . '_order_item WHERE order_id =' . $order['id'])->fetchAll();
@@ -4253,6 +4255,8 @@ function send_mail_order_not_received($order)
 	$data_order['id'] = $order['id'];
 	$info_order = $order;
 	$data_order['order_code'] = $order['order_code'];
+	
+	$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
 	$info_shop = $db->query('SELECT * FROM ' . TABLE . '_seller_management WHERE id = ' . $order['store_id'])->fetch();
 
 	$email_title = 'Thông báo đơn hàng bị khiếu nại';
