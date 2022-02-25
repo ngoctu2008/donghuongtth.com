@@ -40,14 +40,14 @@
 		</div>
 		<div class="row px-2">
 			<div class="col-md-7 p-4 border">
-				<p>{info_order.order_name}</p>
-				<p>{info_order.address}</p>
+				<p>Tên: {info_order.order_name}</p>
+				<p>Địa chỉ: {info_order.address}</p>
 				<p class="mb-0">Điện thoại: {info_order.phone}</p>
 			</div>
 			<div class="col-md-5 p-4 border">
-				<p>Giao Hàng: {info_order.transporters_name} #{info_order.shipping_code}</p>
-				<p>Phí vận chuyển: {info_order.fee_transport} đ</p>
-				<p class="mb-0">Hình thức thanh toán: {info_order.payment_method}</p>
+			<p>Phương Thức Thanh Toán: {info_order.payment_method_name}</p>
+			<p>Giao Hàng: {info_order.transporters_name} {info_order.shipping_code}</p>
+			<p class="mb-0">Phí vận chuyển: {info_order.fee_transport}đ</p>
 			</div>
 		</div>
 	</div>
