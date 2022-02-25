@@ -1,5 +1,9 @@
 <!-- BEGIN: main -->
-
+<style>
+.breadcrumb{
+    display: none;
+}
+</style>
 <!-- BEGIN: error -->
 <div class="alert alert-warning">{ERROR}</div>
 
@@ -13,7 +17,7 @@
 <!-- END: error -->
 
 <!-- BEGIN: thanhcong -->
- <div class="container bg_white">
+ <div class="container bg_white mt-3">
         <div class="text-center fs_24 p-4">Chi tiết giao dịch</div>
         <div class="row border m-3 p-3 rounded-lg ">
             <div class="col-3 text-center">
