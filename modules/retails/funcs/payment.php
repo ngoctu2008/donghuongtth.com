@@ -91,6 +91,7 @@
 				
 				
 			}
+			$inputData['payment_method_name'] = $global_payport[$payment_method]['paymentname'];
 			if($payment_method == 'vnpay'){
 				$inputData['vnp_txnref'] = implode(' - ',$array_order);
 				
@@ -103,23 +104,23 @@
 				$inputData['date_create'] = $ngay . '/' . $thang . '/' . $nam . ' - ' . $gio . ':' . $phut;
 				
 				$inputData['format_vnp_Amount'] = number_format($inputData['vnp_Amount']/100,0,",",",");
-				$xtpl->assign('thanhtoan', $inputData);
+				
 			}elseif($payment_method == 'recieve'){
 				$inputData['vnp_txnref'] = implode(' - ',$array_order);
 				
 				$inputData['date_create'] = date("d/m/Y H:i",$info_order['time_add']);//$ngay . '/' . $thang . '/' . $nam . ' - ' . $gio . ':' . $phut;
 				
 				$inputData['format_Amount'] = number_format($data['sum_total_payment'],0,",",",");
-				$xtpl->assign('thanhtoan', $inputData);
+				
 			}elseif($payment_method == 'momo'){
 				$inputData['vnp_txnref'] = implode(' - ',$array_order);
 				
 				$inputData['date_create'] = date("d/m/Y H:i",$info_order['time_add']);//$ngay . '/' . $thang . '/' . $nam . ' - ' . $gio . ':' . $phut;
 				
 				$inputData['format_Amount'] = number_format($data['sum_total_payment'],0,",",",");
-				$xtpl->assign('thanhtoan', $inputData);
+				
 			}
-			
+			$xtpl->assign('thanhtoan', $inputData);
 			if($user_info['userid']){
 				$xtpl->parse('main.thanhcong.history');
 			}
