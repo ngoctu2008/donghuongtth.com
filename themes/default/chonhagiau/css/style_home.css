@@ -893,7 +893,7 @@ and (-webkit-min-device-pixel-ratio: 1.5) {
 	width:20px;
 	height:20px;
 	border-radius:50%;
-	background:#e6e6e6;
+	background:#f1f2f3;
 	position:absolute;
 	top:-10px;
 	left:-15px;
@@ -903,7 +903,7 @@ and (-webkit-min-device-pixel-ratio: 1.5) {
 	display:block;
 	width:20px;
 	height:20px;
-	background:#e6e6e6;
+	background:#f1f2f3;;
 	border-radius:50%;
 	position:absolute;
 	bottom:-10px;

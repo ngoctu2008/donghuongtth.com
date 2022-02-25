@@ -102,12 +102,16 @@
                     <div class="">
                         <div>{VOUCHER.voucher_name}</div>
                     </div>
-                    <h4 class="secondary_text mt-2" style="font-size:14px;">Giảm {VOUCHER.discount_price} tất cả đơn
+                    <h4 class="secondary_text mt-2" style="font-size:12px;">Giảm {VOUCHER.discount_price} tất cả đơn
                         hàng</h4>
-                    <span class="text_gray_color">
                         <!-- BEGIN: maximum_discount -->
                         <div class="">Giảm tối đa {maximum_discount}</div>
                         <!-- END: maximum_discount -->
+                        <!-- BEGIN: minimum_price -->
+
+                        <!-- <div class="">Đơn tối thiểu {minimum_price}</div> -->
+                        
+                        <!-- END: minimum_price -->
                     </span>
                     <span class="text_gray_color fs_12">{VOUCHER_APPLY}</span>
                     <div class="d-flex pt-2 position-absolute" style="bottom:10px">
@@ -166,7 +170,7 @@
                 else if(res.status == "ERROR_LOGIN") {
                     window.location.href = res.link;
                 } else {
-                    alert("có lỗi xảy ra!, vui lòng kiểm tra lại!");
+                    alert("Vui lòng đăng nhập để thực hiện chức năng này!");
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
