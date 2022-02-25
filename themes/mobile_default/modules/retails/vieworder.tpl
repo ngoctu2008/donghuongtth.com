@@ -2,7 +2,7 @@
 <div class="content_detail_order">
 	<div class="info_order bg_white p-3">
 		<p class="fs_16 font-weight-bold"><span class="text_gray_color">Đơn hàng {info_order.order_code}</span> - {info_order.status}</p> <p>Ngày mua: {info_order.time_add}</p>
-		<div class="primary_text">Bạn đã ủng hộ <span style="color:#1358B9">{children_fund}</span> vào quỹ “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ” từ đơn hàng này.</div>
+		<div class="primary_text font-weight-bold">Bạn đã ủng hộ <span style="color:#1358B9">{children_fund}</span> vào quỹ “ <span class="secondary_text">QUỸ BẢO TRỢ TRẺ EM VIỆT NAM</span> ” từ đơn hàng này.</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="status_vnpost">
