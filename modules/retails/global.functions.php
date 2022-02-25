@@ -15,10 +15,9 @@ $global_status_order = $nv_Cache->db($sql, 'status_id', $module_name);
 $sql = "SELECT * FROM " . TABLE . "_status_vnpos";
 $global_status_vnpos = $nv_Cache->db($sql, 'id_status', $module_name);
 // trạng thái vận chuyển GHN
-$global_status_order_ghn = json_decode($redis->get('status_order_ghtk'),true);
+$global_status_order_ghn = json_decode($redis->get('status_order_ghn'),true);
 // trạng thái lỗi vận chuyển GHN
-//$global_status_error_ghn = $nv_Cache->db("SELECT * FROM " . TABLE . "_status_error_ghn", 'code_status_ghn', $module_name);
-
+$global_status_order_error_ghn = json_decode($redis->get('status_order_error_ghn'),true);
 
 // trạng thái khiếu nại
 $sql = "SELECT * FROM " . TABLE . "_complain_status WHERE status = 1 ORDER BY weight ASC";
@@ -47,7 +46,7 @@ if (!$redis->exists('payport')) {
 }
 $global_payport = json_decode($redis->get('payport'), true);
 
-//$redis->delete('catalogy_main');
+
 if (!$redis->exists('catalogy_main')) {
 	$catalogys = get_categories_all();
 	$redis->set('catalogy_main', json_encode($catalogys));
@@ -56,7 +55,6 @@ if (!$redis->exists('catalogy_main')) {
 $global_catalogys = json_decode($redis->get('catalogy_main'), true);
 
 //$redis->delete('catalogy_main_all_lev');
-
 
 if (!$redis->exists('catalogy_main_all_lev')) {
 	$catalogy_main_all_lev = get_categories_all_lev(0);
@@ -78,10 +76,22 @@ if (!is_dir(NV_ROOTDIR . '/uploads/' . $module_upload . '/' . date('Y_m'))) {
 	$db->query('INSERT INTO ' . $db_config['dbsystem'] . '.' . $db_config['prefix'] . '_upload_dir(dirname,time) VALUES(' . $db->quote($upload_dir) . ',' . NV_CURRENTTIME . ')');
 }
 
+function status_order_error_ghn()
+{
+	global $db;
+	$list = $db->query('SELECT * FROM ' . TABLE . '_status_error_ghn')->fetchAll();
+	$array_status = array();
+	foreach($list as $row)
+	{
+		$array_status[$row['code_status_ghn']] = $row;
+	}
+	return $array_status;
+}
+
 function status_order_ghn()
 {
 	global $db;
-	$list = $db->query('SELECT * FROM ' . TABLE . '_status_order_ghtk ')->fetchAll();
+	$list = $db->query('SELECT * FROM ' . TABLE . '_status_order_ghn ')->fetchAll();
 	$array_status = array();
 	foreach($list as $row)
 	{
