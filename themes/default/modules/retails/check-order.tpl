@@ -43,7 +43,7 @@
                 <p class="mb-0">Email: {info_order.email}</p>
             </div>
             <div class="col-md-5 p-4 border">
-                <p class="">Phương Thức Thanh Toán: {info_order.payment_method}</p>
+                <p class="">Phương Thức Thanh Toán: {info_order.payment_method_name}</p>
                 <p>Giao Hàng: {info_order.transporters_name} {info_order.shipping_code}</p>
                 <p>Phí vận chuyển: {info_order.fee_transport}đ</p>
 
@@ -99,7 +99,7 @@
                         <tr id="row_voucher">
                             <td class="text_gray_color">Voucher</td>
                             <td class="float-right" id="tongvoucher">
-                                {info_order.voucher_price}đ
+                               - {info_order.voucher_price}đ
                             </td>
                         </tr>
                         <!-- END: voucher -->
