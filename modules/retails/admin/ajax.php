@@ -1042,7 +1042,7 @@ if ($mod == 'load_order') {
 		$base_url .= '&status_search=' . $status_ft;
 	} else {
 		$where .= ' ';
-		$base_url .= '&status_search = ""';
+		$base_url .= '';
 	}
 	if (!empty($q)) {
 		$where .= ' AND (t1.order_code LIKE "%" "' . $q . '" "%")';
