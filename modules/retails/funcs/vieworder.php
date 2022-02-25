@@ -295,7 +295,7 @@
 				$xtpl->parse( 'main.vnpost' );
 			}
 		}elseif($info_order['transporters_id'] == 3){
-			$list_tracuu_ghn = check_info_order_ghn_history($info_order['shipping_code']);
+			//$list_tracuu_ghn = check_info_order_ghn_history($info_order['shipping_code']);
 			foreach($list_tracuu_ghn as $value){
 				//print_r($value);die;
 				$value['status_ghn'] = $global_status_ghn[$value['status']]['desc_status_ghn'];
