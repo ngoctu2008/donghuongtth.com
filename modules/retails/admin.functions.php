@@ -17,6 +17,11 @@
 	
 	require_once NV_ROOTDIR . '/modules/' . $module_file . '/global.functions.php';
 	//redis GHN
+	if(!$redis->exists('status_order_error_ghn'))
+	{
+		$status_order_error_ghn = status_order_error_ghn();
+		$redis->set('status_order_error_ghn', json_encode($status_order_error_ghn));	
+	}
 	if(!$redis->exists('status_order_ghn'))
 	{
 		$status_order_ghn = status_order_ghn();
