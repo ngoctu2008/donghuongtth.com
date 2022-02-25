@@ -109,11 +109,7 @@
 	$info_store['alias_shop'] = NV_MY_DOMAIN .'/'.get_info_user($info_store['userid'])['username'].'/';
 	
 	if(!$info_order['status_payment_vnpay']){
-		
-		$check_voucher = check_voucher('', $info_order['voucherid'], $info_store['userid']);
-		
 		$arr = json_decode($check_voucher, true);
-		
 		if($arr['status'] == 'ERROR'){
 			$info_order['total'] = $info_order['total'] + $info_order['voucher_price'];
 			$info_order['voucher_price'] = 0;
@@ -190,7 +186,7 @@
 	}else{
 		$info_order['status_payment'] = 'Chưa thanh toán';
 	}
-	$info_order['payment_method'] = $global_payport[$info_order['payment_method']]['paymentname'];
+	$info_order['payment_method_name'] = $global_payport[$info_order['payment_method']]['paymentname'];
 
 	$info_order['time_add']=date('d-m-Y H:i',$info_order['time_add']);
 	$xtpl->assign( 'info_order', $info_order );

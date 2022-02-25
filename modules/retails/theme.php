@@ -83,7 +83,10 @@ function email_payment_fail($data_order, $data_pro, $info_order)
 	$xtpl->assign('children_fund', $config_setting['children_fund'] . 'đ');
 	$xtpl->assign('LOGO_SRC', $_SERVER["SERVER_NAME"] . '/' . $global_config['site_logo']);
 	$i = 0;
-
+	if ($info_order['voucherid']) {
+		$xtpl->parse('main.data_product.voucher');
+		$xtpl->parse('main.data_product.voucher_title');
+	}
 	if ($info_order['voucherid']) {
 		$xtpl->parse('main.data_product.voucher');
 	}

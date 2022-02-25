@@ -2796,8 +2796,8 @@ if ( $mod == 'add_order' ) {
 		}
 		$total_full = $total_full + $free_ship - $_SESSION['voucher_shop'][$value_transporters['store_id']]['price'];
 	}
-	if($payment_method == 'momo' && $total_full > 20000000){
-		$error[] = 'Lỗi : Ví MoMo chỉ cho phép thanh toán tối đa 20.000.000 VND. Vui lòng chọn phương thức thanh toán khác';
+	if(($payment_method == 'momo' && $total_full > 20000000) || ($payment_method == 'momo' && $total_full < 1000)){
+		$error[] = 'Lỗi : Ví MoMo chỉ cho phép thanh toán tối thiểu là 1000 VND và tối đa 20.000.000 VND. Vui lòng chọn phương thức thanh toán khác';
 	}
 	if(!$total_full)
 	{

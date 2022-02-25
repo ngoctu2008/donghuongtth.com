@@ -58,6 +58,9 @@
                    <div style="width: 60%;">
                        <p>Tiền hàng (tạm tính) :</p>
                        <p>Phí vân chuyển:</p>
+                       <!-- BEGIN: voucher_title -->
+					    <p>Voucher:</p>
+					   <!-- END: voucher_title -->
                        <p>Tổng tiền:</p>
                        <p>Đơn vị vận chuyển:</p>
                        <p>Hình thức thanh toán:</p>
@@ -65,6 +68,9 @@
                    <div style="width: 40%;text-align: end;padding-right: 10px;">
                        <p>{info_order.total_product}đ</p>
                        <p>{info_order.fee_transport}</p>
+                       <!-- BEGIN: voucher -->
+					   <p>- {info_order.voucher_price}đ</p>
+					    <!-- END: voucher -->
                        <p>{info_order.total}đ</p>
                        <p>{info_order.name_transporters}</p>
                        <p>{info_order.payment_method_name}</p>
