@@ -960,7 +960,6 @@ function nv_theme_retailshops_order($array_data, $list_address, $address_df, $ar
 						$list_product['name_group'] = '(' . $name_group . ')';
 					}
 
-
 					$list_product['quantity'] = $value['num'];
 					if ($value['status_check'] == 1) {
 						$total = $total + $value['price'] * $value['num'];
@@ -975,11 +974,9 @@ function nv_theme_retailshops_order($array_data, $list_address, $address_df, $ar
 						$get_province_free_ship = $db->query('SELECT json_free_ship FROM ' . TABLE . '_product_detail WHERE product_id = ' . $value['product_id'])->fetchColumn();
 
 						$arr_free_ship = json_decode($get_province_free_ship, true);
-						//lấy id khu vực có tỉnh giao
-						$get_id_area = $db->query('SELECT id_area FROM ' . $db_config['prefix'] . '_location_area_province WHERE FIND_IN_SET(' . $address_df['province_id'] . ', districtid)')->fetchColumn();
-
+						
 						foreach ($arr_free_ship as $row) {
-							if (($get_id_area == $row['area']) and (in_array($address_df['province_id'], $row['province']) or in_array(0, $row['province']))) {
+							if (in_array($address_df['province_id'], $row['province']) or in_array(0, $row['province'])) {
 								$list_product['free_ship'] = true;
 							} else {
 								$list_product['free_ship'] = false;
