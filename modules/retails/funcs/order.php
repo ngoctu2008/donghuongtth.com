@@ -21,8 +21,11 @@
 	
 	//kiểm tra đơn hàng đã thanh toán chưa nếu chưa thanh toán -> re-payment
 	if($_SESSION['payment'] == false){
+		// echo '<script language="javascript">';
+		// 	echo 'window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=re-payment',true).'"';
+		// 	echo '</script>';
 		echo '<script language="javascript">';
-			echo 'window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=re-payment',true).'"';
+			echo 'window.location = "'.nv_url_rewrite(NV_BASE_SITEURL ,true).'"';
 			echo '</script>';
 	}
 	$mod = $nv_Request->get_string('mod', 'post, get', 0);
@@ -66,8 +69,11 @@
 		{
 			$_SESSION[$module_name . '_vnpay'] = true;
 			if($user_info['userid']){
+				// echo '<script language="javascript">';
+				// echo 'alert("Thanh toán thất bại!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=re-payment',true).'"';
+				// echo '</script>';
 				echo '<script language="javascript">';
-				echo 'alert("Thanh toán thất bại!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=re-payment',true).'"';
+				echo 'alert("Thanh toán thất bại!");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL ,true).'"';
 				echo '</script>';
 			}
 			else{
@@ -79,8 +85,11 @@
 		{
 			$_SESSION[$module_name . '_recieve'] = true;
 			if($user_info['userid']){
+				// echo '<script language="javascript">';
+				// echo 'alert("Bạn đã tạo đơn hàng rồi, vui lòng xem lại lịch sử đơn hàng");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=re-payment',true).'"';
+				// echo '</script>';
 				echo '<script language="javascript">';
-				echo 'alert("Bạn đã tạo đơn hàng rồi, vui lòng xem lại lịch sử đơn hàng");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=retails' . '&' . NV_OP_VARIABLE . '=re-payment',true).'"';
+				echo 'alert("Bạn đã tạo đơn hàng rồi, vui lòng xem lại lịch sử đơn hàng");window.location = "'.nv_url_rewrite(NV_BASE_SITEURL,true).'"';
 				echo '</script>';
 			}
 			else{

@@ -23,7 +23,8 @@
 		$xtpl->assign('HISTORY', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=ordercustomer',true));	
 		$xtpl->assign('LOGO_SRC', NV_BASE_SITEURL . $global_config['site_logo']);
 		if($user_info['userid']){
-			$xtpl->assign('RE_PAYMENT', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=re-payment',true));
+			// $xtpl->assign('RE_PAYMENT', nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;' . NV_OP_VARIABLE . '=re-payment',true));
+			$xtpl->assign('RE_PAYMENT', nv_url_rewrite(NV_BASE_SITEURL,true));
 			}else{
 				$xtpl->assign('RE_PAYMENT', nv_url_rewrite(NV_BASE_SITEURL,true));
 			}
